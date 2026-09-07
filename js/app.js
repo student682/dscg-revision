@@ -522,12 +522,64 @@ function closeSearchModal() {
   if (modal) modal.classList.remove('active');
 }
 
+// Mobile navigation helpers
+function isMobileNav() {
+  return window.matchMedia('(max-width: 900px)').matches;
+}
+
+function toggleMobileNav() {
+  const nav = document.querySelector('.main-nav');
+  const btn = document.querySelector('.nav-toggle');
+  if (!nav) return;
+  const open = nav.classList.toggle('open');
+  if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (!open) closeNavDropdowns();
+}
+
+function closeMobileNav() {
+  const nav = document.querySelector('.main-nav');
+  const btn = document.querySelector('.nav-toggle');
+  if (nav) nav.classList.remove('open');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+  closeNavDropdowns();
+}
+
+function closeNavDropdowns() {
+  document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+}
+
 // Setup Event Listeners
 function setupEventListeners() {
+  // Leaf tabs (incl. those inside dropdowns): switch tab, then collapse the
+  // mobile menu so the fiche is immediately visible.
   document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+    tab.addEventListener('click', () => {
+      switchTab(tab.dataset.tab);
+      if (isMobileNav()) closeMobileNav();
+    });
   });
-  
+
+  // Category buttons: on mobile they open/close their submenu on tap
+  // (desktop keeps the CSS :hover behaviour).
+  document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      if (!isMobileNav()) return;
+      e.stopPropagation();
+      const dd = btn.closest('.nav-dropdown');
+      const wasOpen = dd.classList.contains('open');
+      closeNavDropdowns();
+      if (!wasOpen) dd.classList.add('open');
+    });
+  });
+
+  // Tap outside the menu closes any open dropdown (and the mobile panel).
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.main-nav') && !e.target.closest('.nav-toggle')) {
+      closeNavDropdowns();
+      if (isMobileNav()) closeMobileNav();
+    }
+  });
+
   const searchInput = document.getElementById('global-search');
   if (searchInput) {
     searchInput.addEventListener('input', (e) => handleGlobalSearch(e.target.value));

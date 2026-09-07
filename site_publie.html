@@ -859,11 +859,98 @@ mark.highlight {
 }
 
 /* Responsive Mobile Layout */
+/* Hamburger button — hidden on desktop, shown on mobile */
+.nav-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.nav-toggle:hover { background: rgba(255, 255, 255, 0.25); }
+
+/* ============================================================
+   Responsive — tablette & téléphone
+   ============================================================ */
 @media (max-width: 900px) {
-  .header-container { flex-direction: column; gap: 12px; }
-  .main-nav { overflow-x: auto; width: 100%; justify-content: flex-start; }
-  .subject-layout { grid-template-columns: 1fr; }
-  .sidebar-fiches { max-height: 250px; }
+  .header-container { flex-wrap: wrap; padding: 10px 16px; gap: 10px; }
+  .brand { flex: 1 1 auto; min-width: 0; }
+  .brand-title { font-size: 18px; }
+  .header-controls { gap: 8px; }
+  .nav-toggle { display: flex; }
+
+  /* Barre de recherche : sa propre ligne, pleine largeur */
+  .search-box-header { order: 10; flex-basis: 100%; }
+  .search-input-header,
+  .search-input-header:focus { width: 100%; box-sizing: border-box; }
+
+  /* Menu principal : panneau vertical repliable (hamburger) */
+  .main-nav {
+    order: 20;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+  }
+  .main-nav.open {
+    max-height: 78vh;
+    overflow-y: auto;
+    opacity: 1;
+    margin-top: 4px;
+    padding-bottom: 6px;
+  }
+  .main-nav > .nav-tab { width: 100%; justify-content: flex-start; padding: 14px 16px; font-size: 15px; }
+
+  /* Déroulants en accordéon (tap) */
+  .nav-dropdown { width: 100%; position: static; }
+  .nav-dropdown-btn { width: 100%; justify-content: space-between; padding: 14px 16px; font-size: 15px; }
+  .dropdown-content {
+    position: static;
+    min-width: 0;
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: var(--radius-md);
+    margin: 2px 0 6px;
+  }
+  .nav-dropdown:hover .dropdown-content { display: none; }   /* neutralise le hover au toucher */
+  .nav-dropdown.open .dropdown-content { display: block; }
+  .dropdown-content .nav-tab { padding: 13px 16px 13px 30px; }
+
+  /* Mise en page des matières */
+  .app-container { padding: 16px; }
+  .subject-layout { grid-template-columns: 1fr; gap: 14px; min-height: 0; }
+  .sidebar-fiches { max-height: 40vh; }
+  .viewer-container { min-height: 0; }
+  .viewer-frame { flex: none; height: 72vh; }
+
+  /* Accueil */
+  .hero-banner { padding: 24px 20px; }
+  .hero-title { font-size: 24px; }
+  .subject-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .stat-card { padding: 14px; gap: 12px; }
+  .stat-value { font-size: 20px; }
+  .hero-banner { padding: 20px 16px; }
+  .hero-title { font-size: 21px; }
+  .hero-subtitle { font-size: 14px; }
+  .viewer-toolbar { padding: 10px 12px; }
+  .viewer-title { font-size: 15px; }
+  .viewer-frame { flex: none; height: 70vh; }
+  .section-title { font-size: 18px; }
 }
 
 body { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
@@ -936,6 +1023,7 @@ body { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms
           <input type="text" id="global-search" class="search-input-header" placeholder="Rechercher une notion...">
         </div>
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Changer de thème">🌙</button>
+        <button class="nav-toggle" onclick="toggleMobileNav()" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
       </div>
     </div>
   </header>
@@ -2023,12 +2111,64 @@ function closeSearchModal() {
   if (modal) modal.classList.remove('active');
 }
 
+// Mobile navigation helpers
+function isMobileNav() {
+  return window.matchMedia('(max-width: 900px)').matches;
+}
+
+function toggleMobileNav() {
+  const nav = document.querySelector('.main-nav');
+  const btn = document.querySelector('.nav-toggle');
+  if (!nav) return;
+  const open = nav.classList.toggle('open');
+  if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (!open) closeNavDropdowns();
+}
+
+function closeMobileNav() {
+  const nav = document.querySelector('.main-nav');
+  const btn = document.querySelector('.nav-toggle');
+  if (nav) nav.classList.remove('open');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+  closeNavDropdowns();
+}
+
+function closeNavDropdowns() {
+  document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+}
+
 // Setup Event Listeners
 function setupEventListeners() {
+  // Leaf tabs (incl. those inside dropdowns): switch tab, then collapse the
+  // mobile menu so the fiche is immediately visible.
   document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+    tab.addEventListener('click', () => {
+      switchTab(tab.dataset.tab);
+      if (isMobileNav()) closeMobileNav();
+    });
   });
-  
+
+  // Category buttons: on mobile they open/close their submenu on tap
+  // (desktop keeps the CSS :hover behaviour).
+  document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      if (!isMobileNav()) return;
+      e.stopPropagation();
+      const dd = btn.closest('.nav-dropdown');
+      const wasOpen = dd.classList.contains('open');
+      closeNavDropdowns();
+      if (!wasOpen) dd.classList.add('open');
+    });
+  });
+
+  // Tap outside the menu closes any open dropdown (and the mobile panel).
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.main-nav') && !e.target.closest('.nav-toggle')) {
+      closeNavDropdowns();
+      if (isMobileNav()) closeMobileNav();
+    }
+  });
+
   const searchInput = document.getElementById('global-search');
   if (searchInput) {
     searchInput.addEventListener('input', (e) => handleGlobalSearch(e.target.value));
