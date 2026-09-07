@@ -137,4 +137,7 @@ html_content = re.sub(r'(<iframe[^>]+?)\s+src="[^"]+"([^>]*>)', r'\1\2', html_co
 
 with open('site_publie.html', 'w', encoding='utf-8') as f:
     f.write(html_content)
-print('Bundled site_publie.html generated successfully!')
+os.makedirs('pret_pour_github', exist_ok=True)
+with open('pret_pour_github/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+print('Bundled site_publie.html and pret_pour_github/index.html generated successfully!')
