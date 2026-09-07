@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Approche Comparative (Les Multiples)</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. 2 — L'Approche Comparative</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>L'Évaluation par Approche Comparative (Multiples)</h1>
+  <div class="sub">DSCG UE 2 — Finance</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. Principe de la méthode et formule de base</a></li>
+<li><a href="#s2">2. Évaluer les Capitaux Propres (Le PER)</a></li>
+<li><a href="#s3">3. Évaluer la Valeur Globale (VGE / EBITDA)</a></li>
+<li><a href="#s4">4. Les primes et décotes (Illiquidité, Contrôle)</a></li>
+</ol>
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. Principe de la méthode et formule de base</h2>
+<p>L’approche comparative consiste à valoriser une entreprise cible par analogie avec un échantillon d’entreprises comparables (sociétés cotées ou transactions récentes) dans le même secteur.</p>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ</span>
+On observe comment le marché valorise les entreprises comparables en calculant un "Multiple" (ratio). Puis on applique ce Multiple à notre entreprise cible.
+<br><br>
+<strong>Formule Générale :</strong>
+<br>
+Valeur de la société = Multiple moyen de l'échantillon × Inducteur de la société cible
+</div>
+
+<p>L'inducteur de valeur (le critère) peut être comptable : Résultat Net, EBE (EBITDA), Chiffre d'Affaires...</p>
+
+<h2 class="banner" id="s2">2. Évaluer directement les Capitaux Propres (Vcp)</h2>
+<p>Certains multiples utilisent des indicateurs <strong>après prise en compte des frais financiers</strong> (comme le Résultat Net). Ces multiples permettent de trouver directement la valeur des capitaux propres (Vcp) sans avoir à déduire la dette.</p>
+
+<h3>Le PER (Price Earning Ratio)</h3>
+<p>Le PER est le coefficient multiplicateur du résultat net. Il indique combien de fois les investisseurs sont prêts à payer le bénéfice d'une société.</p>
+
+<div class="cas">
+<h4 class="q">Cas pratique : Calcul avec le PER</h4>
+<div class="principe"><strong>Étape 1 (L'échantillon) :</strong> Une société concurrente cotée a une Capitalisation Boursière de 20 M€ et réalise un Bénéfice Net (RN) de 2 M€. <br>➔ Son PER = 20 / 2 = <strong>10</strong> (le marché paie 10 fois son bénéfice).</div>
+<div class="espece"><strong>Étape 2 (Notre Cible) :</strong> L'entreprise non cotée que l'on veut racheter réalise un Résultat Net de 500 000 €.</div>
+<div class="conclusion"><strong>Étape 3 (Application) :</strong> Valeur de la cible = 500 000 € × 10 (PER) = <strong>5 000 000 €</strong>.
+<br><em>Pourquoi ce calcul ?</em> Parce qu'on estime que si le marché valorise le bénéfice du concurrent à 10 fois sa valeur, il fera de même pour notre cible.</div>
+</div>
+
+<div class="box precision">
+<span class="lbl">📌 Variantes du PER (Approfondissement)</span>
+<ul>
+<li><strong>Le PER relatif :</strong> Supprime l'effet du marché boursier si les sociétés de l'échantillon sont cotées sur des bourses différentes (PER société / PER du marché local).</li>
+<li><strong>Le PEG (Price Earnings to Growth) :</strong> Divise le PER par le taux de croissance attendu du bénéfice. Permet de comparer des entreprises ayant des taux de croissance différents. (Un PEG &lt; 1 signifie que l'action est sous-évaluée par rapport à sa croissance).</li>
+</ul>
+</div>
+
+<h2 class="banner" id="s3">3. Évaluer la Valeur Globale de l'Entreprise (VGE)</h2>
+<p>À l'inverse du PER, les multiples basés sur des indicateurs d'exploitation (qui ne tiennent pas compte de la charge d'intérêts de la dette) donnent la <strong>Valeur Globale de l'Entreprise (VGE)</strong>, c'est-à-dire la valeur de son Actif Économique.</p>
+
+<div class="box memo">
+<span class="lbl">★ MÉMO : Les Multiples de VGE</span>
+Les plus utilisés sont :
+<ul>
+<li><strong>VGE / EBE</strong> (ou EBITDA en anglais) : Inducteur le plus courant car il ignore la structure financière, les amortissements et la fiscalité.</li>
+<li><strong>VGE / Résultat d'Exploitation (REX ou EBIT)</strong> : Prend en compte la politique d'amortissement.</li>
+<li><strong>VGE / Chiffre d'Affaires</strong> : Utilisé pour les entreprises non rentables (start-ups) ou dans le commerce de détail (valorisation au % de CA).</li>
+</ul>
+</div>
+
+<div class="cas">
+<h4 class="q">Cas pratique : Passage de la VGE aux Capitaux Propres</h4>
+<div class="principe">L'échantillon donne un multiple moyen VGE/EBE de <strong>6</strong>.</div>
+<div class="espece">Notre cible génère un EBE de 1 M€ et possède une Dette financière Nette de 1,5 M€.</div>
+<div class="conclusion"><strong>1. Calcul de la VGE :</strong> EBE Cible (1 M€) × 6 = <strong>6 M€</strong> (C'est la valeur de l'outil de travail).<br>
+<strong>2. Calcul de la Valeur des Capitaux Propres (Vcp) :</strong> VGE (6 M€) - Dette Nette (1,5 M€) = <strong>4,5 M€</strong>. (C'est le prix qu'on paiera pour acheter les actions).
+<br><br><em>Pourquoi déduire la dette ?</em> Parce que si vous achetez l'entreprise 6 M€, vous devrez rembourser les 1,5 M€ de dettes qu'elle a contractées. Le vendeur des actions ne touchera donc que 4,5 M€.</div>
+</div>
+
+<div class="box piege">
+<span class="lbl">⚠ PIÈGE D'EXAMEN</span>
+Ne jamais multiplier un indicateur avant impôt et intérêts (comme l'EBE) par un PER (qui est basé sur le Résultat Net) ! 
+<br>Liez toujours : 
+<br>👉 Inducteur "Exploitation" (CA, EBE, REX) ➡️ Obtention de la VGE.
+<br>👉 Inducteur "Actionnaire" (Résultat Net, Dividende) ➡️ Obtention directe des Capitaux Propres (Vcp).
+</div>
+
+<h2 class="banner" id="s4">4. Les primes et décotes</h2>
+<p>L'utilisation de multiples boursiers pour évaluer une PME non cotée nécessite des ajustements, car une PME n'a pas les mêmes caractéristiques qu'un grand groupe coté (le fameux <em>coefficient de risque spécifique</em> de Mme Neau).</p>
+
+<div class="tree">
+<span class="root">Ajustements fréquents sur la Valeur Finale</span>
+<div class="branch">
+<div class="cond-item"><b>La Décote d'Illiquidité :</b> Si on utilise l'échantillon d'entreprises cotées, leurs actions se vendent en 1 clic. Notre PME non cotée sera plus dure à revendre. On applique donc un abattement (souvent -20% à -30%) sur la valeur trouvée pour compenser ce manque de liquidité.</div>
+<div class="cond-item"><b>La Prime de Contrôle :</b> Lors d'une prise de participation majoritaire, l'acheteur paie plus cher (ex: +20%) car il n'achète pas juste des dividendes, il achète le <strong>pouvoir</strong> de diriger l'entreprise. En Bourse, le cours reflète la valeur d'une action "minoritaire".</div>
+</div>
+</div>
+
+</article>
+
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){ document.body.classList.toggle('mobile-force'); }
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

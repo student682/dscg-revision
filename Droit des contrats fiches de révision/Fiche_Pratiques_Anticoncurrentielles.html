@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Pratiques Anticoncurrentielles (Ententes et Abus)</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. — Pratiques Anticoncurrentielles</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Les Pratiques Anticoncurrentielles</h1>
+  <div class="sub">DSCG UE 1 — Gestion juridique, fiscale et sociale · Droit des affaires</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. Champ d'application et articulation Droit Interne / Droit Européen</a></li>
+<li><a href="#s2">2. Les Ententes Illicites (Art. L. 420-1 C. com. / Art. 101 TFUE)</a></li>
+<li><a href="#s3">3. L'Abus de Position Dominante (Art. L. 420-2 C. com. / Art. 102 TFUE)</a></li>
+<li><a href="#s4">4. Procédures, Clémence et Sanctions</a></li>
+<li><a href="#s5">5. Méthode cas DSCG</a></li>
+</ol>
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. Champ d'application et articulation Droit Interne / Droit Européen</h2>
+<div class="box memo">
+<span class="lbl">Règle d'affectation du commerce entre États membres</span>
+Le droit français (Autorité de la Concurrence) s'applique aux pratiques affectant le marché français. Le droit européen (Commission européenne - Art. 101 et 102 TFUE) s'applique si la pratique est susceptible d'affecter le <b>commerce entre États membres de l'UE</b>.
+</div>
+
+<h2 class="banner" id="s2">2. Les Ententes Illicites (Art. L. 420-1 C. com. / Art. 101 TFUE)</h2>
+<p>Sont prohibées les actions concertées, conventions, ententes expresses ou tacites ou coalitions ayant pour objet ou pouvant avoir pour effet d'empêcher, de restreindre ou de fausser le jeu de la concurrence sur un marché.</p>
+
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card">
+<h5>Ententes Horizontales (Cartels)</h5>
+Conclues entre concurrents directs au même stade de la chaîne économique (ex. fixation en commun de prix, répartition géographique de marchés, échanges d'informations stratégiques). Toujours considérées comme très graves.
+</div>
+<div class="cmp-card">
+<h5>Ententes Verticales</h5>
+Conclues entre opérateurs situés à des stades différents (ex. producteur et distributeurs). Prohibées si elles imposent des prix de revente ou des clauses d'exclusivité territoriale étanches.
+</div>
+</div>
+
+<div class="box precision">
+<span class="lbl">Exemptions d'Ententes (Art. L. 420-4 C. com.)</span>
+Une entente est exemptée si ses auteurs démontrent qu'elle apporte un <b>progrès économique ou technique</b>, qu'une partie équitable du profit est réservée aux utilisateurs, et qu'elle n'élimine pas la concurrence pour une part substantielle de produits.
+</div>
+
+<h2 class="banner" id="s3">3. L'Abus de Position Dominante (Art. L. 420-2 C. com. / Art. 102 TFUE)</h2>
+<div class="box piege">
+<span class="lbl">Piège d'examen — Position Dominante vs Abus</span>
+Détenir une position dominante sur un marché n'est <b>pas interdit</b> en soi (récompense de la réussite économique). C'est uniquement l'<b>ABUS</b> de cette position qui est sanctionné.
+</div>
+
+<div class="tree">
+<span class="root">Démonstration de l'Abus de Position Dominante</span>
+<div class="branch">
+<div class="cond-item"><b>1. Délimitation du marché de référence :</b> Marché de produits (substituabilité) + marché géographique.</div>
+<div class="cond-item"><b>2. Constat de la position dominante :</b> Pouvoir de marché permettant de s'affranchir de la pression concurrentielle (généralement part de marché > 40-50 %).</div>
+<div class="cond-item"><b>3. Détection de la pratique abusive :</b> Refus de vente, ventes liées, prix prédateurs (inférieurs au coût marginal), dénigrement de concurrents.</div>
+</div>
+<div class="result ok">Sanctions financières lourdes et injonctions de comportement.</div>
+</div>
+
+<h2 class="banner" id="s4">4. Procédures, Clémence et Sanctions</h2>
+<table>
+<caption>Mécanismes et Sanctions des Pratiques Anticoncurrentielles</caption>
+<thead><tr><th>Mécanisme / Sanction</th><th>Description et Règles</th></tr></thead>
+<tbody>
+<tr><td data-label="Mécanisme">Procédure de Clémence (Leniency)</td><td data-label="Description" class="exo">Une entreprise membre d'un cartel qui dénonce l'entente et fournit des preuves à l'Autorité de la Concurrence peut bénéficier d'une <b>exonération totale ou partielle</b> d'amende (Whistleblowing).</td></tr>
+<tr><td data-label="Sanction">Sanctions Pécuniaires (Entreprises)</td><td data-label="Description" class="imp">Jusqu'à <b>10 % du chiffre d'affaires mondial hors taxes</b> du groupe d'entreprises sanctionné.</td></tr>
+<tr><td data-label="Sanction">Sanctions Pénales (Personnes physiques)</td><td data-label="Description" class="imp">Art. L. 420-6 C. com. : Jusqu'à 4 ans d'emprisonnement et 75 000 € d'amende pour toute personne physique ayant pris une part personnelle et déterminante dans la pratique.</td></tr>
+</tbody>
+</table>
+
+<h2 class="banner" id="s5">5. Méthode cas DSCG</h2>
+<div class="cas">
+<p><b>Énoncé</b> — Les dirigeants des deux plus grands fabricants nationaux de matériel médical (cumulant 85 % du marché) se rencontrent lors d'un repas et conviennent verbalement de rehausser leurs tarifs de 12 % simultanément le mois suivant et de se répartir les appels d'offres publics régionaux.</p>
+
+<h4 class="q">Question 1 — Comment qualifier cette pratique et quelles sont les sanctions encourues ?</h4>
+<div class="principe"><b>En principe :</b> l'accord, même verbal ou tacite, entre deux concurrents visant à fixer des prix et à répartir les marchés constitue une entente horizontale stricte (cartel), expressément prohibée par l'Art. L. 420-1 du Code de commerce.</div>
+<div class="espece"><b>En l'espèce :</b> la concertation lors du repas a débouché sur l'application concertée d'une hausse tarifaire et la répartition des marchés publics.</div>
+<div class="conclusion">Conclusion : Il s'agit d'une entente illicite grave. Les entreprises risquent une amende administrative pouvant atteindre 10 % de leur CA mondial HT, et les dirigeants ayant personnellement orchestré l'entente risquent jusqu'à 4 ans de prison et 75 000 € d'amende (Art. L. 420-6). L'une des deux entreprises pourrait cependant utiliser le programme de clémence pour dénoncer l'accord et échapper à la sanction.</div>
+</div>
+</article>
+
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){ document.body.classList.toggle('mobile-force'); }
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>
+

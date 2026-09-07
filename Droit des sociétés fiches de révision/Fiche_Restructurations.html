@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Restructurations d'entreprises — Fusion, Scission, APA</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+
+/* Toolbar */
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+
+/* Title banner */
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+
+/* TOC */
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+
+/* Section banners */
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+
+/* Callout boxes */
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+
+/* Decision tree (HTML/CSS, texte natif) */
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.tree .mode{
+  display:inline-block; margin-left:10px; font-size:12px; font-weight:700;
+  padding:3px 9px; border-radius:12px; vertical-align:middle;
+}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+
+/* Timeline / chronologie */
+.timeline{margin:16px 0; padding:0; list-style:none;}
+.timeline li{
+  position:relative; padding:8px 0 8px 30px; border-left:2px solid var(--blue); margin-left:6px;
+}
+.timeline li:last-child{border-left:2px solid transparent;}
+.timeline li::before{
+  content:""; position:absolute; left:-7px; top:12px; width:12px; height:12px;
+  border-radius:50%; background:var(--blue); border:2px solid #fff;
+}
+.timeline .t-lbl{font-weight:700; color:var(--dblue); font-size:14px;}
+.timeline .t-txt{font-size:13.5px; color:#333;}
+
+/* Comparison grid (organes / formes / acteurs) */
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+
+/* Mini-cas DSCG */
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+.cas ul{margin:4px 0; padding-left:20px;}
+
+/* Footer */
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+article{margin:0;}
+a.anchor-target{scroll-margin-top:60px;}
+.verif{color:var(--red); font-style:italic; font-weight:600;}
+
+/* ===== Responsive mobile ===== */
+@media (max-width:480px){
+  body{font-size:13.5px;}
+  .wrap{padding:0 10px 50px;}
+  .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  .toolbar .chap{font-size:11.5px;}
+  .toolbar button{padding:6px 8px; font-size:11px;}
+  .title-banner h1{font-size:19px;}
+  .title-banner .sub{font-size:12px;}
+  h2.banner{font-size:15px; padding:8px 12px;}
+  h3{font-size:14.5px;}
+  h4{font-size:13.5px;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+  td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  td:empty, td:not([data-label]){padding:4px 10px;}
+  .cmp{grid-template-columns:1fr!important;}
+}
+@media (min-width:481px) and (max-width:900px){
+  .cmp{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:901px){
+  .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);}
+}
+
+/* mobile-force class : forçage du rendu mobile même sur grand écran */
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force .toolbar{padding:8px 10px;}
+body.mobile-force .toolbar .chap{font-size:11.5px;}
+body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;}
+body.mobile-force .title-banner h1{font-size:19px;}
+body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody,
+body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;}
+body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+body.mobile-force .cmp{grid-template-columns:1fr!important;}
+
+/* ===== Print ===== */
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+  body{font-size:11.5px;}
+  h2.banner{break-before:page; break-after:avoid;}
+  h2.banner:first-of-type{break-before:auto;}
+  table, .box, .tree, .cas, .cmp-card{break-inside:avoid;}
+  .title-banner{break-after:avoid;}
+  a{color:#000; text-decoration:none;}
+  .toc a{color:#000;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. — Restructurations</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Restructurations d'entreprises — Fusion, Scission, APA</h1>
+  <div class="sub">DSCG UE 1 — Gestion juridique, fiscale et sociale · Droit des sociétés</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+
+<ol>
+<li><a href="#s1">1. Définitions et typologie</a></li>
+<li><a href="#s2">2. Contrôle des concentrations</a></li>
+<li><a href="#s3">3. Évaluation et parité d'échange
+  <ol><li><a href="#s3-1">3.1 Méthodes d'évaluation</a></li><li><a href="#s3-2">3.2 Cas pratique n°1 — fusion-absorption</a></li><li><a href="#s3-3">3.3 Cas pratique n°2 — fusion-création</a></li><li><a href="#s3-4">3.4 Rompus et prime de fusion</a></li></ol>
+</li>
+<li><a href="#s4">4. Procédure de fusion
+  <ol><li><a href="#s4-1">4.1 Projet et publicité</a></li><li><a href="#s4-2">4.2 Commissaire à la fusion</a></li><li><a href="#s4-3">4.3 Décision des associés — quorum/majorité</a></li><li><a href="#s4-4">4.4 Cas particuliers</a></li></ol>
+</li>
+<li><a href="#s5">5. Procédure propre à la scission</a></li>
+<li><a href="#s6">6. Apport partiel d'actif (APA)</a></li>
+<li><a href="#s7">7. Effets de l'opération
+  <ol><li><a href="#s7-1">7.1 TUP et date d'effet</a></li><li><a href="#s7-2">7.2 Sort des créanciers</a></li><li><a href="#s7-3">7.3 Sort des contrats</a></li></ol>
+</li>
+<li><a href="#s8">8. Régime social</a></li>
+<li><a href="#s9">9. Méthode cas DSCG</a></li>
+</ol>
+
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. Définitions et typologie</h2>
+<div class="cmp" style="--cmp-cols:3;">
+<div class="cmp-card"><h5>Fusion</h5>2 sociétés se réunissent en une seule (art. L. 236-1). Fusion-absorption (la plus fréquente) ou fusion par création d'une société nouvelle. Dissolution sans liquidation de l'absorbée + TUP + les associés de l'absorbée deviennent associés de l'absorbante.</div>
+<div class="cmp-card"><h5>Scission</h5>Le patrimoine d'une société « scindée » est divisé en plusieurs fractions transmises simultanément à plusieurs sociétés existantes ou nouvelles (art. L. 236-18). C'est une fusion « à l'envers ».</div>
+<div class="cmp-card"><h5>Apport partiel d'actif (APA)</h5>Une société apporte une branche d'activité à une autre et reçoit des droits sociaux en échange (art. L. 236-27). L'apporteur ne disparaît pas — ce n'est ni une fusion ni une scission par principe.</div>
+</div>
+<div class="box precision"><span class="lbl">Précision</span>Ces opérations sont ouvertes aux sociétés de formes différentes (une SA peut fusionner avec une SAS) et aux sociétés en liquidation, à condition que le partage des actifs entre associés n'ait pas commencé.</div>
+
+<h2 class="banner" id="s2">2. Contrôle des concentrations</h2>
+<table>
+<caption>Deux contrôles alternatifs selon les seuils franchis</caption>
+<thead><tr><th>Contrôle</th><th>Autorité</th><th>Seuils cumulatifs</th></tr></thead>
+<tbody>
+<tr><td data-label="Contrôle">National</td><td data-label="Autorité" class="spec">Autorité de la concurrence</td><td data-label="Seuils" class="cond">CA total des sociétés &gt; 250 M€ HT <b>ET</b> CA en France d'au moins 2 sociétés &gt; 80 M€</td></tr>
+<tr><td data-label="Contrôle">Communautaire</td><td data-label="Autorité" class="spec">Commission européenne</td><td data-label="Seuils" class="cond">CA mondial &gt; 5 Md€ <b>ET</b> au moins 2 entreprises avec CA individuel &gt; 250 M€</td></tr>
+</tbody>
+</table>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Défaut de notification au contrôle national → amende pouvant atteindre <b>5 % du chiffre d'affaires</b>. Le contrôle communautaire, une fois la dimension européenne acquise, fait échec à toute application des législations nationales.</div>
+<div class="box memo"><span class="lbl">Mémo — calendrier du contrôle communautaire</span>1<sup>re</sup> décision (ouverture de procédure) : 25 jours ouvrables après réception. Si doutes sérieux : 90 jours supplémentaires pour statuer sur la compatibilité.</div>
+
+<h2 class="banner" id="s3">3. Évaluation et parité d'échange</h2>
+
+<h3 id="s3-1">3.1 Méthodes d'évaluation</h3>
+<table>
+<thead><tr><th>Méthode</th><th>Principe</th></tr></thead>
+<tbody>
+<tr><td data-label="Méthode">Valeur nominale</td><td data-label="Principe">Capital social / nombre d'actions — peu significative en pratique, utile pour les augmentations/réductions de capital</td></tr>
+<tr><td data-label="Méthode">Valeur mathématique (actif net)</td><td data-label="Principe">(Actif − passif envers les tiers) / nombre d'actions</td></tr>
+<tr><td data-label="Méthode">Valeur boursière</td><td data-label="Principe">Résulte de l'offre et de la demande sur un marché</td></tr>
+<tr><td data-label="Méthode">Valeur liquidative</td><td data-label="Principe">Valeur mathématique − charges fiscales/diverses de liquidation (« valeur à la casse »)</td></tr>
+</tbody>
+</table>
+<div class="box precision"><span class="lbl">Précision</span>L'évaluation est <b>complexe</b> (dépend de la rentabilité, du contexte économique, pas seulement de l'actif) et <b>aléatoire</b> (toute méthode peut être contestée ; la parité mathématique n'est pas d'ordre public — les parties peuvent s'en écarter si les droits des actionnaires sont respectés).</div>
+
+<h3 id="s3-2">3.2 Cas pratique n°1 — fusion-absorption (X absorbe Y)</h3>
+<div class="box memo">
+<span class="lbl">Données</span>
+X (SA) : valorisée 75 M€, capital divisé en 5 000 000 actions.<br>
+Y (SAS) : valorisée 7,5 M€, capital divisé en 1 000 000 actions.
+</div>
+<div class="tree">
+<span class="root">Calcul de la parité — étape par étape</span>
+<div class="branch">
+<div class="cond-item"><b>① Valeur de l'action X</b> = 75 000 000 / 5 000 000 = <b>15 €</b></div>
+<div class="cond-item"><b>② Valeur de l'action Y</b> = 7 500 000 / 1 000 000 = <b>7,5 €</b></div>
+<div class="cond-item"><b>③ Rapport X/Y</b> = 15 / 7,5 = <b>2</b> → 2 actions Y = 1 action X</div>
+<div class="cond-item"><b>④ Actions nouvelles à émettre par X</b> = 1 000 000 / 2 = <b>500 000 actions</b></div>
+<div class="cond-item"><b>⑤ Application</b> — un actionnaire de Y détenant 850 actions reçoit 850 / 2 = <b>425 actions X</b></div>
+</div>
+</div>
+
+<h3 id="s3-3">3.3 Cas pratique n°2 — fusion-création (X et Y fusionnent en Z)</h3>
+<div class="box memo"><span class="lbl">Données</span>Mêmes valeurs (X = 75 M€, Y = 7,5 M€). Z nouvellement créée, capital divisé en 10 000 000 actions.</div>
+<div class="tree">
+<div class="branch">
+<div class="cond-item"><b>① Valeur totale de Z</b> = 75 000 000 + 7 500 000 = <b>82 500 000 €</b></div>
+<div class="cond-item"><b>② Valeur de l'action Z</b> = 82 500 000 / 10 000 000 = <b>8,25 €</b></div>
+<div class="cond-item"><b>③ Parité X/Z</b> = 8,25 / 15 = 0,55 → <b>5,5 actions X pour 10 actions Z</b></div>
+<div class="cond-item"><b>④ Parité Y/Z</b> = 8,25 / 7,5 = 1,1 → <b>11 actions Y pour 10 actions Z</b></div>
+</div>
+<div class="result ok">Cohérence : il faut 2 fois plus d'actions Y que d'actions X pour obtenir la même quantité d'actions Z — la parité initiale (X/Y = 2) est bien respectée.</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen — parité inférieure à 1</span>Une parité &lt; 1 (ici 0,55 pour X) est parfaitement normale : elle signifie seulement qu'il faut <b>moins</b> d'actions de la société la plus « chère » pour obtenir une action de la structure d'accueil. Ne pas y voir une anomalie ni une survalorisation de Y.</div>
+
+<h3 id="s3-4">3.4 Rompus et prime de fusion</h3>
+<div class="box piege"><span class="lbl">Piège d'examen — prime de fusion</span>Dans le cas n°1 (X absorbe Y), X émet 500 000 actions à leur <b>valeur nominale</b> (10 €) = 5 000 000 €, alors que la valeur réellement apportée est de 7,5 M€. La différence (2,5 M€) constitue la <b>prime de fusion</b>, affectée en général aux réserves sur décision de l'AG de l'absorbante. Dans le cas n°2 (fusion-création), cette question ne se pose <b>pas</b> : la valeur nominale des actions Z égale leur valeur vénale à l'instant de la création.</div>
+<div class="box memo"><span class="lbl">Mémo — traitement des rompus (parité non entière)</span>
+<ul>
+<li>Renonciation individuelle aux actions formant rompus</li>
+<li>Cession entre actionnaires pour ajuster les quantités</li>
+<li>Versement d'une soulte — <b>plafond : 10 % de la valeur des droits attribués</b>, au-delà l'opération perd la qualification de fusion</li>
+<li>Rachat des rompus par l'absorbante, ou réduction de la valeur nominale des actions</li>
+</ul>
+</div>
+
+<h2 class="banner" id="s4">4. Procédure de fusion</h2>
+
+<h3 id="s4-1">4.1 Projet et publicité</h3>
+<ul class="timeline">
+<li><span class="t-lbl">Projet de fusion/scission</span><br><span class="t-txt">Établi et signé par les dirigeants (CA/directoire en SA, président en SAS, gérant en SARL). Mentions obligatoires : forme/dénomination/siège des sociétés, motifs, évaluation actif/passif, rapport d'échange, prime de fusion, droits spéciaux</span></li>
+<li><span class="t-lbl">Dépôt au greffe + avis SHAL (+ BALO si offre au public)</span><br><span class="t-txt"><b>1 mois au moins</b> avant la 1<sup>re</sup> AG statuant sur l'opération</span></li>
+<li><span class="t-lbl">Réalisation de la fusion</span><br><span class="t-txt">Publication au RCS ; formalités de dissolution pour l'absorbée ; formalités de modification statutaire pour l'absorbante ; formalités de constitution en cas de société nouvelle</span></li>
+</ul>
+
+<h3 id="s4-2">4.2 Commissaire à la fusion</h3>
+<div class="tree">
+<span class="root">Désignation obligatoire ?</span>
+<span class="mode altern">Alternative</span>
+<div class="branch">
+<div class="cond-item">Fusion entre <b>deux sociétés par actions</b> (SA, SAS, SCA)</div>
+<div class="cond-item">Fusion entre une <b>société par actions et une SARL</b></div>
+</div>
+<div class="result ok">→ Commissaire à la fusion obligatoire (nommé par le TC, le plus souvent un CAC)</div>
+<div class="result ko">Fusion impliquant au moins une société qui n'est ni SA ni SARL → pas obligatoire</div>
+</div>
+<div class="box memo"><span class="lbl">Mémo — mission</span>Vérifier que les valeurs relatives des actions sont pertinentes et que le rapport d'échange est <b>équitable</b> ; rapport écrit mis à disposition des actionnaires <b>1 mois au moins</b> avant l'AG. Les actionnaires de toutes les sociétés peuvent, à l'<b>unanimité</b>, décider de ne pas désigner de commissaire.</div>
+
+<h3 id="s4-3">4.3 Décision des associés — quorum et majorité</h3>
+<table>
+<caption>Conditions requises pour approuver une fusion (assimilée à une modification statutaire)</caption>
+<thead><tr><th>Forme</th><th>Quorum</th><th>Majorité</th></tr></thead>
+<tbody>
+<tr><td data-label="Forme">SA</td><td data-label="Quorum" class="cond">1/4 (1<sup>re</sup> conv.) · 1/5 (2<sup>e</sup> conv.)</td><td data-label="Majorité" class="cond">2/3 du capital présent/représenté</td></tr>
+<tr><td data-label="Forme">SARL (constituée avant le 2/8/2005)</td><td data-label="Quorum" class="cond">Aucun</td><td data-label="Majorité" class="cond">3/4 des parts</td></tr>
+<tr><td data-label="Forme">SARL (après le 2/8/2005)</td><td data-label="Quorum" class="cond">1/4 puis 1/5</td><td data-label="Majorité" class="cond">2/3 des parts</td></tr>
+<tr><td data-label="Forme">SAS</td><td data-label="Quorum" class="cond">Aucun sauf clause statutaire</td><td data-label="Majorité" class="cond">Librement fixée par les statuts</td></tr>
+<tr><td data-label="Forme">SNC</td><td data-label="Quorum" class="cond">Aucun sauf clause statutaire</td><td data-label="Majorité" class="cond">Unanimité sauf clause contraire</td></tr>
+</tbody>
+</table>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Si la fusion entraîne une <b>augmentation des engagements des associés</b> (ex. : SA absorbée par une SNC → passage d'une responsabilité limitée à illimitée et solidaire), l'<b>unanimité</b> est requise quelle que soit la forme. Si le capital de l'absorbée comprend des catégories d'actions différentes (actions de préférence), une AG spéciale des titulaires concernés doit en plus être réunie.</div>
+
+<h3 id="s4-4">4.4 Cas particuliers</h3>
+<div class="box precision"><span class="lbl">Précision — fusion simplifiée (filiale à 100 %)</span>Absorption d'une filiale détenue à 100 % : délibération de la <b>seule AG de l'absorbante</b> (pas celle de la filiale), <b>pas de commissaire à la fusion</b>, pas de rapport du CA/directoire.</div>
+<div class="box piege"><span class="lbl">Piège d'examen — participations réciproques</span>Une société ne peut recevoir en échange ses propres actions détenues dans l'absorbée (interdiction art. L. 236-3). Deux solutions : <b>fusion-allotissement</b> (l'absorbante reçoit une fraction de l'actif net correspondant à sa participation, comme en liquidation) ou <b>fusion-renonciation</b> (l'absorbante renonce à l'augmentation de capital correspondant à sa propre participation).</div>
+<div class="box precision"><span class="lbl">Précision — actions non libérées</span>N'est pas un obstacle à la fusion : la créance de l'absorbée sur les actionnaires non libérés est transmise à l'absorbante ; les actionnaires concernés deviennent pleinement actionnaires de l'absorbante mais restent débiteurs du solde.</div>
+<div class="box precision"><span class="lbl">Précision — clauses d'agrément</span>La jurisprudence (y compris la Cour de cassation) tend à appliquer les clauses d'agrément statutaires ou légales (SARL) aux nouveaux actionnaires issus d'une fusion, malgré la logique de TUP. D'où l'intérêt de traiter expressément cette question dans le traité.</div>
+
+<h2 class="banner" id="s5">5. Procédure propre à la scission</h2>
+<div class="tree">
+<span class="root">Commissaire à la scission — dispense possible</span>
+<span class="mode cumul">Conditions cumulatives</span>
+<div class="branch">
+<div class="cond-item">Sociétés nouvelles constituées avec le <b>seul actif de la société scindée</b> (aucun autre apport)</div>
+<div class="cond-item">Actions des sociétés nouvelles attribuées aux actionnaires de la scindée <b>proportionnellement</b> à leurs droits dans le capital de la société scindée</div>
+</div>
+<div class="result ok">Les deux conditions réunies → pas de rapport du commissaire requis (art. L. 236-17, applicable par extension en SAS, SCA, SARL)</div>
+</div>
+<div class="box precision"><span class="lbl">Précision — répartition non proportionnelle possible</span>Si les actionnaires souhaitent se séparer plutôt que reproduire leur cohabitation dans chaque société nouvelle, il est possible d'attribuer à un actionnaire la totalité des titres d'une société bénéficiaire et rien dans l'autre — mais alors le commissaire à la scission redevient nécessaire (rupture de la proportionnalité).</div>
+<div class="box memo"><span class="lbl">Mémo</span>Si des sociétés <b>existantes</b> bénéficient de la scission : commissaire à la fusion obligatoire + délibération d'AG dans les conditions de modification statutaire. Publicité identique à celle de la fusion.</div>
+
+<h2 class="banner" id="s6">6. Apport partiel d'actif (APA)</h2>
+<div class="box precision"><span class="lbl">Précision — régime par défaut vs option pour le régime des scissions</span>Par principe, l'APA est traité comme un simple <b>apport en nature</b> (augmentation de capital ou constitution avec apport en nature). Les parties peuvent <b>opter</b> pour le régime des scissions.</div>
+<div class="tree">
+<span class="root">Intérêt de l'option pour le régime des scissions</span>
+<div class="branch">
+<div class="cond-item">Bénéfice du régime fiscal de faveur applicable aux fusions/scissions</div>
+<div class="cond-item">Qualification en <b>TUP</b> — les contrats afférents (hors bail et contrats de travail) sont transmis automatiquement, sans renégociation ; les dettes suivent l'actif sans accord exprès du créancier</div>
+</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen — condition de l'option</span>L'option n'est ouverte que si l'apport porte sur une <b>branche complète d'activité</b> : ensemble d'actifs et de passifs formant, du point de vue de l'organisation, une exploitation autonome capable de fonctionner par ses propres moyens. Sont exclus les apports isolés (immeuble seul, matériel seul, stock seul).</div>
+<div class="box memo"><span class="lbl">Mémo — conséquences de l'option</span>Traité d'apport soumis aux mêmes formalités de dépôt/publicité qu'une fusion ; commissaire à la scission nommé ; approbation par les AG des deux sociétés aux conditions de modification statutaire.</div>
+
+<h2 class="banner" id="s7">7. Effets de l'opération</h2>
+
+<h3 id="s7-1">7.1 TUP et date d'effet</h3>
+<table>
+<tbody>
+<tr><td data-label="Cas" class="cond">Fusion par création d'une société nouvelle</td><td data-label="Date d'effet">Date de l'<b>immatriculation au RCS</b></td></tr>
+<tr><td data-label="Cas" class="cond">Fusion entre sociétés existantes — effets entre associés</td><td data-label="Date d'effet">Date de la <b>dernière AG</b> ayant statué</td></tr>
+<tr><td data-label="Cas" class="cond">Fusion entre sociétés existantes — effets à l'égard des tiers</td><td data-label="Date d'effet">Date d'accomplissement des <b>formalités de publicité</b></td></tr>
+</tbody>
+</table>
+<div class="box precision"><span class="lbl">Précision — date d'effet conventionnelle</span>Le traité peut prévoir une date antérieure ou postérieure, à condition qu'elle reste dans l'<b>exercice en cours</b> ; cet effet rétroactif ou différé n'est pas opposable aux tiers.</div>
+<div class="box memo"><span class="lbl">Mémo</span>La société absorbée/scindée est dissoute sans liquidation ; ses dirigeants et son CAC perdent leur mandat. La société bénéficiaire est substituée dans tous les droits et obligations. Sanction pénale de l'absorbée (amende) : ne se transmet <b>pas</b> à l'absorbante (personnalité des peines), sauf fraude destinée à échapper à la sanction.</div>
+
+<h3 id="s7-2">7.2 Sort des créanciers</h3>
+<div class="box memo"><span class="lbl">Mémo — créanciers non obligataires</span>Créance transmise sans modification (mêmes conditions, mêmes garanties — le cautionnement suit la dette). En cas de scission, les sociétés bénéficiaires sont <b>débitrices solidaires</b> du passif de la société scindée.</div>
+<div class="tree">
+<span class="root">Droit d'opposition légal des créanciers</span>
+<span class="mode cumul">Conditions cumulatives</span>
+<div class="branch">
+<div class="cond-item">Créance <b>antérieure</b> à la publication de l'opération</div>
+<div class="cond-item">Créance de <b>somme d'argent</b></div>
+<div class="cond-item">Opération entre : 2 sociétés par actions, ou 2 SARL, ou 1 SARL et 1 société par actions</div>
+</div>
+<div class="result ok">Opposition exercée devant le TC dans les <b>30 jours</b> de la publication → le tribunal rejette, ordonne le remboursement, ou ordonne des garanties complémentaires</div>
+</div>
+<div class="box precision"><span class="lbl">Précision — créanciers obligataires</span>Ceux de l'absorbante/bénéficiaire : même droit d'opposition que les créanciers ordinaires. Ceux de l'absorbée/scindée : consultés ou non selon le choix des dirigeants ; s'ils ne sont pas consultés, ils sont remboursés ; s'ils refusent l'opération et qu'elle est maintenue, ils peuvent demander en justice remboursement ou garanties complémentaires.</div>
+
+<h3 id="s7-3">7.3 Sort des contrats</h3>
+<div class="box piege"><span class="lbl">Piège d'examen — exceptions à la transmission automatique</span>Principe : tous les contrats sont transmis (TUP). Exceptions :
+<ul>
+<li>Contrats <b>intransmissibles par nature</b> (bail rural, contrats intuitu personae, certains contrats administratifs)</li>
+<li>Contrats que le traité <b>exclut expressément</b> de la transmission → effet : résiliation du contrat</li>
+</ul>
+Le bail commercial est transmis automatiquement (la clause d'agrément du bailleur ne s'applique en principe pas, puisqu'il ne s'agit pas d'une cession — la jurisprudence invite néanmoins à la prudence, par analogie avec les clauses d'agrément des actionnaires).
+</div>
+
+<h2 class="banner" id="s8">8. Régime social</h2>
+<div class="cmp" style="--cmp-cols:3;">
+<div class="cmp-card"><h5>Information du CSE</h5>Consultation obligatoire sur le projet. L'avis doit être communiqué aux AG de toutes les sociétés concernées. Défaut de communication = cause de <b>nullité des délibérations</b> des assemblées.</div>
+<div class="cmp-card"><h5>Contrats de travail</h5>Transmis automatiquement à la société bénéficiaire (Code du travail). Rémunération, ancienneté, CPF capitalisés. Convention collective du nouvel employeur applicable. En APA, les représentants du personnel protégés ne peuvent être compris dans l'apport qu'avec l'<b>autorisation de l'inspection du travail</b>.</div>
+<div class="cmp-card"><h5>Stock-options non levées</h5>Sort non réglé par les textes. Solution recommandée dans le traité : levée de l'option donnant droit à des actions de l'absorbante, prix d'exercice ajusté à la parité d'échange retenue.</div>
+</div>
+
+<h2 class="banner" id="s9">9. Méthode cas DSCG</h2>
+<div class="cas">
+<p><b>Énoncé</b> — La société ALPHA (SA), valorisée 60 M€, capital divisé en 3 000 000 actions, absorbe la société BETA (SARL constituée en 2018), valorisée 9 M€, capital divisé en 900 000 parts. Un associé de BETA détient 45 000 parts. Le passif de BETA comprend un emprunt garanti par le cautionnement d'un dirigeant.</p>
+
+<h4 class="q">Question 1 — Quelle est la parité d'échange et combien d'actions nouvelles ALPHA doit-elle émettre ?</h4>
+<div class="principe"><b>En principe :</b> la parité se détermine en rapportant la valeur unitaire de l'action absorbante à la valeur unitaire du titre absorbé.</div>
+<div class="espece"><b>En l'espèce :</b> valeur de l'action ALPHA = 60 000 000 / 3 000 000 = 20 €. Valeur de la part BETA = 9 000 000 / 900 000 = 10 €. Rapport ALPHA/BETA = 20/10 = 2 → 2 parts BETA pour 1 action ALPHA. ALPHA doit donc émettre 900 000 / 2 = 450 000 actions nouvelles.</div>
+<div class="conclusion">Conclusion : la parité retenue est de 2 parts BETA pour 1 action ALPHA ; ALPHA émettra 450 000 actions nouvelles ; l'associé détenant 45 000 parts BETA recevra 45 000 / 2 = 22 500 actions ALPHA.</div>
+
+<h4 class="q">Question 2 — Un commissaire à la fusion doit-il être désigné ?</h4>
+<div class="principe"><b>En principe :</b> le commissaire à la fusion est obligatoire entre deux sociétés par actions, ou entre une société par actions et une SARL ; il n'est pas obligatoire si aucune des sociétés n'est SA ni SARL.</div>
+<div class="espece"><b>En l'espèce :</b> ALPHA est une SA et BETA une SARL — le cas de figure « société par actions + SARL » est précisément visé par le texte.</div>
+<div class="conclusion">Conclusion : la désignation d'un commissaire à la fusion est obligatoire ; il devra vérifier la pertinence des valeurs retenues et le caractère équitable du rapport d'échange 2 pour 1, sauf renonciation à l'unanimité des associés des deux sociétés.</div>
+
+<h4 class="q">Question 3 — Que devient le cautionnement garantissant l'emprunt de BETA ?</h4>
+<div class="principe"><b>En principe :</b> le passif de la société absorbée est transmis intégralement à l'absorbante dans le cadre de la TUP ; les garanties attachées à la créance (dont le cautionnement) suivent la dette transmise, sans novation.</div>
+<div class="espece"><b>En l'espèce :</b> l'emprunt de BETA, garanti par le cautionnement d'un dirigeant, est transmis à ALPHA avec l'ensemble du passif.</div>
+<div class="conclusion">Conclusion : le cautionnement continue de garantir la même dette, désormais due par ALPHA ; le créancier bénéficie des mêmes conditions et des mêmes garanties qu'avant la fusion, sous réserve de son droit d'opposition dans les 30 jours de la publication de l'opération (la fusion SA/SARL ouvrant ce droit).</div>
+</div>
+
+<div class="box verif" style="border:1px dashed var(--red); border-radius:8px; padding:10px 14px;">
+<b>Points à vérifier auprès du cours / des textes actualisés :</b>
+<ul>
+<li>Montants actuels des seuils de contrôle des concentrations (250 M€ / 80 M€ national ; 5 Md€ / 250 M€ communautaire) — sujets à révision périodique.</li>
+<li>Date charnière du 2 août 2005 pour le régime de quorum/majorité des SARL en matière de fusion (cohérence à vérifier avec la fiche Transformation).</li>
+</ul>
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){
+  document.body.classList.toggle('mobile-force');
+}
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

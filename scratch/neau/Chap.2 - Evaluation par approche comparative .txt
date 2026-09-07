@@ -1,0 +1,88 @@
+Chapitre 2 - L’évaluation par approche comparative
+I – Principe de la méthode comparative2
+II – Définition et caractéristiques2
+III – Mise en œuvre3
+31 – Les étapes de la méthode3
+32 – L’utilisation des principaux multiples4
+321 – Les principales catégories de multiples4
+322 – Les principaux multiples6
+323 – Démarche et exemples8
+IV – Difficultés d’application10
+Pour aller à l’essentiel :11
+I – Principe de la méthode comparative
+Le principe de la méthode comparative est basé sur une comparaison entre une entreprise sur le point d’être cédée et d’autres acteurs affichant le même profil et qui ont récemment changé de propriétaires.
+La démarche est identique à celle d’un acquéreur immobilier cherchant à connaître le prix d’autres biens vendus dans un quartier afin d’être sûr de payer son appartement au juste prix.
+L’approche comparative est fréquente lors de la reprise d’une entreprise ou d’un fonds de commerce, car la multitude de transactions enregistrées, par exemple auprès des chambres consulaires, facilite les comparaisons.
+En pratique, le repreneur tente d’établir la valeur théorique de l’entreprise en se basant sur un barème ou un ratio commun au même secteur d’activité.
+Cette méthode peut être complétée par une méthode intrinsèque, par exemple l'actualisation des flux financiers et l'analyse du cours des actions d’une entreprise, ou par une approche patrimoniale basée sur l’évaluation des actifs nets comptables.
+II – Définition et caractéristiques
+Ces méthodes ont pour objet de valoriser un bien par comparaison avec un échantillon de référence constitué d’investissements de même nature ou proches. Dans le cas de l’évaluation des entreprises, il sera constitué par exemple :
+des sociétés cotées;
+des transactions réalisées de même nature. Sur les sociétés de l’échantillon, on calcule un multiple de la façon suivante :
+Multiple =
+VGE ou Vcp
+Inducteur de valeur
+VGE = Valeur globale de l’entreprise
+Vcp = Valeur des capitaux propres
+Ensuite, on applique cette relation sur la société à évaluer.
+D’où :
+Valeur de la société = Multiple moyen de l’échantillon x Critère appliqué à la firme
+C’est pour cette raison que l’on appelle cette méthode aussi la méthode des multiples.
+On peut distinguer deux principes essentiels :
+Privilégier la recherche de sociétés cotées comparables (benchmark) et, s’il est possible d’y avoir accès, construire l’échantillon à partir de notes et consensus d’analystes
+Ne pas privilégier, de façon systématique, les sociétés appartenant au même secteur d’activité : la recherche de comparables peut être étendue à des sociétés présentant un profil similaire en termes :
+-d’intensité capitalistique;
+-de rentabilité;
+-de position dans le cycle;
+ -de niveau d’endettement, etc.
+Exemple : Imaginons une société cotée du secteur de la pharmacie dont la capitalisation boursière est de 20 milliards d'euros et qui réalise un bénéfice net de 250 millions d'euros. Si l'on souhaite évaluer une entreprise du même secteur qui dégage un bénéfice net de 60 M €, il va être nécessaire de calculer un ratio (capitalisation/bénéfice) car leur différence de taille ne permet pas une comparaison directe. Ce ratio est ce que l'on appelle un multiple. 
+En matière d'évaluation par comparaison, un multiple est le rapport entre la valeur d'une entreprise et un inducteur de valeur. La valeur peut être la valeur globale de l'entreprise (VGE) ou la valeur de marché de ses capitaux propres (Vcp) et l’inducteur de valeur peut être une donnée comptable ou réelle de l'entreprise.
+III – Mise en œuvre
+31 – Les étapes de la méthode
+La mise en œuvre de la méthode induit logiquement les étapes suivantes :
+1) Constitution d’un échantillon de sociétés cotées ou ayant fait récemment l’objet de transactions comparables à la société avec les mêmes caractéristiques sectorielles et financières.
+2) Détermination du multiple moyen ou médian :
+Identification des indicateurs de performance les plus pertinents qui permettent d’analyser les différences de valorisation entre les entreprises retenues : Chiffre d’affaires, EBE, résultat exploitation, résultat net…
+3) Ajustements empiriques éventuels sur les résultats.
+4) Application des multiples aux données financières de la société à évaluer.
+La valeur ainsi obtenue est représentative soit de la valeur des actifs de l’entreprise ou soit de la valeur des capitaux propres de cette société selon l’inducteur retenu.
+Les ajustements sont à apporter sur :
+➪le calcul du multiple :
+Multiple retenu = Multiple sectoriel de référence x Coefficient de risque spécifique à la société
+➪le calcul de la valeur finale de l’entreprise :
+Valeur de la société = Multiple de la VGE échantillon x Inducteur société – Dettes  société
+OU
+Valeur de la société = Multiple de la Vcp échantillon x Inducteur société
+ON peut aussi être amenée à majorée ou diminuée la valeur par une prime de contrôle ou abattement illiquidité.
+Valeur = Valeur calculée + Prime de Contrôle 
+Ou
+Valeur = Valeur calculée -Abattement illiquidité
+32 – L’utilisation des principaux multiples
+321 – Les principales catégories de multiples
+Plusieurs possibilités de distinction des multiples existent. Mais, il est important de les catégoriser selon qu’ils prennent ou non en compte des frais financiers :
+De cette catégorie, on tire la relation suivante quant à la démarche à mener :
+On calcule ensuite le cours de l’action de la cible de la façon suivante :
+Cours du titre de la cible = Valeur des Capitaux propres/nombre de titres
+Ainsi, nous avons les principaux inducteurs suivants :
+Il est important de bien distinguer les indicateurs qui permettent une estimation directe de Vcp qui reviennent à ne pas tenir compte des dettes de l’entreprise pour leur montant réel des indicateurs VGE.
+Donc, on en retire une fourchette d’évaluation qui se situe entre 28M€ et 38M€.
+322 – Les principaux multiples
+Il existe une multitude de multiples et il n’est pas question de les passer tous en revue. Voici ceux qui le plus souvent utilisés par les analystes financiers.
+En matière d’évaluation par comparaison, un multiple est le rapport entre la valeur d’une entreprise et un inducteur de valeur. La valeur peut être la valeur globale de l’entreprise (VGE) ou la valeur de marché de ses capitaux propres (Vcp) et l’inducteur de valeur peut être une donnée comptable ou réelle de l’entreprise.
+Multiple = VGE ou Vcp / Inducteur de valeur
+3221 – Le P.E.R.
+Le P.E.R. (Price Earning Ratio) est le taux de capitalisation des bénéfices ou le coefficient multiplicateur du résultat.
+Soit PER= Capitalisation boursière / bénéfice
+Il est calculé pour les principaux secteurs d’activité.
+C’est un indicateur caractéristique qui fait l’objet de publications courantes sur toutes les places financières.
+Il permet de comparer des firmes appartenant au même secteur. Mais, il reste une notion empirique qui n’a fait l’objet d’aucune normalisation. Il existe donc des modes de calculs différents tant pour le bénéfice que pour le cours boursier (dernier cours, cours moyen, etc.). Généralement, on retient pour le calcul du bénéfice par action un résultat courant après impôt (hors éléments non récurrents).
+La valeur de l’action s’obtient alors comme suit :
+Valeur de l’action = BPA société x PER moyen de l’échantillon
+3222 – Le P.E.R. relatif
+Lorsque l’échantillon comprend des titres cotés sur des bourses différentes, le PER de chacune des sociétés est affecté par sa place de cotation. La méthode du PER relatif va consister) à supprimer l’effet que peut avoir le marché de cotation en divisant le PER de chacune des sociétés par le PER moyen de son marché de cotation :
+PER relatif = 
+PER société
+PER marché
+Valeur de l’action = PER relatif échantillon x PER marché x BPA société
+3223 – Le P.E.G. (Price Earnings to Growth)
+Nous verrons plus loin que les anticipations de croissance jouent un rôle de premier ordre sur le niveau du PER d'un titre. Dans ces conditions, évaluer une action sur la base du PER d'un échantillon d'entreprises comparables, c'est faire l'hypoth

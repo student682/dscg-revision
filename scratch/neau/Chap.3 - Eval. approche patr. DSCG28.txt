@@ -1,0 +1,112 @@
+Chapitre 3 - L’évaluation par approche patrimoniale
+I – La notion d’actif net comptable – A.N.C.2
+11 - Les actifs fictifs :2
+12 – Les normes IFRS3
+II -  L’actif net comptable corrigé A.N.C.C.4
+21 - Eléments de terminologie4
+22 –Corrections opérées sur les postes d’actif4
+III – La fiscalité différée et latente7
+31 - Impôt différé – Passif7
+32 -  Impôt différé – Actif7
+33 - Fiscalité latente7
+34 - Application de cours :8
+IV – Cas particuliers12
+41 - Existence de participations réciproques ou circulaires12
+42 - Perspective de cessation d’activité13
+1. Valeur liquidative13
+2. Valeur de liquidation13
+3. Valeur de fusion13
+4. Valeur à la casse13
+Au sens strict, les méthodes patrimoniales sont souvent réservées à une utilisation restreinte telle que la valeur mathématique qui permet de formaliser des opérations comme les fusions par exemple. Elles permettent également de donner à l’évaluateur une valeur de l’entreprise qui est généralement considérée comme une base de discussion.
+Quant aux méthodes mixtes, elles sont plus complètes, et plus complexes, mais très largement utilisées dans la pratique, en particulier par les professions comptables.
+Il ne faut jamais oublier qu’une valeur est une opinion et que seuls les prix sont des faits. Une opinion doit pouvoir être justifiée.
+I – La notion d’actif net comptable – A.N.C.
+L’application du principe des coûts historiques conduit à la présentation d’un bilan qui ne permet pas d’apprécier une entreprise à sa juste valeur. Des retraitements seront alors nécessaires, ce qui induira une fiscalité différée.
+Actif fictif
+Capitaux propres
+Actif
+ immobilisé
+Actif
+circulant
+Dettes et provisions
+Définir l’A.N.C.=
+11 - Les actifs fictifs :
+ Charges enregistrées à l’actif et faisant l’objet d’un étalement sur plusieurs exercices (frais d’établissement, charges d’emprunt à répartir, primes de remboursement). Ce sont des non-valeurs :
+Frais d’établissement
+Frais d’émission d’emprunt
+Prime de remboursement des obligations
+Les écarts de conversion actif mais uniquement dans la mesure où ils ne sont pas compensés par le compte 1515.
+Les écarts de conversion passif sont reclassés en augmentation dans les capitaux propres. Les écarts de conversion actif ont déjà été pris en compte dans le résultat par le biais des provisions pour risque de change. Dans une optique d’évaluation patrimoniale, ce poste n’a donc pas à être reclassé en diminution dans les capitaux propres.
+Actif fictif
+Postes représentatifs de charges activables :
+Frais d’établissement
+Frais d’émission d’emprunt
+Prime de remboursement des obligations
+…mais pas charges constatées d’avance
+Les écarts de conversion actif mais uniquement dans la mesure où ils ne sont pas compensés par le compte 1515. 
+Passif fictif
+Capitaux propres y compris provisions réglementées + écarts de conversion passif
+Ces derniers sont des gains de change latents.
+Attention aux dividendes
+Les dividendes sont des dettes vis-à-vis des actionnaires donc ils sont à enlever du passif fictif
+L’actif net comptable est calculé directement sur la base de la valeur comptable des postes du bilan après affectation des bénéfices. Les dividendes dont la distribution est envisagée doit donc être retranchés des capitaux propres avant le calcul de l’actif net comptable.
+L’A.N.C. est une valeur très imparfaite car elle est souvent très éloignée de la valeur de l’entreprise, de la valeur du marché.
+Le calcul de cette valeur ne représente donc qu’une première étape conduisant ensuite au calcul de l’actif net comptable corrigé.
+12 – Les normes IFRS
+Les normes IFRS n’admettent pas ………………………………………………………….
+En normes françaises, la méthode de référence applicable aux frais d’établissement est ……………………………………………………………………………………………….
+Le poste « frais de développement » représente uniquement ………………………………………………………………………………………………….
+ 
+II -  L’actif net comptable corrigé A.N.C.C.
+Cet actif net corrigé est obtenu en substituant, en tant que besoin, les valeurs réelles aux valeurs comptables. Il est aussi appelé actif net intrinsèque.
+A.N.C.C. = A.N.C. + /- values
+21 - Eléments de terminologie
+Eléments
+Définitions
+Actif réel
+Postes représentatifs de biens selon les valeurs réelles.
+Passif réel
+Provisions pour pertes et charges (dettes probables)
+Dettes effectives
+Produits constatés d’avance
+Plus-values ou moins-values latentes
+Ecarts entre les valeurs bilantielles et les valeurs réelles.
+22 – Corrections opérées sur les postes d’actif 
+Généralement, cette réestimation fait apparaître des plus ou moins-values. L’A.N.C. C. est obtenue en substituant les valeurs réelles aux valeurs comptables.
+Les corrections concernent principalement les immobilisations et les titres.
+Fonds commercial
+Le fonds commercial évalue les éléments incorporels de l’actif.
+Ce fonds est à intégrer dans l’ANCC pour le calcul de la valeur mathématique.
+Par contre, il sera exclu pour l’évaluation dans les méthodes mixtes. On le remplacera par des méthodes fondées sur le goodwill ou en prenant le barème fiscal.
+…………………………………………………………………………………………………..
+…………………………………………………………………………………………………..
+Brevets, marques, licences
+Les brevets faisant l’objet d’une licence sont généralement évalués en actualisant les redevances à en attendre. Sinon, l’évaluation des brevets exploités par l’entreprise, des marques et des modèles n’est pas distinguée de l’évaluation du fonds commercial. Elle est comprise dans le fonds de commerce.
+Immobilisations corporelles
+Les immobilisations corporelles figurent au bilan à leur valeur historique d’entrée qui est parfois fort ancienne. Du fait de l’inflation, cette valeur est généralement inférieure à la valeur actuelle.
+Les immobilisations corporelles doivent être réestimées :
+Soit à leur valeur d’utilité, c’est à dire au prix que les dirigeants de l’entreprise accepteraient de payer pour se procurer des biens d’équipement équivalents ; en pratique, il s’agit de la valeur de remplacement, avec application d’un coefficient de vétusté ;
+Soit à leur valeur vénale, sur la base d’expertises ou de cotations, pour les biens hors exploitation. Il s’agit, dans ce cas, d’immobilisations qui figurent à l’actif du bilan qu’elles soient étrangères à l’exploitation de l’entreprise (ex : terrains conservés dans un but spéculatif, habitations louées au personnel).
+Portefeuille – titres
+Cette évaluation fait apparaître :
+Soit une moins-value qui, normalement, est déjà constatée par une provision ;
+Soit une plus-value latente qui doit être ajoutée à la valeur comptable du titre.
+Contrats de crédit-bail
+1ère solution : Les contrats de crédit-bail ont une plus ou moins-value représentée par la différence entre :
+D’une part, la valeur vénale ou la valeur de remplacement des équipements faisant l’objet du contrat ;
+D’autre part, la valeur actualisée des redevances et l’option d’achat restant à payer.
+Une deuxième solution peut être admise. La valeur du contrat de crédit-bail peut être estimée à la différence entre la valeur nette comptable du bien et le reste à rembourser en considérant la contrepartie de la valeur du bien contre un emprunt.
+La valeur des contrats de crédit-bail est un élément du patrimoine de l’entreprise bien qu’elle n’ait pas de traduction comptable au bilan. Attention, il s’agit uniquement de ……………………………………………………………………………………………….
+En général, les calculs s’effectuent à partir de bilans après répartition du résultat. On obtient alors des valeurs « ex-coupon » ou « coupon détaché ». Dans le cas contraire, on calculerait des valeurs « coupon attaché ».
+L’actif net comptable corrigé donne une évaluation de l’entreprise dans son ensemble. L’évaluation de l’action (ou de la part sociale) d’une société est obtenue en divisant l’actif net comptable corrigé par le nombre de titres émis par cette société. Ce quotient est appelé 
+« Valeur mathématique » de l’action (ou de la part).
+A.N.C.C.= 
+En résumé :
+En conso
+En comptes individuels
+Ecart de conversion passif
+Ecart de conversion Actif
+Frais d’établissement
+Frais de développement
+Crédit-Baux
+Fonds de co

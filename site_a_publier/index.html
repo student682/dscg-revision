@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portail de Révision DSCG UE1 — Gestion Juridique, Fiscale et Sociale</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- Application Header / Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand" onclick="switchTab('accueil')">
+        <div class="brand-icon">UE1</div>
+        <div>
+          <div class="brand-title">DSCG Révision</div>
+          <div class="brand-subtitle">Portail Interactif UE 1</div>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <button class="nav-tab active" data-tab="accueil">🏠 Accueil</button>
+
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">⚖️ Droit (UE1) ▼</button>
+          <div class="dropdown-content">
+            <button class="nav-tab" data-tab="societes">🏢 Droit des Sociétés</button>
+            <button class="nav-tab" data-tab="fiscal">⚖️ Droit Fiscal</button>
+            <button class="nav-tab" data-tab="contrats">📜 Contrats/Affaires</button>
+            <button class="nav-tab" data-tab="difficultes_penal">🚨 Difficultés & Pénal</button>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">📈 Finance (UE2) ▼</button>
+          <div class="dropdown-content">
+            <button class="nav-tab" data-tab="finance">📈 Finance (UE2)</button>
+            <button class="nav-tab" data-tab="evaluation">📊 Évaluation (Mme Neau)</button>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn">📊 MCG (UE3) ▼</button>
+          <div class="dropdown-content">
+            <button class="nav-tab" data-tab="mcg">📊 Management & Contrôle</button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-controls">
+        <div class="search-box-header">
+          <span class="search-icon-header">🔍</span>
+          <input type="text" id="global-search" class="search-input-header" placeholder="Rechercher une notion...">
+        </div>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Changer de thème">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="app-container">
+
+    <!-- TAB 1: ACCUEIL / DASHBOARD -->
+    <section id="tab-accueil" class="tab-content active">
+
+      <!-- Hero Banner -->
+      <div class="hero-banner">
+        <h1 class="hero-title">Plateforme Complète de Révision DSCG</h1>
+        <p class="hero-subtitle">
+          Accédez à l'ensemble des fiches synthétiques de cours, cas pratiques corrigés, pièges d'examen et arbres de
+          décision pour réussir l'épreuve de Gestion Juridique, Fiscale et Sociale.
+        </p>
+      </div>
+
+      <!-- Stats Breakdown Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue">📚</div>
+          <div>
+            <div class="stat-value">27</div>
+            <div class="stat-label">Fiches de Révision</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red">⚠️</div>
+          <div>
+            <div class="stat-value">60+</div>
+            <div class="stat-label">Pièges d'Examen Identifiés</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon gold">⚖️</div>
+          <div>
+            <div class="stat-value">25+</div>
+            <div class="stat-label">Cas Pratiques DSCG</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">✅</div>
+          <div>
+            <div class="stat-value" id="stat-completed">0 / 27</div>
+            <div class="stat-label">Fiches Maîtrisées <span onclick="resetProgress()"
+                style="font-size:11px; color:var(--text-muted); cursor:pointer; text-decoration:underline; margin-left:4px;">(Reset)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bookmarks Container -->
+      <div class="bookmarks-container">
+        <div style="font-size:16px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+          <span>⭐️</span> Mes Fiches Favorites & Accès Rapide
+        </div>
+        <div class="bookmark-list" id="bookmark-list">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- Subject Cards Grid (UE1) -->
+      <h2 class="section-title">⚖️ Droit (UE1)</h2>
+      <div class="subject-grid">
+
+        <!-- Card Droit des Sociétés -->
+        <div class="subject-card" onclick="switchTab('societes')">
+          <div>
+            <div class="subject-header">
+              <span class="subject-badge">🏢</span>
+              <div class="subject-name">Droit des Sociétés</div>
+            </div>
+            <p class="subject-desc">
+              Groupes de sociétés, Holding, Augmentations/Réductions de capital, Gouvernement d'entreprise,
+              Restructurations, Fusions, Scissions, Transmission et Transformation.
+            </p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-header">
+              <span>Progression</span>
+              <span id="progress-text-societes">0/12 fiches (0%)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-fill-societes"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Droit Fiscal -->
+        <div class="subject-card" onclick="switchTab('fiscal')">
+          <div>
+            <div class="subject-header">
+              <span class="subject-badge">⚖️</span>
+              <div class="subject-name">Droit Fiscal des Sociétés</div>
+            </div>
+            <p class="subject-desc">
+              Fiscalité des groupes, Intégration fiscale, Échanges internationaux, Régime des fusions, APA, TUP,
+              Financement et transmission d'entreprise à titre gratuit.
+            </p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-header">
+              <span>Progression</span>
+              <span id="progress-text-fiscal">0/7 fiches (0%)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-fill-fiscal"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Droit des Contrats / Affaires -->
+        <div class="subject-card" onclick="switchTab('contrats')">
+          <div>
+            <div class="subject-header">
+              <span class="subject-badge">📜</span>
+              <div class="subject-name">Droit des Contrats & Affaires</div>
+            </div>
+            <p class="subject-desc">
+              Concurrence déloyale, Parasitisme, Transparence commerciale, Rupture brutale, Pratiques
+              anticoncurrentielles (Ententes, Abus), Contrôle des concentrations.
+            </p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-header">
+              <span>Progression</span>
+              <span id="progress-text-contrats">0/4 fiches (0%)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-fill-contrats"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Entreprises en Difficulté & Droit Pénal des Affaires -->
+        <div class="subject-card" onclick="switchTab('difficultes_penal')">
+          <div>
+            <div class="subject-header">
+              <span class="subject-badge">🚨</span>
+              <div class="subject-name">Difficultés & Pénal des Affaires</div>
+            </div>
+            <p class="subject-desc">
+              Prévention des difficultés, Mandat ad hoc, Conciliation, Sauvegarde, Redressement, Liquidation, Droit
+              pénal des affaires, Infractions, Instruction et Sanctions.
+            </p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-header">
+              <span>Progression</span>
+              <span id="progress-text-difficultes_penal">0/4 fiches (0%)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-fill-difficultes_penal"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Finance -->
+      </div>
+
+      <h2 class="section-title" style="margin-top: 30px;">📈 Finance (UE2)</h2>
+      <div class="subject-grid">
+
+        <!-- Card Finance -->
+        <div class="subject-card" onclick="switchTab('finance')">
+          <div>
+            <div class="subject-header">
+              <span class="subject-badge">📈</span>
+              <div class="subject-name">Finance (M. Hamman)</div>
+            </div>
+            <p class="subject-desc">
+              Valeur et risque, Gestion de la valeur de l'action, Trésorerie, Dettes et créances, Politique de
+              dividendes, Fusions-Acquisitions, Innovations.
+            </p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-header">
+              <span>Progression</span>
+              <span id="progress-text-finance">0/7 fiches (0%)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-fill-finance"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Evaluation -->
+        <div class="subject-card" onclick="switchTab('evaluation')">
+          <div>
+            <div class="subject-header">
+              <span class="subject-badge">📊</span>
+              <div class="subject-name">Évaluation (Mme Neau)</div>
+            </div>
+            <p class="subject-desc">
+              Approches comparative, patrimoniale (ANCC), mixte (GoodWill), start-ups et actifs incorporels.
+            </p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-header">
+              <span>Progression</span>
+              <span id="progress-text-evaluation">0/5 fiches (0%)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-fill-evaluation"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2 class="section-title" style="margin-top: 30px;">📊 Management et Contrôle de Gestion (UE3)</h2>
+      <div class="subject-grid">
+        <div class="subject-card" onclick="switchTab('mcg')">
+          <div>
+            <div class="subject-header">
+              <span class="subject-badge">📊</span>
+              <div class="subject-name">Management et Contrôle de Gestion</div>
+            </div>
+            <p class="subject-desc">
+              Section en cours de construction. Fiches à venir.
+            </p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-header">
+              <span>Progression</span>
+              <span id="progress-text-mcg">0/0 fiches (0%)</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-fill-mcg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz Flash Section -->
+      <h2 class="section-title">⚡ Quiz Express — Pièges & Réflexes DSCG</h2>
+      <div class="quiz-widget">
+        <div class="quiz-header">
+          <div class="quiz-title">💡 Auto-Évaluation Rapide</div>
+          <button class="btn-secondary" onclick="nextQuizQuestion()">Question Suivante ➔</button>
+        </div>
+        <div class="quiz-question-box" id="quiz-question">
+          Chargement de la question...
+        </div>
+        <div class="quiz-answer-box" id="quiz-answer">
+          Chargement de la réponse...
+        </div>
+        <div class="quiz-actions">
+          <button class="btn-primary" onclick="showQuizAnswer()">👁️ Révéler la Réponse</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 2: DROIT DES SOCIETES -->
+    <section id="tab-societes" class="tab-content">
+      <div class="subject-layout">
+        <aside class="sidebar-fiches" id="sidebar-societes">
+          <!-- Rendered via JS -->
+        </aside>
+        <div class="viewer-container" id="viewer-container-societes">
+          <div class="viewer-toolbar">
+            <div class="viewer-title" id="viewer-title-societes">Constitution et Vie des Groupes</div>
+
+            <!-- Section Dropdown Jump -->
+            <select id="select-section-societes" class="section-select">
+              <option value="">📑 Aller à la section...</option>
+            </select>
+
+            <!-- Filters -->
+            <div class="filter-bar">
+              <button class="filter-btn active" onclick="filterFicheContent('societes', 'all')">Tous</button>
+              <button class="filter-btn" onclick="filterFicheContent('societes', 'piege')">⚠️ Pièges</button>
+              <button class="filter-btn" onclick="filterFicheContent('societes', 'memo')">📌 Mémos</button>
+              <button class="filter-btn" onclick="filterFicheContent('societes', 'reformulation')">💡
+                Reformulés</button>
+              <button class="filter-btn" onclick="filterFicheContent('societes', 'cas')">⚖️ Cas</button>
+            </div>
+
+            <div class="viewer-actions">
+              <button class="viewer-btn" id="btn-star-societes" onclick="toggleBookmark('societes')">☆
+                Enregistrer</button>
+              <button class="viewer-btn" id="btn-done-societes" onclick="toggleComplete('societes')">Mark
+                Complété</button>
+              <button class="viewer-btn" onclick="toggleFullscreen('societes')">🖥️ Plein Écran</button>
+              <button class="viewer-btn" onclick="printActiveFiche('societes')">🖨️ Imprimer / PDF</button>
+            </div>
+          </div>
+          <iframe id="viewer-societes" class="viewer-frame"
+            src="Droit des sociétés fiches de révision/Fiche_Constitution_Groupes.html"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: DROIT FISCAL -->
+    <section id="tab-fiscal" class="tab-content">
+      <div class="subject-layout">
+        <aside class="sidebar-fiches" id="sidebar-fiscal">
+          <!-- Rendered via JS -->
+        </aside>
+        <div class="viewer-container" id="viewer-container-fiscal">
+          <div class="viewer-toolbar">
+            <div class="viewer-title" id="viewer-title-fiscal">Constitution et Transformation (Fiscalité)</div>
+
+            <select id="select-section-fiscal" class="section-select">
+              <option value="">📑 Aller à la section...</option>
+            </select>
+
+            <div class="filter-bar">
+              <button class="filter-btn active" onclick="filterFicheContent('fiscal', 'all')">Tous</button>
+              <button class="filter-btn" onclick="filterFicheContent('fiscal', 'piege')">⚠️ Pièges</button>
+              <button class="filter-btn" onclick="filterFicheContent('fiscal', 'memo')">📌 Mémos</button>
+              <button class="filter-btn" onclick="filterFicheContent('fiscal', 'reformulation')">💡 Reformulés</button>
+              <button class="filter-btn" onclick="filterFicheContent('fiscal', 'cas')">⚖️ Cas</button>
+            </div>
+
+            <div class="viewer-actions">
+              <button class="viewer-btn" id="btn-star-fiscal" onclick="toggleBookmark('fiscal')">☆ Enregistrer</button>
+              <button class="viewer-btn" id="btn-done-fiscal" onclick="toggleComplete('fiscal')">Mark Complété</button>
+              <button class="viewer-btn" onclick="toggleFullscreen('fiscal')">🖥️ Plein Écran</button>
+              <button class="viewer-btn" onclick="printActiveFiche('fiscal')">🖨️ Imprimer / PDF</button>
+            </div>
+          </div>
+          <iframe id="viewer-fiscal" class="viewer-frame"
+            src="Droit fiscal Fiches de révision/Fiche_Constitution_transformation_societes.html"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: DROIT DES CONTRATS / AFFAIRES -->
+    <section id="tab-contrats" class="tab-content">
+      <div class="subject-layout">
+        <aside class="sidebar-fiches" id="sidebar-contrats">
+          <!-- Rendered via JS -->
+        </aside>
+        <div class="viewer-container" id="viewer-container-contrats">
+          <div class="viewer-toolbar">
+            <div class="viewer-title" id="viewer-title-contrats">Concurrence Déloyale et Parasitisme</div>
+
+            <select id="select-section-contrats" class="section-select">
+              <option value="">📑 Aller à la section...</option>
+            </select>
+
+            <div class="filter-bar">
+              <button class="filter-btn active" onclick="filterFicheContent('contrats', 'all')">Tous</button>
+              <button class="filter-btn" onclick="filterFicheContent('contrats', 'piege')">⚠️ Pièges</button>
+              <button class="filter-btn" onclick="filterFicheContent('contrats', 'memo')">📌 Mémos</button>
+              <button class="filter-btn" onclick="filterFicheContent('contrats', 'reformulation')">💡
+                Reformulés</button>
+              <button class="filter-btn" onclick="filterFicheContent('contrats', 'cas')">⚖️ Cas</button>
+            </div>
+
+            <div class="viewer-actions">
+              <button class="viewer-btn" id="btn-star-contrats" onclick="toggleBookmark('contrats')">☆
+                Enregistrer</button>
+              <button class="viewer-btn" id="btn-done-contrats" onclick="toggleComplete('contrats')">Mark
+                Complété</button>
+              <button class="viewer-btn" onclick="toggleFullscreen('contrats')">🖥️ Plein Écran</button>
+              <button class="viewer-btn" onclick="printActiveFiche('contrats')">🖨️ Imprimer / PDF</button>
+            </div>
+          </div>
+          <iframe id="viewer-contrats" class="viewer-frame"
+            src="Droit des contrats fiches de révision/Fiche_Concurrence_Deloyale.html"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: ENTREPRISES EN DIFFICULTE & DROIT PENAL -->
+    <section id="tab-difficultes_penal" class="tab-content">
+      <div class="subject-layout">
+        <aside class="sidebar-fiches" id="sidebar-difficultes_penal">
+          <!-- Rendered via JS -->
+        </aside>
+        <div class="viewer-container" id="viewer-container-difficultes_penal">
+          <div class="viewer-toolbar">
+            <div class="viewer-title" id="viewer-title-difficultes_penal">Prévention des Difficultés et Sauvegarde</div>
+
+            <select id="select-section-difficultes_penal" class="section-select">
+              <option value="">📑 Aller à la section...</option>
+            </select>
+
+            <div class="filter-bar">
+              <button class="filter-btn active" onclick="filterFicheContent('difficultes_penal', 'all')">Tous</button>
+              <button class="filter-btn" onclick="filterFicheContent('difficultes_penal', 'piege')">⚠️ Pièges</button>
+              <button class="filter-btn" onclick="filterFicheContent('difficultes_penal', 'memo')">📌 Mémos</button>
+              <button class="filter-btn" onclick="filterFicheContent('difficultes_penal', 'reformulation')">💡
+                Reformulés</button>
+              <button class="filter-btn" onclick="filterFicheContent('difficultes_penal', 'cas')">⚖️ Cas</button>
+            </div>
+
+            <div class="viewer-actions">
+              <button class="viewer-btn" id="btn-star-difficultes_penal" onclick="toggleBookmark('difficultes_penal')">☆
+                Enregistrer</button>
+              <button class="viewer-btn" id="btn-done-difficultes_penal"
+                onclick="toggleComplete('difficultes_penal')">Mark Complété</button>
+              <button class="viewer-btn" onclick="toggleFullscreen('difficultes_penal')">🖥️ Plein Écran</button>
+              <button class="viewer-btn" onclick="printActiveFiche('difficultes_penal')">🖨️ Imprimer / PDF</button>
+            </div>
+          </div>
+          <iframe id="viewer-difficultes_penal" class="viewer-frame"
+            src="Droit des affaires fiches/Fiche_Prevention_Sauvegarde_Liquidation.html"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: FINANCE -->
+    <section id="tab-finance" class="tab-content">
+      <div class="subject-layout">
+        <aside class="sidebar-fiches" id="sidebar-finance">
+          <!-- Rendered via JS -->
+        </aside>
+        <div class="viewer-container" id="viewer-container-finance">
+          <div class="viewer-toolbar">
+            <div class="viewer-title" id="viewer-title-finance">Finance</div>
+
+            <select id="select-section-finance" class="section-select">
+              <option value="">📑 Aller à la section...</option>
+            </select>
+
+            <div class="filter-bar">
+              <button class="filter-btn active" onclick="filterFicheContent('finance', 'all')">Tous</button>
+              <button class="filter-btn" onclick="filterFicheContent('finance', 'piege')">⚠️ Pièges</button>
+              <button class="filter-btn" onclick="filterFicheContent('finance', 'memo')">📌 Mémos</button>
+              <button class="filter-btn" onclick="filterFicheContent('finance', 'reformulation')">💡 Reformulés</button>
+              <button class="filter-btn" onclick="filterFicheContent('finance', 'cas')">⚖️ Cas</button>
+            </div>
+
+            <div class="viewer-actions">
+              <button class="viewer-btn" id="btn-star-finance" onclick="toggleBookmark('finance')">☆
+                Enregistrer</button>
+              <button class="viewer-btn" id="btn-done-finance" onclick="toggleComplete('finance')">Mark
+                Complété</button>
+              <button class="viewer-btn" onclick="toggleFullscreen('finance')">🖥️ Plein Écran</button>
+              <button class="viewer-btn" onclick="printActiveFiche('finance')">🖨️ Imprimer / PDF</button>
+            </div>
+          </div>
+          <iframe id="viewer-finance" class="viewer-frame"
+            src="finance fiches de révision/Fiche_Valeur_et_Risque.html"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 7: EVALUATION -->
+    <section id="tab-evaluation" class="tab-content">
+      <div class="subject-layout">
+        <aside class="sidebar-fiches" id="sidebar-evaluation">
+          <!-- Rendered via JS -->
+        </aside>
+        <div class="viewer-container" id="viewer-container-evaluation">
+          <div class="viewer-toolbar">
+            <div class="viewer-title" id="viewer-title-evaluation">Évaluation</div>
+
+            <select id="select-section-evaluation" class="section-select">
+              <option value="">📑 Aller à la section...</option>
+            </select>
+
+            <div class="filter-bar">
+              <button class="filter-btn active" onclick="filterFicheContent('evaluation', 'all')">Tous</button>
+              <button class="filter-btn" onclick="filterFicheContent('evaluation', 'piege')">⚠️ Pièges</button>
+              <button class="filter-btn" onclick="filterFicheContent('evaluation', 'memo')">📌 Mémos</button>
+              <button class="filter-btn" onclick="filterFicheContent('evaluation', 'reformulation')">💡
+                Reformulés</button>
+              <button class="filter-btn" onclick="filterFicheContent('evaluation', 'cas')">⚖️ Cas</button>
+            </div>
+
+            <div class="viewer-actions">
+              <button class="viewer-btn" id="btn-star-evaluation" onclick="toggleBookmark('evaluation')">☆
+                Enregistrer</button>
+              <button class="viewer-btn" id="btn-done-evaluation" onclick="toggleComplete('evaluation')">Mark
+                Complété</button>
+              <button class="viewer-btn" onclick="toggleFullscreen('evaluation')">🖥️ Plein Écran</button>
+              <button class="viewer-btn" onclick="printActiveFiche('evaluation')">🖨️ Imprimer / PDF</button>
+            </div>
+          </div>
+          <iframe id="viewer-evaluation" class="viewer-frame"
+            src="Evaluation fiches de révision/Fiche_Intro_Evaluation.html"></iframe>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TAB 8: MCG -->
+    <section id="tab-mcg" class="tab-content">
+      <div class="subject-layout">
+        <aside class="sidebar-fiches" id="sidebar-mcg">
+          <div class="sidebar-title">Fiches de Révision (0)</div>
+          <div style="padding: 15px; color: var(--text-muted); font-size: 14px;">Aucune fiche disponible pour le moment.
+          </div>
+        </aside>
+        <div class="viewer-container" id="viewer-container-mcg">
+          <div class="viewer-toolbar">
+            <div class="viewer-title" id="viewer-title-mcg">Management et Contrôle de Gestion</div>
+          </div>
+          <div
+            style="display:flex; align-items:center; justify-content:center; height:100%; font-size:24px; color:var(--text-muted);">
+            🚧 Section en construction 🚧
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Search Results Modal Overlay -->
+  <div class="search-modal" id="search-modal">
+    <div class="search-modal-content">
+      <div class="search-modal-header">
+        <div style="font-weight:700; font-size:18px;">🔍 Résultats de Recherche</div>
+        <button onclick="closeSearchModal()"
+          style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--text-color);">✕</button>
+      </div>
+      <div class="search-modal-body" id="search-results">
+        <!-- Search results injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    DSCG UE 1 — Support de Révision Intégré · Droit des sociétés, Droit fiscal & Droit des affaires
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+
+</html>

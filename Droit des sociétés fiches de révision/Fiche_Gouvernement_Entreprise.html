@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Gouvernement d'Entreprise</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+
+/* Toolbar */
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+
+/* Title banner */
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+
+/* TOC */
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+
+/* Section banners */
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+
+/* Callout boxes */
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+
+/* Decision tree (HTML/CSS, texte natif) */
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.tree .mode{
+  display:inline-block; margin-left:10px; font-size:12px; font-weight:700;
+  padding:3px 9px; border-radius:12px; vertical-align:middle;
+}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+
+/* Timeline / chronologie */
+.timeline{margin:16px 0; padding:0; list-style:none;}
+.timeline li{
+  position:relative; padding:8px 0 8px 30px; border-left:2px solid var(--blue); margin-left:6px;
+}
+.timeline li:last-child{border-left:2px solid transparent;}
+.timeline li::before{
+  content:""; position:absolute; left:-7px; top:12px; width:12px; height:12px;
+  border-radius:50%; background:var(--blue); border:2px solid #fff;
+}
+.timeline .t-lbl{font-weight:700; color:var(--dblue); font-size:14px;}
+.timeline .t-txt{font-size:13.5px; color:#333;}
+
+/* Comparison grid (organes / formes / acteurs) */
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+
+/* Mini-cas DSCG */
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+.cas ul{margin:4px 0; padding-left:20px;}
+
+/* Footer */
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+article{margin:0;}
+a.anchor-target{scroll-margin-top:60px;}
+.verif{color:var(--red); font-style:italic; font-weight:600;}
+
+/* ===== Responsive mobile ===== */
+@media (max-width:480px){
+  body{font-size:13.5px;}
+  .wrap{padding:0 10px 50px;}
+  .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  .toolbar .chap{font-size:11.5px;}
+  .toolbar button{padding:6px 8px; font-size:11px;}
+  .title-banner h1{font-size:19px;}
+  .title-banner .sub{font-size:12px;}
+  h2.banner{font-size:15px; padding:8px 12px;}
+  h3{font-size:14.5px;}
+  h4{font-size:13.5px;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+  td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  td:empty, td:not([data-label]){padding:4px 10px;}
+  .cmp{grid-template-columns:1fr!important;}
+}
+@media (min-width:481px) and (max-width:900px){
+  .cmp{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:901px){
+  .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);}
+}
+
+/* mobile-force class : forçage du rendu mobile même sur grand écran */
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force .toolbar{padding:8px 10px;}
+body.mobile-force .toolbar .chap{font-size:11.5px;}
+body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;}
+body.mobile-force .title-banner h1{font-size:19px;}
+body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody,
+body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;}
+body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+body.mobile-force .cmp{grid-template-columns:1fr!important;}
+
+/* ===== Print ===== */
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+  body{font-size:11.5px;}
+  h2.banner{break-before:page; break-after:avoid;}
+  h2.banner:first-of-type{break-before:auto;}
+  table, .box, .tree, .cas, .cmp-card{break-inside:avoid;}
+  .title-banner{break-after:avoid;}
+  a{color:#000; text-decoration:none;}
+  .toc a{color:#000;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. — Gouvernement d'Entreprise</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Gouvernement d'Entreprise</h1>
+  <div class="sub">DSCG UE 1 — Gestion juridique, fiscale et sociale · Droit des sociétés</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+
+<ol>
+<li><a href="#s1">1. Organes de direction — structures par forme sociale</a></li>
+<li><a href="#s2">2. Pouvoirs et fin de mandat des dirigeants
+  <ol><li><a href="#s2-1">2.1 Étendue et limites des pouvoirs</a></li><li><a href="#s2-2">2.2 Cumul mandat / contrat de travail</a></li><li><a href="#s2-3">2.3 Fin du mandat social</a></li></ol>
+</li>
+<li><a href="#s3">3. Responsabilité des dirigeants
+  <ol><li><a href="#s3-1">3.1 Responsabilité civile</a></li><li><a href="#s3-2">3.2 Responsabilités pénale, fiscale, patrimoniale, professionnelle</a></li></ol>
+</li>
+<li><a href="#s4">4. Droits et obligations des associés/actionnaires
+  <ol><li><a href="#s4-1">4.1 Droits individuels</a></li><li><a href="#s4-2">4.2 Droit d'alerte et expertise de gestion</a></li><li><a href="#s4-3">4.3 Responsabilité des associés</a></li></ol>
+</li>
+<li><a href="#s5">5. Conventions réglementées</a></li>
+<li><a href="#s6">6. Contrôle par le commissaire aux comptes</a></li>
+<li><a href="#s7">7. Droits des salariés (CSE et participation)</a></li>
+<li><a href="#s8">8. Sociétés cotées — théorie de l'agence et administrateurs indépendants</a></li>
+<li><a href="#s9">9. Transparence des sociétés cotées (say on pay, DPEF, AMF)</a></li>
+<li><a href="#s10">10. Méthode cas DSCG</a></li>
+</ol>
+
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. Organes de direction — structures par forme sociale</h2>
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>Sociétés « à gérant »</h5>SNC, SCS, SARL, SCA : un ou plusieurs <b>gérants</b> (associés commandités ou tiers en SCS/SCA). SAS : un <b>président</b> (personne physique ou morale), éventuellement des directeurs généraux délégués.</div>
+<div class="cmp-card"><h5>SA — deux organisations au choix</h5><b>Moniste</b> : conseil d'administration (CA) + président du CA + directeur général (ou PCA-DG unique). <b>Dualiste</b> : directoire + président du directoire (ou DG) + conseil de surveillance (CS).</div>
+</div>
+<div class="box precision"><span class="lbl">Précision — rôle du CA vs du CS</span>Le CA <b>oriente</b> la gestion et contrôle le DG. Le CS <b>contrôle</b> la gestion du directoire et apprécie l'opportunité des actes de gestion — il ne gère pas lui-même. Les membres du CA/CS sont élus par l'assemblée ; les autres organes (PCA, président du directoire, DG, DGD) sont désignés par le CA ou le CS.</div>
+<div class="box piege"><span class="lbl">Piège d'examen — dirigeant de droit vs dirigeant de fait</span>Le <b>dirigeant de fait</b> est celui qui assume en fait la gestion d'une société aux lieu et place de ses représentants légaux, sans y avoir été régulièrement désigné — notamment un associé qui s'immisce dans la gestion. Il encourt les <b>mêmes responsabilités civile et pénale</b> qu'un dirigeant de droit.</div>
+
+<h2 class="banner" id="s2">2. Pouvoirs et fin de mandat des dirigeants</h2>
+
+<h3 id="s2-1">2.1 Étendue et limites des pouvoirs</h3>
+<div class="tree">
+<span class="root">Cadre juridique de l'action des dirigeants</span>
+<span class="mode cumul">Cumulatif</span>
+<div class="branch">
+<div class="cond-item">Agir dans l'<b>intérêt social</b> (pas de faute de gestion, éviter les conflits d'intérêts)</div>
+<div class="cond-item">Préserver l'<b>intérêt des associés</b> (principe d'égalité)</div>
+<div class="cond-item">Les actes doivent entrer dans l'<b>objet social</b> — sauf en SARL et sociétés par actions, où la société est engagée même par un acte dépassant l'objet social, sauf preuve que le tiers en avait connaissance (la seule publication des statuts ne suffit pas)</div>
+</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Garanties, cautions et avals consentis par le représentant légal d'une SA doivent être <b>autorisés préalablement par le CA ou le CS</b> pour être opposables à la société.</div>
+<div class="box precision"><span class="lbl">Précision — pouvoir de modifier les statuts : exception au principe</span>En principe réservé aux associés. Exceptions légales : transfert du siège social par le gérant (SARL) ou le CA/CS (SA) ; modification de certaines clauses par le dirigeant de SAS si les statuts le prévoient.</div>
+
+<h3 id="s2-2">2.2 Cumul mandat social / contrat de travail</h3>
+<div class="tree">
+<span class="root">Cumul possible en SARL ?</span>
+<span class="mode cumul">Conditions cumulatives</span>
+<div class="branch">
+<div class="cond-item">Fonctions techniques <b>effectives</b></div>
+<div class="cond-item">Rémunération <b>distincte</b> du mandat</div>
+<div class="cond-item">État de <b>subordination</b> réel</div>
+<div class="cond-item">Qualité d'associé <b>minoritaire</b></div>
+</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>En SA, les administrateurs ne peuvent en principe <b>pas</b> cumuler mandat et contrat de travail. Le contrat de travail d'un dirigeant est de toute façon soumis à la procédure des conventions réglementées. Limite légale du cumul de mandats en SA : <b>5 mandats maximum</b> par personne physique (DG, MDD, DGU, administrateur, MCS) dans des SA ayant leur siège en France.</div>
+
+<h3 id="s2-3">2.3 Fin du mandat social</h3>
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>Démission</h5>Libre, sans texte limitatif. Ne doit pas être donnée avec l'intention de nuire (abus de droit).</div>
+<div class="cmp-card"><h5>Révocation</h5>Principe de <b>libre révocabilité</b>, d'ordre public (toute clause contraire réputée non écrite) — sauf SAS et SCA où les statuts fixent les conditions. Doit reposer sur un <b>juste motif</b> (sauf SAS/SCA) et ne doit pas être abusive (pas de circonstances vexatoires/injurieuses).</div>
+</div>
+<div class="box precision"><span class="lbl">Précision</span>Le dirigeant reste tenu d'une obligation de <b>non-concurrence</b> et de <b>loyauté</b> même après la fin de son mandat.</div>
+
+<h2 class="banner" id="s3">3. Responsabilité des dirigeants</h2>
+
+<h3 id="s3-1">3.1 Responsabilité civile</h3>
+<table>
+<caption>3 fondements de la faute de gestion</caption>
+<tbody>
+<tr><td data-label="Fondement" class="imp">Faute de gestion</td><td data-label="Exemple">Engagement financier excessif, absence d'assurance</td></tr>
+<tr><td data-label="Fondement" class="imp">Non-respect des lois et règlements</td><td data-label="Exemple">Non-respect des droits des associés</td></tr>
+<tr><td data-label="Fondement" class="imp">Violation des statuts</td><td data-label="Exemple">Non-respect d'une limitation de pouvoirs</td></tr>
+</tbody>
+</table>
+<div class="tree">
+<span class="root">Qui peut agir ? 3 types d'actions</span>
+<span class="mode altern">Alternative selon le préjudice</span>
+<div class="branch">
+<div class="cond-item"><b>Action sociale</b> (préjudice de la société) — exercée par les représentants légaux non fautifs, <b>ou</b> par un/plusieurs associés représentant au moins <b>10 % du capital en SARL</b> / <b>5 % en sociétés par actions</b>. Le quitus donné en AG n'éteint jamais l'action sociale.</div>
+<div class="cond-item"><b>Action individuelle</b> (préjudice personnel distinct de celui de la société) — ex. : empêchement d'assister à une AG, détournement de dividendes</div>
+<div class="cond-item"><b>Action des tiers</b> — recevable seulement si <b>faute séparable des fonctions</b>, d'une gravité particulière incompatible avec l'exercice normal du mandat</div>
+</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Le quitus voté en assemblée porte sur la gestion, mais aucune décision d'assemblée ne peut éteindre l'action sociale — un dirigeant « quitus » peut donc être poursuivi ultérieurement pour les mêmes faits.</div>
+
+<h3 id="s3-2">3.2 Responsabilités pénale, fiscale, patrimoniale, professionnelle</h3>
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>Pénale</h5>Délits d'affaires (présentation de comptes infidèles, abus de biens sociaux, surévaluation frauduleuse d'apport), délit de banqueroute en procédure collective. Le dirigeant de fait encourt la même responsabilité que le dirigeant de droit.</div>
+<div class="cmp-card"><h5>Fiscale</h5>Manœuvres frauduleuses ou inobservation grave et répétée des obligations fiscales rendant impossible le recouvrement → condamnation personnelle au paiement des impôts et pénalités.</div>
+<div class="cmp-card"><h5>Professionnelle</h5>En procédure collective : faillite personnelle, interdiction de gérer (possible en complément d'une condamnation pénale pour banqueroute).</div>
+<div class="cmp-card"><h5>Patrimoniale</h5>En liquidation judiciaire : le tribunal peut mettre l'insuffisance d'actif à la charge de tout ou partie des dirigeants fautifs, solidairement en cas de pluralité.</div>
+</div>
+
+<h2 class="banner" id="s4">4. Droits et obligations des associés/actionnaires</h2>
+
+<h3 id="s4-1">4.1 Droits individuels</h3>
+<table>
+<thead><tr><th>Droit</th><th>Contenu</th></tr></thead>
+<tbody>
+<tr><td data-label="Droit">Communication permanente</td><td data-label="Contenu">Tout au long de l'exercice — questions écrites, documents comptables/financiers/juridiques</td></tr>
+<tr><td data-label="Droit">Communication temporaire</td><td data-label="Contenu">Avant chaque assemblée — inventaire, comptes annuels, rapport de gestion, texte des résolutions, rapport CAC, rapport sur les conventions réglementées</td></tr>
+<tr><td data-label="Droit">Participation et vote</td><td data-label="Contenu">D'ordre public ; représentation possible ; vote à distance courant</td></tr>
+<tr><td data-label="Droit">Dividendes</td><td data-label="Contenu">Sur décision de l'AG lors de l'approbation des comptes</td></tr>
+<tr><td data-label="Droit">Cession de titres</td><td data-label="Contenu">Non libre en SNC ; réductible par statuts en SARL ; clauses d'agrément/préemption/inaliénabilité possibles en sociétés par actions</td></tr>
+</tbody>
+</table>
+<div class="box piege"><span class="lbl">Piège d'examen — défaut de communication des documents</span>À défaut, l'associé peut saisir le président du tribunal <b>en référé</b> pour enjoindre sous astreinte la communication, ou faire désigner un mandataire chargé d'y procéder.</div>
+
+<h3 id="s4-2">4.2 Droit d'alerte et expertise de gestion — 2 mécanismes à ne jamais confondre</h3>
+<table>
+<caption>Comparatif — piège classique d'examen</caption>
+<thead><tr><th>Critère</th><th>Droit d'alerte</th><th>Expertise de gestion</th></tr></thead>
+<tbody>
+<tr><td data-label="Critère">Déclencheur</td><td data-label="Alerte" class="cond">Tout fait de nature à <b>compromettre la continuité d'exploitation</b></td><td data-label="Expertise" class="cond">Une ou plusieurs <b>opérations de gestion</b> déterminées</td></tr>
+<tr><td data-label="Critère">Seuil</td><td data-label="Alerte" class="exo">Aucun seuil — ouvert à tout associé non gérant</td><td data-label="Expertise" class="cond">10 % du capital en SARL · 5 % en SA</td></tr>
+<tr><td data-label="Critère">Procédure</td><td data-label="Alerte" class="cond">Question écrite directe au gérant (max <b>2 fois/exercice</b>) ; réponse écrite copiée au CAC</td><td data-label="Expertise" class="cond">Requête directe au président du TC pour désigner un expert</td></tr>
+<tr><td data-label="Critère">En SA</td><td data-label="Alerte" class="spec">Procédure plus longue impliquant le CA/CS puis l'AG</td><td data-label="Expertise" class="spec">Même seuil de 5 % du capital</td></tr>
+</tbody>
+</table>
+<div class="box piege"><span class="lbl">Piège d'examen classique</span>Ne pas confondre les deux mécanismes : l'alerte est une <b>question</b> sans condition de seuil portant sur la continuité de l'exploitation ; l'expertise de gestion est une <b>demande judiciaire</b> soumise à un seuil de détention, portant sur des opérations de gestion précises.</div>
+
+<h3 id="s4-3">4.3 Responsabilité des associés</h3>
+<div class="box piege"><span class="lbl">Piège d'examen — abus de majorité vs abus de minorité</span>
+<ul>
+<li><b>Abus de majorité</b> : décision contraire à l'intérêt social prise dans le seul intérêt des majoritaires → sanction : <b>nullité</b> de la décision.</li>
+<li><b>Abus de minorité</b> : blocage d'une décision extraordinaire essentielle à la société, dans le seul intérêt des minoritaires.</li>
+</ul>
+</div>
+<table>
+<caption>Responsabilité pour les dettes sociales</caption>
+<tbody>
+<tr><td data-label="Forme" class="imp">SNC</td><td data-label="Régime">Indéfinie et solidaire</td></tr>
+<tr><td data-label="Forme" class="exo">SARL, SA, SAS</td><td data-label="Régime">Limitée aux apports</td></tr>
+<tr><td data-label="Forme" class="spec">Sociétés en commandite</td><td data-label="Régime">Commandités : indéfinie et solidaire · Commanditaires : limitée aux apports</td></tr>
+</tbody>
+</table>
+
+<h2 class="banner" id="s5">5. Conventions réglementées</h2>
+<div class="tree">
+<span class="root">3 catégories de conventions</span>
+<span class="mode altern">Alternative</span>
+<div class="branch">
+<div class="cond-item"><b>Interdites</b> — ex. : caution de la société dans l'intérêt personnel d'un dirigeant</div>
+<div class="cond-item"><b>Libres</b> — conclues dans le cadre de l'objet social, à des conditions normales</div>
+<div class="cond-item"><b>Réglementées</b> — ex. : contrat de travail entre la société et un dirigeant → procédure spéciale</div>
+</div>
+</div>
+<div class="box memo"><span class="lbl">Mémo</span>Les conventions réglementées font l'objet d'un <b>rapport spécial</b> (CAC, ou à défaut le dirigeant) présenté à l'assemblée, qui les <b>ratifie ou non</b>. Champ d'application : SARL et sociétés de capitaux (là où la responsabilité des associés est limitée).</div>
+
+<h2 class="banner" id="s6">6. Contrôle par le commissaire aux comptes</h2>
+<div class="box memo"><span class="lbl">Mémo — seuils de désignation obligatoire</span>Dépassement de 2 des 3 seuils suivants : total bilan <b>4 M€</b> · CAHT <b>8 M€</b> · <b>50 salariés</b>.</div>
+<table>
+<caption>Incompatibilités du CAC (indépendance)</caption>
+<tbody>
+<tr><td data-label="Interdiction" class="imp">Tout emploi salarié</td><td data-label="Exception">Sauf enseignement lié à la profession ou emploi chez un CAC/expert-comptable</td></tr>
+<tr><td data-label="Interdiction" class="imp">Toute activité commerciale (directe ou par personne interposée)</td><td data-label="Exception">Aucune</td></tr>
+<tr><td data-label="Interdiction" class="imp">Prendre un intérêt chez l'entité contrôlée ou son groupe</td><td data-label="Exception">Aucune</td></tr>
+</tbody>
+</table>
+<div class="box memo"><span class="lbl">Mémo — prérogatives du CAC</span>Contrôle permanent des comptes · certification (avec ou sans réserve) ou refus · information des associés et dirigeants · <b>obligation</b> de déclencher la procédure d'alerte · <b>obligation</b> de révélation des faits délictueux au procureur de la République.</div>
+<div class="box precision"><span class="lbl">Précision — contraintes</span>Interdiction de s'immiscer dans la gestion. Responsabilités civile, pénale et professionnelle possibles. Le H3C surveille la profession (déontologie, indépendance).</div>
+
+<h2 class="banner" id="s7">7. Droits des salariés (CSE et participation)</h2>
+<div class="box memo"><span class="lbl">Mémo — prérogatives du CSE</span>Informé/consulté sur l'organisation et les modifications économiques/juridiques de l'entreprise · destinataire des mêmes informations que les associés · 2 représentants avec voix consultative au CA/CS · peut convoquer le CAC, se faire assister d'un expert, demander une expertise de gestion, déclencher l'alerte, demander la désignation d'un mandataire pour convoquer l'AG, requérir l'inscription de résolutions à l'ordre du jour.</div>
+<div class="box precision"><span class="lbl">Précision — participation financière</span>Participation obligatoire (entreprises ≥ 50 salariés) · intéressement facultatif · PEE · stock-options et attribution gratuite d'actions. Sur le plan de la gestion, si les statuts de SA le prévoient : jusqu'à 4 administrateurs salariés élus avec voix délibérative.</div>
+
+<h2 class="banner" id="s8">8. Sociétés cotées — théorie de l'agence et administrateurs indépendants</h2>
+<div class="box precision"><span class="lbl">Précision — théorie de l'agence</span>Contrat par lequel un <b>principal</b> (les actionnaires) délègue une partie de son autorité à un <b>agent</b> (les dirigeants). Dans les SA, la délégation est <b>double</b> : des actionnaires aux administrateurs, puis des administrateurs aux dirigeants exécutifs (DG). D'où perte d'information/de contrôle pour les actionnaires et risques de conflits d'intérêts.</div>
+<div class="box memo"><span class="lbl">Mémo — jalons historiques (utile pour situer une citation)</span>Royaume-Uni : rapport Cadbury (1991), Greenbury (1995). France : Viénot I (2 administrateurs indépendants min., 5 mandats max.), Viénot II (1999, séparation PCA/DG), Bouton (2002, règlement intérieur du CA). Code Afep-Medef (2003, puis 2008) ; Code Middlenext (2009, PME cotées).</div>
+<div class="box piege"><span class="lbl">Piège d'examen — définition de l'administrateur indépendant</span>Ce n'est <b>pas seulement</b> un administrateur non-exécutif : il doit en outre être <b>dépourvu de tout lien d'intérêt particulier</b> (non salarié/MS de la société ou de sa mère depuis 5 ans, non client/fournisseur/banquier/CAC/actionnaire de référence).</div>
+<div class="box memo"><span class="lbl">Mémo — comité d'audit (art. L. 823-19 C. com.)</span>Comité spécialisé sous la responsabilité du CA/CS. Au moins un membre doit être <b>indépendant</b> et présenter des compétences financières/comptables particulières. Missions : suivi de l'élaboration de l'information financière, efficacité du contrôle interne, contrôle légal des comptes, indépendance des CAC.</div>
+
+<h2 class="banner" id="s9">9. Transparence des sociétés cotées (say on pay, DPEF, AMF)</h2>
+<div class="box memo"><span class="lbl">Mémo — say on pay</span>Depuis le Code Afep-Medef 2013 : l'AG donne un <b>avis</b> sur la rémunération de chaque dirigeant mandataire social.</div>
+<div class="box piege"><span class="lbl">Piège d'examen — seuils de la DPEF (déclaration de performance extra-financière)</span>
+<table style="margin:8px 0 0;"><tbody>
+<tr><td class="cond" data-label="Type">Société <b>cotée</b></td><td data-label="Seuils">20 M€ de total bilan · 40 M€ de CA net · 500 salariés permanents</td></tr>
+<tr><td class="cond" data-label="Type">Société <b>non cotée</b></td><td data-label="Seuils">100 M€ de total bilan · 100 M€ de CA net · 500 salariés permanents</td></tr>
+</tbody></table>
+Piège : les seuils sont nettement <b>plus bas</b> pour les sociétés cotées — ne pas appliquer les seuils des non-cotées à une société cotée.
+</div>
+<div class="box memo"><span class="lbl">Mémo — obligations d'information</span>Rapport financier annuel déposé auprès de l'AMF dans les <b>4 mois</b> suivant la clôture, tenu à disposition du public pendant <b>5 ans</b>. Principe « appliquer ou expliquer » pour l'écart au code de gouvernance de référence. CAC personne physique : interdiction de certifier plus de <b>6 exercices consécutifs</b> dans une société cotée.</div>
+<div class="box precision"><span class="lbl">Précision — rôle de l'AMF</span>Informée des propositions de nomination/renouvellement des CAC de sociétés cotées, peut émettre des observations. Vérifie l'information financière publiée, surveille les intermédiaires financiers et les marchés (détection des abus de marché : manipulation de cours, opérations d'initiés, fausses informations).</div>
+
+<h2 class="banner" id="s10">10. Méthode cas DSCG</h2>
+<div class="cas">
+<p><b>Énoncé</b> — Dans la SA GAMMA (structure classique CA/DG), un actionnaire minoritaire détenant 6 % du capital s'inquiète d'une opération de cession d'actifs décidée par le directeur général sans consultation de l'AG. Il souhaite obtenir des explications sur cette opération précise, et un autre actionnaire, détenant 4 % du capital, souhaite alerter les dirigeants sur des difficultés de trésorerie qu'il pressent.</p>
+
+<h4 class="q">Question 1 — L'actionnaire à 6 % peut-il demander une expertise de gestion sur cette opération ?</h4>
+<div class="principe"><b>En principe :</b>
+<ul>
+<li>le droit à l'expertise de gestion est ouvert aux actionnaires de SA représentant au moins 5 % du capital ;</li>
+<li>il porte sur une ou plusieurs opérations de gestion déterminées.</li>
+</ul>
+</div>
+<div class="espece"><b>En l'espèce :</b> l'actionnaire détient 6 % du capital, au-dessus du seuil de 5 % ; l'opération visée (cession d'actifs) est une opération de gestion déterminée.</div>
+<div class="conclusion">Conclusion : l'actionnaire peut demander au président du TC la désignation d'un expert de gestion chargé d'établir un rapport sur cette opération précise.</div>
+
+<h4 class="q">Question 2 — L'actionnaire à 4 % peut-il déclencher la procédure d'alerte ?</h4>
+<div class="principe"><b>En principe :</b> le droit d'alerte, à la différence de l'expertise de gestion, n'est soumis à <b>aucun seuil</b> de détention du capital ; il vise tout fait de nature à compromettre la continuité de l'exploitation, dans la limite de 2 fois par exercice.</div>
+<div class="espece"><b>En l'espèce :</b> l'actionnaire ne détient que 4 % du capital — insuffisant pour l'expertise de gestion, mais cette condition de seuil est <b>sans incidence</b> sur le droit d'alerte.</div>
+<div class="conclusion">Conclusion : l'actionnaire peut poser une question écrite aux dirigeants sur les difficultés de trésorerie pressenties, indépendamment de tout seuil de capital — il ne faut pas transposer la condition des 5 % de l'expertise de gestion à l'alerte.</div>
+
+<h4 class="q">Question 3 — Le directeur général pouvait-il décider seul de la cession d'actifs ?</h4>
+<div class="principe"><b>En principe :</b> un acte de cession d'actifs relève des pouvoirs des dirigeants dès lors qu'il n'entrave pas la poursuite de l'objet social ; si la vente compromet la réalisation de l'objet social, elle requiert une décision des associés.</div>
+<div class="espece"><b>En l'espèce :</b> il conviendrait de vérifier si les actifs cédés étaient nécessaires à la poursuite de l'activité principale de GAMMA.</div>
+<div class="conclusion">Conclusion : à défaut de précision contraire, si la cession ne compromet pas la poursuite de l'objet social, la décision du DG seul est valable ; dans le cas contraire, l'absence de consultation de l'AG constitue une irrégularité pouvant engager la responsabilité du dirigeant pour violation de ses pouvoirs.</div>
+</div>
+
+<div class="box verif" style="border:1px dashed var(--red); border-radius:8px; padding:10px 14px;">
+<b>Points à vérifier auprès du cours / des textes actualisés :</b>
+<ul>
+<li>Composition actuelle et évolutions récentes du Code Afep-Medef (révisions postérieures à 2020 sur la mixité, le climat).</li>
+<li>Seuils de désignation obligatoire du CAC (4 M€ / 8 M€ / 50 salariés) — vérifier leur cohérence avec les seuils en vigueur au moment de l'examen.</li>
+</ul>
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){
+  document.body.classList.toggle('mobile-force');
+}
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

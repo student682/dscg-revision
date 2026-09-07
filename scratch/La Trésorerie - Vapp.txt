@@ -1,0 +1,33 @@
+LA TRESORERIE
+Dans les grands groupes internationaux comme dans n’importe quelle entreprise, le rôle du trésorier est d’_________ la trésorerie tout en réduisant les _________ bancaires, en maximisant les _________ financiers issus des ____________ et en gérant les ___________ financiers à court terme.
+Lorsque les prévisions font ressortir un solde de trésorerie négatif, il doit prévoir des moyens de financement à court terme, qui peuvent être d’origine bancaire ou provenir des marchés monétaires. 
+Les crédits d’origine bancaire sont :
+La mobilisation des créances (escompte, crédit de mobilisation de créances commerciales, crédit Dailly, avances de devises) ;
+Les crédits de trésorerie (facilités de caisse, découverts, le crédit spot) ;
+Les crédits pour opérations spécifiques (crédits de campagne, préfinancement des marchés publics).
+Le financement direct sur les marchés se fait par l’émission de billets de trésorerie ou de bons à moyen terme négociables (BMTN).
+Il existe enfin une troisième possibilité de financement à court terme : le crédit interentreprises, l’affacturage et la cession des créances. 
+En cas d’excès de liquidité le trésorier doit envisager des placements à court terme. Les placements bancaires sont le dépôt à terme ou les dépôts bancaires en devises. Les placements sur les marchés se font en titres de créances négociables (bons du Trésor négociables, billets de trésorerie, certificats de dépôts) ou en valeurs mobilières de placement (obligations ou OPCVM choisies pour leur liquidité). 
+Les outils de la gestion de trésorerie de groupe
+ La centralisation de trésorerie
+La centralisation de trésorerie est soumise aux dispositions ________________ de chacune des sociétés du groupe. Or, vouloir centraliser peut entraîner des risques juridiques comme celui de l'abus de biens sociaux ou celui de l'abus de majorité. 
+En France, le Code monétaire et financier autorise les opérations de crédit entre plusieurs filiales d'un même groupe sans procéder à une violation du monopole bancaire. Les sociétés doivent impérativement mentionner cette spécificité dans leurs statuts. Une _______________________________________________________ intragroupe doit être signée au préalable afin de pouvoir réaliser des opérations courantes, conclues à des conditions normales et dans un cadre juridique spécifié.
+Elle doit présenter un intérêt pour chaque entreprise signataire et définir avec clarté les obligations réciproques de chacun. En principe, elle est signée par la banque et l'ensemble des sociétés concernées.
+L’organisation de la centralisation
+Les caractéristiques de la centralisation
+Définition
+Une centralisation de trésorerie est un système qui permet d'effectuer une remontée automatique de l'ensemble des soldes et des écritures des différents comptes bancaires qui appartiennent à l'ensemble des sociétés du groupe sur un compte unique, appelé compte centralisateur.
+Une centralisation doit être définie avant tout en termes d'objectifs. Les enjeux en termes d'amélioration de la liquidité, de gestion des risques, de sécurité des paiements, de rationalisation de l'information doivent être examinés.
+Objectifs de la centralisation
+Les objectifs d'une centralisation de trésorerie sont: 
+- d’optimiser les _________________ ; 
+- de prévoir les _________________________ des différentes filiales pour accroitre l’efficacité opérationnelle du groupe dans son ensemble ;
+- d’équilibrer les comptes et les soldes en organisant une gestion des variations quotidiennes et une gestion globale des comptes du groupe. 
+Une centralisation de trésorerie procure les avantages suivants :
+• une gestion optimale des recours au crédit bancaire. En effet, une filiale ou sous­filiale de taille modeste ne peut pas accéder seule à des conditions de financement optimales comme des taux d'intérêt compétitifs. 
+• Une gestion optimale dans le placement des excédents. En transférant ses propres excédents, la filiale ou la sous-filiale peut espérer obtenir par la centralisation des taux de rémunération plus élevés et un placement plus diversifié que si elle avait opéré seule. 
+• Un allégement des procédures manuelles, souvent coûteuses. Au quotidien, une gestion des placements et des excédents optimale impose une gestion rigoureuse, des compétences et beaucoup d'énergie. 
+Le choix du degré de centralisation
+L'arbitrage dépend: 
+• Du choix de la structure du compte centralisateur. La centralisation d'une trésorerie passe par une grande liberté de choix au niveau juridique de la structure à mettre en place. Il peut s'agir de sociétés de capitaux (SA, SCA...), de GIE ou de sociétés de personnes; tout dépend de la taille du groupe. Dans tous les cas, le compte centralisateur doit se situer au niveau de la structure qualifiée de société-pivot. 
+• Des comptes secondaires. Les autres comptes du groupe sont des comptes secondaires. Il peut exister également des comptes de regroupement (par entités, par zones géographiques...) mis en place en fonction de la com

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche DSCG UE2 — La valeur en finance</title>
+<style>
+:root{
+  --blue:#2E75B6; --dblue:#1F4E79; --red:#C00000; --green:#548235; --gold:#BF8F00;
+  --bg:#f4f6f8; --paper:#ffffff; --text:#1c2733;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',Calibri,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+.toolbar{position:sticky;top:0;z-index:100;background:var(--dblue);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;flex-wrap:wrap;gap:8px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+.toolbar h2{margin:0;font-size:1rem;font-weight:600;}
+.toolbar .btns{display:flex;gap:8px;flex-wrap:wrap;}
+.toolbar button{background:var(--blue);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.85rem;}
+.toolbar button:hover{background:#3d8bd4;}
+.titleband{background:var(--dblue);color:#fff;padding:28px 20px 22px;text-align:center;}
+.titleband h1{margin:0 0 6px;font-size:1.6rem;}
+.titleband p{margin:0;opacity:.85;font-size:.95rem;}
+.container{max-width:900px;margin:0 auto;padding:16px;}
+.toc{background:var(--paper);border-radius:10px;padding:16px 20px;margin:18px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.toc h3{margin-top:0;color:var(--dblue);}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:24px;}
+.toc a{color:var(--blue);text-decoration:none;font-size:.92rem;}
+.toc a:hover{text-decoration:underline;}
+section{background:var(--paper);border-radius:10px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+section h2{color:var(--dblue);border-bottom:2px solid var(--blue);padding-bottom:6px;font-size:1.25rem;}
+section h3{color:var(--dblue);font-size:1.05rem;margin-top:20px;}
+.box{border-radius:8px;padding:12px 14px;margin:12px 0;border-left:5px solid;}
+.box p:first-child{margin-top:0;}
+.box p:last-child{margin-bottom:0;}
+.box .label{font-weight:700;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em;display:block;margin-bottom:6px;}
+.piege{background:#fdecea;border-color:var(--red);}
+.piege .label{color:var(--red);}
+.memo{background:#fef9e7;border-color:var(--gold);}
+.memo .label{color:var(--gold);}
+.reflexe{background:#eaf3ea;border-color:var(--green);}
+.reflexe .label{color:var(--green);}
+.precision{background:#eaf1fb;border-color:var(--blue);}
+.precision .label{color:var(--blue);}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem;}
+th,td{border:1px solid #d7dde3;padding:8px 10px;text-align:left;vertical-align:top;}
+th{background:var(--dblue);color:#fff;}
+td.exo{background:#eaf3ea;} td.imp{background:#fdecea;} td.cond{background:#fef9e7;} td.spec{background:#eaf1fb;}
+.formula{font-family:'Cambria Math',Georgia,serif;font-size:1.05rem;text-align:center;padding:10px;background:#fffdf6;border:1px dashed var(--gold);border-radius:6px;margin:10px 0;}
+.tree{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+.branch{border:1px solid var(--blue);border-radius:8px;padding:10px 12px;background:#f7fafd;}
+.branch .cond-item{font-weight:600;color:var(--dblue);}
+.branch .result{margin-top:4px;color:var(--text);}
+footer{text-align:center;padding:24px;color:#8a97a3;font-size:.8rem;}
+@media print{
+  .toolbar{display:none;}
+  section{box-shadow:none;break-inside:avoid;}
+  body{background:#fff;}
+}
+@media (max-width:600px){
+  .toc ol{columns:1;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  tr{margin-bottom:10px;border:1px solid #d7dde3;border-radius:6px;overflow:hidden;}
+  td{border:none;border-bottom:1px solid #eef1f4;position:relative;padding-left:46%;}
+  td::before{content:attr(data-label);position:absolute;left:10px;top:8px;font-weight:700;color:var(--dblue);white-space:nowrap;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h2>La valeur en finance</h2>
+  <div class="btns">
+    <button onclick="window.print()">⬇ Exporter en PDF</button>
+    <button onclick="document.body.classList.toggle('mobile-force')">📱 Format mobile</button>
+  </div>
+</div>
+
+<div class="titleband">
+  <h1>La valeur en finance</h1>
+  <p>DSCG UE 2 — Finance · Chapitre M. Hamman (Module 5 — La valeur)</p>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <h3>Sommaire</h3>
+  <ol>
+    <li><a href="#s1">Le rôle des marchés financiers</a></li>
+    <li><a href="#s2">Typologie et organisation des marchés</a></li>
+    <li><a href="#s3">Ordres de Bourse</a></li>
+    <li><a href="#s4">Les indices boursiers</a></li>
+    <li><a href="#s5">L'information financière des marchés</a></li>
+    <li><a href="#s6">L'hypothèse d'efficience informationnelle</a></li>
+    <li><a href="#s7">Les remises en cause de l'efficience</a></li>
+    <li><a href="#s8">Méthode cas pratique DSCG</a></li>
+    <li><a href="#s9">Points à vérifier</a></li>
+  </ol>
+</div>
+
+<section id="s1">
+<h2>1. Le rôle des marchés financiers</h2>
+<p>Les marchés financiers (marchés <strong>de capitaux</strong>, ou marchés traditionnels) organisent la rencontre entre agents à besoin de financement et agents à capacité de financement, sur le long terme. Les marchés <strong>dérivés</strong> s'adossent aux marchés traditionnels en proposant des instruments de protection contre les risques de cours, de change et de taux.</p>
+
+<div class="box memo">
+<span class="label">Formule et théorie — cinq fonctions des marchés financiers</span>
+<p>1. Fonction de <strong>marché primaire</strong> : lieu où les émetteurs (entreprises, États) créent et vendent de nouveaux titres pour se financer (introduction en Bourse, augmentation de capital, émission obligataire, adjudication d'État).<br>
+2. Fonction de <strong>marché secondaire</strong> : les investisseurs achètent/revendent les titres déjà émis. Permet de calculer la <strong>capitalisation boursière</strong> = cours de l'action × nombre d'actions en circulation.<br>
+3. Fonction d'<strong>instrument de mesure de la valeur</strong> des actifs financiers (hypothèse d'efficience informationnelle).<br>
+4. Fonction de <strong>mutation du système productif</strong> (OPA, changement de contrôle).<br>
+5. Fonction de <strong>négociation et transfert du risque</strong> (marchés dérivés : des agents averses au risque vers des spéculateurs).</p>
+</div>
+
+<div class="box piege">
+<span class="label">Piège de confusion</span>
+<p>Ne pas confondre <strong>marché primaire</strong> (émission de titres <em>nouveaux</em>, l'entreprise perçoit des fonds) et <strong>marché secondaire</strong> (échange de titres <em>déjà émis</em> entre investisseurs, l'entreprise ne perçoit rien). C'est la fonction de marché secondaire qui rend le marché primaire attractif : sans liquidité de revente, personne n'investirait au primaire.</p>
+</div>
+
+<div class="box precision">
+<span class="label">Application numérique — capitalisation boursière</span>
+<p><strong>Énoncé :</strong> une société cotée compte 50 000 000 d'actions ; le cours de l'action est de 42 €.</p>
+<div class="formula">Capitalisation boursière = Cours de l'action × Nombre d'actions<br>= 42 € × 50 000 000 = <strong>2 100 000 000 €</strong> (2,1 Md€)</div>
+<p><strong>Interprétation :</strong> la capitalisation boursière mesure la valeur de marché des seuls capitaux propres (et non de l'entreprise dans son ensemble : pour la valeur de l'actif économique, il faut y ajouter la dette financière nette → notion développée au chapitre Évaluation/DCF).</p>
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Typologie et organisation des marchés</h2>
+<table>
+<thead><tr><th>Critère</th><th>Marchés réglementés</th><th>Marchés de gré à gré (OTC)</th></tr></thead>
+<tbody>
+<tr><td data-label="Critère">Organisation</td><td data-label="Réglementés" class="spec">Gérés par une entreprise de marché (Euronext) sous surveillance de l'AMF</td><td data-label="Gré à gré" class="cond">Relation directe acheteur/vendeur, sans chambre centrale</td></tr>
+<tr><td data-label="Critère">Sécurité</td><td data-label="Réglementés" class="spec">Compensation via chambre de compensation (LCH Clearnet)</td><td data-label="Gré à gré" class="cond">Risque de contrepartie plus élevé</td></tr>
+</tbody>
+</table>
+
+<div class="box memo">
+<span class="label">Acteurs clés à connaître</span>
+<p><strong>Entreprise de marché</strong> (Euronext, née en 2000 de la fusion Paris/Amsterdam/Bruxelles) : gère la cotation, articule les relations entre <strong>PSI</strong> (prestataires de services d'investissement). Parmi les PSI : les <strong>courtiers/brokers</strong> (agissent pour le compte d'un tiers) et les <strong>teneurs de marché/dealers</strong> (agissent pour compte propre). La <strong>chambre de compensation</strong> assure le règlement-livraison des titres négociés.</p>
+</div>
+
+<div class="box precision">
+<span class="label">Limite du modèle</span>
+<p>Même un marché réglementé n'est pas à l'abri de manquements : l'AMF a sanctionné Euronext Paris SA (5 M€, ramenés à 3 M€ après recours) pour avoir accordé un avantage discrétionnaire à un teneur de marché (Virtu Financial), permettant une manipulation de cours sur 27 titres du CAC 40. La neutralité de l'entreprise de marché est une exigence réglementaire, pas une garantie absolue.</p>
+</div>
+
+<h3>Liquidité et mode de cotation</h3>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p>La liquidité se mesure par la possibilité d'acheter/vendre rapidement un actif sans effet majeur sur son prix. Plus un actif est liquide, plus il est <strong>facile, rapide et peu coûteux</strong> d'y réaliser des transactions → cela réduit la prime de risque exigée par les investisseurs (moins liquide = rentabilité exigée plus élevée).</p>
+<p>Les titres liquides sont cotés <strong>en continu</strong> (confrontation permanente offre/demande). Les titres peu liquides sont cotés <strong>au fixing</strong> (prix fixé une à plusieurs fois par séance, les ordres s'accumulent avant exécution).</p>
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Ordres de Bourse</h2>
+<p>Un ordre de Bourse est un ordre de passation d'une transaction sur un actif financier : sens (achat/vente), quantité, code ISIN (2 lettres pays + 10 chiffres).</p>
+<table>
+<thead><tr><th>Type d'ordre</th><th>Principe</th><th>Avantage / Inconvénient</th></tr></thead>
+<tbody>
+<tr><td data-label="Type">Au marché</td><td data-label="Principe" class="imp">Exécution immédiate, sans condition de prix</td><td data-label="Avantage/Inconvénient">Priorité d'exécution mais aucune maîtrise du cours obtenu</td></tr>
+<tr><td data-label="Type">À cours limité</td><td data-label="Principe" class="exo">Achat/vente avec un prix plafond ou plancher fixé</td><td data-label="Avantage/Inconvénient">Maîtrise du cours, mais exécution partielle voire nulle possible</td></tr>
+<tr><td data-label="Type">À seuil de déclenchement</td><td data-label="Principe" class="cond">Se déclenche « au marché » une fois un seuil de cours atteint</td><td data-label="Avantage/Inconvénient">Protège contre un retournement de tendance, mais pas de maîtrise du cours d'exécution</td></tr>
+<tr><td data-label="Type">À plage de déclenchement</td><td data-label="Principe" class="spec">Combine seuil de déclenchement + cours limité</td><td data-label="Avantage/Inconvénient">Le plus protecteur, mais le plus restrictif à l'exécution</td></tr>
+<tr><td data-label="Type">Suiveur (trailing stop)</td><td data-label="Principe" class="spec">Seuil exprimé en % de variation, qui suit le cours</td><td data-label="Avantage/Inconvénient">Limite la perte tout en profitant des plus-values, sans réajustement manuel</td></tr>
+</tbody>
+</table>
+<div class="box piege">
+<span class="label">Piège classique</span>
+<p>Le SRD (Service de Règlement Différé) n'est pas un type d'ordre mais un <strong>mode de règlement</strong> permettant de différer le paiement/la livraison. Il est réservé aux titres de l'indice SBF 120 ou dont la capitalisation dépasse 1 Md€ (avec un volume quotidien suffisant). Il est plus coûteux que le règlement comptant.</p>
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Les indices boursiers</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<p>Un indice boursier est une <strong>mesure synthétique</strong> (moyenne pondérée) des cours d'un échantillon de valeurs. Le <strong>CAC 40</strong> a été lancé le 31 décembre 1987 (base 100), calculé à partir des 40 premières capitalisations parmi les valeurs les plus liquides d'Euronext Paris, pondérées par la capitalisation boursière du <strong>flottant</strong> (nombre d'actions réellement disponibles à l'échange, hors participations stables). Il existe une version « à dividendes réinvendis » (indice de référence pour évaluer la performance totale d'un portefeuille).</p>
+</div>
+<table>
+<thead><tr><th>Zone</th><th>Indice de référence</th><th>Composition</th></tr></thead>
+<tbody>
+<tr><td data-label="Zone">France</td><td data-label="Indice">CAC 40</td><td data-label="Composition" class="spec">40 valeurs, pondération flottant</td></tr>
+<tr><td data-label="Zone">France (large)</td><td data-label="Indice">SBF 120 / SBF 250</td><td data-label="Composition" class="spec">120 / 250 valeurs les plus actives</td></tr>
+<tr><td data-label="Zone">USA (blue chips)</td><td data-label="Indice">Dow Jones</td><td data-label="Composition" class="spec">Grandes capitalisations du NYSE</td></tr>
+<tr><td data-label="Zone">USA (large)</td><td data-label="Indice">S&amp;P 500</td><td data-label="Composition" class="spec">500 valeurs</td></tr>
+<tr><td data-label="Zone">USA (tech)</td><td data-label="Indice">Nasdaq</td><td data-label="Composition" class="spec">Valeurs technologiques</td></tr>
+<tr><td data-label="Zone">Japon</td><td data-label="Indice">Nikkei 225</td><td data-label="Composition" class="spec">225 plus grosses capitalisations, Tokyo</td></tr>
+<tr><td data-label="Zone">Royaume-Uni</td><td data-label="Indice">FTSE 100 (« Footsie »)</td><td data-label="Composition" class="spec">Bourse de Londres</td></tr>
+<tr><td data-label="Zone">Allemagne</td><td data-label="Indice">DAX</td><td data-label="Composition" class="spec">Bourse de Francfort</td></tr>
+</tbody>
+</table>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p>Plus un indice est large (nombre important de valeurs), meilleure est sa <strong>représentativité</strong> du marché. Un indice sectoriel ou de style (growth, ISR) sert de <strong>benchmark</strong> ciblé pour juger la performance relative d'une gestion de portefeuille spécialisée.</p>
+</div>
+</section>
+
+<section id="s5">
+<h2>5. L'information financière des marchés</h2>
+<div class="tree">
+<div class="branch"><span class="cond-item">Information périodique</span><div class="result">Diffusée à échéances régulières (annuelle/semestrielle) : rapport financier annuel (comptes, rapport de gestion, éventuellement rapport RSE, rapports des commissaires aux comptes, déclaration de responsabilité).</div></div>
+<div class="branch"><span class="cond-item">Information permanente</span><div class="result">Obligation de rendre publique sans délai toute information privilégiée (règlement UE n°596/2014 « abus de marché »).</div></div>
+<div class="branch"><span class="cond-item">Information spécifique</span><div class="result">Liée à une opération donnée : prospectus (offre au public), note d'information (offre publique d'achat).</div></div>
+</div>
+<div class="box memo">
+<span class="label">Destinataires — à distinguer</span>
+<p><strong>Investisseurs institutionnels</strong> (« zinzins ») : banques, assurances, OPCVM, fonds de pension — poids majeur, mouvements massifs. <strong>Investisseurs individuels</strong ("particuliers) : en baisse depuis 2008, ciblés par clubs d'actionnaires, lettres, sites pédagogiques. <strong>Actionnaires salariés</strong> : double statut (salarié + actionnaire) ; au-delà de 3 % du capital, la loi impose un administrateur représentant les salariés actionnaires (C. com., art. L. 225-23 et L. 225-71).</p>
+</div>
+</section>
+
+<section id="s6">
+<h2>6. L'hypothèse d'efficience informationnelle des marchés (HEM)</h2>
+<div class="box memo">
+<span class="label">Formule et théorie — les postulats de l'efficience</span>
+<p>Un marché est informationnellement efficient si le prix d'un actif intègre <strong>instantanément et totalement</strong> toute l'information disponible le concernant. Postulats sous-jacents (théorie néo-classique) : les individus sont <strong>rationnels</strong> ; le marché assure la <strong>liquidité</strong> des titres ; l'accès à l'information est <strong>gratuit et immédiat</strong> ; les coûts de transaction sont <strong>nuls</strong>.</p>
+<p>Fondateurs : <strong>Markowitz</strong> (théorie du portefeuille, critères espérance/variance — un investisseur rationnel maximise son espérance de rentabilité pour un niveau de risque donné, ou minimise le risque pour une rentabilité donnée) ; <strong>Bachelier</strong> (précurseur de la marche au hasard des prix) ; <strong>Fama</strong> (1970 — formalisation des trois niveaux d'efficience et remise en cause en 1991).</p>
+</div>
+
+<table>
+<thead><tr><th>Niveau d'efficience</th><th>Information intégrée dans le prix</th><th>Conséquence</th></tr></thead>
+<tbody>
+<tr><td data-label="Niveau">Faible</td><td data-label="Information" class="spec">Historique des prix passés</td><td data-label="Conséquence">L'analyse technique (chartisme) est inutile</td></tr>
+<tr><td data-label="Niveau">Semi-forte</td><td data-label="Information" class="spec">Prix passés + toute l'information publique disponible</td><td data-label="Conséquence">L'analyse fondamentale ne permet pas de battre durablement le marché</td></tr>
+<tr><td data-label="Niveau">Forte</td><td data-label="Information" class="spec">Prix passés + information publique + information privilégiée</td><td data-label="Conséquence">Personne ne peut réaliser de profit anormal, même les initiés (niveau théorique, non observé en pratique)</td></tr>
+</tbody>
+</table>
+
+<div class="box reflexe">
+<span class="label">Interprétation financière — conséquences pratiques</span>
+<p>Si le marché est efficient : les investisseurs ne peuvent pas « battre le marché » durablement ; les dirigeants ne peuvent pas tromper durablement le marché par de la comptabilité créative ; le <strong>market timing</strong> de la publication d'information est sans effet. En pratique, les études empiriques valident surtout la forme <strong>semi-forte</strong> ; la forme forte n'existe pas dans les faits.</p>
+</div>
+
+<div class="box piege">
+<span class="label">Piège de confusion</span>
+<p><strong>Analyse fondamentale</strong> (étude des déterminants économiques/financiers réels de l'entreprise pour trouver la valeur intrinsèque) ≠ <strong>Analyse technique/chartiste</strong> (étude des courbes de cours passés pour repérer des tendances, lignes de résistance/soutien). L'HEM sous forme semi-forte rend la première inefficace à long terme et la seconde inefficace même à court terme (forme faible).</p>
+</div>
+</section>
+
+<section id="s7">
+<h2>7. Les remises en cause de l'efficience des marchés</h2>
+<table>
+<thead><tr><th>Anomalie</th><th>Constat</th></tr></thead>
+<tbody>
+<tr><td data-label="Anomalie">Effet de taille</td><td data-label="Constat" class="imp">À risque comparable, les petites capitalisations affichent une rentabilité plus <strong>élevée</strong> que les grandes (coûts de négociation et de suivi plus importants, négligence des institutionnels)</td></tr>
+<tr><td data-label="Anomalie">Effet de date</td><td data-label="Constat" class="imp">Effets saisonniers (effet janvier), effets de jour de semaine (ventes lourdes le lundi matin, hausse en fin de séance)</td></tr>
+<tr><td data-label="Anomalie">Bulles et krachs</td><td data-label="Constat" class="imp">Comportement grégaire des investisseurs → mouvements de cours déconnectés des fondamentaux économiques (ex. bulle Internet 1999)</td></tr>
+</tbody>
+</table>
+
+<div class="box precision">
+<span class="label">Limite du modèle — le court-termisme</span>
+<p>La pression sur la performance immédiate pousse les dirigeants à privilégier le <strong>résultat comptable à court terme</strong> et le <strong>cours de bourse instantané</strong>, au risque de négliger les investissements longs (R&amp;D) et de « lisser » les résultats. Ce comportement est en réalité <strong>contradictoire</strong> avec l'hypothèse d'efficience : un marché vraiment efficient ne sanctionnerait pas un mauvais résultat ponctuel si les fondamentaux long terme restent solides.</p>
+</div>
+
+<div class="box memo">
+<span class="label">Cadres complémentaires</span>
+<p>La <strong>finance comportementale</strong> explique les écarts par rapport à la rationalité pure (biais cognitifs, mimétisme). Les théories du <strong>chaos et des fractales</strong> proposent des cadres alternatifs à l'efficience pure des marchés pour expliquer certaines dynamiques de prix non aléatoires.</p>
+</div>
+</section>
+
+<section id="s8">
+<h2>8. Méthode cas pratique DSCG</h2>
+<div class="box precision">
+<p><strong>Énoncé type :</strong> Le titre BETA cote 68 € pour 12 000 000 d'actions en circulation. Un analyste constate que le cours a progressé de 15 % après la publication de très bons résultats trimestriels, puis s'est stabilisé en une seule séance. Commentez au regard de l'efficience du marché et calculez la nouvelle capitalisation boursière.</p>
+<p><strong>1. Formule et justification de la méthode :</strong> Capitalisation boursière = Cours × Nombre d'actions. L'ajustement en une seule séance, sans dérive progressive les jours suivants, est un signal caractéristique d'un marché efficient au sens <strong>semi-fort</strong> (information publique intégrée rapidement et intégralement).</p>
+<div class="formula">Nouveau cours = 68 × 1,15 = 78,20 €<br>Nouvelle capitalisation = 78,20 × 12 000 000 = <strong>938 400 000 €</strong></div>
+<p><strong>2. Calcul détaillé :</strong> Hausse de capitalisation = (78,20 − 68) × 12 000 000 = 122 400 000 €.</p>
+<p><strong>3. Interprétation économique et recommandation :</strong> L'ajustement immédiat et sans sur-réaction ultérieure confirme la forme semi-forte de l'efficience. Il n'y a donc <strong>pas d'opportunité d'arbitrage</strong> à exploiter après coup (acheter après l'annonce n'apporte pas de surperformance) : recommander de ne pas chercher à « rattraper » le mouvement, mais à surveiller les prochaines publications d'information privilégiée.</p>
+</div>
+</section>
+
+<section id="s9">
+<h2>9. Points à vérifier avec le cours du formateur</h2>
+<div class="box piege">
+<p>Le support source (version « Vapp », à trous, destinée à être complétée en cours) comportait des blancs sur des données factuelles précises. Les éléments suivants ont été reconstitués à partir des connaissances générales du programme DSCG et doivent être <strong>confirmés avec les notes prises en cours</strong> :</p>
+<ul>
+<li>Dates exactes et chiffres cités par M. Hamman pour l'historique du CAC 40 (base de calcul, société gestionnaire exacte).</li>
+<li>Formulation exacte retenue en cours pour les « effets de taille » et « effets de date » (valeurs numériques éventuelles citées en exemple).</li>
+<li>Le détail exact du contenu du « rapport financier annuel » tel qu'énuméré dans les diapositives (listes à trous non résolues avec certitude à 100 %).</li>
+</ul>
+</div>
+</section>
+
+</div>
+<footer>Fiche DSCG UE 2 — Finance · M. Hamman · Généré à partir du cours source « La valeur en finance — Vapp »</footer>
+</body>
+</html>

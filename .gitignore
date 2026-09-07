@@ -1,0 +1,14 @@
+# Scripts contenant un secret (token GitHub en clair) — NE PAS versionner
+scratch/github_data_api.py
+scratch/github_upload.py
+scratch/check_actions.py
+
+# Sous-dépôts git de publication (copies, dont le fichier 49 Mo) — ne pas imbriquer
+repo_github/
+repo_github_2/
+
+# Fichiers temporaires / système
+~$*
+*.tmp
+.DS_Store
+Thumbs.db

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche DSCG UE2 — Gestion de la valeur de l'action</title>
+<style>
+:root{
+  --blue:#2E75B6; --dblue:#1F4E79; --red:#C00000; --green:#548235; --gold:#BF8F00;
+  --bg:#f4f6f8; --paper:#ffffff; --text:#1c2733;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',Calibri,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+.toolbar{position:sticky;top:0;z-index:100;background:var(--dblue);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;flex-wrap:wrap;gap:8px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+.toolbar h2{margin:0;font-size:1rem;font-weight:600;}
+.toolbar .btns{display:flex;gap:8px;flex-wrap:wrap;}
+.toolbar button{background:var(--blue);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.85rem;}
+.toolbar button:hover{background:#3d8bd4;}
+.titleband{background:var(--dblue);color:#fff;padding:28px 20px 22px;text-align:center;}
+.titleband h1{margin:0 0 6px;font-size:1.6rem;}
+.titleband p{margin:0;opacity:.85;font-size:.95rem;}
+.container{max-width:900px;margin:0 auto;padding:16px;}
+.toc{background:var(--paper);border-radius:10px;padding:16px 20px;margin:18px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.toc h3{margin-top:0;color:var(--dblue);}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:24px;}
+.toc a{color:var(--blue);text-decoration:none;font-size:.92rem;}
+.toc a:hover{text-decoration:underline;}
+section{background:var(--paper);border-radius:10px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+section h2{color:var(--dblue);border-bottom:2px solid var(--blue);padding-bottom:6px;font-size:1.25rem;}
+section h3{color:var(--dblue);font-size:1.05rem;margin-top:20px;}
+.box{border-radius:8px;padding:12px 14px;margin:12px 0;border-left:5px solid;}
+.box p:first-child{margin-top:0;}
+.box p:last-child{margin-bottom:0;}
+.box .label{font-weight:700;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em;display:block;margin-bottom:6px;}
+.piege{background:#fdecea;border-color:var(--red);}
+.piege .label{color:var(--red);}
+.memo{background:#fef9e7;border-color:var(--gold);}
+.memo .label{color:var(--gold);}
+.reflexe{background:#eaf3ea;border-color:var(--green);}
+.reflexe .label{color:var(--green);}
+.precision{background:#eaf1fb;border-color:var(--blue);}
+.precision .label{color:var(--blue);}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.87rem;}
+th,td{border:1px solid #d7dde3;padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:var(--dblue);color:#fff;}
+td.exo{background:#eaf3ea;} td.imp{background:#fdecea;} td.cond{background:#fef9e7;} td.spec{background:#eaf1fb;}
+.formula{font-family:'Cambria Math',Georgia,serif;font-size:1.02rem;text-align:center;padding:10px;background:#fffdf6;border:1px dashed var(--gold);border-radius:6px;margin:10px 0;}
+.legend{font-size:.88rem;background:#fbfaf5;border-left:3px solid var(--gold);padding:6px 10px;margin:6px 0 10px;}
+.etape{border-left:4px solid var(--blue);padding:8px 12px;margin:10px 0;background:#f7fafd;}
+.etape .num{display:inline-block;background:var(--blue);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-right:8px;}
+.tree{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+.branch{border:1px solid var(--blue);border-radius:8px;padding:10px 12px;background:#f7fafd;}
+.branch .cond-item{font-weight:600;color:var(--dblue);}
+.branch .result{margin-top:4px;color:var(--text);}
+footer{text-align:center;padding:24px;color:#8a97a3;font-size:.8rem;}
+@media print{
+  .toolbar{display:none;}
+  section{box-shadow:none;break-inside:avoid;}
+  body{background:#fff;}
+}
+@media (max-width:600px){
+  .toc ol{columns:1;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  tr{margin-bottom:10px;border:1px solid #d7dde3;border-radius:6px;overflow:hidden;}
+  td{border:none;border-bottom:1px solid #eef1f4;position:relative;padding-left:46%;}
+  td::before{content:attr(data-label);position:absolute;left:10px;top:8px;font-weight:700;color:var(--dblue);white-space:nowrap;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h2>Gestion de la valeur de l'action</h2>
+  <div class="btns">
+    <button onclick="window.print()">⬇ Exporter en PDF</button>
+    <button onclick="document.body.classList.toggle('mobile-force')">📱 Format mobile</button>
+  </div>
+</div>
+
+<div class="titleband">
+  <h1>La gestion de la valeur de l'action</h1>
+  <p>DSCG UE 2 — Finance · Chapitre M. Hamman (Module 4 — Ingénierie financière)</p>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <h3>Sommaire</h3>
+  <ol>
+    <li><a href="#s1">Les rachats d'actions : cadre juridique</a></li>
+    <li><a href="#s2">Finalités du rachat d'actions</a></li>
+    <li><a href="#s3">Rachat d'actions : théorie de l'agence et des signaux</a></li>
+    <li><a href="#s4">Application chiffrée — impact d'un rachat sur le BPA</a></li>
+    <li><a href="#s5">Opérations affectant le nombre d'actions</a></li>
+    <li><a href="#s6">Actions gratuites et dividendes en actions</a></li>
+    <li><a href="#s7">Opérations de restructuration : apports et scissions</a></li>
+    <li><a href="#s8">Introduction en Bourse (IPO)</a></li>
+    <li><a href="#s9">Méthode cas pratique DSCG</a></li>
+  </ol>
+</div>
+
+<section id="s1">
+<h2>1. Les rachats d'actions : cadre juridique</h2>
+<div class="box memo">
+<span class="label">Formule et théorie — contraintes réglementaires</span>
+<p>Autorisé depuis 1998, le rachat d'actions est décidé en assemblée générale (c. com., art. L. 225-209 et s.) et plafonné : une société ne peut détenir plus de <strong>10 % de son capital</strong> en autodétention, ni acheter plus de 10 % en flux sur la durée du programme, ni annuler plus de 10 % du capital par période de <strong>24 mois</strong>.</p>
+</div>
+
+<table>
+<thead><tr><th>Modalité</th><th>Principe</th></tr></thead>
+<tbody>
+<tr><td data-label="Modalité" class="spec">Offre publique de rachat (OPRA)</td><td data-label="Principe">Proposée à tous les actionnaires, à un prix et pendant une période donnés</td></tr>
+<tr><td data-label="Modalité" class="spec">Rachat au fil de l'eau</td><td data-label="Principe">Sur le marché, dans la limite de 10 % du capital, programme approuvé en AG</td></tr>
+<tr><td data-label="Modalité" class="spec">Rachat négocié (greenmail)</td><td data-label="Principe">Rachat ciblé auprès d'un actionnaire ou groupe, souvent avec prime — peut contrer une OPA hostile</td></tr>
+</tbody>
+</table>
+
+<div class="box piege">
+<span class="label">Piège de vocabulaire</span>
+<p>Le <strong>greenmail</strong> désigne la pratique d'un investisseur activiste qui acquiert une participation, harcèle la direction, puis force la société à racheter sa participation au prix fort — ce n'est pas un simple synonyme de « rachat d'actions ».</p>
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Finalités du rachat d'actions</h2>
+<div class="tree">
+<div class="branch"><span class="cond-item">Restitution de liquidités</span><div class="result">Alternative ponctuelle et flexible au dividende, quand les projets d'investissement ne rentabilisent pas suffisamment les excédents de trésorerie</div></div>
+<div class="branch"><span class="cond-item">Augmentation de la valeur de l'action</span><div class="result">Réduit le nombre de titres → augmente l'actif net par action et le BNPA (bénéfice net par action) → à PER constant, le cours s'apprécie</div></div>
+<div class="branch"><span class="cond-item">Financement de croissance externe</span><div class="result">Conservation des titres rachetés pour les remettre en paiement lors d'une fusion/scission/apport</div></div>
+<div class="branch"><span class="cond-item">Ajustement de la structure financière (gearing)</span><div class="result">Le rachat, financé par dette, augmente le ratio Dettes/Capitaux propres lorsque les flux futurs sont jugés assez sûrs pour supporter l'endettement</div></div>
+<div class="branch"><span class="cond-item">Dissuasion d'OPA hostile</span><div class="result">Renchérit le prix des titres et/ou réduit le nombre d'actions en circulation, rendant l'offre de rachat plus coûteuse ou plus difficile</div></div>
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Rachat d'actions : théorie de l'agence et des signaux</h2>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p><strong>Théorie de l'agence :</strong> distribuer les flux discrétionnaires (via rachat) réduit le risque que les dirigeants les gaspillent dans des investissements peu rentables. Les sociétés qui rachètent leurs actions présentent typiquement une rentabilité et des dépenses d'investissement en baisse (moins d'opportunités d'investissement rentables à financer).</p>
+<p><strong>Théorie des signaux :</strong> à l'inverse d'une augmentation de capital (signal négatif : le dirigeant pense le titre cher), le rachat signale que le dirigeant estime le titre <strong>sous-évalué</strong>. C'est cependant un signal peu coûteux (les dirigeants ne s'engagent pas réellement, ils s'octroient une simple option d'achat sur le marché) — moins fort que l'augmentation du dividende.</p>
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Application chiffrée — impact d'un rachat sur le BPA</h2>
+<div class="box precision">
+<span class="label">Application numérique — méthode étape par étape</span>
+<p><strong>Énoncé :</strong> société X — Capitaux propres = 2 500 M€ ; Résultat net = 50 M€ ; Nombre d'actions = 2 000 000. Cours moyen = 20 € ; la société rachète 10 % de ses actions au cours de 18 €. Coût normal d'endettement pour financer le rachat = 6 %, IS = 33,1/3 %.</p>
+<div class="etape"><span class="num">1</span>BPA avant opération = 50 M€ / 2 000 000 = <strong>25 €</strong></div>
+<div class="etape"><span class="num">2</span>Capitaux propres par action avant = 2 500 M€ / 2 000 000 = <strong>1 250 €</strong></div>
+<div class="etape"><span class="num">3</span>Nombre d'actions rachetées = 2 000 000 × 10 % = <strong>200 000</strong> → actions restantes = 1 800 000</div>
+<div class="etape"><span class="num">4</span>Coût net de la dette servant à financer le rachat = (200 000 × 18) × 6 % × (1 − 33,1/3 %) = <strong>144 000 €</strong></div>
+<div class="etape"><span class="num">5</span>Résultat net après opération = 50 M€ − 0,144 M€ = <strong>49,85 M€</strong></div>
+<div class="etape"><span class="num">6</span>BPA après opération = 49,85 M€ / 1 800 000 = <strong>27,69 €</strong></div>
+<div class="etape"><span class="num">7</span>Capitaux propres par action après = (2 500 M€ − 0,144 M€) / 1 800 000 = <strong>1 388,81 €</strong></div>
+<p><strong>Interprétation :</strong> le BPA progresse de 25 € à 27,69 € (+10,8 %) malgré une légère baisse du résultat net (due au coût de la dette). Le rachat au cours de 18 €, inférieur à la valeur comptable par action de 1 250 €, est relutif : il augmente mécaniquement la richesse par action des actionnaires restants.</p>
+</div>
+</section>
+
+<section id="s5">
+<h2>5. Opérations affectant le nombre d'actions</h2>
+<div class="box memo">
+<span class="label">Formule et théorie — division / regroupement d'actions</span>
+<p><strong>En clair :</strong> une division d'actions (stock split) multiplie le nombre d'actions et divise le nominal dans la même proportion, ce qui fait baisser mécaniquement le cours — sans changer la capitalisation boursière. Le regroupement (reverse split) produit l'effet inverse.</p>
+</div>
+<div class="box precision">
+<span class="label">Application numérique</span>
+<p>Split 2 pour 1 : chaque actionnaire reçoit 1 action supplémentaire pour chaque action détenue ; le nominal est divisé par 2. Cours avant = 100 € → cours après ≈ <strong>50 €</strong>, nombre d'actions doublé, <strong>capitalisation boursière inchangée</strong>.</p>
+</div>
+<div class="box piege">
+<span class="label">Piège de confusion</span>
+<p>Une division ou un regroupement d'actions ne crée <strong>ni ne détruit de valeur</strong> pour l'actionnaire — contrairement à un rachat d'actions (relutif sur le BPA) ou une distribution de dividendes (baisse mécanique du cours). C'est une opération purement <strong>mécanique</strong> de dilution/relution du nombre de titres.</p>
+</div>
+<table>
+<thead><tr><th>Avantages du split</th><th>Inconvénients du split</th></tr></thead>
+<tbody>
+<tr><td data-label="Avantages" class="exo">Élargit l'actionnariat, aide les petits porteurs, meilleure liquidité, meilleure acceptation internationale</td><td data-label="Inconvénients" class="imp">Favorise des investisseurs court-termistes, oblige à verser davantage de dividendes en volume, aggrave une éventuelle baisse en marché baissier</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="s6">
+<h2>6. Actions gratuites et dividendes en actions</h2>
+<div class="tree">
+<div class="branch"><span class="cond-item">Incorporation de réserves au capital</span><div class="result">Simple jeu d'écriture (virement réserves → capital), sans impact financier de fond. Peut prendre la forme d'actions gratuites (DPA : droit préférentiel d'attribution, négociable) ou d'une élévation du nominal.</div></div>
+<div class="branch"><span class="cond-item">Attribution gratuite d'actions aux salariés</span><div class="result">Décidée en AGE (c. com., art. L. 225-197-1) ; actions existantes (autodétenues) ou actions nouvelles à émettre.</div></div>
+<div class="branch"><span class="cond-item">Dividende en actions</span><div class="result">Prix d'émission ≥ 90 % de la moyenne des cours des 20 séances précédentes (c. com., art. L. 232-19). Préserve la trésorerie mais dilue le BPA et le contrôle du capital.</div></div>
+</div>
+</section>
+
+<section id="s7">
+<h2>7. Opérations de restructuration : apports et scissions</h2>
+<table>
+<thead><tr><th>Opération</th><th>Principe</th><th>Actionnaires reçoivent des titres ?</th></tr></thead>
+<tbody>
+<tr><td data-label="Opération" class="spec">Apport partiel d'actif</td><td data-label="Principe">A apporte une partie de son actif à B et reçoit des titres B en échange</td><td data-label="Titres">Non — c'est <strong>la société A</strong> qui reçoit les titres, pas ses actionnaires</td></tr>
+<tr><td data-label="Opération" class="spec">Spin-off (scission-distribution)</td><td data-label="Principe">La filiale est distribuée aux actionnaires de la mère, aux mêmes proportions</td><td data-label="Titres">Oui, sous forme de dividende en actions</td></tr>
+<tr><td data-label="Opération" class="spec">Split-off (scission-échange)</td><td data-label="Principe">Les actionnaires échangent (sur option) leurs actions de la mère contre des actions de la filiale — assimilable à une OPRA payée en actions</td><td data-label="Titres">Oui, sur option, en échange d'actions de la mère</td></tr>
+<tr><td data-label="Opération" class="spec">Split-up (scission-dissolution)</td><td data-label="Principe">La société mère disparaît, distribue les actions des entités issues et cesse d'exister</td><td data-label="Titres">Oui, la société mère disparaît</td></tr>
+<tr><td data-label="Opération" class="spec">Equity Carve-Out (ECO)</td><td data-label="Principe">Cession au public de nouvelles actions sur une filiale — génère des liquidités pour la mère qui garde le contrôle</td><td data-label="Titres">Non — vente au marché, pas aux actionnaires existants</td></tr>
+</tbody>
+</table>
+
+<div class="box precision">
+<span class="label">Application numérique — split-off (méthode étape par étape)</span>
+<p><strong>Énoncé :</strong> Société Y (50 000 000 actions à 54 €) détient 3 500 000 actions de sa filiale Z (5 000 000 actions, cours 5,4 €). Y propose un split-off : 300 000 actions Y apportées contre des actions Z.</p>
+<div class="etape"><span class="num">1</span>Parité d'échange = valeur de l'action Y / valeur de l'action Z = 54 / 5,4 = <strong>1 action Y pour 10 actions Z</strong></div>
+<div class="etape"><span class="num">2</span>Actions Z distribuées = 300 000 × 10 = <strong>3 000 000 actions Z</strong></div>
+<div class="etape"><span class="num">3</span>Participation résiduelle de Y dans Z = 3 500 000 − 3 000 000 = 500 000 actions, soit 500 000 / 5 000 000 = <strong>10 %</strong> (contre 70 % avant)</div>
+<p><strong>Interprétation :</strong> la chute de 70 % à 10 % de la participation de Y dans Z fait perdre le contrôle exclusif → impact direct sur le <strong>périmètre de consolidation</strong> (sortie d'intégration globale, possible mise en équivalence ou déconsolidation totale).</p>
+</div>
+
+<div class="box reflexe">
+<span class="label">Interprétation financière — la décote de conglomérat</span>
+<p>Les scissions créent souvent de la valeur car elles corrigent la <strong>« décote de conglomérat »</strong> : un cours de bourse unique oblige les investisseurs à agréger des perspectives hétérogènes, ce qui pénalise la valorisation. Après scission, chaque activité est valorisée séparément et plus justement — mais l'opération a un coût si des synergies entre divisions disparaissent.</p>
+</div>
+</section>
+
+<section id="s8">
+<h2>8. Introduction en Bourse (IPO)</h2>
+<div class="box memo">
+<span class="label">Formule et théorie — émission primaire vs secondaire</span>
+<p><strong>Émission primaire</strong> (~85 % du volume en France) : actions nouvelles, la société lève des fonds. <strong>Émission secondaire</strong> : actionnaires existants vendent leurs titres, sans apport de fonds à la société. Une émission peut être <strong>mixte</strong>.</p>
+</div>
+
+<table>
+<thead><tr><th>Marché</th><th>Diffusion minimale</th><th>Historique de comptes</th></tr></thead>
+<tbody>
+<tr><td data-label="Marché" class="spec">Euronext</td><td data-label="Diffusion">25 % du capital ou 5 % représentant ≥ 5 M€</td><td data-label="Historique">3 ans certifiés, normes IFRS</td></tr>
+<tr><td data-label="Marché" class="spec">Euronext Growth</td><td data-label="Diffusion">2,5 M€</td><td data-label="Historique">2 ans certifiés, IFRS ou PCG</td></tr>
+<tr><td data-label="Marché" class="spec">Euronext Access</td><td data-label="Diffusion">Aucun minimum</td><td data-label="Historique">2 ans si ancienneté suffisante</td></tr>
+</tbody>
+</table>
+
+<div class="box reflexe">
+<span class="label">Interprétation financière — motivations et coûts</span>
+<p><strong>Avantages :</strong> financement de projets ambitieux, réduction de l'endettement, liquidité, meilleure position de négociation bancaire, notoriété, transparence accrue, gouvernance renforcée.</p>
+<p><strong>Coûts directs :</strong> marge des banques introductrices (5 à 10 % des capitaux levés), commissions d'intermédiaires. <strong>Coûts indirects :</strong> mobilisation du temps des dirigeants, perte de confidentialité vis-à-vis des concurrents.</p>
+</div>
+
+<table>
+<thead><tr><th>Procédure (particuliers)</th><th>Principe</th></tr></thead>
+<tbody>
+<tr><td data-label="Procédure" class="spec">Offre à prix ferme (OPF)</td><td data-label="Principe">Prix fixé à l'avance ; répartition proportionnelle si sursouscription</td></tr>
+<tr><td data-label="Procédure" class="spec">Offre à prix ouvert (OPO)</td><td data-label="Principe">Fourchette de prix indicative ; prix définitif fixé après collecte des ordres</td></tr>
+<tr><td data-label="Procédure" class="spec">Offre à prix minimal (OPM)</td><td data-label="Principe">Prix plancher fixé, offres en dessous rejetées</td></tr>
+<tr><td data-label="Procédure" class="spec">Placement global (institutionnels)</td><td data-label="Principe">Book building par le chef de file (lead underwriter / book runner) ; allocation discrétionnaire</td></tr>
+</tbody>
+</table>
+
+<div class="box piege">
+<span class="label">Piège classique</span>
+<p>Ne pas confondre <strong>placement global</strong> (réservé aux institutionnels, book building, allocation discrétionnaire) et les procédures grand public <strong>OPF/OPO/OPM</strong> — elles sont souvent combinées lors d'une même introduction.</p>
+</div>
+</section>
+
+<section id="s9">
+<h2>9. Méthode cas pratique DSCG</h2>
+<div class="box precision">
+<p><strong>Énoncé type :</strong> la société OMEGA (capitaux propres 1 800 M€, résultat net 60 M€, 3 000 000 actions, cours 200 €) envisage de racheter 8 % de ses actions au cours de 195 €, financé par une dette au coût net d'impôt de 4 %.</p>
+<div class="etape"><span class="num">1</span><strong>Justification théorique :</strong> analyser l'opération sous l'angle de son impact sur le BPA (création de valeur relative) et de sa cohérence avec la stratégie financière (structure de capital, signal au marché).</div>
+<div class="etape"><span class="num">2</span><strong>Calcul détaillé :</strong> BPA avant = 60 M€ / 3 000 000 = 20 €. Actions rachetées = 3 000 000 × 8 % = 240 000 ; actions restantes = 2 760 000. Coût net de la dette = 240 000 × 195 × 4 % = 1 872 000 €. Résultat après = 60 M€ − 1,872 M€ = 58,128 M€. BPA après = 58 128 000 / 2 760 000 ≈ <strong>21,06 €</strong>.</div>
+<div class="etape"><span class="num">3</span><strong>Recommandation managériale :</strong> l'opération est relutive (+5,3 % de BPA) car le cours de rachat (195 €) reste inférieur à la valeur créée par action. Elle doit néanmoins être resituée dans la stratégie financière globale : vérifier que l'augmentation de l'endettement reste compatible avec les covenants bancaires et la notation de crédit de la société, et que la société ne renonce pas à des projets d'investissement rentables (VAN positive) pour financer ce rachat.</div>
+</div>
+</section>
+
+</div>
+<footer>Fiche DSCG UE 2 — Finance · M. Hamman · Généré à partir du cours source « Gestion de la valeur de l'action — Vform »</footer>
+</body>
+</html>

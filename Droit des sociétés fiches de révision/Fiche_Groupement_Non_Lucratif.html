@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Groupements Sans But Lucratif (Associations et Fondations)</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none;}
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+p{margin:8px 0;}
+ul{margin:8px 0; padding-left:24px;}
+li{margin-bottom:4px;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+
+.cmp{display:grid; gap:10px; margin:14px 0; grid-template-columns:repeat(3,1fr);}
+.cmp-card{border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+
+@media (max-width:480px){
+  body{font-size:13.5px;} .wrap{padding:0 10px 50px;} .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  table, thead, tbody, th, td, tr{display:block;} thead{display:none;} table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;} td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  .cmp{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">DSCG — GSBL</div>
+  <div class="btns">
+    <button onclick="window.print()">⬇ Exporter en PDF</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Groupements Sans But Lucratif</h1>
+  <div class="sub">Associations (loi 1901) et Fondations</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. Les Associations</a></li>
+<li><a href="#s2">2. Les Fondations</a></li>
+<li><a href="#s3">3. Tableau Comparatif</a></li>
+</ol>
+</div>
+
+<article>
+
+<h2 class="banner" id="s1">1. Les Associations (Loi 1901)</h2>
+
+<h3 id="s1-1">1.1 Constitution et Typologie</h3>
+<p>L'association est un contrat par lequel 2+ personnes mettent en commun leur activité dans un <b>but autre que de partager des bénéfices</b>.</p>
+<ul>
+<li><b>Non déclarée</b> : Libre, pas de personnalité juridique.</li>
+<li><b>Déclarée</b> : Déclaration en Préfecture + JOAFE. Acquiert la capacité juridique.</li>
+<li><b>Reconnue d'Utilité Publique (ARUP)</b> : Pleine capacité (reçoit legs).</li>
+</ul>
+
+<div class="box piege"><span class="lbl">Piège de requalification</span>
+Si l'association partage des bénéfices entre ses membres, elle risque la <b>requalification en société créée de fait</b>, entraînant la responsabilité illimitée et solidaire (si objet commercial) de ses membres.
+</div>
+
+<h3 id="s1-2">1.2 Fonctionnement</h3>
+<ul>
+<li><b>AG</b> : Organe souverain. En principe, pas de quorum exigé sauf clause contraire. 1 membre = 1 voix.</li>
+<li><b>Dirigeants</b> : Responsabilité civile envers l'association (fautes de gestion) et envers les tiers si faute <b>détachable</b> des fonctions.</li>
+<li><b>CAC</b> : Obligatoire si subventions/dons > 153 000€ ou si activité économique (2 des 3 seuils).</li>
+</ul>
+
+<div class="box memo"><span class="lbl">Boni de liquidation</span>
+En cas de dissolution, le boni de liquidation ne peut <b>jamais</b> être attribué aux membres. Il doit être dévolu à une autre personne morale à but non lucratif.
+</div>
+
+<h2 class="banner" id="s2">2. Les Fondations</h2>
+<p>Affectation <b>irrévocable</b> de biens à la réalisation d'une œuvre d'intérêt général (sans membres).</p>
+
+<div class="cmp">
+<div class="cmp-card"><h5>Fondation Abritée</h5>Pas de personnalité morale. Libéralité avec charge gérée par une fondation abritante.</div>
+<div class="cmp-card"><h5>Fondation Reconnue (FRUP)</h5>Décret en Conseil d'État. Gérée par CA/Directoire (pas d'AG). Peut recevoir dons et legs.</div>
+<div class="cmp-card"><h5>Fondation d'Entreprise</h5>Outil de mécénat pour sociétés. Autorisation préfectorale. Interdit de recevoir legs/dons externes. Durée min. 5 ans.</div>
+</div>
+
+<h2 class="banner" id="s3">3. Tableau de Synthèse Comparatif</h2>
+
+<table>
+<thead><tr><th>Caractéristiques</th><th>Association Déclarée</th><th>FRUP</th><th>Fondation d'Entreprise</th></tr></thead>
+<tbody>
+<tr><td data-label="Nature"><b>Nature</b></td><td data-label="Association">Groupement de personnes</td><td data-label="FRUP">Masse de biens affectés</td><td data-label="Fondation Ent.">Outil mécénat sociétés</td></tr>
+<tr><td data-label="Création"><b>Création</b></td><td data-label="Association">Déclaration Préfecture</td><td data-label="FRUP">Décret Conseil d'État</td><td data-label="Fondation Ent.">Autorisation Préfectorale</td></tr>
+<tr><td data-label="Gouvernance"><b>Gouvernance</b></td><td data-label="Association">AG, CA, Bureau</td><td data-label="FRUP">CA (Pas d'AG)</td><td data-label="Fondation Ent.">CA (Pas d'AG)</td></tr>
+<tr><td data-label="Dons et Legs"><b>Dons et Legs</b></td><td data-label="Association">Dons manuels uniquement (sauf ARUP)</td><td data-label="FRUP">Capacité à recevoir</td><td data-label="Fondation Ent.">Interdit (sauf internes)</td></tr>
+<tr><td data-label="Durée"><b>Durée</b></td><td data-label="Association">Libre</td><td data-label="FRUP">En principe illimitée</td><td data-label="Fondation Ent.">Déterminée (min 5 ans)</td></tr>
+</tbody>
+</table>
+
+</article>
+</div>
+</body>
+</html>

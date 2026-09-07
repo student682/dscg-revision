@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Le Financement</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+
+/* Toolbar */
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+
+/* Title banner */
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+
+/* TOC */
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+
+/* Section banners */
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+
+/* Callout boxes */
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+
+/* Decision tree (HTML/CSS, texte natif) */
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.tree .mode{
+  display:inline-block; margin-left:10px; font-size:12px; font-weight:700;
+  padding:3px 9px; border-radius:12px; vertical-align:middle;
+}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+
+/* Timeline / chronologie */
+.timeline{margin:16px 0; padding:0; list-style:none;}
+.timeline li{
+  position:relative; padding:8px 0 8px 30px; border-left:2px solid var(--blue); margin-left:6px;
+}
+.timeline li:last-child{border-left:2px solid transparent;}
+.timeline li::before{
+  content:""; position:absolute; left:-7px; top:12px; width:12px; height:12px;
+  border-radius:50%; background:var(--blue); border:2px solid #fff;
+}
+.timeline .t-lbl{font-weight:700; color:var(--dblue); font-size:14px;}
+.timeline .t-txt{font-size:13.5px; color:#333;}
+
+/* Comparison grid (organes / formes / acteurs) */
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+
+/* Mini-cas DSCG */
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+.cas ul{margin:4px 0; padding-left:20px;}
+
+/* Footer */
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+article{margin:0;}
+a.anchor-target{scroll-margin-top:60px;}
+.verif{color:var(--red); font-style:italic; font-weight:600;}
+
+/* ===== Responsive mobile ===== */
+@media (max-width:480px){
+  body{font-size:13.5px;}
+  .wrap{padding:0 10px 50px;}
+  .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  .toolbar .chap{font-size:11.5px;}
+  .toolbar button{padding:6px 8px; font-size:11px;}
+  .title-banner h1{font-size:19px;}
+  .title-banner .sub{font-size:12px;}
+  h2.banner{font-size:15px; padding:8px 12px;}
+  h3{font-size:14.5px;}
+  h4{font-size:13.5px;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+  td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  td:empty, td:not([data-label]){padding:4px 10px;}
+  .cmp{grid-template-columns:1fr!important;}
+}
+@media (min-width:481px) and (max-width:900px){
+  .cmp{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:901px){
+  .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);}
+}
+
+/* mobile-force class : forçage du rendu mobile même sur grand écran */
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force .toolbar{padding:8px 10px;}
+body.mobile-force .toolbar .chap{font-size:11.5px;}
+body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;}
+body.mobile-force .title-banner h1{font-size:19px;}
+body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody,
+body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;}
+body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+body.mobile-force .cmp{grid-template-columns:1fr!important;}
+
+/* ===== Print ===== */
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+  body{font-size:11.5px;}
+  h2.banner{break-before:page; break-after:avoid;}
+  h2.banner:first-of-type{break-before:auto;}
+  table, .box, .tree, .cas, .cmp-card{break-inside:avoid;}
+  .title-banner{break-after:avoid;}
+  a{color:#000; text-decoration:none;}
+  .toc a{color:#000;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. — Le Financement</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Le Financement</h1>
+  <div class="sub">DSCG UE 1 — Gestion juridique, fiscale et sociale · Droit des sociétés</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+
+<ol>
+<li><a href="#s1">1. L'augmentation de capital
+  <ol><li><a href="#s1-1">1.1 Modalités et conditions communes</a></li><li><a href="#s1-2">1.2 Le droit préférentiel de souscription (DPS)</a></li><li><a href="#s1-3">1.3 Cas pratique — calcul du DPS</a></li><li><a href="#s1-4">1.4 Suppression du DPS</a></li></ol>
+</li>
+<li><a href="#s2">2. Pacte d'actionnaires</a></li>
+<li><a href="#s3">3. Amortissement et réduction de capital
+  <ol><li><a href="#s3-1">3.1 Amortissement du capital</a></li><li><a href="#s3-2">3.2 Réduction de capital</a></li><li><a href="#s3-3">3.3 Le coup d'accordéon</a></li><li><a href="#s3-4">3.4 Rachat d'actions propres</a></li></ol>
+</li>
+<li><a href="#s4">4. Comptes courants d'associés</a></li>
+<li><a href="#s5">5. Emprunt obligataire
+  <ol><li><a href="#s5-1">5.1 Caractéristiques et modalités d'émission</a></li><li><a href="#s5-2">5.2 Droits et protection des obligataires</a></li></ol>
+</li>
+<li><a href="#s6">6. Valeurs mobilières donnant accès au capital (titres hybrides)</a></li>
+<li><a href="#s7">7. Garanties du crédit
+  <ol><li><a href="#s7-1">7.1 Garanties personnelles</a></li><li><a href="#s7-2">7.2 Garanties réelles</a></li></ol>
+</li>
+<li><a href="#s8">8. Méthode cas DSCG</a></li>
+</ol>
+
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. L'augmentation de capital</h2>
+
+<h3 id="s1-1">1.1 Modalités et conditions communes</h3>
+<div class="cmp" style="--cmp-cols:3;">
+<div class="cmp-card"><h5>Numéraire</h5>Apport d'argent frais. Le DPS des actionnaires anciens s'applique par principe.</div>
+<div class="cmp-card"><h5>Nature</h5>Apport de biens. Pas de DPS (rien à répartir entre anciens actionnaires puisqu'aucun titre en numéraire n'est en jeu).</div>
+<div class="cmp-card"><h5>Incorporation de réserves</h5>Transformation de réserves en capital — aucun apport nouveau. L'AGE statue mais aux conditions de <b>quorum et majorité d'une AGO</b> (seule dérogation aux règles normales d'AGE).</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>L'augmentation de capital par incorporation de réserves est décidée en <b>AGE</b> mais votée aux conditions de <b>quorum/majorité d'AGO</b> — ne pas appliquer par réflexe la majorité renforcée d'AGE.</div>
+<div class="box precision"><span class="lbl">Précision — tiers souscripteur en SARL</span>La création de parts nouvelles au profit d'un tiers exige l'<b>agrément préalable</b> de tous les associés — sauf ascendants, descendants ou conjoint d'un associé (sauf clause statutaire contraire).</div>
+
+<h3 id="s1-2">1.2 Le droit préférentiel de souscription (DPS)</h3>
+<div class="box memo"><span class="lbl">Mémo — nature et exercice du DPS</span>Droit d'ordre public, proportionnel à la part détenue, <b>négociable</b>. S'exerce d'abord <b>à titre irréductible</b> (délai minimum : 5 jours de bourse), puis <b>à titre réductible</b> si l'AGE l'a expressément prévu — répartition des titres non souscrits proportionnellement aux droits antérieurs.</div>
+<div class="box precision"><span class="lbl">Précision</span>L'actionnaire ancien a deux options : <b>exercer</b> son DPS pour ne pas être dilué, ou le <b>vendre</b> pour ne pas perdre en patrimoine (le DPS est lui-même coté en société cotée). En SARL, le DPS n'est que <b>facultatif</b> (sauf clause statutaire le rendant obligatoire).</div>
+
+<h3 id="s1-3">1.3 Cas pratique — calcul du DPS</h3>
+<div class="box memo">
+<span class="lbl">Formule</span>
+Valeur théorique du DPS = (Valeur de l'action avant augmentation − Valeur théorique de l'action après augmentation)
+</div>
+<div class="tree">
+<span class="root">Données de l'exemple</span>
+<div class="branch">
+<div class="cond-item">Société : 40 000 actions anciennes, valeur avant l'opération = <b>120 €</b> par action</div>
+<div class="cond-item">Augmentation de capital : émission de <b>10 000 actions nouvelles</b> au prix d'émission de <b>90 €</b></div>
+</div>
+</div>
+<div class="tree">
+<span class="root">Calcul étape par étape</span>
+<div class="branch">
+<div class="cond-item"><b>① Valeur totale de la société avant</b> = 40 000 × 120 = <b>4 800 000 €</b></div>
+<div class="cond-item"><b>② Montant apporté par les actions nouvelles</b> = 10 000 × 90 = <b>900 000 €</b></div>
+<div class="cond-item"><b>③ Valeur totale après augmentation</b> = 4 800 000 + 900 000 = <b>5 700 000 €</b></div>
+<div class="cond-item"><b>④ Nombre total d'actions après</b> = 40 000 + 10 000 = <b>50 000</b></div>
+<div class="cond-item"><b>⑤ Valeur théorique de l'action après (« ex-droit »)</b> = 5 700 000 / 50 000 = <b>114 €</b></div>
+<div class="cond-item"><b>⑥ Valeur théorique du DPS</b> = 120 − 114 = <b>6 €</b></div>
+</div>
+<div class="result ok">Vérification par la formule directe : DPS = n(V−E)/(N+n) = 10 000 × (120−90) / 50 000 = 300 000/50 000 = 6 € ✓</div>
+</div>
+<div class="box reflexe"><span class="lbl">Réflexe cas pratique</span>Un actionnaire ancien détenant 400 actions (soit 1/100 du capital) peut : <b>souscrire</b> à 100 actions nouvelles (1/100 × 10 000) en exerçant ses 400 DPS, ou <b>vendre</b> ses 400 DPS à 6 € = 2 400 €, compensant exactement la perte de valeur de son portefeuille (400 × 6 € = 2 400 €).</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Le DPS n'est <b>pas un cadeau</b> : il compense mathématiquement la dilution. Un actionnaire qui n'exerce ni ne vend son DPS subit une perte patrimoniale nette égale à sa valeur.</div>
+
+<h3 id="s1-4">1.4 Suppression du DPS</h3>
+<div class="tree">
+<span class="root">Procédure — double AGE</span>
+<div class="branch">
+<div class="cond-item"><b>1<sup>re</sup> AGE</b> : décide de la suppression du DPS, au vu du rapport du CA/directoire (motifs, bénéficiaires, prix d'émission, incidence sur la répartition du capital) <b>et</b> du rapport spécial du CAC (avis sur la suppression et le calcul du prix d'émission)</div>
+<div class="cond-item"><b>2<sup>e</sup> AGE</b> : décide l'augmentation de capital elle-même</div>
+</div>
+<div class="result ko">Absence de l'un des deux rapports (CA/directoire ou CAC) → <b>nullité des délibérations</b></div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Si l'AGE délègue sa compétence au CA/directoire, le rapport du CAC <b>n'est pas requis à ce stade</b> — mais le CAC devra établir un rapport complémentaire sur les conditions définitives de l'opération, présenté à l'AGO suivante. L'émission des actions nouvelles doit intervenir dans les <b>18 mois</b> suivant l'AGE ayant supprimé le DPS.</div>
+<div class="box precision"><span class="lbl">Précision — offre au public / placement privé</span>L'AGE peut supprimer le DPS <b>sans nommer les bénéficiaires</b> en cas d'offre au public ou de placement privé auprès d'investisseurs qualifiés. Le placement privé est plafonné à <b>20 % du capital social par an</b>.</div>
+
+<h2 class="banner" id="s2">2. Pacte d'actionnaires</h2>
+<div class="box precision"><span class="lbl">Précision</span>Contrat <b>extrastatutaire</b> conclu entre certains actionnaires, régi par la liberté contractuelle et le Code civil. Peut contenir une clause pénale. Doit rester conforme aux statuts et à l'intérêt social — sert notamment à organiser des clauses d'agrément, de préemption ou d'inaliénabilité en complément (ou en substitut) des statuts.</div>
+
+<h2 class="banner" id="s3">3. Amortissement et réduction de capital</h2>
+
+<h3 id="s3-1">3.1 Amortissement du capital</h3>
+<div class="box memo"><span class="lbl">Mémo</span>Remboursement anticipé de tout ou partie de la valeur nominale des actions, prélevé sur les <b>bénéfices et réserves distribuables</b> (jamais sur la réserve légale/statutaire, jamais sur le capital lui-même) → le capital social n'est <b>pas</b> modifié. Actions non amorties = actions de capital ; actions amorties = <b>actions de jouissance</b> (perdent le droit au remboursement du nominal, conservent les autres droits).</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Impossible si la société a des actions à dividende prioritaire sans droit de vote encore en circulation (il faut d'abord les racheter et les annuler), ou des valeurs mobilières donnant accès au capital en circulation.</div>
+
+<h3 id="s3-2">3.2 Réduction de capital</h3>
+<table>
+<caption>3 motifs principaux</caption>
+<tbody>
+<tr><td data-label="Motif" class="cond">Annulation de pertes</td><td data-label="Détail">Réduction obligatoire si CP &lt; moitié du capital (délai de 4 mois pour convoquer l'AGE après approbation des comptes révélant la perte)</td></tr>
+<tr><td data-label="Motif" class="cond">Remboursement (capital jugé trop élevé)</td><td data-label="Détail">Effet de relution — droit d'opposition des créanciers</td></tr>
+<tr><td data-label="Motif" class="cond">Annulation d'actions propres</td><td data-label="Détail">Rachat puis annulation — droit d'opposition des créanciers</td></tr>
+</tbody>
+</table>
+<div class="tree">
+<span class="root">Capitaux propres &lt; moitié du capital social — procédure</span>
+<div class="branch">
+<div class="cond-item">Convocation de l'AGE dans les <b>4 mois</b> suivant l'approbation des comptes révélant la perte, pour statuer sur une dissolution anticipée</div>
+<div class="cond-item">Si pas de dissolution : délai de <b>2 ans</b> pour régulariser — reconstituer les CP à hauteur de la moitié du capital, ou réduire le capital</div>
+</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen — droit d'opposition des créanciers</span>Seule la réduction de capital <b>non motivée par des pertes</b> ouvre un droit d'opposition aux créanciers antérieurs au dépôt du PV au greffe, dans un délai de <b>20 jours</b>. La réduction motivée par des pertes n'ouvre <b>aucun</b> droit d'opposition (logique : elle ne fait qu'entériner une perte déjà subie, elle ne réduit pas le gage réel des créanciers).</div>
+<div class="box memo"><span class="lbl">Mémo — communication au CAC</span>SARL : <b>45 jours</b> au moins avant l'AG. SA : délai raisonnable, non formellement fixé. Rapport CAC communiqué aux actionnaires <b>15 jours</b> au moins avant l'AGE.</div>
+
+<h3 id="s3-3">3.3 Le coup d'accordéon</h3>
+<div class="cmp" style="--cmp-cols:3;">
+<div class="cmp-card"><h5>Sans prise de contrôle</h5>Réduction de K pour apurer les pertes, puis augmentation par les moyens classiques (numéraire...).</div>
+<div class="cmp-card"><h5>Avec prise de contrôle par un tiers</h5>Réduction pour assainir, puis augmentation réservée à un tiers apportant de l'« argent frais » et prenant le contrôle.</div>
+<div class="cmp-card"><h5>Par incorporation des comptes courants</h5>Augmentation de K par prélèvement sur les comptes courants d'associés, suivie d'une réduction par imputation des pertes — restructure le passif et consolide les fonds propres.</div>
+</div>
+<div class="box memo"><span class="lbl">Mémo — procédure</span>Double AGE : la 1<sup>re</sup> décide la réduction (au vu du rapport CA + rapport CAC garantissant l'égalité des actionnaires, communiqué 15 jours au moins avant), la 2<sup>e</sup> décide l'augmentation réservée.</div>
+
+<h3 id="s3-4">3.4 Rachat d'actions propres</h3>
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>Pour conservation</h5>Rachat sur le marché (sociétés cotées uniquement, limite <b>10 % du capital</b>, programme approuvé en AGE, durée max 18 mois) ou OPRA. Titres conservés pour croissance externe ou stock-options, ou revendus.</div>
+<div class="cmp-card"><h5>Pour annulation</h5>Réduction de capital non motivée par des pertes, ou opération relutive (amélioration du bénéfice par action). Offre d'achat proposée à tous les actionnaires ; réduction proportionnelle si sursouscription.</div>
+</div>
+
+<h2 class="banner" id="s4">4. Comptes courants d'associés</h2>
+<div class="box memo"><span class="lbl">Mémo — avantages</span>Intérêts déductibles du résultat imposable · flexibilité (retraits ou blocage conventionnel) · renforcement de la surface financière sans risque de renversement de majorité (contrairement à une augmentation de capital).</div>
+<div class="box piege"><span class="lbl">Piège d'examen — interdiction des comptes débiteurs</span>Interdit aux personnes physiques (et à leur conjoint, ascendants, descendants) qui sont : gérants/associés de SARL, administrateurs/MDD/MCS/DG de SA, président/dirigeants de SAS — de <b>contracter un emprunt</b> auprès de la société ou de se faire consentir un <b>découvert</b> en compte courant. C'est l'inverse qui est autorisé : ces personnes peuvent prêter à la société, pas lui emprunter.</div>
+<div class="box precision"><span class="lbl">Précision — conventions réglementées</span>En SA, les conventions de compte courant <b>portant intérêts</b> conclues avec un dirigeant ou un actionnaire détenant plus de <b>10 % des droits de vote</b> sont soumises à l'autorisation préalable du CA.</div>
+
+<h2 class="banner" id="s5">5. Emprunt obligataire</h2>
+
+<h3 id="s5-1">5.1 Caractéristiques et modalités d'émission</h3>
+<table>
+<thead><tr><th>Notion</th><th>Définition</th></tr></thead>
+<tbody>
+<tr><td data-label="Notion">Valeur nominale</td><td data-label="Définition">Quote-part de l'emprunt ; base de calcul du coupon</td></tr>
+<tr><td data-label="Notion">Taux nominal (facial)</td><td data-label="Définition">Appliqué à la valeur nominale pour obtenir le coupon</td></tr>
+<tr><td data-label="Notion">Taux actuariel</td><td data-label="Définition">Taux de rendement réel — équivalence entre prix d'acquisition et flux futurs</td></tr>
+<tr><td data-label="Notion">Prime d'émission</td><td data-label="Définition">Nominal − prix d'émission (émission en dessous du pair, fréquent)</td></tr>
+<tr><td data-label="Notion">Prime de remboursement</td><td data-label="Définition">Prix de remboursement − nominal</td></tr>
+</tbody>
+</table>
+<div class="box memo"><span class="lbl">Mémo — qui peut émettre des obligations</span>Sociétés par actions · GIE dont les membres sont exclusivement des sociétés par actions · associations à activité économique · État et personnes morales de droit public · certaines SARL sous conditions. Condition commune : <b>capital entièrement libéré</b> (sauf actions salariés).</div>
+<div class="box precision"><span class="lbl">Précision — compétence</span>Obligations ordinaires : CA/directoire/gérant (sauf clause contraire). Obligations donnant accès au capital : compétence exclusive de l'<b>AGE</b>, qui peut déléguer (réalisation dans les <b>5 ans</b>).</div>
+
+<h3 id="s5-2">5.2 Droits et protection des obligataires</h3>
+<div class="box memo"><span class="lbl">Mémo — masse des obligataires</span>Personnalité civile propre. Représentée par 1 à 3 mandataires élus, ayant accès à l'AG des actionnaires (voix consultative, pas délibérative), sans pouvoir s'immiscer dans la gestion.</div>
+<table>
+<caption>3 régimes selon la gravité de la modification</caption>
+<tbody>
+<tr><td data-label="Cas" class="imp">Décision de l'AG des obligataires s'impose à la société</td><td data-label="Exemples">Abandon de garanties, report d'échéance, modification du taux/amortissement</td></tr>
+<tr><td data-label="Cas" class="cond">Société peut passer outre en offrant le remboursement</td><td data-label="Exemples">Modification de l'objet/forme sociale, émission d'obligations prioritaires</td></tr>
+<tr><td data-label="Cas" class="spec">Société peut passer outre, mais la masse peut demander remboursement ou garanties en justice</td><td data-label="Exemples">Fusion ou scission de la société</td></tr>
+</tbody>
+</table>
+
+<h2 class="banner" id="s6">6. Valeurs mobilières donnant accès au capital (titres hybrides)</h2>
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>OCA — Obligations convertibles en actions</h5>Option de conversion, inséparable de l'obligation. Coût d'émission plus faible pour l'émetteur ; l'obligataire observe le cours avant de convertir (« période de fiançailles »).</div>
+<div class="cmp-card"><h5>ORA — Obligations remboursables en actions</h5>Remboursement <b>obligatoirement</b> en actions — pas de composante emprunt réelle en raison de la certitude de l'échange (ce ne sont donc pas de vrais titres hybrides).</div>
+<div class="cmp-card"><h5>OBSA — Obligations à bons de souscription d'actions</h5>Bon coté séparément de l'obligation ; permet de souscrire à une augmentation de capital future à prix fixé. Fréquent en LBO (dette subordonnée).</div>
+<div class="cmp-card"><h5>OBSAR</h5>OBSA dont les bons sont ensuite cédés à des salariés/mandataires — attribution des bons soumise à un <b>vote distinct</b> (bénéficiaires exclus du vote).</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen — opérations interdites après émission</span>Dès l'émission de VM donnant accès au capital, la société <b>ne peut plus</b>, sans autorisation du contrat d'émission ou de la masse des porteurs : modifier sa forme/objet, modifier la répartition des bénéfices, ou amortir son capital.</div>
+
+<h2 class="banner" id="s7">7. Garanties du crédit</h2>
+
+<h3 id="s7-1">7.1 Garanties personnelles</h3>
+<table>
+<caption>Cautionnement simple vs solidaire</caption>
+<tbody>
+<tr><td data-label="Type" class="exo">Simple</td><td data-label="Effet">Bénéfice de <b>discussion</b> (poursuivre le débiteur d'abord) + bénéfice de <b>division</b> (diviser les poursuites entre cautions)</td></tr>
+<tr><td data-label="Type" class="imp">Solidaire</td><td data-label="Effet">Renonciation à ces deux bénéfices — le créancier poursuit directement la caution pour le tout</td></tr>
+</tbody>
+</table>
+<div class="box piege"><span class="lbl">Piège d'examen — proportionnalité (art. 2300 C. civ., depuis 2022)</span>Un cautionnement souscrit par une <b>personne physique</b> envers un créancier professionnel, <b>manifestement disproportionné</b> à ses revenus et son patrimoine au jour de la conclusion, est <b>réduit</b> au montant qu'elle pouvait garantir. L'appréciation se fait sur les biens et revenus <b>déclarés</b> (pas les biens réels) — une caution ayant menti dans sa déclaration ne peut invoquer son patrimoine réel.</div>
+<div class="box precision"><span class="lbl">Précision — caractère accessoire</span>Le cautionnement ne peut excéder la dette garantie ; la caution peut opposer au créancier toutes les exceptions du débiteur principal. À l'inverse, la <b>garantie autonome</b> n'est pas accessoire : le garant paie sans pouvoir différer ni contester (sauf fraude ou collusion manifeste), et n'est pas transmise avec la créance cédée sauf clause contraire.</div>
+
+<h3 id="s7-2">7.2 Garanties réelles</h3>
+<table>
+<thead><tr><th>Sûreté</th><th>Assiette</th><th>Formalisme / opposabilité</th></tr></thead>
+<tbody>
+<tr><td data-label="Sûreté">Gage</td><td data-label="Assiette">Bien mobilier corporel</td><td data-label="Formalisme">Avec ou sans dépossession ; publicité par inscription si sans dépossession</td></tr>
+<tr><td data-label="Sûreté">Nantissement</td><td data-label="Assiette">Bien meuble incorporel (créance, fonds de commerce, parts sociales...)</td><td data-label="Formalisme">Régime variable selon l'objet</td></tr>
+<tr><td data-label="Sûreté">Hypothèque conventionnelle</td><td data-label="Assiette">Immeuble</td><td data-label="Formalisme">Acte notarié (contrat solennel) + publicité foncière</td></tr>
+<tr><td data-label="Sûreté">Privilège</td><td data-label="Assiette">Général (ensemble de biens) ou spécial (bien déterminé)</td><td data-label="Formalisme">Accordé par la loi selon la qualité de la créance</td></tr>
+<tr><td data-label="Sûreté">Fiducie-sûreté</td><td data-label="Assiette">Biens/droits transférés à un fiduciaire (patrimoine d'affectation)</td><td data-label="Formalisme">Réservée à certains fiduciaires : établissements de crédit, sociétés d'investissement, assureurs, avocats</td></tr>
+</tbody>
+</table>
+<div class="box memo"><span class="lbl">Mémo — droit de préférence et droit de suite (hypothèque)</span>Le créancier hypothécaire est payé <b>en priorité</b> (préférence) et peut faire saisir l'immeuble même après aliénation par le débiteur (<b>suite</b>).</div>
+
+<h2 class="banner" id="s8">8. Méthode cas DSCG</h2>
+<div class="cas">
+<p><b>Énoncé</b> — La SA DELTA, au capital divisé en 60 000 actions valorisées 80 € chacune, décide une augmentation de capital par émission de 20 000 actions nouvelles au prix de 65 €. Un actionnaire, Monsieur Roy, détient 1 200 actions et souhaite savoir comment préserver au mieux son patrimoine.</p>
+
+<h4 class="q">Question 1 — Quelle est la valeur théorique du DPS ?</h4>
+<div class="principe"><b>En principe :</b> valeur théorique du DPS = valeur de l'action avant − valeur théorique de l'action après augmentation ; valeur après = (valeur totale avant + montant apporté) / nombre total d'actions après.</div>
+<div class="espece"><b>En l'espèce :</b> valeur avant = 60 000 × 80 = 4 800 000 €. Montant apporté = 20 000 × 65 = 1 300 000 €. Valeur totale après = 6 100 000 €. Nombre d'actions après = 80 000. Valeur théorique après = 6 100 000 / 80 000 = 76,25 €. DPS = 80 − 76,25 = <b>3,75 €</b>.</div>
+<div class="conclusion">Conclusion : chaque action ancienne porte un DPS théorique de 3,75 €.</div>
+
+<h4 class="q">Question 2 — Combien d'actions nouvelles M. Roy peut-il souscrire à titre irréductible ?</h4>
+<div class="principe"><b>En principe :</b> le DPS s'exerce à titre irréductible proportionnellement à la part détenue dans le capital ancien.</div>
+<div class="espece"><b>En l'espèce :</b> M. Roy détient 1 200/60 000 = 2 % du capital. Il a donc droit à 2 % des 20 000 actions nouvelles, soit 400 actions.</div>
+<div class="conclusion">Conclusion : M. Roy peut souscrire 400 actions nouvelles à titre irréductible en exerçant ses 1 200 DPS (ratio 3 DPS anciens pour 1 action nouvelle : 60 000/20 000 = 3).</div>
+
+<h4 class="q">Question 3 — S'il préfère vendre ses DPS sans souscrire, quel montant peut-il en attendre ?</h4>
+<div class="principe"><b>En principe :</b> le DPS est négociable ; sa cession compense la dilution patrimoniale subie par l'actionnaire qui n'exerce pas son droit.</div>
+<div class="espece"><b>En l'espèce :</b> M. Roy détient 1 200 DPS, chacun valorisé théoriquement 3,75 €.</div>
+<div class="conclusion">Conclusion : la cession de ses 1 200 DPS lui rapporterait théoriquement 1 200 × 3,75 = 4 500 €, montant qui compense exactement la perte de valeur de ses 1 200 actions anciennes (1 200 × 3,75 € de dépréciation).</div>
+</div>
+
+<div class="box verif" style="border:1px dashed var(--red); border-radius:8px; padding:10px 14px;">
+<b>Points à vérifier auprès du cours / des textes actualisés :</b>
+<ul>
+<li>Seuil de rachat d'actions propres sur le marché (10 % du capital) et plafond du placement privé (20 % du capital/an) — vérifier leur actualité.</li>
+<li>Modalités précises de l'art. 2300 du Code civil sur la proportionnalité du cautionnement (entrée en vigueur 1<sup>er</sup> janvier 2022) — confirmer le champ d'application exact.</li>
+</ul>
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){
+  document.body.classList.toggle('mobile-force');
+}
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

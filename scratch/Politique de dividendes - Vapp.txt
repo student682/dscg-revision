@@ -1,0 +1,38 @@
+La politique de dividendes
+• Lorsqu'une société réalise des bénéfices, ses actionnaires doivent se prononcer lors de l'assemblée générale annuelle sur l'affectation de ces derniers. 
+Globalement, deux choix s'offrent à eux: 
+mettre en ____________ tout ou partie de ces bénéfices 
+ou les distribuer sous forme de ____________. 
+Le schéma suivant illustre les différentes utilisations possibles lorsque l'on raisonne non plus sur la base du résultat mais du flux de trésorerie pour les actionnaires (FTA) dégagé au cours de l'exercice. Ce FTA correspond au flux de trésorerie disponible, minoré des versements aux créanciers financiers (annuités nettes d'impôt). Il correspond à la trésorerie qui est susceptible de revenir aux actionnaires. 
+• Les affectations possibles des flux de trésorerie disponibles pour les actionnaires
+La politique de dividendes d'une entreprise correspond à la façon dont elle va utiliser son FTA, et notamment à l'arbitrage qu'elle va devoir faire entre conserver cette trésorerie et la distribuer à ses actionnaires. Si elle décide de la distribuer, elle pourra le faire par une distribution de dividendes ou dans le cadre d'un programme de rachat d'actions. 
+La distribution de dividendes est ainsi un moyen pour le dirigeant de ________ ______________________________________________________________________________. Le rachat d'actions, la réduction de capital et le versement d'un dividende exceptionnel sont également des moyens de _________________________________________. 
+L'observation des politiques de dividendes des entreprises montre une très grande diversité des pratiques. Ceci nous amène à nous poser deux questions: 
+- Quels sont les déterminants de la politique de dividendes? 
+- Quel est l'impact de cette politique sur la valeur de l'entreprise et son cours boursier?
+Les dispositions légales en matière de distribution de dividendes 
+Le Code de commerce prévoit que « le bénéfice distribuable est constitué par le __________________, diminué des ________________, ainsi que des sommes à porter en_____________ en application de la loi ou des statuts, et augmenté du _____________ ». Pour bien comprendre ceci, voyons les trois postes des capitaux propres qui sont concernés par une distribution de dividendes: 
+- ___________________________ ; 
+-  ___________________________ ; 
+- ____________________________. 
+Le __________________________ correspond au bénéfice tel qu'il apparaît au compte de résultat. II est donc après _______.
+Le ________________________ correspond aux sommes des exercices antérieurs qui n'ont pas été affectées. 
+Ceci ne concerne que deux situations. La première se produit lorsque la société a fait des pertes. 
+Le résultat de l'exercice déficitaire d'une année apparaît alors l'année suivante en report à nouveau négatif. La seconde situation correspond aux sommes qui n'ont été ni mises en réserves, ni distribuées, généralement pour des raisons d'arrondi de dividendes. 
+Quant aux ____________, il faut distinguer celles qui sont ___________ de celles qui sont __________________. Les réserves _______________ sont dotées de la part du bénéfice distribuable qui n'a pas été distribuée. 
+L'affectation du résultat 
+Résultat de I' exercice N
+- Dotation à la réserve légale
++ RAN de N-l
+- Dotation aux réserves réglementées
+- Dotations aux réserves statuaires
+= Bénéfice distribuable
++ Réserves mises en distribution
+= Montant distribuable
+- Dividendes
+- Dotations aux réserves facultatives
+= RAN de N
+Le dividende peut être composé d'un intérêt statuaire, exprimé en pourcentage de la valeur nominale de l'action, qui doit être versé dès lors que la société fait des bénéfices. Le dividende supplémentaire est appelé superdividende et est exprimé en euros. 
+Pour bien comprendre la politique de dividendes, il faut avoir à l'esprit les différences qui existent entre bénéfice distribuable, réserves et trésorerie. Pour pouvoir distribuer des dividendes, il faut avoir un bénéfice distribuable mais également une __________ disponible. Imaginons une société qui affiche au 31 décembre N un bénéfice de 100 et une trésorerie de 100. En janvier N+1, elle réalise un investissement de 100 par autofinancement. D'un point de vue comptable, la société peut distribuer. Mais d'un point de vue pratique, elle ne dispose pas de la trésorerie nécessaire.
+De même, le fait de disposer de réserves importantes n'implique pas nécessairement d'avoir une trésorerie _________________. Enfin, une société peut dégager beaucoup de trésorerie au cours d'un exercice et ne pas disposer pour autant d'un bénéfice ______________. Cette situation peut, par exemple, se rencontrer lorsque l'entreprise a investi dans le passé et comptabilise donc des _________________________________________. Ces _____________ réduisent le résultat et donc le bénéfice distribuable mais n'ont pas d'incidence en terme de trésorerie (à l'exception de _______________________________ qu'elles permettent). 
+En conclusion, pour pouvoir distribuer des dividendes, i

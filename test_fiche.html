@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Le Contrat de Société et la Personnalité Morale</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+
+/* Toolbar */
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+
+/* Title banner */
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+
+/* TOC */
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+
+/* Section banners */
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+ul{margin:8px 0; padding-left:24px;}
+li{margin-bottom:4px;}
+
+/* Callout boxes */
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+
+/* Flowchart (using styled divs to mimic mermaid) */
+.flowchart {
+  display:flex; flex-direction:column; align-items:center; gap:15px; margin:20px 0;
+  background:#FAFBFC; padding:20px; border:1px solid #e2e2e2; border-radius:8px;
+}
+.fc-node {
+  background:#fff; border:2px solid var(--dblue); border-radius:6px; padding:10px 15px;
+  text-align:center; font-weight:600; font-size:14px; max-width:250px;
+}
+.fc-diamond {
+  background:var(--lgold); border:2px solid var(--gold); border-radius:4px; padding:10px;
+  text-align:center; font-weight:600; font-size:13.5px; transform:rotate(45deg);
+  margin:10px 0; width:120px; height:120px; display:flex; align-items:center; justify-content:center;
+}
+.fc-diamond-inner { transform:rotate(-45deg); }
+.fc-arrow { color:var(--blue); font-size:24px; font-weight:bold; line-height:1; }
+.fc-row { display:flex; gap:30px; align-items:flex-start; width:100%; justify-content:center; }
+.fc-col { display:flex; flex-direction:column; align-items:center; gap:10px; flex:1; max-width:300px; text-align:center; }
+.fc-label { font-size:12px; font-weight:bold; color:var(--grey); background:#fff; padding:2px 6px; border:1px solid #ddd; border-radius:10px; margin:-5px 0; z-index:2;}
+
+/* Decision tree */
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.tree .mode{
+  display:inline-block; margin-left:10px; font-size:12px; font-weight:700;
+  padding:3px 9px; border-radius:12px; vertical-align:middle;
+}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+
+/* Comparison grid */
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+
+/* Footer */
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+article{margin:0;}
+
+/* Responsive */
+@media (max-width:480px){
+  body{font-size:13.5px;}
+  .wrap{padding:0 10px 50px;}
+  .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  .toolbar .chap{font-size:11.5px;}
+  .toolbar button{padding:6px 8px; font-size:11px;}
+  .title-banner h1{font-size:19px;}
+  .title-banner .sub{font-size:12px;}
+  h2.banner{font-size:15px; padding:8px 12px;}
+  h3{font-size:14.5px;}
+  h4{font-size:13.5px;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+  td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  .cmp{grid-template-columns:1fr!important;}
+  .fc-row { flex-direction:column; align-items:center; gap:15px; }
+}
+@media (min-width:481px) and (max-width:900px){
+  .cmp{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:901px){
+  .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);}
+}
+
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force .toolbar{padding:8px 10px;}
+body.mobile-force .toolbar .chap{font-size:11.5px;}
+body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;}
+body.mobile-force .title-banner h1{font-size:19px;}
+body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody,
+body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;}
+body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+body.mobile-force .cmp{grid-template-columns:1fr!important;}
+body.mobile-force .fc-row { flex-direction:column; align-items:center; gap:15px; }
+
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+  body{font-size:11.5px;}
+  h2.banner{break-before:page; break-after:avoid;}
+  h2.banner:first-of-type{break-before:auto;}
+  table, .box, .tree, .cmp-card, .flowchart{break-inside:avoid;}
+  .title-banner{break-after:avoid;}
+  a{color:#000; text-decoration:none;}
+  .toc a{color:#000;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">DSCG — Droit des sociétés</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Le Contrat de Société et la Personnalité Morale</h1>
+  <div class="sub">DCG/DSCG — Droit des sociétés · Constitution et Personnalité juridique</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. Les Conditions de Validité du Contrat de Société</a>
+  <ol><li><a href="#s1-1">1.1 Les Conditions Générales</a></li><li><a href="#s1-2">1.2 Les Conditions Spécifiques</a></li></ol>
+</li>
+<li><a href="#s2">2. La Personnalité Morale de la Société</a>
+  <ol><li><a href="#s2-1">2.1 La période de formation et la reprise des actes</a></li><li><a href="#s2-2">2.2 Les attributs de la Personnalité Morale</a></li><li><a href="#s2-3">2.3 Sanctions et nullités</a></li></ol>
+</li>
+<li><a href="#s3">3. Les Sociétés Sans Personnalité Morale</a></li>
+<li><a href="#s4">4. Synthèse pour le choix de la forme juridique (SARL vs SAS)</a></li>
+</ol>
+</div>
+
+<article>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s1">1. Les Conditions de Validité du Contrat de Société (Art. 1832 C. civ.)</h2>
+
+<h3 id="s1-1">1.1 Les Conditions Générales (Art. 1128 C. civ.)</h3>
+<ul>
+<li><b>Consentement</b> : Doit être exempt de vices (erreur, dol, violence). L'erreur sur la personne (intuitu personae) ou sur la forme de la société est retenue. La simulation (société fictive, prête-nom) est sanctionnée par la nullité (sans rétroactivité).</li>
+<li><b>Capacité</b> :
+    <ul>
+        <li><i>Mineurs</i> : Possible avec représentant légal (SARL/SA), interdiction absolue si la capacité commerciale est requise (SNC).</li>
+        <li><i>Époux</i> : L'apport d'un bien commun nécessite l'<b>information du conjoint</b> (Art. 1832-2) qui peut revendiquer 50% des parts acquises (sauf renonciation définitive). Défaut d'information = nullité de l'apport.</li>
+    </ul>
+</li>
+<li><b>Objet Social</b> : Doit être licite et déterminé. Il délimite la capacité juridique (principe de spécialité) et le pouvoir de représentation des dirigeants à l'égard des tiers.</li>
+</ul>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Époux et apport d'un bien commun</span>
+Le défaut d'information du conjoint lors de l'apport d'un bien commun entraîne la <b>nullité</b> de l'apport, et non de la société entière. Le conjoint a le droit de revendiquer la qualité d'associé pour la moitié des parts, mais il peut aussi y renoncer.
+</div>
+
+<h3 id="s1-2">1.2 Les Conditions Spécifiques au Contrat de Société</h3>
+<ul>
+<li><b>Pluralité d'associés</b> : En principe 2 minimum, sauf exceptions légales (EURL, SASU). En cours de vie sociale, la réunion des parts en une seule main n'entraîne pas la dissolution immédiate (délai de régularisation d'1 an, prorogeable 6 mois).</li>
+<li><b>Les Apports</b> : Forment le capital social (sauf apport en industrie).
+    <ul>
+        <li><i>Numéraire</i> : Argent. Distinction stricte avec les comptes courants d'associés (qui sont des prêts).</li>
+        <li><i>Nature</i> : Biens. S'il y a apport d'un fonds de commerce, la société est caution solidaire du passif (sauf opposition/publicité).</li>
+        <li><i>Industrie</i> : Savoir-faire, travail. Ne concourt pas au capital social mais donne droit aux bénéfices et votes (égal à l'associé qui a le moins apporté, sauf clause contraire).</li>
+    </ul>
+</li>
+<li><b>Participation aux Résultats</b> : Partage des bénéfices et contribution aux pertes. <b>Prohibition des clauses léonines</b> (exonération totale des pertes ou attribution totale des profits réputées non écrites).</li>
+<li><b>Affectio Societatis</b> : Volonté de collaborer de façon effective, sur un pied d'égalité et intéressée. Permet de distinguer la société d'un contrat de travail.</li>
+</ul>
+
+<div class="box memo"><span class="lbl">Rappel DCG — Apports et Commissaire aux Apports (CAA)</span>
+<ul>
+<li><b>SA / SAS</b> : CAA obligatoire pour TOUT apport en nature.</li>
+<li><b>SARL</b> : CAA obligatoire SAUF si décision unanime + chaque apport < 30 000 € + total apports nature < 50% du capital. S'ils écartent le rapport, les associés sont solidairement responsables de la valeur pendant 5 ans.</li>
+<li><b>Libération (Numéraire)</b> : SARL = 20% à la constitution. SA/SAS = 50% à la constitution. Le solde dans les 5 ans.</li>
+</ul>
+</div>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s2">2. La Personnalité Morale de la Société</h2>
+
+<p>La personnalité morale est acquise à compter de l'<b>immatriculation au RCS</b> via le guichet unique électronique.</p>
+
+<h3 id="s2-1">2.1 La période de formation et la reprise des actes</h3>
+<p>Avant immatriculation, la société est en formation. Les fondateurs sont tenus personnellement et solidairement (société commerciale) des actes passés. La société peut reprendre ces engagements <b>avec effet rétroactif</b> par 3 mécanismes :</p>
+<ol>
+<li>Signature des statuts avec l'état des actes en annexe.</li>
+<li>Mandat exprès et déterminé donné à un fondateur avant l'immatriculation.</li>
+<li>Décision expresse à la majorité des associés prise après l'immatriculation.</li>
+</ol>
+
+<div class="flowchart">
+  <div class="fc-node">Acte conclu par un fondateur</div>
+  <div class="fc-arrow">↓</div>
+  <div class="fc-diamond"><div class="fc-diamond-inner">Société<br>immatriculée ?</div></div>
+  <div class="fc-row">
+    <div class="fc-col">
+      <div class="fc-label">Non</div>
+      <div class="fc-arrow">↓</div>
+      <div class="fc-node" style="border-color:var(--red); background:var(--lred);">Le fondateur est responsable personnellement</div>
+    </div>
+    <div class="fc-col">
+      <div class="fc-label">Oui</div>
+      <div class="fc-arrow">↓</div>
+      <div class="fc-diamond"><div class="fc-diamond-inner" style="font-size:11px;">Mécanisme légal<br>de reprise ?</div></div>
+      <div class="fc-row" style="margin-top:10px;">
+        <div class="fc-col">
+            <div class="fc-label">Non</div>
+            <div class="fc-arrow">↓</div>
+            <div class="fc-node" style="border-color:var(--red); background:var(--lred);">Fondateur reste responsable</div>
+        </div>
+        <div class="fc-col">
+            <div class="fc-label">Oui</div>
+            <div class="fc-arrow">↓</div>
+            <div class="fc-node" style="border-color:var(--green); background:var(--lgreen);">La société reprend l'acte rétroactivement. Le fondateur est libéré.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 id="s2-2">2.2 Les attributs de la Personnalité Morale</h3>
+<ul>
+<li><b>Dénomination sociale</b> : Modifiable par décision de l'AGE.</li>
+<li><b>Siège social</b> : Domicile juridique. Détermine la nationalité, la loi applicable et la juridiction. Le <b>siège réel prime</b> sur le siège statutaire pour protéger les tiers.</li>
+<li><b>Patrimoine social</b> : Distinct de celui des associés (gage exclusif des créanciers en responsabilité limitée).</li>
+<li><b>Capacité pénale</b> : Responsabilité pénale (Art. 121-2) pour les infractions commises pour son compte par ses organes.</li>
+</ul>
+
+<h3 id="s2-3">2.3 Sanctions et nullités</h3>
+<p>L'effet de la nullité agit <b>sans rétroactivité</b> pour la sécurité juridique (elle produit les effets d'une dissolution). L'action en régularisation est presque toujours possible.</p>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s3">3. Les Sociétés Sans Personnalité Morale</h2>
+
+<table>
+<caption>Comparatif SEP et SCF</caption>
+<thead><tr><th>Caractéristique</th><th>Société en Participation (SEP)</th><th>Société Créée de Fait (SCF)</th></tr></thead>
+<tbody>
+<tr><td data-label="Origine"><b>Origine</b></td><td data-label="SEP">Volontaire (choix délibéré)</td><td data-label="SCF">Comportementale (les associés s'ignorent juridiquement)</td></tr>
+<tr><td data-label="Immatriculation"><b>Immatriculation</b></td><td data-label="SEP">Non</td><td data-label="SCF">Non</td></tr>
+<tr><td data-label="Preuve"><b>Preuve</b></td><td data-label="SEP">Libre</td><td data-label="SCF">Faisceau d'indices (apports + affectio societatis + partage)</td></tr>
+<tr><td data-label="Responsabilité (Tiers)"><b>Responsabilité</b></td><td data-label="SEP" class="cond">Gérant engagé seul (si occulte). Si révélée : associés solidaires (commerciaux).</td><td data-label="SCF" class="imp">Associés tenus indéfiniment (solidairement si commerciale).</td></tr>
+</tbody>
+</table>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s4">4. Synthèse pour le choix de la forme juridique (SARL vs SAS)</h2>
+
+<div class="box memo"><span class="lbl">Rappel DCG — Quorums et Majorités</span>
+<ul>
+<li><b>SARL (AGO)</b> : Majorité absolue (50% + 1 part) sur 1ère conv. Majorité relative sur 2ème. Pas de quorum.</li>
+<li><b>SARL (AGE)</b> : Quorum 1/4 (1ère) et 1/5 (2ème). Majorité des 2/3 des parts présentes ou représentées.</li>
+<li><b>SAS</b> : <b>Liberté statutaire.</b> La loi n'impose ni quorum ni majorité (sauf rares unanimités légales).</li>
+</ul>
+</div>
+
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>La SARL (Sécurité)</h5>Cadre légal très structuré, protecteur mais rigide. Direction : Gérant obligatoirement personne physique. Transformation ultérieure en SAS lourde (unanimité requise).</div>
+<div class="cmp-card"><h5>La SAS (Souplesse)</h5>Liberté contractuelle optimale (idéal projet évolutif, pacte d'actionnaires). Direction : Président personne physique ou morale. Facilitation des actions de préférence.</div>
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){ document.body.classList.toggle('mobile-force'); }
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree, .flowchart');
+    if (type === 'all') { allBoxes.forEach(b => b.style.display = ''); return; }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

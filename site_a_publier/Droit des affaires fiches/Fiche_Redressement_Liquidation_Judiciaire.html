@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Redressement et Liquidation Judiciaire</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. — Redressement et Liquidation</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Le Redressement et la Liquidation Judiciaire</h1>
+  <div class="sub">DSCG UE 1 — Gestion juridique, fiscale et sociale · Droit des affaires</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. La Cessation des Paiements (Définition et Déclaration)</a></li>
+<li><a href="#s2">2. Le Redressement Judiciaire (Période d'Observation & Plan)</a></li>
+<li><a href="#s3">3. La Liquidation Judiciaire et la Réalisation des Actifs</a></li>
+<li><a href="#s4">4. Le Rétablissement Professionnel (Personnes physiques)</a></li>
+<li><a href="#s5">5. Méthode cas DSCG</a></li>
+</ol>
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. La Cessation des Paiements (Définition et Déclaration)</h2>
+<div class="box memo">
+<span class="lbl">Définition légale (Art. L. 631-1 C. com.)</span>
+L'impossibilité de faire face au <b>passif exigible</b> avec son <b>actif disponible</b>.
+</div>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ (EN CLAIR)</span>
+Être en cessation des paiements (ou "dépôt de bilan"), c'est n'avoir plus assez de trésorerie immédiate (caisse, banque, découverts autorisés) pour payer les factures et dettes dues tout de suite. Le dirigeant a l'obligation légale d'en faire la déclaration au tribunal dans un délai strict de <b>45 jours</b>.
+</div>
+
+<div class="box piege">
+<span class="lbl">Piège d'examen — Actif disponible vs Actif total</span>
+L'actif disponible ne comprend QUE l'argent immédiatement mobilisable (caisse, solde bancaire créditeur, effets à l'escompte). Les stocks, immeubles ou matériel ne sont PAS de l'actif disponible.
+</div>
+
+<h2 class="banner" id="s2">2. Le Redressement Judiciaire (Période d'Observation & Plan)</h2>
+<p>Destiné à permettre la poursuite de l'activité de l'entreprise, le maintien de l'emploi et l'apurement du passif lorsque le redressement est possible.</p>
+
+<div class="tree">
+<span class="root">Déroulement du Redressement Judiciaire</span>
+<div class="branch">
+<div class="cond-item"><b>1. Déclaration sous 45 jours :</b> Par le dirigeant (ou assignation par un créancier).</div>
+<div class="cond-item"><b>2. Jugement d'ouverture :</b> Nomme le Juge-Commissaire, l'Administrateur judiciaire (assistance ou représentation) et le Mandataire judiciaire (représente les créanciers).</div>
+<div class="cond-item"><b>3. Période d'observation (6 mois renouvelable max 18 mois) :</b> Gel des dettes antérieures, poursuite des contrats en cours, bilan économique et social.</div>
+<div class="cond-item"><b>4. Issue de la procédure :</b> Adoption d'un Plan de Redressement (max 10 ans) OU Cession d'entreprise OU Liquidation si échec.</div>
+</div>
+</div>
+
+<h2 class="banner" id="s3">3. La Liquidation Judiciaire et la Réalisation des Actifs</h2>
+<p>Ouverte lorsque l'entreprise est en cessation des paiements et que son redressement est <b>manifestement impossible</b>.</p>
+
+<table>
+<caption>Effets majeurs du Jugement de Liquidation Judiciaire</caption>
+<thead><tr><th>Domaine</th><th>Effet Juridique</th></tr></thead>
+<tbody>
+<tr><td>Dessaisissement du débiteur</td><td>Le dirigeant perd l'administration et la disposition de ses biens. Le **Liquidateur** exerce tous ses droits.</td></tr>
+<tr><td>Licenciements économiques</td><td>Rupture des contrats de travail ordonnée par le liquidateur dans les 15 jours (prise en charge par l'AGS).</td></tr>
+<tr><td>Réalisation des actifs</td><td>Vente de gré à gré ou vente aux enchères des biens immobiliers et mobiliers de l'entreprise.</td></tr>
+<tr><td>Clôture de la procédure</td><td>Pour extinction du passif (rare) ou pour <b>insuffisance d'actif</b> (disparition de la personne morale).</td></tr>
+</tbody>
+</table>
+
+<h2 class="banner" id="s4">4. Le Rétablissement Professionnel (Personnes physiques)</h2>
+<div class="box precision">
+<span class="lbl">Effacement des dettes pour les indépendants</span>
+Réservé aux personnes physiques n'ayant aucun salarié et un actif inférieur à 15 000 €. Permet un effacement des dettes professionnelles sans passer par une liquidation judiciaire lourde.
+</div>
+
+<h2 class="banner" id="s5">5. Méthode cas DSCG</h2>
+<div class="cas">
+<p><b>Énoncé</b> — Monsieur VALLIER, gérant de la SARL BATI-CONSTRUCT, a constaté au 1er mars un passif exigible de 300 000 € (fournisseurs et URSSAF) alors que l'actif disponible en banque s'élève à 40 000 €. Il espère vendre un terrain d'ici 6 mois pour payer les dettes et décide de ne pas déclarer la situation au tribunal.</p>
+
+<h4 class="q">Question 1 — M. VALLIER a-t-il commis une faute et quelles en sont les conséquences ?</h4>
+<div class="principe"><b>En principe :</b> la cessation des paiements est caractérisée lorsque le passif exigible dépasse l'actif disponible. Le dirigeant doit obligatoirement déclarer la cessation des paiements au greffe du tribunal dans un délai de 45 jours au plus tard (Art. L. 631-4). À défaut, il commet une faute de gestion pouvant entraîner une interdiction de gérer ou une faillite personnelle.</div>
+<div class="espece"><b>En l'espèce :</b> le passif exigible (300 000 €) excède largement l'actif disponible (40 000 €). Le terrain n'étant pas immédiatement négociable, il ne compte pas dans l'actif disponible. M. VALLIER est donc en cessation des paiements au 1er mars et devait déposer le bilan au plus tard le 15 avril.</div>
+<div class="conclusion">Conclusion : Le retard de déclaration au-delà de 45 jours constitue une faute sanctionnable par l'interdiction de gérer et peut justifier le prononcé d'une déchéance professionnelle par le tribunal de commerce.</div>
+</div>
+</article>
+
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){ document.body.classList.toggle('mobile-force'); }
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>
+

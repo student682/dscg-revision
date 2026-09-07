@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Droit Pénal des Sociétés Commerciales et des Affaires</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+ul{margin:8px 0; padding-left:24px;}
+li{margin-bottom:4px;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+
+.flowchart {
+  display:flex; flex-direction:column; align-items:center; gap:15px; margin:20px 0;
+  background:#FAFBFC; padding:20px; border:1px solid #e2e2e2; border-radius:8px;
+}
+.fc-node {
+  background:#fff; border:2px solid var(--dblue); border-radius:6px; padding:10px 15px;
+  text-align:center; font-weight:600; font-size:14px; max-width:250px;
+}
+.fc-arrow { color:var(--blue); font-size:24px; font-weight:bold; line-height:1; }
+
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+@media (max-width:480px){
+  body{font-size:13.5px;} .wrap{padding:0 10px 50px;} .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  .toolbar .chap{font-size:11.5px;} .toolbar button{padding:6px 8px; font-size:11px;}
+  table, thead, tbody, th, td, tr{display:block;} thead{display:none;} table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;} td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+}
+body.mobile-force{font-size:13.5px;} body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody, body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;} body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;} body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+@media print{ .toolbar{display:none!important;} @page{size:A4; margin:14mm 12mm;} body{font-size:11.5px;} a{color:#000; text-decoration:none;} }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">DSCG — Droit Pénal</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Droit Pénal des Sociétés Commerciales et des Affaires</h1>
+  <div class="sub">DCG/DSCG — Infractions applicables à la vie des sociétés, dirigeants et CAC</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. Infractions relatives à la constitution</a></li>
+<li><a href="#s2">2. Infractions relatives au fonctionnement</a></li>
+<li><a href="#s3">3. Infractions relatives aux modifications du capital</a></li>
+<li><a href="#s4">4. Le contrôle : infractions liées au CAC</a></li>
+<li><a href="#s5">5. Autres infractions des affaires (Blanchiment, Bourse)</a></li>
+<li><a href="#s6">6. Tableau de synthèse des peines</a></li>
+</ol>
+</div>
+
+<article>
+
+<h2 class="banner" id="s1">1. Infractions relatives à la constitution des sociétés</h2>
+
+<h3 id="s1-1">1.1 Publicité et RCS</h3>
+<ul>
+<li><b>Usage irrégulier de qualité</b> : Faire figurer le nom d'une personne avec sa qualité (gouvernement, magistrat) pour inspirer confiance. (6 mois, 7 500 €).</li>
+<li><b>Défaut d'immatriculation</b> : Pas de sanction pénale directe (injonction de faire sous astreinte par le juge).</li>
+<li><b>Informations inexactes au RCS</b> : 6 mois et 4 500 €. Peine complémentaire : privation droits de vote/éligibilité (5 ans max).</li>
+</ul>
+
+<h3 id="s1-2">1.2 Constitution du capital social</h3>
+<div class="box memo"><span class="lbl">Rappel DCG : Constitution du capital</span>
+<b>SARL</b> : Libération de 20% min. à la constitution.<br>
+<b>SA</b> : 37 000 € min. Libération de 50% min à la constitution.<br>
+Apports en nature : Évaluation CAA obligatoire dans SA, sous conditions en SARL.
+</div>
+
+<ul>
+<li><b>Émission et négociation illicites</b> :
+    <ul>
+        <li><i>SARL</i> : Émission de valeurs mobilières irrégulières (6 mois, 9 000 €).</li>
+        <li><i>SA, SCA, SAS</i> : Négocier actions sans libération légale à la souscription (150 000 €).</li>
+    </ul>
+</li>
+<li><b>Délit de surévaluation des apports en nature</b> : Attribuer <i>frauduleusement</i> (mauvaise foi) une valeur supérieure à la valeur réelle.
+    <ul>
+        <li><i>SARL</i> : 5 ans et 375 000 €.</li>
+        <li><i>SA</i> : 5 ans et 9 000 €.</li>
+    </ul>
+</li>
+</ul>
+
+<h2 class="banner" id="s2">2. Infractions relatives au fonctionnement des sociétés</h2>
+
+<h3 id="s2-1">2.1 Les infractions comptables et financières</h3>
+<p>Délits fondamentaux en DSCG qui sanctionnent les dirigeants (de droit ou de fait) qui présentent une fausse image de l'entreprise.</p>
+<ul>
+<li><b>Délit de présentation ou publication de comptes infidèles</b> : Publier des comptes ne donnant pas une image fidèle pour dissimuler la situation réelle.</li>
+<li><b>Délit de distribution de dividendes fictifs</b> : Répartition en l'absence d'inventaire ou sur base d'un inventaire frauduleux.</li>
+</ul>
+
+<div class="box piege"><span class="lbl">Peines applicables</span>
+Pour ces deux délits majeurs (SARL, SA, SCA, SAS) : la peine est de <b>5 ans d'emprisonnement et 375 000 € d'amende</b>. Prescription de 6 ans.
+</div>
+
+<h3 id="s2-2">2.2 Infractions liées aux assemblées</h3>
+<ul>
+<li><b>Non-établissement des documents annuels</b> : Ne pas dresser l'inventaire, comptes et rapport (9 000 €). Ne pas soumettre à l'AGOA pour une SA (6 mois, 9 000 €).</li>
+<li><b>Entrave à la participation aux assemblées</b> : Empêcher un actionnaire/obligataire de participer, ou payer pour orienter un vote (2 ans, 9 000 €).</li>
+</ul>
+
+<h2 class="banner" id="s3">3. Infractions relatives aux modifications du capital</h2>
+
+<ul>
+<li><b>Augmentation de capital (SA, SCA, SAS)</b> : Émission d'actions sans libération intégrale du capital précédent ou non-libération du quart en numéraire (150 000 €).</li>
+<li><b>Indications inexactes (DPS)</b> : Dirigeants ou CAC justifiant faussement la suppression du Droit Préférentiel de Souscription (2 ans, 18 000 €).</li>
+<li><b>Réduction de capital</b> : Sans respecter l'égalité des actionnaires (30 000 €).</li>
+<li><b>Spécificité SAS</b> : Dirigeant omettant de consulter les associés (selon statuts) pour toute modification structurelle (6 mois, 7 500 €).</li>
+</ul>
+
+<h2 class="banner" id="s4">4. Le contrôle des sociétés : Le CAC</h2>
+
+<div class="box memo"><span class="lbl">Obligation du CAC</span>
+Obligation de <b>moyens</b> dans ses contrôles, mais de <b>résultat</b> concernant l'indépendance, le secret professionnel et la révélation des faits délictueux.
+</div>
+
+<ul>
+<li><b>Entrave au contrôle du CAC</b> : Ne pas le désigner, ne pas le convoquer (2 ans, 30 000 €). Faire obstacle à ses vérifications (5 ans, 75 000 €).</li>
+<li><b>Délits commis par le CAC</b> :
+    <ul>
+        <li>Donner des informations mensongères.</li>
+        <li><b>Non-révélation de faits délictueux au Procureur.</b> (Peine : 5 ans, 75 000 €).</li>
+    </ul>
+</li>
+</ul>
+
+<h2 class="banner" id="s5">5. Autres infractions des affaires</h2>
+
+<h3 id="s5-1">5.1 Le délit de blanchiment</h3>
+<p>Faciliter la justification mensongère de l'origine des biens/revenus tirés d'un délit.</p>
+<div class="flowchart" style="flex-direction:row; justify-content:center; gap:30px;">
+  <div class="fc-node" style="border-color:#ff9999; background:#ffe6e6;">1. Placement</div>
+  <div class="fc-arrow">→</div>
+  <div class="fc-node" style="border-color:#ffcc99; background:#fff2e6;">2. Empilage (Lavage)</div>
+  <div class="fc-arrow">→</div>
+  <div class="fc-node" style="border-color:#99ff99; background:#e6ffe6;">3. Intégration (Essorage)</div>
+</div>
+<ul>
+<li><b>Blanchiment simple</b> : 5 ans et 375 000 €.</li>
+<li><b>Blanchiment aggravé</b> (bande organisée, profession) : 10 ans et 750 000 €.</li>
+</ul>
+
+<h3 id="s5-2">5.2 Le droit pénal boursier</h3>
+<ul>
+<li><b>Délit d'initié</b> : Utiliser ou communiquer une information privilégiée avant qu'elle soit publique.</li>
+<li><b>Manipulation de cours</b> : Fixer le cours à un niveau artificiel.</li>
+<li><i>Peines</i> : 5 ans et <b>100 millions d'euros</b> (ou décuple de l'avantage retiré).</li>
+</ul>
+
+<h2 class="banner" id="s6">6. Tableau de Synthèse des Peines (À connaître)</h2>
+
+<table>
+<thead><tr><th>Infraction</th><th>Auteur(s) visé(s)</th><th>Emprisonnement</th><th>Amende</th></tr></thead>
+<tbody>
+<tr><td data-label="Infraction" class="spec">Défaut d'immatriculation</td><td data-label="Auteurs">Commerçant</td><td data-label="Prison">-</td><td data-label="Amende">Injonction juge</td></tr>
+<tr><td data-label="Infraction" class="imp">Surévaluation apports (SARL)</td><td data-label="Auteurs">Toute pers. / CAA</td><td data-label="Prison">5 ans</td><td data-label="Amende">375 000 €</td></tr>
+<tr><td data-label="Infraction">Surévaluation apports (SA)</td><td data-label="Auteurs">Toute pers. / CAA</td><td data-label="Prison">5 ans</td><td data-label="Amende">9 000 €</td></tr>
+<tr><td data-label="Infraction" class="imp">Comptes annuels infidèles</td><td data-label="Auteurs">Dirigeants</td><td data-label="Prison">5 ans</td><td data-label="Amende">375 000 €</td></tr>
+<tr><td data-label="Infraction" class="imp">Dividendes fictifs</td><td data-label="Auteurs">Dirigeants</td><td data-label="Prison">5 ans</td><td data-label="Amende">375 000 €</td></tr>
+<tr><td data-label="Infraction" class="imp">Blanchiment simple</td><td data-label="Auteurs">Toute personne</td><td data-label="Prison">5 ans</td><td data-label="Amende">375 000 €</td></tr>
+<tr><td data-label="Infraction" class="imp">Non-révélation faits (CAC)</td><td data-label="Auteurs">CAC</td><td data-label="Prison">5 ans</td><td data-label="Amende">75 000 €</td></tr>
+<tr><td data-label="Infraction" class="imp">Délit d'initié</td><td data-label="Auteurs">Initiés</td><td data-label="Prison">5 ans</td><td data-label="Amende">100 M€</td></tr>
+</tbody>
+</table>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = délit majeur · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){ document.body.classList.toggle('mobile-force'); }
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree, .flowchart');
+    if (type === 'all') { allBoxes.forEach(b => b.style.display = ''); return; }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

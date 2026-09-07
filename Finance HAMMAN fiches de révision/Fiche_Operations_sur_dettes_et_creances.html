@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche DSCG UE2 — Opérations sur les dettes et les créances</title>
+<style>
+:root{
+  --blue:#2E75B6; --dblue:#1F4E79; --red:#C00000; --green:#548235; --gold:#BF8F00;
+  --bg:#f4f6f8; --paper:#ffffff; --text:#1c2733;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',Calibri,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+.toolbar{position:sticky;top:0;z-index:100;background:var(--dblue);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;flex-wrap:wrap;gap:8px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+.toolbar h2{margin:0;font-size:1rem;font-weight:600;}
+.toolbar .btns{display:flex;gap:8px;flex-wrap:wrap;}
+.toolbar button{background:var(--blue);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.85rem;}
+.toolbar button:hover{background:#3d8bd4;}
+.titleband{background:var(--dblue);color:#fff;padding:28px 20px 22px;text-align:center;}
+.titleband h1{margin:0 0 6px;font-size:1.6rem;}
+.titleband p{margin:0;opacity:.85;font-size:.95rem;}
+.container{max-width:900px;margin:0 auto;padding:16px;}
+.toc{background:var(--paper);border-radius:10px;padding:16px 20px;margin:18px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.toc h3{margin-top:0;color:var(--dblue);}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:24px;}
+.toc a{color:var(--blue);text-decoration:none;font-size:.92rem;}
+.toc a:hover{text-decoration:underline;}
+section{background:var(--paper);border-radius:10px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+section h2{color:var(--dblue);border-bottom:2px solid var(--blue);padding-bottom:6px;font-size:1.25rem;}
+section h3{color:var(--dblue);font-size:1.05rem;margin-top:20px;}
+.box{border-radius:8px;padding:12px 14px;margin:12px 0;border-left:5px solid;}
+.box p:first-child{margin-top:0;}
+.box p:last-child{margin-bottom:0;}
+.box .label{font-weight:700;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em;display:block;margin-bottom:6px;}
+.piege{background:#fdecea;border-color:var(--red);}
+.piege .label{color:var(--red);}
+.memo{background:#fef9e7;border-color:var(--gold);}
+.memo .label{color:var(--gold);}
+.reflexe{background:#eaf3ea;border-color:var(--green);}
+.reflexe .label{color:var(--green);}
+.precision{background:#eaf1fb;border-color:var(--blue);}
+.precision .label{color:var(--blue);}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.87rem;}
+th,td{border:1px solid #d7dde3;padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:var(--dblue);color:#fff;}
+td.exo{background:#eaf3ea;} td.imp{background:#fdecea;} td.cond{background:#fef9e7;} td.spec{background:#eaf1fb;}
+.formula{font-family:'Cambria Math',Georgia,serif;font-size:1.02rem;text-align:center;padding:10px;background:#fffdf6;border:1px dashed var(--gold);border-radius:6px;margin:10px 0;}
+.legend{font-size:.88rem;background:#fbfaf5;border-left:3px solid var(--gold);padding:6px 10px;margin:6px 0 10px;}
+.etape{border-left:4px solid var(--blue);padding:8px 12px;margin:10px 0;background:#f7fafd;}
+.etape .num{display:inline-block;background:var(--blue);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-right:8px;}
+.tree{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+.branch{border:1px solid var(--blue);border-radius:8px;padding:10px 12px;background:#f7fafd;}
+.branch .cond-item{font-weight:600;color:var(--dblue);}
+.branch .result{margin-top:4px;color:var(--text);}
+footer{text-align:center;padding:24px;color:#8a97a3;font-size:.8rem;}
+@media print{
+  .toolbar{display:none;}
+  section{box-shadow:none;break-inside:avoid;}
+  body{background:#fff;}
+}
+@media (max-width:600px){
+  .toc ol{columns:1;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  tr{margin-bottom:10px;border:1px solid #d7dde3;border-radius:6px;overflow:hidden;}
+  td{border:none;border-bottom:1px solid #eef1f4;position:relative;padding-left:46%;}
+  td::before{content:attr(data-label);position:absolute;left:10px;top:8px;font-weight:700;color:var(--dblue);white-space:nowrap;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h2>Opérations sur dettes et créances</h2>
+  <div class="btns">
+    <button onclick="window.print()">⬇ Exporter en PDF</button>
+    <button onclick="document.body.classList.toggle('mobile-force')">📱 Format mobile</button>
+  </div>
+</div>
+
+<div class="titleband">
+  <h1>Les opérations sur les dettes et les créances</h1>
+  <p>DSCG UE 2 — Finance · Chapitre M. Hamman (Module 4 — Ingénierie financière)</p>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <h3>Sommaire</h3>
+  <ol>
+    <li><a href="#s1">La titrisation : principe et acteurs</a></li>
+    <li><a href="#s2">Structuration financière : tranching et cascade des paiements</a></li>
+    <li><a href="#s3">Rehaussement de crédit</a></li>
+    <li><a href="#s4">Titrisation classique vs synthétique</a></li>
+    <li><a href="#s5">La notation financière (rating)</a></li>
+    <li><a href="#s6">Limites des agences de notation</a></li>
+    <li><a href="#s7">La défaisance (defeasance)</a></li>
+    <li><a href="#s8">Méthode cas pratique DSCG</a></li>
+  </ol>
+</div>
+
+<section id="s1">
+<h2>1. La titrisation : principe et acteurs</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<p><strong>En clair :</strong> la titrisation transforme des actifs peu liquides (crédits, créances) en valeurs mobilières négociables (obligations), en les cédant à une entité ad hoc qui émet des titres adossés à leurs flux futurs. En France, cette entité s'appelle le <strong>Fonds Commun de Titrisation (FCT)</strong> (Special Purpose Vehicle / SPV à l'international).</p>
+<p><strong>Terminologie ABS</strong> (Asset Backed Securities) : terme générique. Selon le sous-jacent : <strong>CDO</strong> (créances bancaires diverses), <strong>CBO</strong> (obligations), <strong>CLO</strong> (prêts commerciaux), <strong>MBS</strong> (crédits hypothécaires).</p>
+</div>
+<table>
+<thead><tr><th>Acteur</th><th>Rôle</th></tr></thead>
+<tbody>
+<tr><td data-label="Acteur" class="spec">Société gestionnaire du FCT</td><td data-label="Rôle">Administre le fonds, suit l'émission et le placement des parts</td></tr>
+<tr><td data-label="Acteur" class="spec">Société dépositaire</td><td data-label="Rôle">Dépositaire des créances et de la trésorerie ; établissement de crédit</td></tr>
+<tr><td data-label="Acteur" class="spec">FCT</td><td data-label="Rôle">Acquiert les créances, émet les parts/titres de créance, peut recourir à l'emprunt</td></tr>
+</tbody>
+</table>
+<div class="box piege">
+<span class="label">Piège historique</span>
+<p>La titrisation, initialement conçue pour permettre aux banques de consentir <strong>davantage</strong> de crédits (contrainte réglementaire de ressources propres), a été détournée dans les années 2000 pour se débarrasser des <strong>mauvais risques</strong> (subprimes) — c'est cette dérive, combinée à la mauvaise qualité des créances titrisées et à la défaillance des agences de notation, qui est à l'origine de la crise de 2008.</p>
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Structuration financière : tranching et cascade des paiements</h2>
+<table>
+<thead><tr><th>Structure</th><th>Mécanisme</th></tr></thead>
+<tbody>
+<tr><td data-label="Structure" class="spec">Pass-through</td><td data-label="Mécanisme">Transfert direct et proportionnel des flux des créances, sans transformation</td></tr>
+<tr><td data-label="Structure" class="spec">Pay-through</td><td data-label="Mécanisme">Remboursement indépendant des échéances des créances sous-jacentes ; permet plusieurs catégories de titres (taux, maturité différents) — structure la plus utilisée</td></tr>
+</tbody>
+</table>
+
+<div class="box memo">
+<span class="label">Formule et théorie — la subordination (credit tranching)</span>
+<p><strong>En clair :</strong> les titres émis sont hiérarchisés en tranches, ce qui détermine l'ordre d'absorption des pertes <strong>en cas de défaut</strong> (cascade des paiements, dite « waterfall »).</p>
+</div>
+<table>
+<thead><tr><th>Tranche</th><th>Rendement / risque</th><th>Ordre d'absorption des pertes</th></tr></thead>
+<tbody>
+<tr><td data-label="Tranche" class="exo">Senior (souvent notée AAA)</td><td data-label="Rendement">Faible rendement, très faible exposition</td><td data-label="Ordre">Servie en dernier (pertes)</td></tr>
+<tr><td data-label="Tranche" class="cond">Mezzanine (BBB à AAA)</td><td data-label="Rendement">Rendement et risque intermédiaires</td><td data-label="Ordre">Deuxième absorption</td></tr>
+<tr><td data-label="Tranche" class="imp">Equity (généralement non notée)</td><td data-label="Rendement">Forte rentabilité, risque maximal</td><td data-label="Ordre">Absorbe les pertes en premier</td></tr>
+</tbody>
+</table>
+<div class="box piege">
+<span class="label">Piège de confusion</span>
+<p>Ordre de <strong>versement des flux</strong> (waterfall, priorité aux seniors) ≠ ordre d'<strong>absorption des pertes</strong> (priorité inverse : la tranche equity absorbe en premier). Les deux logiques coexistent et sont symétriques.</p>
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Rehaussement de crédit</h2>
+<table>
+<thead><tr><th>Technique interne</th><th>Principe</th></tr></thead>
+<tbody>
+<tr><td data-label="Technique" class="spec">Subordination</td><td data-label="Principe">Hiérarchisation des tranches (cf. section 2)</td></tr>
+<tr><td data-label="Technique" class="spec">Marge d'intérêt excédentaire (Excess Spread)</td><td data-label="Principe">Écart entre le taux moyen des créances titrisées et le coût moyen des titres émis</td></tr>
+<tr><td data-label="Technique" class="spec">Surdimensionnement</td><td data-label="Principe">Actifs titrisés d'un montant supérieur aux titres émis (marge de sécurité)</td></tr>
+<tr><td data-label="Technique" class="spec">Réserve de liquidités (Cash Deposit)</td><td data-label="Principe">Le cédant dépose des liquidités dans le FCT, réinvesties en actifs sûrs immédiatement mobilisables</td></tr>
+</tbody>
+</table>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p>Le rehaussement de crédit externe passe par des établissements spécialisés (<strong>Credit Enhancers</strong>). L'objectif global du rehaussement — interne ou externe — est d'obtenir la meilleure notation possible pour chaque tranche, en réduisant l'exposition perçue au risque de défaut du portefeuille sous-jacent.</p>
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Titrisation classique vs synthétique</h2>
+<table>
+<thead><tr><th>Type</th><th>Principe</th></tr></thead>
+<tbody>
+<tr><td data-label="Type" class="spec">Titrisation classique (cash flow)</td><td data-label="Principe">Les actifs générateurs de flux sont <strong>cédés</strong> juridiquement au véhicule de titrisation</td></tr>
+<tr><td data-label="Type" class="spec">Titrisation synthétique</td><td data-label="Principe">Les actifs restent la propriété juridique de l'initiateur ; seul le <strong>risque de crédit</strong> est transféré via des dérivés de crédit (CDS)</td></tr>
+</tbody>
+</table>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p>Dans un CDS, le vendeur de protection s'engage à indemniser l'acheteur en cas d'événement de crédit (défaut), en échange d'une prime périodique. La titrisation synthétique évite la cession effective des actifs (utile pour des créances non cessibles contractuellement) et réduit les coûts de gestion — mais complexifie l'analyse du risque réel porté par chaque intervenant.</p>
+</div>
+</section>
+
+<section id="s5">
+<h2>5. La notation financière (rating)</h2>
+<div class="box piege">
+<span class="label">Piège de confusion — score ≠ notation</span>
+<p>Le <strong>score</strong> est un indicateur statistique automatisé, utilisé par les PME/ETI pour évaluer un client ou fournisseur. La <strong>notation financière (rating)</strong> résulte d'une analyse humaine combinant données quantitatives et qualitatives, produite par une agence de notation (S&amp;P, Moody's, Fitch — les « Big 3 », créées respectivement en 1868, 1908, 1913).</p>
+</div>
+
+<div class="box memo">
+<span class="label">Formule et théorie — échelle de notation</span>
+<table>
+<thead><tr><th>Catégorie</th><th>Notes</th><th>Interprétation</th></tr></thead>
+<tbody>
+<tr><td data-label="Catégorie" class="exo">Investment grade</td><td data-label="Notes">AAA à A</td><td data-label="Interprétation">Investissements sécurisés</td></tr>
+<tr><td data-label="Catégorie" class="cond">Spéculatif</td><td data-label="Notes">BBB à B</td><td data-label="Interprétation">Risque significatif</td></tr>
+<tr><td data-label="Catégorie" class="imp">Risque de défaut</td><td data-label="Notes">CCC à C</td><td data-label="Interprétation">Entreprise en risque de défaut</td></tr>
+<tr><td data-label="Catégorie" class="imp">Faillite</td><td data-label="Notes">DDD à D</td><td data-label="Interprétation">Situation de faillite</td></tr>
+</tbody>
+</table>
+<p>Un émetteur noté AAA affiche un risque de faillite d'environ <strong>0,05 %</strong>. Un investissement est jugé « spéculatif » (junk bond) dès lors que la note est BB ou inférieure.</p>
+</div>
+
+<div class="box reflexe">
+<span class="label">Interprétation financière — impact de la notation</span>
+<p>La différence de taux d'intérêt entre un émetteur noté AAA et un émetteur moins bien noté constitue la <strong>prime de risque</strong>. Une dégradation de note est presque systématiquement suivie d'une baisse du cours du titre visé et d'une hausse du coût de financement futur.</p>
+</div>
+</section>
+
+<section id="s6">
+<h2>6. Limites des agences de notation</h2>
+<div class="box piege">
+<span class="label">Piège d'examen — conflits d'intérêts</span>
+<p>Depuis les années 1970-80, ce sont les <strong>émetteurs eux-mêmes</strong> qui rémunèrent les agences pour être notés (et non plus les investisseurs), créant une dépendance financière. Autre conflit : les agences mêlent activités de <strong>conseil</strong> (sur des opérations en cours de montage) et de <strong>notation</strong> — elles participent à la construction du produit qu'elles évaluent ensuite.</p>
+</div>
+<div class="box reflexe">
+<span class="label">Interprétation financière — exemples historiques de défaillance</span>
+<p>Les agences n'ont anticipé aucune crise majeure : Vivendi Universal a fait faillite deux semaines après avoir été noté AAA ; lors de la bulle Internet, 90 % des notes attribuées incitaient à l'achat malgré un endettement considérable (WorldCom : 29,3 Md$) ; la dégradation de la Grèce (2010) est intervenue plus de 3 mois après la reconnaissance du problème par les États de la zone euro.</p>
+</div>
+</section>
+
+<section id="s7">
+<h2>7. La défaisance (defeasance)</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<p><strong>En clair :</strong> la défaisance est un élargissement de la titrisation : l'emprunteur cède <strong>simultanément</strong> une dette et un portefeuille d'actifs sans risque à une entité ad hoc indépendante, de façon <strong>irrévocable</strong>. Comptablement, titres et dettes sortent du bilan à une valeur inférieure à leur valeur comptable ; l'écart passe en une seule fois au compte de résultat.</p>
+</div>
+<table>
+<thead><tr><th>Type de défaisance</th><th>Élément concerné</th></tr></thead>
+<tbody>
+<tr><td data-label="Type" class="spec">In substance defeasance</td><td data-label="Élément">Passif du bilan (« désendettement de fait »)</td></tr>
+<tr><td data-label="Type" class="spec">Cantonnement</td><td data-label="Élément">Actif du bilan (actifs compromis)</td></tr>
+</tbody>
+</table>
+<div class="box reflexe">
+<span class="label">Interprétation financière — pourquoi utiliser la défaisance ?</span>
+<p>Économiquement équivalente à un remboursement anticipé, elle permet de contourner : l'absence de clause de remboursement anticipé, le coût élevé d'une telle clause, la lenteur/incertitude d'un rachat de dette sur le marché. Elle améliore les ratios de bilan (donc potentiellement le rating), assainit le bilan, et optimise le coût des ressources par rapport à leur maturité.</p>
+</div>
+<div class="box precision">
+<span class="label">Cas pratique historique — le cantonnement du Crédit Lyonnais</span>
+<p>Après la quasi-faillite de 1993, le <strong>Consortium de Réalisation (COR)</strong>, structure ad hoc, a repris 28,3 Md€ d'actifs compromis, séparant la partie saine (conservée par le Crédit Lyonnais) de la partie compromise (cédée à l'État via l'EPFR). C'est l'exemple de référence du cantonnement d'actifs en France.</p>
+</div>
+</section>
+
+<section id="s8">
+<h2>8. Méthode cas pratique DSCG</h2>
+<div class="box precision">
+<p><strong>Énoncé type :</strong> une banque BETA détient un portefeuille de créances hypothécaires de 500 M€ générant un taux moyen pondéré de 4,2 %. Elle envisage de le titriser en émettant des titres à un coût moyen pondéré de 3,1 %, structurés en 3 tranches : senior (80 %, AAA), mezzanine (15 %, BBB) et equity (5 %, non notée).</p>
+<div class="etape"><span class="num">1</span><strong>Justification théorique :</strong> la titrisation permet à BETA de sortir les créances de son bilan, de libérer des fonds propres réglementaires et de dégager une marge d'intérêt excédentaire.</div>
+<div class="etape"><span class="num">2</span><strong>Calcul détaillé :</strong> Excess Spread = 4,2 % − 3,1 % = <strong>1,1 point</strong>, appliqué sur 500 M€ = 5,5 M€ de marge brute annuelle avant frais de structuration. En cas de choc de défaut affectant 6 % du portefeuille (30 M€ de pertes), la tranche equity (25 M€) est intégralement absorbée en premier, puis 5 M€ viennent entamer la tranche mezzanine (75 M€), qui reste largement solvable ; la tranche senior (400 M€) n'est pas affectée.</div>
+<div class="etape"><span class="num">3</span><strong>Recommandation managériale :</strong> le niveau de subordination (5 % equity + 15 % mezzanine = 20 % de coussin) semble suffisant pour protéger la tranche senior d'un choc modéré ; recommander néanmoins un stress-test à un taux de défaut plus sévère (proche de la crise des subprimes) avant validation, et vérifier l'indépendance de l'agence de notation retenue pour éviter tout conflit d'intérêts.</div>
+</div>
+</section>
+
+</div>
+<footer>Fiche DSCG UE 2 — Finance · M. Hamman · Généré à partir du cours source « Opérations sur les dettes et les créances — Vform »</footer>
+</body>
+</html>

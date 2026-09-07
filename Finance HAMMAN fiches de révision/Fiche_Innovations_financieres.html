@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche DSCG UE2 — Les innovations financières</title>
+<style>
+:root{
+  --blue:#2E75B6; --dblue:#1F4E79; --red:#C00000; --green:#548235; --gold:#BF8F00;
+  --bg:#f4f6f8; --paper:#ffffff; --text:#1c2733;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',Calibri,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+.toolbar{position:sticky;top:0;z-index:100;background:var(--dblue);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;flex-wrap:wrap;gap:8px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+.toolbar h2{margin:0;font-size:1rem;font-weight:600;}
+.toolbar .btns{display:flex;gap:8px;flex-wrap:wrap;}
+.toolbar button{background:var(--blue);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.85rem;}
+.toolbar button:hover{background:#3d8bd4;}
+.titleband{background:var(--dblue);color:#fff;padding:28px 20px 22px;text-align:center;}
+.titleband h1{margin:0 0 6px;font-size:1.6rem;}
+.titleband p{margin:0;opacity:.85;font-size:.95rem;}
+.container{max-width:900px;margin:0 auto;padding:16px;}
+.toc{background:var(--paper);border-radius:10px;padding:16px 20px;margin:18px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.toc h3{margin-top:0;color:var(--dblue);}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:24px;}
+.toc a{color:var(--blue);text-decoration:none;font-size:.92rem;}
+.toc a:hover{text-decoration:underline;}
+section{background:var(--paper);border-radius:10px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+section h2{color:var(--dblue);border-bottom:2px solid var(--blue);padding-bottom:6px;font-size:1.25rem;}
+section h3{color:var(--dblue);font-size:1.05rem;margin-top:20px;}
+.box{border-radius:8px;padding:12px 14px;margin:12px 0;border-left:5px solid;}
+.box p:first-child{margin-top:0;}
+.box p:last-child{margin-bottom:0;}
+.box .label{font-weight:700;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em;display:block;margin-bottom:6px;}
+.piege{background:#fdecea;border-color:var(--red);}
+.piege .label{color:var(--red);}
+.memo{background:#fef9e7;border-color:var(--gold);}
+.memo .label{color:var(--gold);}
+.reflexe{background:#eaf3ea;border-color:var(--green);}
+.reflexe .label{color:var(--green);}
+.precision{background:#eaf1fb;border-color:var(--blue);}
+.precision .label{color:var(--blue);}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.87rem;}
+th,td{border:1px solid #d7dde3;padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:var(--dblue);color:#fff;}
+td.exo{background:#eaf3ea;} td.imp{background:#fdecea;} td.cond{background:#fef9e7;} td.spec{background:#eaf1fb;}
+.formula{font-family:'Cambria Math',Georgia,serif;font-size:1.02rem;text-align:center;padding:10px;background:#fffdf6;border:1px dashed var(--gold);border-radius:6px;margin:10px 0;}
+.legend{font-size:.88rem;background:#fbfaf5;border-left:3px solid var(--gold);padding:6px 10px;margin:6px 0 10px;}
+.etape{border-left:4px solid var(--blue);padding:8px 12px;margin:10px 0;background:#f7fafd;}
+.etape .num{display:inline-block;background:var(--blue);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-right:8px;}
+.tree{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+.branch{border:1px solid var(--blue);border-radius:8px;padding:10px 12px;background:#f7fafd;}
+.branch .cond-item{font-weight:600;color:var(--dblue);}
+.branch .result{margin-top:4px;color:var(--text);}
+footer{text-align:center;padding:24px;color:#8a97a3;font-size:.8rem;}
+@media print{
+  .toolbar{display:none;}
+  section{box-shadow:none;break-inside:avoid;}
+  body{background:#fff;}
+}
+@media (max-width:600px){
+  .toc ol{columns:1;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  tr{margin-bottom:10px;border:1px solid #d7dde3;border-radius:6px;overflow:hidden;}
+  td{border:none;border-bottom:1px solid #eef1f4;position:relative;padding-left:46%;}
+  td::before{content:attr(data-label);position:absolute;left:10px;top:8px;font-weight:700;color:var(--dblue);white-space:nowrap;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h2>Les innovations financières</h2>
+  <div class="btns">
+    <button onclick="window.print()">⬇ Exporter en PDF</button>
+    <button onclick="document.body.classList.toggle('mobile-force')">📱 Format mobile</button>
+  </div>
+</div>
+
+<div class="titleband">
+  <h1>Les innovations financières</h1>
+  <p>DSCG UE 2 — Finance · Chapitre M. Hamman (Module 4 — Ingénierie financière)</p>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <h3>Sommaire</h3>
+  <ol>
+    <li><a href="#s1">Le crowdfunding : typologie</a></li>
+    <li><a href="#s2">Cadre réglementaire du financement participatif</a></li>
+    <li><a href="#s3">Les fintechs</a></li>
+    <li><a href="#s4">La blockchain : mécanisme et types</a></li>
+    <li><a href="#s5">Les cryptoactifs</a></li>
+    <li><a href="#s6">Les ICO (Initial Coin Offering)</a></li>
+    <li><a href="#s7">Digitalisation, Big Data et IA en finance</a></li>
+    <li><a href="#s8">Méthode cas pratique DSCG</a></li>
+  </ol>
+</div>
+
+<section id="s1">
+<h2>1. Le crowdfunding : typologie</h2>
+<div class="box memo">
+<span class="label">Formule et théorie — 4 types de crowdfunding (Bessière et Stéphany, 2017)</span>
+<table>
+<thead><tr><th>Type</th><th>Principe</th></tr></thead>
+<tbody>
+<tr><td data-label="Type" class="spec">Don simple (Donation)</td><td data-label="Principe">Avec ou sans contrepartie</td></tr>
+<tr><td data-label="Type" class="spec">Don contre récompense (Reward-Based)</td><td data-label="Principe">Contrepartie en nature/service</td></tr>
+<tr><td data-label="Type" class="spec">Prêt (CrowdLending)</td><td data-label="Principe">Avec ou sans intérêt</td></tr>
+<tr><td data-label="Type" class="spec">Investissement (Crowdinvesting)</td><td data-label="Principe">Titres financiers, notamment fonds propres (Equity Crowdfunding)</td></tr>
+</tbody>
+</table>
+</div>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p>Le crowdfunding reste un mode de financement <strong>complémentaire</strong> aux circuits classiques (banques, marchés, private equity) — il ne s'y substitue pas. Il répond notamment à l'amorçage de jeunes entreprises innovantes, aux besoins encore mal couverts (investissements immatériels), et aux projets à but non lucratif (associations, collectivités).</p>
+</div>
+<table>
+<thead><tr><th>Avantages</th><th>Inconvénients</th></tr></thead>
+<tbody>
+<tr><td data-label="Avantages" class="exo">Rapidité d'accès, effet marketing, désintermédiation, test de marché du projet</td><td data-label="Inconvénients" class="imp">Risque de plagiat, gestion lourde de la communauté, coûts non négligeables, pression court-termiste de la « foule »</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="s2">
+<h2>2. Cadre réglementaire du financement participatif</h2>
+<div class="box memo">
+<span class="label">Formule et théorie — les deux statuts créés en 2014</span>
+<p>Cadre légal : ordonnance n° 2014-559 du 30 mai 2014 et décret n° 2014-1053 (révisé en 2016).</p>
+</div>
+<table>
+<thead><tr><th>Statut</th><th>Activité</th><th>Autorité de contrôle</th></tr></thead>
+<tbody>
+<tr><td data-label="Statut" class="spec">IFP (Intermédiaire en Financement Participatif)</td><td data-label="Activité">Plateformes de prêts</td><td data-label="Autorité">ACPR</td></tr>
+<tr><td data-label="Statut" class="spec">CIP (Conseiller en Investissement Participatif)</td><td data-label="Activité">Plateformes en capital — ne peut détenir ni fonds ni titres des clients</td><td data-label="Autorité">AMF</td></tr>
+</tbody>
+</table>
+<div class="box precision">
+<span class="label">Plafonds réglementaires à retenir</span>
+<p>Fin du monopole bancaire en matière de prêts (ordonnance de 2014) : prêt <strong>rémunéré</strong> ≤ 2 000 € par prêteur et par projet, sur 7 ans maximum ; prêt <strong>sans intérêt</strong> ≤ 5 000 € par prêteur et par projet ; emprunt ≤ <strong>2,5 M€</strong> par projet et par porteur. Les CIP peuvent proposer, sans visa AMF, des titres jusqu'à <strong>2,5 M€</strong> (actions, obligations à taux fixe/convertibles, mini-bons).</p>
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Les fintechs</h2>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p><strong>En clair :</strong> contraction de « finance » et « technology », les fintechs déploient la technologie dans les activités financières pour contourner ou moderniser les circuits traditionnels (B2B ou B2C). Le crowdfunding en est l'une des applications les plus visibles. Le secteur se segmente désormais en sous-verticales spécialisées : <strong>Insurtech</strong> (assurance), <strong>Regtech</strong> (conformité réglementaire).</p>
+</div>
+</section>
+
+<section id="s4">
+<h2>4. La blockchain : mécanisme et types</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<p><strong>En clair :</strong> la blockchain est un registre permanent, infalsifiable, distribué et historicisé qui établit la confiance entre agents <strong>sans tiers intermédiaire</strong>. Popularisée par le bitcoin (Satoshi Nakamoto, 2009), son objectif central est la <strong>désintermédiation</strong>.</p>
+</div>
+<table>
+<thead><tr><th>Type de blockchain</th><th>Caractéristique</th></tr></thead>
+<tbody>
+<tr><td data-label="Type" class="spec">Publique</td><td data-label="Caractéristique">Accès libre, aucun intermédiaire officiel, validation par la communauté (récompensée)</td></tr>
+<tr><td data-label="Type" class="spec">Privée</td><td data-label="Caractéristique">Appartient à un propriétaire qui fixe les droits de lecture/écriture</td></tr>
+<tr><td data-label="Type" class="spec">Hybride (consortium)</td><td data-label="Caractéristique">Approbation contrôlée par des nœuds prédéterminés, lecture publique ou restreinte</td></tr>
+</tbody>
+</table>
+
+<div class="box memo">
+<span class="label">Formule et théorie — les trois phases de validation</span>
+<div class="tree">
+<div class="branch"><span class="cond-item">1. Preuve de travail (Proof of Work)</span><div class="result">Les mineurs résolvent des algorithmes pour valider les transactions regroupées en blocs</div></div>
+<div class="branch"><span class="cond-item">2. Validation par consensus</span><div class="result">La transaction est validée quand la majorité des mineurs l'approuve ; empreinte numérique via hash cryptographique SHA-256</div></div>
+<div class="branch"><span class="cond-item">3. Création du bloc</span><div class="result">Un nouveau bloc est créé et lié aux précédents ; la chaîne devient consultable publiquement</div></div>
+</div>
+</div>
+
+<div class="box piege">
+<span class="label">Piège de vocabulaire</span>
+<p>Ne pas confondre <strong>mineurs</strong> (rémunérés en cryptomonnaie, en compétition pour créer des blocs) et <strong>nœuds</strong> (stockent une copie de la blockchain, contrôlent les transactions, mais <strong>ne sont pas rémunérés</strong>).</p>
+</div>
+</section>
+
+<section id="s5">
+<h2>5. Les cryptoactifs</h2>
+<div class="box piege">
+<span class="label">Piège de terminologie officielle</span>
+<p>Selon la Banque de France, le terme « monnaie » est à éviter car ces instruments remplissent <strong>très imparfaitement</strong> les fonctions de la monnaie légale. La loi PACTE (11 avril 2019) retient le terme officiel d'« <strong>actifs numériques</strong> » ; Tracfin utilise « cryptoactif ». « Cryptomonnaie » reste un usage courant mais impropre.</p>
+</div>
+<div class="box memo">
+<span class="label">Formule et théorie — une transaction en bitcoin</span>
+<p>Trois informations nécessaires : l'<strong>origine</strong> (adresse Bitcoin de l'émetteur), le <strong>montant</strong> (nombre de bitcoins), la <strong>destination</strong> (adresse du destinataire).</p>
+</div>
+<table>
+<thead><tr><th>Forces</th><th>Faiblesses</th></tr></thead>
+<tbody>
+<tr><td data-label="Forces" class="exo">Traçabilité, paiement irréversible, décentralisation, sécurité cryptographique</td><td data-label="Faiblesses" class="imp">Absence d'actif sous-jacent, forte volatilité, concentration des pools de minage, statut juridique encore mal défini, risque de blanchiment</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="s6">
+<h2>6. Les ICO (Initial Coin Offering)</h2>
+<div class="box memo">
+<span class="label">Formule et théorie (définition AMF, 2017)</span>
+<p><strong>En clair :</strong> une ICO est une levée de fonds via émission de <strong>tokens</strong> (jetons numériques), réalisée sur une technologie de registre distribué (DLT), en principe sans intermédiaire financier. Contrairement à une action (IPO), un token ne représente <strong>pas une part de l'entreprise</strong> : c'est un pré-achat du produit ou service à venir.</p>
+</div>
+<div class="box piege">
+<span class="label">Piège de confusion — IPO vs ICO</span>
+<p>Exemple pédagogique du cours : une IPO sur Air France reviendrait à acheter des <strong>actions</strong> Air France (droits sur l'entreprise). Une ICO reviendrait à <strong>pré-acheter des Miles</strong> (droit d'usage futur d'un service, sans droit de propriété sur l'entreprise).</p>
+</div>
+<table>
+<thead><tr><th>Type de token (position AMF, 2018)</th><th>Nature</th></tr></thead>
+<tbody>
+<tr><td data-label="Type" class="spec">Equity Token</td><td data-label="Nature">Ressemble à un instrument financier</td></tr>
+<tr><td data-label="Type" class="spec">Utility Token</td><td data-label="Nature">Ressemble à un service ou un bien</td></tr>
+</tbody>
+</table>
+<div class="box precision">
+<span class="label">Cadre réglementaire</span>
+<p>Les tokens ne sont <strong>pas</strong> des instruments financiers au sens juridique classique ; les ICO ne sont <strong>pas</strong> des placements collectifs. Les statuts CIP/PSI ne sont pas adaptés. L'AMF a proposé un visa optionnel (« Option 38 »). Le décret n° 2018-1226 du 24 décembre 2018 reconnaît juridiquement l'usage de la blockchain pour l'inscription de certains titres et mini-bons.</p>
+</div>
+<table>
+<thead><tr><th>Avantages</th><th>Inconvénients</th></tr></thead>
+<tbody>
+<tr><td data-label="Avantages" class="exo">Rapidité de levée de fonds, notoriété rapide, désintermédiation, transparence des ventes</td><td data-label="Inconvénients" class="imp">Risque de fraude, absence de réglementation contraignante, non-réalisation du projet, inconvertibilité possible des tokens</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="s7">
+<h2>7. Digitalisation, Big Data et IA en finance</h2>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p>La digitalisation transforme les métiers de la finance : disparition progressive de certains métiers (traders remplacés par des programmeurs depuis 10 ans), émergence de néobanques (Orange Bank, Go Bank) posant la question de l'« ubérisation » de la finance. Le Big Data et l'IA bouleversent également le travail des banques, cabinets d'audit et directions financières — un enjeu qui dépasse le seul cadre financier.</p>
+</div>
+</section>
+
+<section id="s8">
+<h2>8. Méthode cas pratique DSCG</h2>
+<div class="box precision">
+<p><strong>Énoncé type :</strong> une startup souhaite lever 800 000 € pour développer une plateforme de stockage décentralisé. Elle hésite entre une levée en equity crowdfunding classique via une plateforme CIP, et une ICO émettant des tokens utilitaires (utility tokens) donnant accès au service futur.</p>
+<div class="etape"><span class="num">1</span><strong>Justification théorique :</strong> comparer la nature juridique des deux instruments — l'equity crowdfunding donne des titres de capital (droits sur l'entreprise, encadrement CIP/AMF, plafond 2,5 M€ sans visa) ; l'ICO émet des tokens qui ne confèrent aucun droit de propriété, dans un cadre juridique encore optionnel (visa AMF « Option 38 »).</div>
+<div class="etape"><span class="num">2</span><strong>Analyse comparée :</strong> l'ICO permet une collecte potentiellement plus rapide et internationale (public plus large, absence de plafond réglementaire strict), mais expose à un risque réputationnel et juridique plus élevé (absence d'audit obligatoire, requalification possible en instrument financier si les tokens s'apparentent à des Equity Tokens).</div>
+<div class="etape"><span class="num">3</span><strong>Recommandation managériale :</strong> pour une startup en phase d'amorçage souhaitant sécuriser sa levée de fonds et rassurer des investisseurs institutionnels futurs, privilégier l'equity crowdfunding encadré (statut CIP), quitte à explorer l'ICO dans un second temps pour financer la phase de croissance, une fois le produit validé par le marché et un cadre réglementaire plus stabilisé disponible.</div>
+</div>
+</section>
+
+</div>
+<footer>Fiche DSCG UE 2 — Finance · M. Hamman · Généré à partir du cours source « Innovations financières — Vform »</footer>
+</body>
+</html>

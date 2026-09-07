@@ -1,0 +1,76 @@
+Chapitre 1 - Introduction à l’évaluation des groupes
+Introduction à l’évaluation des groupes1
+I – Le diagnostic2
+II – Négociation des prix3
+III - La mise en œuvre de l’évaluation4
+12 – Les différentes étapes4
+13 - Les différentes démarches :4
+14 - Autre présentation possible4
+L’évaluation d’entreprise est utilisée dans le cadre d’opérations de cession, de rachat, de fusions et de rapprochement, introduction en bourse…ou se faire en dehors de toute idée de transaction.
+Du côté de l’acquéreur, deux types d’approches sont possibles :
+Dans le premier cas, l’acquéreur informe un certain nombre d’acteurs susceptibles de l’aider dans sa recherche. De même, il s’informe sur les entreprises à vendre ou en difficulté, pour lesquelles un plan de reprise peut être présenté.
+Dans le second cas, l’entreprise va directement approcher les firmes qu’elle considère comme correspondant au profil recherché. Cette identification se fait par des contacts avec les clients, les fournisseurs, les visites dans les salons professionnels…Si le taux de succès est supérieur à celui de la première approche, le prix final risque d’être plus élevé, puisque l’entreprise est en position de demandeur.
+Au sens strict, l’évaluation d’une entreprise consiste à calculer, à partir de données comptables et financières, la valeur de cette entreprise à l’aide de formules précises, variant en fonction de l’approche retenue. La valeur de l’entreprise est censée donner le prix auquel se fera la transaction entre l’acheteur et le vendeur.
+Toutefois, l’expérience démontre que la négociation porte non pas sur cette valeur, mais sur les points forts et les points faibles de l’entreprise ciblée.
+Ainsi, au sens large, l’évaluation de l’entreprise cible comprend une dimension qualitative, abordée par un diagnostic, et une dimension quantitative à travers le calcul de la valeur de l’entreprise.
+I – Le diagnostic
+En théorie, l’acquéreur doit pouvoir réaliser un diagnostic stratégique.
+Schématiquement, on distingue :
+Le diagnostic interne menant aux forces et faiblesses de l’entreprise ;
+Eléments de diagnostic interne
+Diagnostic interne
+Contenu
+Diagnostic financier
+Analyse de l’évolution des postes de bilans et comptes de résultats sur au moins trois années, calcul des principaux ratios financiers, analyse de la politique financière.
+Diagnostic commercial
+Portefeuille de produits et de clients, canaux de distribution, force de vente.
+Diagnostic technologique
+Ampleur de la recherche et développement, dépôt de brevets, veille technologique.
+Diagnostic humain
+ Recrutement et formation, compétences, climat social.
+Diagnostic structurel
+Organisation, systèmes de gestion, centralisation des décisions.
+Diagnostic culturel
+Valeurs et culture de l’entreprise, type de management.
+Le diagnostic externe mettant en évidence les menaces et les opportunités dans l’environnement.
+Eléments du diagnostic externe
+Diagnostic externe
+Contenu
+Demande
+Nature, évolution et perspectives.
+Offre
+Concentration du secteur, position sur la courbe de vie.
+Concurrence
+Intensité des forces concurrentielles.
+Environnement technologique
+Evolution des technologies, impact sur la segmentation stratégique.
+Environnement socio-économique
+Grandes tendances (inflation, politique monétaire, réglementation…)
+Environnement climat COP30
+Changement d’énergie et investissement important…
+L’évaluation du potentiel de synergies entre l’acquéreur et l’entreprise ciblée est aussi très importante.
+Les différentes logiques qui seront adoptées lors des processus d’évaluation s’appuient sur objectifs poursuivis par l’acquéreur.
+II – Négociation des prix
+La négociation est le processus au terme duquel acheteur et vendeur vont se mettre d’accord sur un prix.
+Pour une entreprise en situation d’acheteur, il peut être important de connaître les motivations du vendeur afin d’optimiser le déroulement de la négociation.
+Pour mener à bien cette négociation, voici un plan directeur :
+L’élaboration d’un plan de négociation, fixant le résultat souhaité ainsi que les limites à ne pas dépasser, les modalités de la négociation, la constitution de l’équipe, la répartition des rôles…
+Le maintien de l’initiative, en effectuant une proposition de prix ;
+Ne pas s’enfermer dans une formule d’évaluation ;
+Savoir dire « oui, mais… » ;
+Respecter les règles du jeu propres au pays ;
+Négocier globalement ;
+Signer un document lorsque la négociation a abouti.
+L’existence juridique de la transaction doit être matérialisée dans un document dénommé protocole d’accord. Ce document fait apparaître toute une série d’éléments qui engagent définitivement les deux parties.
+III - La mise en œuvre de l’évaluation
+12 – Les différentes étapes
+13 - Les différentes démarches : 
+Les différentes méthodes :
+Approche financière : DCF : GLS
+Approche patrimoniale : ANC+ANCC+Goodwill : IN
+Approche comparative : multiples ou comparable : IN
+14 - Autre présentation possible
+On peut distinguer l’approche directe de l’approche indirecte:
+Les méthodes directes évaluent « directement » la valeur des capitaux propres (PER, actualisation des dividendes...)
+Les méthodes indirectes évaluent l’entreprise comme un « tout » auquel il faut ôter la valeur de l’endettement (actualisation des flux de trésorerie...).
+Valeur totale – valeur de la dette = valeur de l’entité (capitaux propres)

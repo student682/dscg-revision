@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>SAS, SCA et Société Civile — Comparatif des Formes Sociales</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{font-family:var(--font); color:#222; margin:0; padding:0; background:#fff; font-size:15.5px; line-height:1.5;}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{background:#fff; color:var(--dblue); border:none; border-radius:6px; padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;}
+.toolbar button:active{transform:scale(.97);}
+.title-banner{background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{background:var(--lgrey); border:1px solid #ddd; border-radius:8px; padding:16px 20px; margin:22px 0;}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+h2.banner{background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px; border-radius:6px; font-size:18px; scroll-margin-top:60px;}
+h3{color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px; margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px; font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;}
+.tree .mode{display:inline-block; margin-left:10px; font-size:12px; font-weight:700; padding:3px 9px; border-radius:12px; vertical-align:middle;}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;}
+.cond-item{background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold); border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;}
+.cond-item b{color:var(--dblue);}
+.result{border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px; display:block;}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+.timeline{margin:16px 0; padding:0; list-style:none;}
+.timeline li{position:relative; padding:8px 0 8px 30px; border-left:2px solid var(--blue); margin-left:6px;}
+.timeline li:last-child{border-left:2px solid transparent;}
+.timeline li::before{content:""; position:absolute; left:-7px; top:12px; width:12px; height:12px; border-radius:50%; background:var(--blue); border:2px solid #fff;}
+.timeline .t-lbl{font-weight:700; color:var(--dblue); font-size:14px;}
+.timeline .t-txt{font-size:13.5px; color:#333;}
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+.cas ul{margin:4px 0; padding-left:20px;}
+footer{margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey); font-size:12px; color:var(--grey); text-align:center;}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+article{margin:0;}
+@media (max-width:480px){
+  body{font-size:13.5px;} .wrap{padding:0 10px 50px;} .toolbar{padding:8px 10px;} .toolbar .chap{font-size:11.5px;} .toolbar button{padding:6px 8px; font-size:11px;} .title-banner h1{font-size:19px;} .title-banner .sub{font-size:12px;} h2.banner{font-size:15px; padding:8px 12px;} h3{font-size:14.5px;}
+  table, thead, tbody, th, td, tr{display:block;} thead{display:none;} table{border:1px solid #ddd; border-radius:8px; overflow:hidden;} tr{border-bottom:2px solid var(--lgrey); padding:6px 0;} td{border:none; padding:4px 10px;} td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;} .cmp{grid-template-columns:1fr!important;}
+}
+@media (min-width:481px) and (max-width:900px){ .cmp{grid-template-columns:repeat(2,1fr);} }
+@media (min-width:901px){ .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);} }
+body.mobile-force{font-size:13.5px;} body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;} body.mobile-force .toolbar{padding:8px 10px;} body.mobile-force .toolbar .chap{font-size:11.5px;} body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;} body.mobile-force .title-banner h1{font-size:19px;} body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody, body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;} body.mobile-force thead{display:none;} body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;} body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;} body.mobile-force td{border:none; padding:4px 10px;} body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;} body.mobile-force .cmp{grid-template-columns:1fr!important;}
+@media print{ .toolbar{display:none!important;} @page{size:A4; margin:14mm 12mm;} body{font-size:11.5px;} h2.banner{break-before:page; break-after:avoid;} h2.banner:first-of-type{break-before:auto;} table, .box, .tree, .cas, .cmp-card{break-inside:avoid;} .title-banner{break-after:avoid;} a{color:#000; text-decoration:none;} }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">DCG2 — SAS, SCA et Société Civile</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>SAS, SCA et Société Civile</h1>
+  <div class="sub">DCG UE 2 — Droit des sociétés et des groupements d'affaires · Comparatif des formes sociales</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. La SAS — Société par Actions Simplifiée</a>
+  <ol><li><a href="#s1-1">1.1 Constitution</a></li><li><a href="#s1-2">1.2 Président et direction</a></li><li><a href="#s1-3">1.3 Clauses statutaires fondamentales</a></li><li><a href="#s1-4">1.4 Assemblées et décisions collectives</a></li></ol>
+</li>
+<li><a href="#s2">2. La SCA — Société en Commandite par Actions</a>
+  <ol><li><a href="#s2-1">2.1 Constitution et associés</a></li><li><a href="#s2-2">2.2 Gérance et contrôle</a></li><li><a href="#s2-3">2.3 Intérêt stratégique de la SCA</a></li></ol>
+</li>
+<li><a href="#s3">3. La Société Civile</a>
+  <ol><li><a href="#s3-1">3.1 Constitution</a></li><li><a href="#s3-2">3.2 Gérance</a></li><li><a href="#s3-3">3.3 Responsabilité et cession</a></li><li><a href="#s3-4">3.4 Dissolution</a></li></ol>
+</li>
+<li><a href="#s4">4. Grand tableau comparatif — Toutes les formes sociales</a></li>
+<li><a href="#s5">5. Cas pratique intégré</a></li>
+</ol>
+</div>
+
+<article>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s1">1. La SAS — Société par Actions Simplifiée</h2>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ (EN CLAIR)</span>
+La SAS est la forme sociale « couteau suisse » du droit français : une liberté statutaire quasi-totale, une responsabilité limitée aux apports, et un seul organe obligatoire (le Président). Elle ne peut ni être cotée sur un marché réglementé, ni faire appel public à l'épargne.
+</div>
+
+<h3 id="s1-1">1.1 Constitution</h3>
+<table>
+<thead><tr><th>Élément</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td data-label="Élément">Nombre d'associés</td><td data-label="Règle"><b>1 ou plus</b> (SASU si associé unique). PP ou PM</td></tr>
+<tr><td data-label="Élément">Capital social</td><td data-label="Règle" class="exo"><b>Libre</b> (pas de minimum)</td></tr>
+<tr><td data-label="Élément">Apports en numéraire</td><td data-label="Règle">Libérés d'au moins <b>50 %</b> à la constitution, solde sous 5 ans</td></tr>
+<tr><td data-label="Élément">Apports en nature</td><td data-label="Règle" class="cond">CAA en principe obligatoire, <b>sauf</b> conditions réunies (chaque apport &lt; 30 000 € et total &lt; 50 % du capital)</td></tr>
+<tr><td data-label="Élément">Apports en industrie</td><td data-label="Règle" class="exo"><b>Autorisés</b></td></tr>
+<tr><td data-label="Élément">Cotation</td><td data-label="Règle" class="imp"><b>Interdite</b> sur un marché réglementé</td></tr>
+</tbody>
+</table>
+
+<h3 id="s1-2">1.2 Président et direction</h3>
+
+<div class="box memo"><span class="lbl">Mémo — Le Président de SAS</span>
+<ul>
+<li>Seul organe <b>obligatoire</b> — PP ou PM, associé ou non</li>
+<li>Représente la société à l'égard des tiers avec les <b>pouvoirs les plus étendus</b></li>
+<li>Les statuts peuvent créer un <b>DG</b>, des <b>DGD</b>, des comités — liberté totale d'organisation</li>
+<li>Régime social : <b>assimilé salarié</b> (affilié au régime général)</li>
+</ul>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Révocation du Président</span>
+La révocation du Président de SAS est <b>libre selon les statuts</b>. Les statuts peuvent prévoir :
+<ul>
+<li>Une révocation <b>ad nutum</b> (à tout moment, sans motif)</li>
+<li>Une révocation pour <b>juste motif</b> uniquement</li>
+<li>Une quasi-<b>irrévocabilité</b></li>
+</ul>
+Contrairement à la SA, il n'y a <b>aucune règle légale impérative</b> sur la révocation. C'est la force de la liberté statutaire.
+</div>
+
+<h3 id="s1-3">1.3 Clauses statutaires fondamentales</h3>
+
+<div class="cmp" style="--cmp-cols:3;">
+<div class="cmp-card"><h5>Clause d'agrément</h5>Peut porter sur <b>toutes</b> les cessions (y compris entre associés), contrairement à la SA. Les statuts fixent librement les conditions et la majorité.</div>
+<div class="cmp-card"><h5>Clause d'inaliénabilité</h5>Interdit la cession des actions pendant une durée maximale de <b>10 ans</b>. Permet de « figer » l'actionnariat.</div>
+<div class="cmp-card"><h5>Clause d'exclusion</h5>Permet d'<b>exclure</b> un associé dans les conditions prévues par les statuts. L'associé exclu a droit au <b>rachat de ses actions</b> à un prix déterminé.</div>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Unanimité obligatoire</span>
+Même dans la SAS où la liberté statutaire est maximale, certaines décisions restent soumises à l'<b>unanimité</b> :
+<ul>
+<li>Adoption ou modification d'une clause d'<b>agrément</b></li>
+<li>Adoption ou modification d'une clause d'<b>inaliénabilité</b></li>
+<li>Adoption ou modification d'une clause d'<b>exclusion</b></li>
+<li>Changement de contrôle d'un associé PM</li>
+</ul>
+</div>
+
+<h3 id="s1-4">1.4 Assemblées et décisions collectives</h3>
+<p>Les statuts déterminent librement les <b>formes</b> et <b>conditions</b> des décisions collectives (AG physique, consultation écrite, visioconférence...).</p>
+
+<div class="box precision"><span class="lbl">Précision — Règles de la SA applicables par défaut</span>
+À défaut de stipulation contraire dans les statuts, les règles de la SA s'appliquent à la SAS, <b>sauf</b> celles concernant :
+<ul>
+<li>La <b>direction</b> et l'<b>administration</b></li>
+<li>Les <b>assemblées générales</b></li>
+</ul>
+Le nombre de voix n'est pas nécessairement proportionnel au capital détenu.
+</div>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s2">2. La SCA — Société en Commandite par Actions</h2>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ (EN CLAIR)</span>
+La SCA combine deux catégories d'associés aux statuts radicalement différents : les commandités (responsables indéfiniment, qui dirigent) et les commanditaires (actionnaires classiques, responsabilité limitée). C'est un outil de protection du pouvoir de direction contre les prises de contrôle hostiles.
+</div>
+
+<h3 id="s2-1">2.1 Constitution et associés</h3>
+<table>
+<thead><tr><th>Élément</th><th>Commandités</th><th>Commanditaires</th></tr></thead>
+<tbody>
+<tr><td data-label="Élément">Nombre minimum</td><td data-label="Commandités"><b>1</b> minimum</td><td data-label="Commanditaires"><b>3</b> minimum</td></tr>
+<tr><td data-label="Élément">Qualité</td><td data-label="Commandités" class="imp"><b>Commerçants</b> (PP ou PM)</td><td data-label="Commanditaires" class="exo">PP ou PM, pas de qualité commerciale</td></tr>
+<tr><td data-label="Élément">Responsabilité</td><td data-label="Commandités" class="imp"><b>Indéfinie et solidaire</b></td><td data-label="Commanditaires" class="exo"><b>Limitée aux apports</b></td></tr>
+<tr><td data-label="Élément">Titres</td><td data-label="Commandités">Parts sociales (non négociables)</td><td data-label="Commanditaires" class="exo">Actions (négociables)</td></tr>
+<tr><td data-label="Élément">Capital minimum</td><td data-label="Commandités" colspan="2" class="cond"><b>37 000 €</b></td></tr>
+</tbody>
+</table>
+
+<h3 id="s2-2">2.2 Gérance et contrôle</h3>
+
+<div class="box memo"><span class="lbl">Mémo — Organisation de la SCA</span>
+<ul>
+<li><b>Gérant</b> : commandité (ou non) — nommé dans les statuts ou par AG. Pouvoirs les plus étendus. Révocable par AGO (si non commandité) ou dans les conditions statutaires</li>
+<li><b>Conseil de surveillance</b> : composé exclusivement de <b>commanditaires</b> (3 membres minimum). Contrôle la gestion du gérant. Ne peut <b>pas s'immiscer</b> dans la gestion</li>
+<li><b>AGO des commanditaires</b> : approuve les comptes, nomme le CS. Le gérant et les commandités <b>ne votent pas</b> sur certaines résolutions</li>
+<li><b>AGE</b> : nécessite l'accord des commanditaires ET le <b>consentement de chaque commandité</b></li>
+</ul>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Commanditaires et ingérence</span>
+Les commanditaires <b>ne peuvent pas</b> s'immiscer dans la gestion, sous peine de perdre le bénéfice de leur responsabilité limitée et de devenir responsables <b>indéfiniment et solidairement</b> des dettes sociales.
+</div>
+
+<h3 id="s2-3">2.3 Intérêt stratégique de la SCA</h3>
+
+<div class="box reflexe"><span class="lbl">Réflexe — La SCA comme défense anti-OPA</span>
+Dans une SCA cotée, un investisseur hostile ne peut acquérir que les <b>actions des commanditaires</b> (cotées en bourse). Mais le pouvoir de direction appartient aux <b>commandités</b>, dont les parts ne sont pas cotées et dont l'accord est nécessaire pour toute modification statutaire. Exemples : <b>Michelin, Lagardère, Hermès</b>.
+</div>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s3">3. La Société Civile</h2>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ (EN CLAIR)</span>
+La société civile est le véhicule juridique des activités non commerciales (immobilier via SCI, professions libérales via SCP/SCM, agriculture via SCEA). Ses associés sont responsables indéfiniment (mais non solidairement) des dettes sociales, proportionnellement à leur participation.
+</div>
+
+<h3 id="s3-1">3.1 Constitution</h3>
+<table>
+<thead><tr><th>Élément</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td data-label="Élément">Nombre d'associés</td><td data-label="Règle"><b>Minimum 2</b> — PP ou PM</td></tr>
+<tr><td data-label="Élément">Capital social</td><td data-label="Règle"><b>Pas de minimum</b></td></tr>
+<tr><td data-label="Élément">Objet social</td><td data-label="Règle" class="imp">Nécessairement <b>civil</b> (pas d'activité commerciale)</td></tr>
+<tr><td data-label="Élément">Apports</td><td data-label="Règle" class="exo">Tous types : numéraire, nature, industrie</td></tr>
+<tr><td data-label="Élément">Fiscalité</td><td data-label="Règle" class="spec"><b>Transparence fiscale</b> par défaut (IR) — option IS possible</td></tr>
+</tbody>
+</table>
+
+<h3 id="s3-2">3.2 Gérance</h3>
+
+<div class="box memo"><span class="lbl">Mémo — Gérance de la société civile</span>
+<ul>
+<li><b>Nomination</b> : dans les statuts ou par décision des associés</li>
+<li><b>Pouvoirs</b> : peut accomplir tous les actes de gestion dans l'intérêt de la société. Limites statutaires <b>opposables aux tiers</b> (contrairement aux sociétés commerciales)</li>
+<li><b>Révocation</b> : toujours révocable en justice pour <b>cause légitime</b>, à la demande d'un seul associé, même si nommé pour la durée de la société</li>
+<li><b>Responsabilité</b> : civilement responsable envers la société et les tiers. Peut être pénalement responsable</li>
+</ul>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Opposabilité des limites de pouvoirs</span>
+En société civile, les limitations statutaires des pouvoirs du gérant sont <b>opposables aux tiers</b>. C'est une différence majeure avec les sociétés commerciales (SA, SAS, SARL) où ces limitations sont inopposables.
+</div>
+
+<h3 id="s3-3">3.3 Responsabilité et cession</h3>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Responsabilité indéfinie mais non solidaire</span>
+Les associés de société civile sont responsables <b>indéfiniment</b> des dettes sociales, mais <b>non solidairement</b> :
+<ul>
+<li>Chaque associé n'est tenu qu'à <b>proportion de sa part</b> dans le capital</li>
+<li>Le créancier doit d'abord poursuivre vainement la société avant de se retourner contre les associés</li>
+<li>Différence capitale avec la SNC (solidarité) : en SC, un créancier ne peut pas demander l'intégralité de la dette à un seul associé</li>
+</ul>
+</div>
+
+<div class="box memo"><span class="lbl">Mémo — Cession des parts de société civile</span>
+<ul>
+<li><b>Agrément</b> : cession soumise à l'agrément des associés à l'<b>unanimité</b> (sauf clause contraire)</li>
+<li><b>Procédure</b> : notification du projet → décision dans un délai de <b>6 mois</b> → à défaut de réponse, agrément réputé acquis</li>
+<li><b>Retrait d'un associé</b> : possible si autorisé par les statuts ou à l'unanimité. À défaut, retrait judiciaire pour <b>justes motifs</b></li>
+</ul>
+</div>
+
+<h3 id="s3-4">3.4 Dissolution</h3>
+
+<div class="tree">
+<span class="root">Causes spécifiques de dissolution de la société civile</span>
+<span class="mode altern">Alternatives</span>
+<div class="branch">
+<div class="cond-item">Absence de gérant depuis plus de <b>1 an</b></div>
+<div class="cond-item">Révocation du gérant (sauf clause de continuation prévue)</div>
+<div class="cond-item">Décès d'un associé (si prévu par les statuts)</div>
+<div class="cond-item">Incapacité, redressement judiciaire ou liquidation d'un associé (si prévu par les statuts)</div>
+<div class="cond-item">Causes communes à toutes les sociétés : arrivée du terme, réalisation de l'objet, dissolution anticipée par les associés, dissolution judiciaire</div>
+</div>
+</div>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s4">4. Grand tableau comparatif — Toutes les formes sociales</h2>
+
+<table>
+<caption>Comparatif transversal — SNC, SARL, SA, SAS, SCA, SC</caption>
+<thead><tr><th>Critère</th><th>SNC</th><th>SARL</th><th>SA</th><th>SAS</th><th>SCA</th><th>SC</th></tr></thead>
+<tbody>
+<tr>
+<td data-label="Critère"><b>Associés min.</b></td>
+<td data-label="SNC">2</td>
+<td data-label="SARL">1 (EURL)</td>
+<td data-label="SA">2 (7 si cotée)</td>
+<td data-label="SAS">1 (SASU)</td>
+<td data-label="SCA">4 (1+3)</td>
+<td data-label="SC">2</td>
+</tr>
+<tr>
+<td data-label="Critère"><b>Capital min.</b></td>
+<td data-label="SNC">Libre</td>
+<td data-label="SARL">Libre</td>
+<td data-label="SA" class="imp">37 000 €</td>
+<td data-label="SAS">Libre</td>
+<td data-label="SCA" class="imp">37 000 €</td>
+<td data-label="SC">Libre</td>
+</tr>
+<tr>
+<td data-label="Critère"><b>Apports industrie</b></td>
+<td data-label="SNC" class="exo">Oui</td>
+<td data-label="SARL" class="exo">Oui</td>
+<td data-label="SA" class="imp">Non</td>
+<td data-label="SAS" class="exo">Oui</td>
+<td data-label="SCA" class="imp">Non (commanditaires)</td>
+<td data-label="SC" class="exo">Oui</td>
+</tr>
+<tr>
+<td data-label="Critère"><b>Responsabilité</b></td>
+<td data-label="SNC" class="imp">Indéfinie & solidaire</td>
+<td data-label="SARL" class="exo">Limitée</td>
+<td data-label="SA" class="exo">Limitée</td>
+<td data-label="SAS" class="exo">Limitée</td>
+<td data-label="SCA" class="cond">Commandités : indéfinie<br>Commanditaires : limitée</td>
+<td data-label="SC" class="imp">Indéfinie (non solidaire)</td>
+</tr>
+<tr>
+<td data-label="Critère"><b>Direction</b></td>
+<td data-label="SNC">Gérant</td>
+<td data-label="SARL">Gérant (PP)</td>
+<td data-label="SA">PCA/DG ou Directoire</td>
+<td data-label="SAS">Président (PP/PM)</td>
+<td data-label="SCA">Gérant</td>
+<td data-label="SC">Gérant</td>
+</tr>
+<tr>
+<td data-label="Critère"><b>Cession</b></td>
+<td data-label="SNC" class="imp">Unanimité</td>
+<td data-label="SARL" class="cond">Libre entre associés / agrément tiers</td>
+<td data-label="SA" class="exo">Libre (clause agrément possible)</td>
+<td data-label="SAS" class="cond">Selon statuts (agrément toutes cessions possible)</td>
+<td data-label="SCA" class="cond">Commanditaires : libre<br>Commandités : unanimité</td>
+<td data-label="SC" class="imp">Agrément unanimité</td>
+</tr>
+<tr>
+<td data-label="Critère"><b>Fiscalité</b></td>
+<td data-label="SNC" class="spec">IR (option IS)</td>
+<td data-label="SARL" class="spec">IS (option IR)</td>
+<td data-label="SA" class="spec">IS</td>
+<td data-label="SAS" class="spec">IS (option IR &lt; 5 ans)</td>
+<td data-label="SCA" class="spec">IS</td>
+<td data-label="SC" class="spec">IR (option IS)</td>
+</tr>
+<tr>
+<td data-label="Critère"><b>Cotation possible</b></td>
+<td data-label="SNC" class="imp">Non</td>
+<td data-label="SARL" class="imp">Non</td>
+<td data-label="SA" class="exo">Oui</td>
+<td data-label="SAS" class="imp">Non (marché réglementé)</td>
+<td data-label="SCA" class="exo">Oui</td>
+<td data-label="SC" class="imp">Non</td>
+</tr>
+</tbody>
+</table>
+
+<div class="box reflexe"><span class="lbl">Réflexe — Choisir la forme sociale</span>
+<ul>
+<li><b>PME/projet entrepreneurial</b> → SAS (souplesse) ou SARL (protection)</li>
+<li><b>Grande entreprise cotée</b> → SA</li>
+<li><b>Protection du dirigeant fondateur</b> → SCA ou SAS avec clauses</li>
+<li><b>Holding familiale</b> → SC (transparence fiscale) ou SAS (souplesse)</li>
+<li><b>Professions libérales</b> → SC (SCP, SCM) — jamais SNC</li>
+<li><b>Activité immobilière</b> → SCI (société civile immobilière)</li>
+</ul>
+</div>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s5">5. Cas pratique intégré</h2>
+
+<div class="cas">
+<p><b>Énoncé</b> — Trois entrepreneurs (A, B, C) souhaitent créer une société pour développer une application mobile. A souhaite investir 50 000 € et être irrévocable. B apportera son expertise technique (apport en industrie). C souhaite investir 30 000 € mais limiter sa responsabilité. Ils envisagent de lever des fonds auprès d'investisseurs dans 3 ans et souhaitent pouvoir exclure un associé défaillant. Quelle forme sociale choisir ?</p>
+
+<h4 class="q">Question 1 — La SA est-elle adaptée ?</h4>
+<div class="principe"><b>En principe :</b> la SA permet la cotation future et offre une structure de gouvernance encadrée. Cependant, les apports en industrie sont <b>interdits</b> en SA (art. L. 225-1), le capital minimum est de 37 000 €, et la révocation des dirigeants est encadrée par la loi (ad nutum pour les administrateurs).</div>
+<div class="espece"><b>En l'espèce :</b> B souhaite réaliser un apport en industrie → incompatible avec la SA. A souhaite être irrévocable → incompatible avec le régime ad nutum de la SA.</div>
+<div class="conclusion">Conclusion : la SA ne convient pas en raison de l'interdiction des apports en industrie et de l'impossibilité d'aménager statutairement l'irrévocabilité du dirigeant.</div>
+
+<h4 class="q">Question 2 — La SAS est-elle plus adaptée ?</h4>
+<div class="principe"><b>En principe :</b> la SAS autorise les apports en industrie, n'impose pas de capital minimum, permet une liberté totale dans l'aménagement de la révocation du dirigeant et autorise les clauses d'exclusion.</div>
+<div class="espece"><b>En l'espèce :</b>
+<ul>
+<li>B peut réaliser son apport en industrie ✅</li>
+<li>A peut être nommé Président avec une clause de quasi-irrévocabilité dans les statuts ✅</li>
+<li>C a une responsabilité limitée à ses 30 000 € ✅</li>
+<li>Une clause d'exclusion peut être insérée pour exclure un associé défaillant ✅</li>
+<li>La levée de fonds est possible (mais pas sur un marché réglementé — Euronext Growth possible) ✅</li>
+</ul>
+</div>
+<div class="conclusion">Conclusion : la SAS est la forme la plus adaptée. Elle répond à tous les besoins des entrepreneurs : apport en industrie, quasi-irrévocabilité du dirigeant, responsabilité limitée, clause d'exclusion et possibilité de levée de fonds. Les statuts devront prévoir une clause d'agrément et une clause d'exclusion votées à l'unanimité.</div>
+
+<h4 class="q">Question 3 — Quelles clauses essentielles insérer dans les statuts de la SAS ?</h4>
+<div class="principe"><b>En principe :</b> la SAS offre une liberté statutaire maximale. Les clauses les plus fréquentes sont : agrément, inaliénabilité, exclusion, préemption, tag-along et drag-along.</div>
+<div class="conclusion">Conclusion — Clauses recommandées :
+<ul>
+<li><b>Clause d'agrément</b> : pour contrôler l'entrée de nouveaux associés</li>
+<li><b>Clause d'exclusion</b> : pour pouvoir exclure un associé défaillant</li>
+<li><b>Clause d'inaliénabilité</b> (3 ans) : pour stabiliser l'actionnariat en phase de démarrage</li>
+<li><b>Clause de préemption</b> : priorité aux associés existants en cas de cession</li>
+<li><b>Clause de sortie conjointe (tag-along)</b> : pour protéger les minoritaires en cas de cession du contrôle</li>
+</ul>
+</div>
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){ document.body.classList.toggle('mobile-force'); }
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') { allBoxes.forEach(b => b.style.display = ''); return; }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+Les innovations financières
+Les plateformes de financement participatif et les cryptomonnaies fleurissent pour tout type d'activités. Ces transactions, communiquées en quelques secondes et confirmées en 10 minutes maximum, garantissaient l'anonymat et sont facturées moins d'un centime de dollar. Malgré les débats suscités par les nouvelles formes de financement et les monnaies virtuelles, l'émergence de nouveaux acteurs force les institutionnels à évoluer et à proposer de nouveaux services.
+L’émergence de nouveaux acteurs de la finance
+La finance a toujours été un domaine d'application des nouvelles technologies. Internet, les entrepôts de données (Data Center), le développement de l'informatique, le recours à l'intelligence artificielle, etc., ont propulsé les innovations financières au cours de ces vingt dernières années en créant de nouveaux acteurs, bouleversant ainsi les institutions et les circuits de financement traditionnels.
+ Le crowdfunding
+ 
+Le crowdfunding ou financement participatif consiste à faire financer un projet (funding) ou une entreprise risquée par un nombre d'individus ou de souscripteurs (crowd) plutôt que par des professionnels.
+1 880 millions d’euros ont été collectés sur les plateformes de financement participatif, soit une croissance de 84% par rapport à l’année dernière. Depuis 2015, les chiffres ont été multipliés par 11,2, portant la collecte du crowdfunding à près de 5 milliards.
+Cette croissance s’explique par :
+la crédibilité du crowdfunding dans les circuits de financement de l’économie ;
+une vraie adéquation entre les demandes de porteurs de projet et les attentes des épargnants ;
+la diversification des mécanismes de collecte (placements privés, fonds d’investissement, etc.) qui résultent de l’hybridation entre le crowdfunding et l’asset management ;
+le poids de l’immobilier qui continue de progresser : il représente cette année 61% de la collecte globale et dépasse à lui seul nettement la barre du milliard d’euros.
+Le concept n'est pas nouveau (ex. : financement de la tour Eiffel). Il s'est développé surtout au début depuis la décennie 2010 grâce aux réseaux sociaux et plateformes collaboratives permettant d'apporter des ressources (argent, idées, savoir-faire, avis, etc.) aux demandeurs (système de troc sans intermédiaires). 
+Selon Bessière et Stéphany (2017), il existe quatre types d'activités de crowdfunding : 
+- le don simple avec ou sans contrepartie (Donation Crowd funding) ; 
+- le don contre récompense (Reward-BasedCrowdfunding) ; 
+- le prêt avec ou sans intérêt (CrowdLending) ; 
+- l'investissement en titres financiers émis par une entreprise (crowdinvesting), notamment en fonds propres (Equity Crowdfunding). 
+Le crowdfunding regroupe diverses activités (dons, prêts, financement en actions de projets, etc.), des acteurs multiples (plateformes, porteurs de projets, crowders) et des objectifs variés (philanthropie, esprit communautaire, intérêts financiers, etc.). 
+Si, au départ, le financement reposait sur la foule (particuliers), plusieurs plateformes ont modifié le modèle économique en collectant de plus en plus de fonds auprès d'investisseurs institutionnels.
+Le crowdfunding et la finance durable
+Cela concerne 76 933 projets qui représentent un volume de collecte de 440 millions d’euros, soit 23,4% du volume total, et 45,6% des projets financés.
+65,1% des plateformes prennent en compte des critères ESG dans leur approche pour identifier les projets éligibles.
+Pour 78,1% des plateformes sondées, le financement participatif peut même aller au-delà et s’inscrire dans une démarche de finance à impact.
+53,5% des plateformes ont d’ores et déjà pris en compte au moins une fois les Objectifs de Développement Durable des Nations Unies dans leur approche pour identifier des projets éligibles au cours de l’année écoulée.
+Le financement participatif en don
+Si 2020 fut une année record pour le crowdfunding en don (218,5 M€) avec une forte mobilisation des citoyens en faveur de projets humanitaires et solidaires, 2021 reste une belle année avec une collecte de 196,8 millions d’euros pour 165 555 projets. Le secteur culturel concentre plus de 50% de la collecte (en particulier les arts plastiques et spectacles vivants pour 60,4 M€), suivi du secteur social pour 25,8% de la collecte (dont les projets humanitaires et solidaires représentent 32 M€), puis du secteur économique pour 20,4% des volumes.
+Le crowdfunding en don est plébiscité par les Français : ils sont 4 millions à avoir contribué à un projet en 2021.
+Le financement participatif en prêt
+Avec 1,58 milliard de collecte en 2021, contre 741 millions en 2020, le financement participatif en prêt explose. Il concerne essentiellement le secteur économique (1 570,6 M€), notamment l’immobilier (1 146,5 M€), suivi de l’environnement et des énergies renouvelables (188,5 M€) et des commerces et services (157,1 M€).
+Le prêt rémunéré se déploie avec 260 millions d’euros collectés l’année dernière. Il permet le financement de TPE, PM

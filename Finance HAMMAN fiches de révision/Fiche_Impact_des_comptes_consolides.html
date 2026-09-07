@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche DSCG UE2 — Impact des comptes consolidés</title>
+<style>
+:root{
+  --blue:#2E75B6; --dblue:#1F4E79; --red:#C00000; --green:#548235; --gold:#BF8F00;
+  --bg:#f4f6f8; --paper:#ffffff; --text:#1c2733;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',Calibri,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+.toolbar{position:sticky;top:0;z-index:100;background:var(--dblue);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;flex-wrap:wrap;gap:8px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+.toolbar h2{margin:0;font-size:1rem;font-weight:600;}
+.toolbar .btns{display:flex;gap:8px;flex-wrap:wrap;}
+.toolbar button{background:var(--blue);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.85rem;}
+.toolbar button:hover{background:#3d8bd4;}
+.titleband{background:var(--dblue);color:#fff;padding:28px 20px 22px;text-align:center;}
+.titleband h1{margin:0 0 6px;font-size:1.6rem;}
+.titleband p{margin:0;opacity:.85;font-size:.95rem;}
+.container{max-width:900px;margin:0 auto;padding:16px;}
+.toc{background:var(--paper);border-radius:10px;padding:16px 20px;margin:18px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.toc h3{margin-top:0;color:var(--dblue);}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:24px;}
+.toc a{color:var(--blue);text-decoration:none;font-size:.92rem;}
+.toc a:hover{text-decoration:underline;}
+section{background:var(--paper);border-radius:10px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+section h2{color:var(--dblue);border-bottom:2px solid var(--blue);padding-bottom:6px;font-size:1.25rem;}
+section h3{color:var(--dblue);font-size:1.05rem;margin-top:20px;}
+.box{border-radius:8px;padding:12px 14px;margin:12px 0;border-left:5px solid;}
+.box p:first-child{margin-top:0;}
+.box p:last-child{margin-bottom:0;}
+.box .label{font-weight:700;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em;display:block;margin-bottom:6px;}
+.piege{background:#fdecea;border-color:var(--red);}
+.piege .label{color:var(--red);}
+.memo{background:#fef9e7;border-color:var(--gold);}
+.memo .label{color:var(--gold);}
+.reflexe{background:#eaf3ea;border-color:var(--green);}
+.reflexe .label{color:var(--green);}
+.precision{background:#eaf1fb;border-color:var(--blue);}
+.precision .label{color:var(--blue);}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;}
+th,td{border:1px solid #d7dde3;padding:6px 8px;text-align:left;vertical-align:top;}
+th{background:var(--dblue);color:#fff;}
+td.exo{background:#eaf3ea;} td.imp{background:#fdecea;} td.cond{background:#fef9e7;} td.spec{background:#eaf1fb;}
+.formula{font-family:'Cambria Math',Georgia,serif;font-size:1.02rem;text-align:center;padding:10px;background:#fffdf6;border:1px dashed var(--gold);border-radius:6px;margin:10px 0;}
+.legend{font-size:.88rem;background:#fbfaf5;border-left:3px solid var(--gold);padding:6px 10px;margin:6px 0 10px;}
+.etape{border-left:4px solid var(--blue);padding:8px 12px;margin:10px 0;background:#f7fafd;}
+.etape .num{display:inline-block;background:var(--blue);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-right:8px;}
+.tree{display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+.branch{border:1px solid var(--blue);border-radius:8px;padding:10px 12px;background:#f7fafd;}
+.branch .cond-item{font-weight:600;color:var(--dblue);}
+.branch .result{margin-top:4px;color:var(--text);}
+footer{text-align:center;padding:24px;color:#8a97a3;font-size:.8rem;}
+@media print{
+  .toolbar{display:none;}
+  section{box-shadow:none;break-inside:avoid;}
+  body{background:#fff;}
+}
+@media (max-width:600px){
+  .toc ol{columns:1;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  tr{margin-bottom:10px;border:1px solid #d7dde3;border-radius:6px;overflow:hidden;}
+  td{border:none;border-bottom:1px solid #eef1f4;position:relative;padding-left:46%;}
+  td::before{content:attr(data-label);position:absolute;left:10px;top:8px;font-weight:700;color:var(--dblue);white-space:nowrap;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h2>Impact des comptes consolidés</h2>
+  <div class="btns">
+    <button onclick="window.print()">⬇ Exporter en PDF</button>
+    <button onclick="document.body.classList.toggle('mobile-force')">📱 Format mobile</button>
+  </div>
+</div>
+
+<div class="titleband">
+  <h1>La présentation des comptes consolidés et l'impact sur l'analyse</h1>
+  <p>DSCG UE 2 — Finance · Chapitre M. Hamman (Diagnostic financier approfondi 2/5)</p>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <h3>Sommaire</h3>
+  <ol>
+    <li><a href="#s1">Référentiels comptables applicables</a></li>
+    <li><a href="#s2">Périmètre et structure du groupe</a></li>
+    <li><a href="#s3">Le compte de résultat consolidé</a></li>
+    <li><a href="#s4">Le bilan consolidé</a></li>
+    <li><a href="#s5">Le tableau des flux de trésorerie</a></li>
+    <li><a href="#s6">Le tableau de variation des capitaux propres</a></li>
+    <li><a href="#s7">Les informations boursières</a></li>
+    <li><a href="#s8">Méthode cas pratique DSCG</a></li>
+  </ol>
+</div>
+
+<section id="s1">
+<h2>1. Référentiels comptables applicables</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<p><strong>En clair :</strong> depuis le 01/01/2021 (ordonnance n° 2020-01, regroupant les règlements CRC 99-02, 99-07 et 2000-05), le référentiel applicable dépend du statut de l'entité :</p>
+</div>
+<table>
+<thead><tr><th>Entité</th><th>Comptes sociaux</th><th>Comptes consolidés</th></tr></thead>
+<tbody>
+<tr><td data-label="Entité" class="spec">Sociétés cotées (APE)</td><td data-label="Comptes sociaux">PCG (règlement CRC 99-02)</td><td data-label="Comptes consolidés" class="imp">Normes IFRS obligatoires (règlement CE du 19/07/2002)</td></tr>
+<tr><td data-label="Entité" class="spec">Groupes consolidés non APE</td><td data-label="Comptes sociaux">PCG</td><td data-label="Comptes consolidés" class="cond">IFRS sur option seulement</td></tr>
+<tr><td data-label="Entité" class="spec">Entités non consolidantes</td><td data-label="Comptes sociaux">PCG</td><td data-label="Comptes consolidés">—</td></tr>
+</tbody>
+</table>
+<div class="box piege">
+<span class="label">Piège d'examen — seuils de consolidation obligatoire</span>
+<p>Sont tenues de consolider les sociétés APE et les groupes dépassant <strong>2 des 3 critères</strong> suivants : salariés &gt; 250 personnes ; CA HT &gt; 48 M€ ; total bilan &gt; 24 M€.</p>
+</div>
+<div class="box reflexe">
+<span class="label">Interprétation financière — principales divergences France/IFRS</span>
+<p>La notion de « résultat global » et « autres éléments du résultat global » n'existe <strong>pas</strong> en règles françaises. Un « troisième bilan » (retraité en cas de changement de méthode) n'est <strong>jamais</strong> requis en IFRS. Les informations en annexe sont globalement <strong>moins développées</strong> en France, avec des modèles simplifiés selon la taille de l'entité (CRC 99-02, section IV).</p>
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Périmètre et structure du groupe</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<p><strong>En clair :</strong> le périmètre de consolidation définit les sociétés incluses dans les comptes consolidés, en fonction du % de contrôle du groupe sur ses filiales — ce pourcentage détermine la <strong>méthode de consolidation</strong> et impacte donc la présentation des états financiers.</p>
+</div>
+<div class="tree">
+<div class="branch"><span class="cond-item">Questions clés de l'analyste sur le périmètre</span><div class="result">Quelles filiales sont consolidées ? Lesquelles sont exclues ? Lesquelles sont entrées/sorties sur l'exercice ? Le % de contrôle a-t-il varié ?</div></div>
+</div>
+<div class="box piege">
+<span class="label">Piège d'examen — le cas Enron</span>
+<p>L'exclusion de filiales du périmètre (notamment bancaires/financières) peut <strong>réduire artificiellement l'endettement apparent</strong> du groupe si la dette y est logée. C'est exactement le montage utilisé par Enron : des dettes portées par des sociétés non consolidées, masquant le niveau d'endettement réel. Depuis, l'IASB et le CRC 99-02 imposent la consolidation obligatoire des <strong>entités ad hoc</strong> dès lors qu'il existe un contrôle en substance (contrat, accord, clause statutaire), même sans détention d'actions.</p>
+</div>
+<div class="box reflexe">
+<span class="label">Interprétation financière — états Pro-Forma</span>
+<p>Tout changement de périmètre doit donner lieu à des états financiers <strong>Pro-Forma</strong>, retraitant les comptes passés pour les rendre comparables au périmètre actuel — condition indispensable pour une analyse comparative fiable des performances dans le temps.</p>
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Le compte de résultat consolidé</h2>
+<table>
+<thead><tr><th>Présentation</th><th>Caractéristique</th></tr></thead>
+<tbody>
+<tr><td data-label="Présentation" class="spec">Par nature</td><td data-label="Caractéristique">Synthétique, reprend le modèle PCG (répartition des charges/produits selon leur nature)</td></tr>
+<tr><td data-label="Présentation" class="spec">Par fonction (destination)</td><td data-label="Caractéristique">Met en évidence le coût des ventes, frais commerciaux, frais de R&amp;D — présentation anglo-saxonne prisée des analystes financiers pour évaluer la performance</td></tr>
+</tbody>
+</table>
+<div class="box piege">
+<span class="label">Piège de vocabulaire — le résultat exceptionnel disparaît</span>
+<p>Les deux présentations (nature et fonction) prévoient la <strong>suppression du résultat exceptionnel</strong>. En IFRS, il n'existe pas en tant que tel : les éléments non récurrents apparaissent éventuellement dans les <strong>« autres produits et charges opérationnels (non courants) »</strong>.</p>
+</div>
+<div class="box memo">
+<span class="label">Formule et théorie — structure du compte de résultat consolidé</span>
+<div class="formula">
+Chiffre d'affaires<br>
+− Charges d'exploitation<br>
+<strong>= Résultat opérationnel courant</strong> (performance récurrente)<br>
+± Autres produits et charges opérationnels (non courants)<br>
+<strong>= Résultat opérationnel</strong> (Operating Income — hors financier et impôt)<br>
+± Quote-part dans le résultat des entreprises associées (mises en équivalence)<br>
+− Coût de l'endettement financier net<br>
+± Autres produits et charges financiers<br>
+<strong>= Résultat avant impôt</strong><br>
+− Charge d'impôt<br>
+<strong>= Résultat net</strong><br>
+→ scindé entre <strong>Part du Groupe</strong> et <strong>Part des minoritaires</strong> (participations ne donnant pas le contrôle)
+</div>
+</div>
+<div class="box reflexe">
+<span class="label">Interprétation financière — points spécifiques aux comptes consolidés</span>
+<p>Les charges de personnel incluent la <strong>participation des salariés</strong> (contrairement aux comptes individuels, où elle apparaît distinctement après le résultat exceptionnel). Les impôts sur les résultats comprennent les impôts exigibles <strong>et</strong> les impôts différés.</p>
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Le bilan consolidé</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<p><strong>En clair :</strong> les normes IFRS imposent la distinction, au bilan, entre éléments <strong>courants</strong> (actifs/passifs relatifs au cycle d'exploitation normal, ou d'échéance &lt; 12 mois, ou éléments de trésorerie) et <strong>non courants</strong>.</p>
+</div>
+<div class="box reflexe">
+<span class="label">Interprétation financière — postes spécifiques des comptes consolidés</span>
+<p>Au passif, les <strong>capitaux propres</strong> sont séparés entre part du <strong>Groupe</strong> et <strong>intérêts ne conférant pas le contrôle</strong> (minoritaires). Le cas échéant, des <strong>impôts différés</strong> sont comptabilisés au passif non courant. À l'actif, les titres de participation détenus de façon notable sont inscrits à leur valeur de <strong>mise en équivalence</strong>, et un écart d'acquisition (<strong>goodwill</strong>) peut apparaître si le prix d'acquisition d'une filiale a dépassé sa valeur d'évaluation.</p>
+</div>
+</section>
+
+<section id="s5">
+<h2>5. Le tableau des flux de trésorerie</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<p>Le tableau de flux se divise en trois fonctions : <strong>flux liés à l'activité</strong>, <strong>flux liés au financement</strong>, <strong>flux liés à l'investissement</strong>.</p>
+<div class="formula">FNTLA = CAF (ou MBA) − Variation du BFR</div>
+<div class="legend">FNTLA : Flux Net de Trésorerie Lié à l'Activité · CAF/MBA : Capacité d'Autofinancement / Marge Brute d'Autofinancement</div>
+</div>
+<table>
+<thead><tr><th>Méthode</th><th>Principe</th></tr></thead>
+<tbody>
+<tr><td data-label="Méthode" class="spec">Directe</td><td data-label="Principe">Entrées et sorties de trésorerie présentées par grandes catégories (encaissements clients, versements fournisseurs...) pour aboutir au flux de trésorerie d'exploitation</td></tr>
+<tr><td data-label="Méthode" class="exo">Indirecte (préférée en pratique)</td><td data-label="Principe">Le résultat net est retraité des charges et produits calculés (DAP, RADP), des variations de juste valeur, de la variation du BFR, et des flux liés à l'investissement/financement</td></tr>
+</tbody>
+</table>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p>La méthode indirecte est préférée en pratique car elle part d'un solde du compte de résultat et fait ressortir un solde intermédiaire clé : la <strong>marge brute d'autofinancement</strong>, directement exploitable pour l'analyse financière.</p>
+</div>
+</section>
+
+<section id="s6">
+<h2>6. Le tableau de variation des capitaux propres</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<p><strong>En clair :</strong> ce tableau informe les apporteurs de capitaux sur l'évolution de la formation du capital et d'une possible dilution. Il mentionne l'évolution du capital social, des réserves, le montant des dividendes versés, et le nombre d'actions détenues (autocontrôle).</p>
+</div>
+<div class="box precision">
+<span class="label">Éléments clés à surveiller (exemple Le Noble Âge)</span>
+<p>Le tableau distingue les <strong>transactions avec les actionnaires</strong> (distribution de dividendes, neutralisation des actions auto-détenues, plans d'attribution gratuite d'actions) du <strong>résultat global</strong> (résultat net de la période + autres éléments du résultat global). C'est la lecture croisée de ces deux blocs qui permet de comprendre la dynamique complète des capitaux propres d'un exercice à l'autre.</p>
+</div>
+</section>
+
+<section id="s7">
+<h2>7. Les informations boursières</h2>
+<div class="box memo">
+<span class="label">Formule et théorie</span>
+<div class="formula">Capitalisation boursière = Nombre d'actions × Cours de l'action</div>
+</div>
+<div class="box reflexe">
+<span class="label">Interprétation financière</span>
+<p>La capitalisation boursière mesure le <strong>potentiel capitalistique</strong> de l'entité. C'est un indicateur essentiel pour l'analyste financier, servant notamment de base au calcul du <strong>coût du capital</strong> (pondération capitaux propres/dette dans le CMPC — lien direct avec le chapitre Évaluation/DCF).</p>
+</div>
+</section>
+
+<section id="s8">
+<h2>8. Méthode cas pratique DSCG</h2>
+<div class="box precision">
+<p><strong>Énoncé type :</strong> le groupe THETA a cédé en cours d'exercice une filiale bancaire portant 40 M€ de dettes financières, sortie du périmètre de consolidation. L'endettement financier net consolidé affiché passe de 180 M€ à 145 M€ sur l'exercice.</p>
+<div class="etape"><span class="num">1</span><strong>Justification théorique :</strong> avant toute conclusion sur l'amélioration du profil financier du groupe, l'analyste doit systématiquement examiner l'évolution du <strong>périmètre de consolidation</strong> — une baisse apparente de l'endettement peut résulter d'un simple changement de structure plutôt que d'un désendettement réel (cf. risque de type Enron).</div>
+<div class="etape"><span class="num">2</span><strong>Calcul détaillé :</strong> si la sortie de la filiale explique 40 M€ des 35 M€ de baisse affichée (180 − 145), le groupe s'est en réalité <strong>ré-endetté de 5 M€</strong> à périmètre constant, malgré une amélioration apparente du ratio d'endettement.</div>
+<div class="etape"><span class="num">3</span><strong>Recommandation managériale :</strong> demander la production d'états financiers Pro-Forma neutralisant l'effet de périmètre, afin de comparer la dette sur une base homogène. Alerter sur le risque que cette cession corresponde à un montage déconsolidant intentionnel plutôt qu'à une opération économiquement justifiée, et vérifier l'existence d'engagements hors bilan (garanties, clauses de rachat) qui maintiendraient un risque résiduel pour le groupe malgré la déconsolidation comptable.</div>
+</div>
+</section>
+
+</div>
+<footer>Fiche DSCG UE 2 — Finance · M. Hamman · Généré à partir du support « Diagnostic financier approfondi — 2. La présentation des comptes consolidés »</footer>
+</body>
+</html>

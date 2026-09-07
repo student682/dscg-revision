@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Approche Mixte (GoodWill)</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. 4 — L'Approche Mixte</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>L'Évaluation par Approche Mixte (GoodWill)</h1>
+  <div class="sub">DSCG UE 2 — Finance</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. Principe de la méthode : ANCC + Goodwill</a></li>
+<li><a href="#s2">2. Calcul de la Rente de Goodwill (Surprofit)</a></li>
+<li><a href="#s3">3. Les actifs économiques (VSB, CPNE)</a></li>
+<li><a href="#s4">4. Les formules d'actualisation (UEC, Anglo-saxons, Praticiens)</a></li>
+</ol>
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. Principe de la méthode : ANCC + Goodwill</h2>
+<p>La méthode patrimoniale (ANCC) est statique et oublie la valeur immatérielle (le savoir-faire, la capacité à générer de la rentabilité future). <br>
+La méthode mixte corrige cela : elle additionne la valeur du patrimoine de départ (ANCC) et la <strong>"Rente de Goodwill"</strong> (le supplément de valeur généré par la rentabilité).</p>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ</span>
+<strong>Valeur de l'entreprise = ANCC (hors fonds de commerce) + Goodwill</strong>
+<br><br>
+<em>Interprétation :</em> Le Goodwill (survaleur) représente la part du prix payé par l'acquéreur qui n'est pas justifiée par les actifs matériels. C'est le "prix de l'immatériel" ou la prime pour la rentabilité future.
+</div>
+
+<h2 class="banner" id="s2">2. Calcul de la Rente de Goodwill (Surprofit)</h2>
+<p>On calcule le Goodwill à partir de la "Rente de Goodwill" annuelle. C'est la différence entre le bénéfice économique dégagé par l'entreprise et la rémunération "normale" qu'exigeraient les actionnaires pour l'outil de travail investi.</p>
+
+<div class="cas">
+<h4 class="q">Formule du Surprofit</h4>
+<div class="principe"><strong>Rn = Bn - (r × An)</strong></div>
+<div class="espece">
+- <strong>Rn</strong> : Rente de Goodwill de l'année n.<br>
+- <strong>Bn</strong> : Bénéfice économique attendu (Résultat net retraité ou REX net d'IS).<br>
+- <strong>An</strong> : Actif économique engagé (ANCC, VSB, ou CPNE).<br>
+- <strong>r</strong> : Taux de rentabilité exigé par le marché (le coût de cet actif).
+</div>
+<div class="conclusion"><em>Pourquoi faire ce calcul ?</em> <br>Si une entreprise a 10 M€ d'actifs (An) et que le marché exige 10% (r), on s'attend à ce qu'elle produise 1 M€ de bénéfice "normal". Si elle produit 1,5 M€ (Bn), elle dégage un <strong>Surprofit (Rente) de 0,5 M€</strong> grâce à son savoir-faire/clientèle (son Goodwill).</div>
+</div>
+
+<div class="box piege">
+<span class="lbl">⚠ PIÈGE D'EXAMEN</span>
+Attention, on ne calcule <strong>JAMAIS</strong> le Goodwill en incluant la valeur comptable du Fonds de Commerce dans l'ANCC de départ. Si vous le laissez, vous comptez l'immatériel deux fois ! L'ANCC utilisé dans l'approche mixte doit toujours être "Hors Fonds de Commerce" ou "Hors Actifs Incorporels non identifiables".
+</div>
+
+<h2 class="banner" id="s3">3. L'Actif Économique (An) et le Bénéfice Économique (Bn)</h2>
+<p>Selon les méthodes, "l'actif engagé (An)" ne désigne pas la même chose. Il faut veiller à la <strong>cohérence</strong> entre le numérateur (Bénéfice) et le dénominateur (Actif).</p>
+
+<div class="tree">
+<span class="root">Choix du couple (An / Bn)</span>
+<div class="branch">
+<div class="cond-item"><b>Le choix "Capitaux Propres" :</b> <br>Si An = <strong>ANCC</strong> (Valeur des Capitaux Propres). <br>👉 Alors Bn = <strong>Résultat Net</strong> (Bénéfice revenant aux actionnaires).</div>
+<div class="cond-item"><b>Le choix "Global / Industriel" :</b> <br>Si An = <strong>VSB (Valeur Substantielle Brute)</strong> (Tous les actifs exploités, même les crédits-baux, sans tenir compte des dettes) ou <strong>CPNE (Capitaux Permanents Nécessaires à l'Exploitation = Immos + BFR)</strong>.<br>👉 Alors Bn = <strong>Résultat d'Exploitation net d'IS</strong> (Flux généré par l'outil, indépendamment de la dette).</div>
+</div>
+</div>
+
+<h2 class="banner" id="s4">4. Les méthodes d'actualisation du Goodwill</h2>
+<p>La Rente (Rn) n'est que la valeur créée sur une seule année. Le Goodwill est la valeur actualisée de <strong>toutes les rentes futures</strong>.</p>
+
+<table style="font-size:13px;">
+<caption>Comparatif des méthodes mixtes</caption>
+<thead><tr><th>Méthode</th><th>Formule du Goodwill (GW)</th><th>Interprétation</th></tr></thead>
+<tbody>
+<tr>
+<td class="spec">1. Rente abrégée (Actualisation limitée)</td>
+<td>Somme des (Rn / (1+i)^n) de l'année 1 à l'année 5.</td>
+<td>On estime qu'un surprofit ne peut pas durer indéfiniment (la concurrence va réagir). On actualise sur une durée finie (ex: 5 ans).</td>
+</tr>
+<tr>
+<td class="spec">2. Méthode des Praticiens</td>
+<td>Valeur Entreprise = (ANCC + Valeur de Rendement) / 2</td>
+<td>Méthode très simple et empirique. On fait la moyenne entre l'approche purement patrimoniale (ANCC) et l'approche purement financière (Valeur de rendement).</td>
+</tr>
+<tr>
+<td class="spec">3. Méthode U.E.C. (Experts comptables)</td>
+<td>GW = a × (Bn - r × ANCC) <br><i>(avec a = facteur de rente constante actualisée)</i></td>
+<td>C'est la méthode de référence en Europe. La rente est supposée constante pendant n années et actualisée au taux 'i'. L'actif de référence est toujours l'ANCC (Capitalisation boursière = ANCC + GW).</td>
+</tr>
+<tr>
+<td class="spec">4. Méthode Anglo-Saxonne</td>
+<td>GW = (Bn - r × VSB) / i</td>
+<td>Approche indirecte : On considère que l'avantage concurrentiel est <strong>perpétuel</strong>. On capitalise la rente à l'infini (1/i). L'actif An est industriel (VSB ou CPNE).</td>
+</tr>
+</tbody>
+</table>
+
+<div class="box reflexe">
+<span class="lbl">✓ RÉFLEXE DSCG</span>
+Dans les exercices, la consigne vous oriente toujours : <i>"Calculez la valeur selon la méthode UEC avec une actualisation sur 5 ans à 10%"</i>. Identifiez bien (1) l'actif à utiliser pour la rémunération de base (ANCC ou VSB), et (2) la durée de la rente (5 ans vs perpétuel).
+</div>
+
+</article>
+
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){ document.body.classList.toggle('mobile-force'); }
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Constitution et Vie des Groupes de Sociétés</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+
+/* Toolbar */
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+
+/* Title banner */
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+
+/* TOC */
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+
+/* Section banners */
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+
+/* Callout boxes */
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+
+/* Decision tree (HTML/CSS, texte natif) */
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.tree .mode{
+  display:inline-block; margin-left:10px; font-size:12px; font-weight:700;
+  padding:3px 9px; border-radius:12px; vertical-align:middle;
+}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+
+/* Timeline / chronologie */
+.timeline{margin:16px 0; padding:0; list-style:none;}
+.timeline li{
+  position:relative; padding:8px 0 8px 30px; border-left:2px solid var(--blue); margin-left:6px;
+}
+.timeline li:last-child{border-left:2px solid transparent;}
+.timeline li::before{
+  content:""; position:absolute; left:-7px; top:12px; width:12px; height:12px;
+  border-radius:50%; background:var(--blue); border:2px solid #fff;
+}
+.timeline .t-lbl{font-weight:700; color:var(--dblue); font-size:14px;}
+.timeline .t-txt{font-size:13.5px; color:#333;}
+
+/* Comparison grid (organes / formes / acteurs) */
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+
+/* Mini-cas DSCG */
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+.cas ul{margin:4px 0; padding-left:20px;}
+
+/* Footer */
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+article{margin:0;}
+a.anchor-target{scroll-margin-top:60px;}
+.verif{color:var(--red); font-style:italic; font-weight:600;}
+
+/* ===== Responsive mobile ===== */
+@media (max-width:480px){
+  body{font-size:13.5px;}
+  .wrap{padding:0 10px 50px;}
+  .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  .toolbar .chap{font-size:11.5px;}
+  .toolbar button{padding:6px 8px; font-size:11px;}
+  .title-banner h1{font-size:19px;}
+  .title-banner .sub{font-size:12px;}
+  h2.banner{font-size:15px; padding:8px 12px;}
+  h3{font-size:14.5px;}
+  h4{font-size:13.5px;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+  td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  td:empty, td:not([data-label]){padding:4px 10px;}
+  .cmp{grid-template-columns:1fr!important;}
+}
+@media (min-width:481px) and (max-width:900px){
+  .cmp{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:901px){
+  .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);}
+}
+
+/* mobile-force class : forçage du rendu mobile même sur grand écran */
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force .toolbar{padding:8px 10px;}
+body.mobile-force .toolbar .chap{font-size:11.5px;}
+body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;}
+body.mobile-force .title-banner h1{font-size:19px;}
+body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody,
+body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;}
+body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+body.mobile-force .cmp{grid-template-columns:1fr!important;}
+
+/* ===== Print ===== */
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+  body{font-size:11.5px;}
+  h2.banner{break-before:page; break-after:avoid;}
+  h2.banner:first-of-type{break-before:auto;}
+  table, .box, .tree, .cas, .cmp-card{break-inside:avoid;}
+  .title-banner{break-after:avoid;}
+  a{color:#000; text-decoration:none;}
+  .toc a{color:#000;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. — Constitution des Groupes</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Constitution et Vie des Groupes de Sociétés</h1>
+  <div class="sub">DSCG UE 1 — Gestion juridique, fiscale et sociale · Droit des sociétés</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+
+<ol>
+<li><a href="#s1">1. Notion de groupe — vocabulaire des opérations</a></li>
+<li><a href="#s2">2. Structures des groupes
+  <ol><li><a href="#s2-1">2.1 Pyramide, étoile, cercle</a></li><li><a href="#s2-2">2.2 La holding, tête de groupe</a></li><li><a href="#s2-3">2.3 Formes sociales utilisées : société civile vs SAS</a></li></ol>
+</li>
+<li><a href="#s3">3. Prises de participation et de contrôle
+  <ol><li><a href="#s3-1">3.1 Participations réciproques — encadrement</a></li><li><a href="#s3-2">3.2 Franchissement de seuils (sociétés cotées)</a></li><li><a href="#s3-3">3.3 Sanctions du défaut de déclaration</a></li></ol>
+</li>
+<li><a href="#s4">4. Offres publiques
+  <ol><li><a href="#s4-1">4.1 Offre publique obligatoire</a></li><li><a href="#s4-2">4.2 Étapes d'une OPA</a></li><li><a href="#s4-3">4.3 OPR et retrait obligatoire</a></li><li><a href="#s4-4">4.4 Défenses anti-OPA</a></li></ol>
+</li>
+<li><a href="#s5">5. Méthode cas DSCG</a></li>
+</ol>
+
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. Notion de groupe — vocabulaire des opérations</h2>
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ (EN CLAIR)</span>
+Un groupe de sociétés n'a pas de personnalité juridique propre : c'est un ensemble économique composé d'une société mère (holding) et de filiales juridiquement indépendantes liées par des participations financières et une direction commune.
+</div>
+<table>
+<thead><tr><th>Terme</th><th>Définition</th></tr></thead>
+<tbody>
+<tr><td data-label="Terme">Prise de participation</td><td data-label="Définition">Devenir propriétaire d'une partie du capital ou des droits de vote d'une société</td></tr>
+<tr><td data-label="Terme">Cession de bloc de contrôle</td><td data-label="Définition">Vente d'une fraction majoritaire des droits sociaux, occasionnant un changement de majorité</td></tr>
+<tr><td data-label="Terme">Offre publique (OPA/OPE)</td><td data-label="Définition">Offre faite aux actionnaires de céder leurs titres à un initiateur — en numéraire (OPA) ou en titres (OPE)</td></tr>
+<tr><td data-label="Terme">Apport partiel d'actif</td><td data-label="Définition">Une société apporte un actif à une autre et reçoit des droits sociaux en échange</td></tr>
+</tbody>
+</table>
+
+<h2 class="banner" id="s2">2. Structures des groupes</h2>
+
+<h3 id="s2-1">2.1 Pyramide, étoile, cercle</h3>
+<div class="cmp" style="--cmp-cols:3;">
+<div class="cmp-card"><h5>Groupe pyramidal</h5>La holding contrôle des filiales, qui contrôlent elles-mêmes des sous-filiales — contrôle en cascade par majorités successives.</div>
+<div class="cmp-card"><h5>Groupe radial (étoile)</h5>La société mère détient directement toutes les filiales, sans niveau de sous-filiales.</div>
+<div class="cmp-card"><h5>Groupe circulaire</h5>A contrôle B, qui contrôle C, qui contrôle D, qui contrôle A — <b>autocontrôle</b>. Menace directe le principe de libre révocabilité des dirigeants (les dirigeants en place finissent par décider indirectement de leur propre maintien).</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>C'est précisément pour neutraliser le risque du groupe circulaire que les <b>participations réciproques</b> et l'<b>autocontrôle</b> sont réglementés par le Code de commerce (cf. § 3.1).</div>
+
+<h3 id="s2-2">2.2 La holding, tête de groupe</h3>
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>Constitution « par le haut »</h5>Les associés d'une société d'exploitation apportent leurs titres à une société nouvelle créée pour l'occasion, qui devient holding.</div>
+<div class="cmp-card"><h5>Constitution « par le bas »</h5>Une société apporte son fonds de commerce (son activité) à une filiale nouvellement créée et devient elle-même holding en conservant les titres reçus en échange — filialisation.</div>
+</div>
+<div class="box memo"><span class="lbl">Mémo — 4 intérêts de la holding</span>
+<ul>
+<li><b>Déconnexion capital/pouvoir</b> — le principe majoritaire (50 % + 1) se répète à chaque étage : contrôler 100 nécessite 50 en direct, mais seulement 25 via une holding, 12,5 via deux holdings en cascade, etc.</li>
+<li><b>Transmission familiale</b> — la majorité des titres de l'entreprise est logée dans une holding ; l'héritier repreneur reçoit la majorité des titres de la holding (respectant ainsi l'égalité en valeur entre héritiers sur les autres actifs)</li>
+<li><b>LBO (rachat à effet de levier)</b> — triple levier : <b>juridique</b> (mise de fonds réduite via l'emprunt logé dans la holding), <b>financier</b> (la cible rembourse l'emprunt via remontée de ses bénéfices), <b>fiscal</b> (régime mère-fille, intégration fiscale)</li>
+<li><b>Politique commune</b> — unité de direction entre plusieurs sociétés d'un même ensemble économique (production, commercialisation, immobilier via SCI)</li>
+</ul>
+</div>
+<div class="box reflexe"><span class="lbl">Réflexe cas pratique — calcul du levier capitalistique</span>Pour contrôler une société valant 100 sans holding : 50 + 1 nécessaires. Avec une holding intermédiaire détenue à 50 % + 1 : investissement réduit à 25 + petit surplus. Avec deux holdings en cascade : environ 12,5. Ce calcul est un classique du cas pratique DSCG sur les groupes.</div>
+
+<h3 id="s2-3">2.3 Formes sociales utilisées : société civile vs SAS</h3>
+<table>
+<caption>Comparatif — holding de tête</caption>
+<thead><tr><th>Critère</th><th>Société civile</th><th>SAS</th></tr></thead>
+<tbody>
+<tr><td data-label="Critère">Responsabilité des associés</td><td data-label="SC" class="imp">Indéfinie au passif social</td><td data-label="SAS" class="exo">Limitée aux apports</td></tr>
+<tr><td data-label="Critère">Révocation du dirigeant</td><td data-label="SC" class="imp">Toujours révocable en justice pour cause légitime, à la demande d'un seul associé, même si nommé pour la durée de la société</td><td data-label="SAS" class="exo">Aucune cause de révocation légale — les statuts peuvent prévoir une quasi-irrévocabilité</td></tr>
+<tr><td data-label="Critère">Objet social</td><td data-label="SC" class="cond">Nécessairement civil</td><td data-label="SAS" class="cond">Libre</td></tr>
+<tr><td data-label="Critère">Fiscalité</td><td data-label="SC" class="spec">Neutralité fiscale possible (transparence)</td><td data-label="SAS" class="spec">Assujettissement obligatoire à l'IS</td></tr>
+<tr><td data-label="Critère">Clauses de stabilité</td><td data-label="SC" class="exo">Catégories de parts, blocage des cessions</td><td data-label="SAS" class="exo">Inaliénabilité (max 10 ans), agrément (toutes cessions, sans exception), clauses de changement de contrôle</td></tr>
+</tbody>
+</table>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Le seul avantage réel restant à la société civile face à la SAS est la <b>fiscalité</b> (transparence fiscale) — sur tous les autres plans (stabilité du dirigeant, souplesse statutaire, limitation de responsabilité), la SAS est aujourd'hui largement privilégiée comme holding de tête.</div>
+
+<h2 class="banner" id="s3">3. Prises de participation et de contrôle</h2>
+
+<h3 id="s3-1">3.1 Participations réciproques — encadrement</h3>
+<table>
+<tbody>
+<tr><td data-label="Cas" class="imp">Entre deux sociétés par actions (art. L. 233-29)</td><td data-label="Règle">Une société par actions ne peut détenir d'actions d'une autre si celle-ci détient <b>plus de 10 %</b> de son propre capital</td></tr>
+<tr><td data-label="Cas" class="imp">Société par actions / autre société (art. L. 233-30)</td><td data-label="Règle">Si une société non-par-actions a pour associée une société par actions détenant plus de 10 % de son capital, elle ne peut détenir d'actions de cette dernière ; si la détention est ≤ 10 %, la réciproque est plafonnée à 10 %</td></tr>
+</tbody>
+</table>
+<div class="box precision"><span class="lbl">Précision</span>Ces règles visent à empêcher la reconstitution d'un autocontrôle qui viderait de sens le principe de libre révocabilité et fausserait la réalité du capital social.</div>
+
+<h3 id="s3-2">3.2 Franchissement de seuils (sociétés cotées)</h3>
+<div class="box memo"><span class="lbl">Mémo — 11 seuils légaux (art. L. 233-7 C. com.)</span>5 % · 10 % · 15 % · 20 % · 25 % · 30 % · 33,33 % · 50 % · 66,66 % · 90 % · 95 % — du capital <b>ou</b> des droits de vote.</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>C'est le <b>franchissement</b> du seuil qui doit être déclaré, pas l'acquisition d'un pourcentage donné. Exemple : un actionnaire à 26 % qui acquiert 3 % de plus passe à 29 % — <b>aucune déclaration</b> requise, bien que la participation acquise soit significative, car aucun seuil légal (30 %) n'a été franchi.</div>
+<div class="box precision"><span class="lbl">Précision — seuils statutaires</span>Les statuts peuvent ajouter des seuils intermédiaires, y compris en dessous de 5 %, mais jamais en dessous de <b>0,5 %</b>. Ces seuils statutaires ne sont déclarés qu'à la société, pas à l'AMF.</div>
+<div class="box memo"><span class="lbl">Mémo — déclaration d'intentions (seuils 10 %, 15 %, 20 %, 25 %)</span>Au franchissement à la hausse de ces 4 seuils, la personne doit en plus déclarer ses intentions pour les <b>6 mois à venir</b> (financement, action seule/de concert, poursuite ou arrêt des achats, stratégie, demande de nomination d'administrateurs).</div>
+
+<h3 id="s3-3">3.3 Sanctions du défaut de déclaration</h3>
+<div class="box piege"><span class="lbl">Piège d'examen — 2 sanctions de privation des droits de vote (art. L. 233-14)</span>
+<ul>
+<li><b>Automatique</b> : frappe la fraction de droits de vote excédant le seuil non déclaré, pour une durée de <b>2 ans</b> à partir de la régularisation</li>
+<li>Sur <b>demande</b> en justice d'un ou plusieurs actionnaires (privation pouvant être plus étendue)</li>
+</ul>
+</div>
+
+<h2 class="banner" id="s4">4. Offres publiques</h2>
+
+<h3 id="s4-1">4.1 Offre publique obligatoire</h3>
+<div class="box memo"><span class="lbl">Mémo</span>Toute personne (seule ou de concert) qui vient à détenir plus de <b>30 %</b> du capital ou des droits de vote d'une société cotée doit déposer un projet d'offre publique (art. 234-2 RG AMF).</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>L'offre doit obligatoirement porter sur <b>100 % du capital</b> — aucune OPA partielle n'est permise, pour garantir aux minoritaires une sortie complète à conditions égales.</div>
+<div class="box precision"><span class="lbl">Précision — caducité automatique</span>Toute OP qui ne réunit pas, à sa clôture, plus de la <b>moitié du capital ou des droits de vote</b>, est automatiquement caduque.</div>
+
+<h3 id="s4-2">4.2 Étapes d'une OPA</h3>
+<ul class="timeline">
+<li><span class="t-lbl">Préparation</span><br><span class="t-txt">Montage du dossier par l'initiateur</span></li>
+<li><span class="t-lbl">Présentation à l'AMF</span><br><span class="t-txt">Dépôt du dossier</span></li>
+<li><span class="t-lbl">Publication par l'AMF</span></li>
+<li><span class="t-lbl">Recevabilité</span><br><span class="t-txt">5 jours</span></li>
+<li><span class="t-lbl">Visa de l'AMF</span></li>
+<li><span class="t-lbl">Ouverture de l'offre</span><br><span class="t-txt">Entre 25 et 35 jours</span></li>
+<li><span class="t-lbl">Surenchère éventuelle</span><br><span class="t-txt">5 jours — recevable seulement si le nouveau prix dépasse le précédent de plus de 2 %</span></li>
+<li><span class="t-lbl">Résultat</span><br><span class="t-txt">9 jours</span></li>
+</ul>
+<div class="box precision"><span class="lbl">Précision — procédure normale vs simplifiée</span>Normale : l'initiateur détient moins de la moitié du capital/droits de vote. Simplifiée : il détient déjà la majorité — la différence porte essentiellement sur la <b>durée d'ouverture</b> de l'offre.</div>
+
+<h3 id="s4-3">4.3 OPR et retrait obligatoire</h3>
+<div class="tree">
+<span class="root">Cas d'ouverture d'une offre publique de retrait (OPR)</span>
+<span class="mode altern">Alternative</span>
+<div class="branch">
+<div class="cond-item">Majoritaires détenant de concert au moins <b>95 %</b> des droits de vote</div>
+<div class="cond-item">SA envisageant de se transformer en SCA</div>
+<div class="cond-item">Modification statutaire importante ou projet de fusion-absorption envisagé par l'actionnaire contrôlant</div>
+</div>
+</div>
+<div class="box memo"><span class="lbl">Mémo — retrait obligatoire</span>Suite logique de l'OPR : porte sur le <b>reliquat</b> non présenté à l'OPR, plafonné à <b>5 %</b> des titres à droit de vote. Transfert aux majoritaires contre indemnisation, sous surveillance de l'AMF (prix validé par l'AMF selon des méthodes objectives).</div>
+
+<h3 id="s4-4">4.4 Défenses anti-OPA</h3>
+<table>
+<thead><tr><th>Technique</th><th>Mécanisme</th></tr></thead>
+<tbody>
+<tr><td data-label="Technique">Actions de préférence sans droit de vote</td><td data-label="Mécanisme">Plafonnées à 1/4 des actions dans une société cotée (art. L. 228-11)</td></tr>
+<tr><td data-label="Technique">Actions à droit de vote double</td><td data-label="Mécanisme">Renforce le pouvoir des actionnaires fidèles/historiques</td></tr>
+<tr><td data-label="Technique">Plafonnement des droits de vote</td><td data-label="Mécanisme">Doit s'appliquer sans discrimination à tous les actionnaires (ex. : Danone — 6 % actions ordinaires / 12 % droit de vote double)</td></tr>
+<tr><td data-label="Technique">Dilution de l'initiateur</td><td data-label="Mécanisme">Augmentation de capital, dividende en actions, stock-options, titres convertibles — noyer sa participation sous 50 %</td></tr>
+<tr><td data-label="Technique">Structure « tour d'ivoire »</td><td data-label="Mécanisme">SCA ou SAS — dissociation capital coté / pouvoir de gestion (commandités non cotés en SCA)</td></tr>
+</tbody>
+</table>
+<div class="box piege"><span class="lbl">Piège d'examen — SCA comme défense anti-OPA</span>Dans une SCA, l'initiateur ne peut racheter en Bourse que les titres des <b>commanditaires</b> (actionnaires sans pouvoir de gestion) — les <b>commandités</b>, qui dirigent, ne détiennent pas de titres cotés. Exemples historiques : Michelin, Lagardère.</div>
+
+<h2 class="banner" id="s5">5. Méthode cas DSCG</h2>
+<div class="cas">
+<p><b>Énoncé</b> — Monsieur Blanc, actionnaire minoritaire de la société cotée OMEGA, détient 8 % du capital. Il acquiert progressivement des titres et atteint 26 %, puis, quelques mois plus tard, acquiert 5 % supplémentaires pour atteindre 31 %. Il envisage ensuite de transformer OMEGA (SA) en SCA pour protéger durablement son contrôle.</p>
+
+<h4 class="q">Question 1 — M. Blanc devait-il déclarer son passage de 8 % à 26 % ?</h4>
+<div class="principe"><b>En principe :</b> tout franchissement à la hausse ou à la baisse des seuils légaux (5 %, 10 %, 15 %, 20 %, 25 %...) doit être déclaré à la société et à l'AMF.</div>
+<div class="espece"><b>En l'espèce :</b> en passant de 8 % à 26 %, M. Blanc franchit successivement les seuils de 10 %, 15 %, 20 % et 25 %.</div>
+<div class="conclusion">Conclusion : M. Blanc devait déclarer chacun de ces franchissements, et joindre une déclaration d'intentions pour les seuils de 10 %, 15 %, 20 % et 25 %.</div>
+
+<h4 class="q">Question 2 — Le passage de 26 % à 31 % déclenche-t-il une offre publique obligatoire ?</h4>
+<div class="principe"><b>En principe :</b> le franchissement à la hausse du seuil de 30 % du capital ou des droits de vote déclenche l'obligation de déposer un projet d'offre publique portant sur 100 % du capital.</div>
+<div class="espece"><b>En l'espèce :</b> M. Blanc franchit le seuil de 30 % en passant de 26 % à 31 %.</div>
+<div class="conclusion">Conclusion : M. Blanc doit déposer un projet d'offre publique obligatoire sur la totalité du capital d'OMEGA — une offre partielle serait irrégulière.</div>
+
+<h4 class="q">Question 3 — La transformation d'OMEGA en SCA est-elle une défense anti-OPA pertinente pour la suite ?</h4>
+<div class="principe"><b>En principe :</b> dans une SCA, seuls les commanditaires détiennent des titres cotés négociables ; les commandités dirigent sans être nécessairement cotés, ce qui limite la capacité d'un tiers à prendre le contrôle par simple rachat en Bourse.</div>
+<div class="espece"><b>En l'espèce :</b> si M. Blanc devient commandité de la SCA après transformation, il conservera la direction indépendamment de futures acquisitions boursières par un tiers sur les titres de commanditaires.</div>
+<div class="conclusion">Conclusion : la transformation en SCA peut effectivement sécuriser le contrôle de M. Blanc contre une OPA ultérieure, à condition de respecter la procédure de transformation (cf. fiche Transformation) et sous réserve que cette opération, intervenant après qu'il a lui-même franchi le seuil des 30 %, ne soulève pas de difficultés au regard de l'offre publique déjà en cours.</div>
+</div>
+
+<div class="box verif" style="border:1px dashed var(--red); border-radius:8px; padding:10px 14px;">
+<b>Points à vérifier auprès du cours / des textes actualisés :</b>
+<ul>
+<li>Seuil de retrait obligatoire (5 % des titres à droit de vote) et seuil de l'OPR à 95 % — vérifier leur maintien réglementaire.</li>
+<li>Plafond de 1/4 pour les actions de préférence sans droit de vote dans les sociétés cotées (art. L. 228-11).</li>
+</ul>
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){
+  document.body.classList.toggle('mobile-force');
+}
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

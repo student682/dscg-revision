@@ -1,0 +1,62 @@
+La valeur et le risque
+En 2017, Danone a dégagé une rentabilité sur ses capitaux propres de 17,59% et un bénéfice net de 2,4 milliards d’euros. Est-ce bien ? Une société qui réalise un tel bénéfice crée-t-elle nécessairement de la valeur pour ses actionnaires ? A ce stade, il est impossible de le dire. La rentabilité à elle seule ne permet pas de trancher cette question. Pourquoi ? Ce qui importe n’est pas la rentabilité en elle-même, mais la confrontation de la rentabilité obtenue et de la rentabilité qui était espérée. Et qu’espérait-on ? Une rentabilité suffisante pour rémunérer le risque encouru ! 
+Donc : la rentabilité espérée d’un actif financier est proportionnelle au risque encouru.  
+Tout comme le temps, le risque est un paramètre fondamental en finance. On parle de risque dès lors qu’une somme future est incertaine dans son montant et/ou sa date d’apparition. C’est l’aléa qui est l’origine du risque et non le fait que l’on puisse perdre de l’argent. Si un titre financier qui vaut aujourd’hui 100 € est amené à valoir 150 dans un an avec une probabilité de 25% et 130 € avec une probabilité de 75%, il est considéré comme risqué car sa valeur future est incertaine, quant bien même il est assuré qu’elle sera supérieure à sa valeur actuelle. 
+La relation rentabilité-risque
+Chaque décision d’investissement est prise en conséquence d’une relation existante entre le risque et la rentabilité espérée. A l’échelle individuelle, il s’agit de ce que l’on appelle l’aversion au risque. Moins un investisseur aura une aversion au risque et plus il sera à même d’investir dans des produits risqués, et inversement. 
+Une fois cela compris, il s’agit alors de déterminer comment appréhender le risque qui est lié à la rentabilité d’un placement.
+Prenons un exemple :
+BNP Paribas
+Danone
+Rentabilité hebdomadaire moyenne sur 2017 
+0,13 %
+0,34 %
+Ecart-type
+3,38 %
+1,87 %
+Minimum 
+-8,90 %
+-3,30 %
+Maximum
+8,47 %
+6,00 %
+ 
+Dans quel titre investiriez-vous ? Pourquoi ? 
+La lecture des données et leur compréhension orientent nos choix, cependant l’étude des données passées est-elle suffisante afin de déterminer le risque et la rentabilité futurs ? La réponse est globalement positive concernant le risque et négative pour la rentabilité. 
+L’écart-type des rentabilités est relativement stable dans le temps et il est donc possible d’estimer le risque futur sur la base de l’étude des données passées. Par contre, les rentabilités passées ne préjugent en rien des rentabilités futures. Concrètement, cela signifie que l’on peut faire l’hypothèse que l’écart-type des rentabilités hebdomadaires futures de l’action Danone sera de 1,87 %, mais pas que sa rentabilité sera de 0,34 %. Pourquoi alors investir dans BNP Paribas alors que le risque est supérieur (3,38 % contre 1,87%). Tout simplement car l’espérance de rentabilité pour ce titre peut être plus grande. Si le titre peut beaucoup baisser, il peut aussi très fortement augmenter. L’étude des données passée le confirme. Alors qu’au maximum, sur la période d’étude, le titre de Danone a augmenté en une semaine de 6 %, celui de BNP Paribas a pris 8,47 %.
+La prise en compte du risque va se faire en deux étapes :
+Etape 1 : la quantification du risque (variance, écart-type, bêta) ;
+Etape 2 : la tarification du risque (MEDAF, APT, modèle de Fama et French).
+La quantification du risque
+D’abord, quelques rappels statistiques. 
+La rentabilité moyenne
+Sur une période donnée, la rentabilité d’un actif tient compte de deux facteurs : la variation de valeur de l’actif et les revenus qu’il a éventuellement versés (dividendes, coupons…), soit :
+Où Pt et Pt-1 représentent le prix de l’actif aux dates t et t-1 , Revt étant le revenu éventuel qu’il a distribué au cours de l’intervalle de temps entre t-1 et t. 
+Une fois la rentabilité de l’actif calculée sur plusieurs périodes, il faut en faire la moyenne. A ce stade, une question se pose car il existe deux types de moyennes, la moyenne arithmétiques et la moyenne géométrique. 
+La moyenne arithmétique
+Moyenne arithmétique calculée à partir de données passées (échantillon de n périodes) : 
+Avec,  la rentabilité du titre i, le jour t. 
+Moyenne arithmétique estimée à partir de données prévisionnelles (distribution de probabilités) : 
+Avec , la probabilité que la rentabilité du titre i soit égale à .
+2.1.2 Rentabilité moyenne géométrique
+La rentabilité moyenne géométrique () tient compte, quant à elle, du principe des intérêts composés : 
+Exemple : Rentabilités mensuelles au T4 de N
+Cours de clôture ajusté
+Rentabilité mensuelle
+Août
+5,53
+Septembre
+6,63
+19,89 %
+Octobre
+7,.03
+6,03 %
+Novembre
+7,12
+1,28 %
+Décembre
+7,52
+5,62 %
+Moyenne arithmétique : (19,89 % + 6,03 % + 1,28 % + 5,62 %) / 4 = 8,205 %
+Moyenne géométrique : (1,1989 x 1,0603 x 1,0128 x 1,0562)1/4 – 1 = 7,987 %
+Comment expliquer et interpréter cette différence de résultat ? Tout d’abord, il faut avoir à l’esprit que l’on ne mesure pas la même chose dans les deux cas. Lors de l’étude de données passées, il est 

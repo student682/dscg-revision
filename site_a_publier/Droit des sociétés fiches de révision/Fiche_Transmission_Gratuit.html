@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>La Transmission à Titre Gratuit</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+
+/* Toolbar */
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+
+/* Title banner */
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+
+/* TOC */
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+
+/* Section banners */
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+
+/* Callout boxes */
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+
+/* Decision tree (HTML/CSS, texte natif) */
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.tree .mode{
+  display:inline-block; margin-left:10px; font-size:12px; font-weight:700;
+  padding:3px 9px; border-radius:12px; vertical-align:middle;
+}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+
+/* Timeline / chronologie */
+.timeline{margin:16px 0; padding:0; list-style:none;}
+.timeline li{
+  position:relative; padding:8px 0 8px 30px; border-left:2px solid var(--blue); margin-left:6px;
+}
+.timeline li:last-child{border-left:2px solid transparent;}
+.timeline li::before{
+  content:""; position:absolute; left:-7px; top:12px; width:12px; height:12px;
+  border-radius:50%; background:var(--blue); border:2px solid #fff;
+}
+.timeline .t-lbl{font-weight:700; color:var(--dblue); font-size:14px;}
+.timeline .t-txt{font-size:13.5px; color:#333;}
+
+/* Comparison grid (organes / formes / acteurs) */
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+
+/* Mini-cas DSCG */
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+.cas ul{margin:4px 0; padding-left:20px;}
+
+/* Footer */
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+article{margin:0;}
+a.anchor-target{scroll-margin-top:60px;}
+.verif{color:var(--red); font-style:italic; font-weight:600;}
+
+/* ===== Responsive mobile ===== */
+@media (max-width:480px){
+  body{font-size:13.5px;}
+  .wrap{padding:0 10px 50px;}
+  .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  .toolbar .chap{font-size:11.5px;}
+  .toolbar button{padding:6px 8px; font-size:11px;}
+  .title-banner h1{font-size:19px;}
+  .title-banner .sub{font-size:12px;}
+  h2.banner{font-size:15px; padding:8px 12px;}
+  h3{font-size:14.5px;}
+  h4{font-size:13.5px;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+  td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  td:empty, td:not([data-label]){padding:4px 10px;}
+  .cmp{grid-template-columns:1fr!important;}
+}
+@media (min-width:481px) and (max-width:900px){
+  .cmp{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:901px){
+  .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);}
+}
+
+/* mobile-force class : forçage du rendu mobile même sur grand écran */
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force .toolbar{padding:8px 10px;}
+body.mobile-force .toolbar .chap{font-size:11.5px;}
+body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;}
+body.mobile-force .title-banner h1{font-size:19px;}
+body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody,
+body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;}
+body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+body.mobile-force .cmp{grid-template-columns:1fr!important;}
+
+/* ===== Print ===== */
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+  body{font-size:11.5px;}
+  h2.banner{break-before:page; break-after:avoid;}
+  h2.banner:first-of-type{break-before:auto;}
+  table, .box, .tree, .cas, .cmp-card{break-inside:avoid;}
+  .title-banner{break-after:avoid;}
+  a{color:#000; text-decoration:none;}
+  .toc a{color:#000;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. — Transmission à Titre Gratuit</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>La Transmission à Titre Gratuit</h1>
+  <div class="sub">DSCG UE 1 — Gestion juridique, fiscale et sociale · Droit des sociétés</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+
+<ol>
+<li><a href="#s1">1. Vue d'ensemble</a></li>
+<li><a href="#s2">2. Transmission inorganisée
+  <ol><li><a href="#s2-1">2.1 Dévolution légale — ordres et degrés</a></li><li><a href="#s2-2">2.2 Cas pratique — calcul de la succession</a></li><li><a href="#s2-3">2.3 Droits du conjoint successible</a></li><li><a href="#s2-4">2.4 Droits post-successoraux des collaborateurs</a></li></ol>
+</li>
+<li><a href="#s3">3. Cas particuliers : mineurs et démembrement
+  <ol><li><a href="#s3-1">3.1 Entreprise individuelle démembrée</a></li><li><a href="#s3-2">3.2 Entreprise sociétaire démembrée</a></li></ol>
+</li>
+<li><a href="#s4">4. Indivision et sursis au partage</a></li>
+<li><a href="#s5">5. Le statut de l'entrepreneur individuel (depuis 2022)</a></li>
+<li><a href="#s6">6. Transmission organisée — techniques du droit des libéralités
+  <ol><li><a href="#s6-1">6.1 La donation simple</a></li><li><a href="#s6-2">6.2 Cas pratique — réduction pour atteinte à la réserve</a></li><li><a href="#s6-3">6.3 Donation-partage et Pacte Dutreil</a></li></ol>
+</li>
+<li><a href="#s7">7. Transmission organisée — techniques du droit des sociétés</a></li>
+<li><a href="#s8">8. Méthode cas DSCG</a></li>
+</ol>
+
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. Vue d'ensemble</h2>
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>Transmission pour cause de mort</h5>Dévolution successorale (art. 720 à 892 C. civ.) — la succession s'ouvre par le décès.</div>
+<div class="cmp-card"><h5>Transmission entre vifs</h5>Techniques organisées, tirées du droit des successions (donation) et du droit des sociétés (holding, dissociation capital/pouvoir).</div>
+</div>
+<div class="box precision"><span class="lbl">Précision</span>Dans les deux cas, on distingue la transmission <b>inorganisée</b> (règles légales par défaut, en l'absence d'anticipation) de la transmission <b>organisée</b> (techniques mises en place pour optimiser gouvernance et coût fiscal).</div>
+
+<h2 class="banner" id="s2">2. Transmission inorganisée</h2>
+
+<h3 id="s2-1">2.1 Dévolution légale — ordres et degrés</h3>
+<div class="box memo"><span class="lbl">Mémo — les 4 ordres d'héritiers (art. 734 C. civ.)</span>
+<ol>
+<li>Enfants et leurs descendants</li>
+<li>Père et mère ; frères et sœurs et leurs descendants</li>
+<li>Ascendants autres que père et mère</li>
+<li>Collatéraux autres que frères et sœurs et leurs descendants</li>
+</ol>
+Chaque ordre exclut le suivant.
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen — calcul des degrés</span>
+<ul>
+<li><b>Ligne directe</b> : un degré par génération</li>
+<li><b>Ligne collatérale</b> : on additionne le nombre de générations jusqu'à l'ancêtre commun, <b>puis</b> de l'ancêtre commun jusqu'à l'héritier (ex. : frère/sœur = 2<sup>e</sup> degré, neveu/nièce = 3<sup>e</sup> degré)</li>
+</ul>
+Au sein d'un même ordre, le plus proche <b>degré</b> l'emporte. À égalité d'ordre et de degré, le partage se fait <b>par tête</b>.
+</div>
+
+<h3 id="s2-2">2.2 Cas pratique — calcul de la succession</h3>
+<div class="tree">
+<span class="root">Données</span>
+<div class="branch">
+<div class="cond-item">Défunt laissant 2 enfants, l'un d'eux (Enfant 2) prédécédé, laissant lui-même 2 enfants (petits-enfants du défunt)</div>
+<div class="cond-item">Patrimoine total : <b>200 000 €</b></div>
+</div>
+</div>
+<div class="tree">
+<span class="root">Calcul étape par étape</span>
+<div class="branch">
+<div class="cond-item"><b>① Ordre applicable</b> : ordre 1 (enfants et descendants)</div>
+<div class="cond-item"><b>② Partage entre les souches</b> = 200 000 / 2 = <b>100 000 €</b> par souche (Enfant 1 ; souche de l'Enfant 2 prédécédé)</div>
+<div class="cond-item"><b>③ Enfant 1</b> reçoit directement <b>100 000 €</b></div>
+<div class="cond-item"><b>④ Représentation</b> : les 2 petits-enfants se partagent la part de l'Enfant 2 prédécédé = 100 000 / 2 = <b>50 000 €</b> chacun</div>
+</div>
+<div class="result ok">Le plus proche degré l'emporte au sein de chaque souche ; le mécanisme de représentation permet aux petits-enfants de venir à la place de leur auteur prédécédé.</div>
+</div>
+
+<h3 id="s2-3">2.3 Droits du conjoint successible</h3>
+<div class="box piege"><span class="lbl">Piège d'examen — le PACS ne donne AUCUN droit successoral légal</span>Le partenaire pacsé n'est <b>pas héritier légal</b> — seul un testament peut lui conférer des droits. Le « conjoint successible » est le conjoint <b>marié, non divorcé</b> au jour du décès.</div>
+<table>
+<caption>Droits du conjoint selon la configuration familiale</caption>
+<thead><tr><th>Situation</th><th>Droits du conjoint</th></tr></thead>
+<tbody>
+<tr><td data-label="Situation">Conjoint + enfants tous communs</td><td data-label="Droits" class="cond">Choix : totalité en usufruit <b>ou</b> 1/4 en pleine propriété</td></tr>
+<tr><td data-label="Situation">Conjoint + enfant(s) non communs</td><td data-label="Droits" class="cond">1/4 en pleine propriété, obligatoirement (pas de choix)</td></tr>
+<tr><td data-label="Situation">Conjoint + père et mère du défunt</td><td data-label="Droits" class="cond">1/2 pour le conjoint, 1/4 pour chaque parent</td></tr>
+<tr><td data-label="Situation">Conjoint + un seul parent</td><td data-label="Droits" class="cond">3/4 pour le conjoint, 1/4 pour le parent</td></tr>
+<tr><td data-label="Situation">Conjoint seul (pas d'enfant ni de parent)</td><td data-label="Droits" class="exo">Intégralité de la succession</td></tr>
+</tbody>
+</table>
+
+<h3 id="s2-4">2.4 Droits post-successoraux des collaborateurs</h3>
+<div class="tree">
+<span class="root">Contrat de travail à salaire différé — conditions</span>
+<span class="mode cumul">Cumulatif</span>
+<div class="branch">
+<div class="cond-item">Être <b>descendant</b> du chef d'exploitation</div>
+<div class="cond-item">Travail <b>effectif et régulier</b>, sans salaire</div>
+<div class="cond-item">Au moins <b>5 ans consécutifs</b> de travail</div>
+<div class="cond-item">Âge minimal de <b>18 ans</b> pour la période prise en compte</div>
+<div class="cond-item">Absence de rémunération ou de contrepartie suffisante</div>
+</div>
+</div>
+<div class="box memo"><span class="lbl">Mémo</span>Durée maximale prise en compte : <b>10 ans</b>. Le salaire différé est prélevé sur l'actif successoral <b>avant tout partage</b> — priorité sur la succession, déduit de la part des autres héritiers.</div>
+<div class="box precision"><span class="lbl">Précision — concubin ou tiers</span>Pour un concubin ou un partenaire de PACS collaborant bénévolement (hors mécanisme du salaire différé, réservé aux descendants), les voies possibles sont l'indemnisation par reconnaissance d'un accord tacite (société créée de fait, contrat de travail dissimulé).</div>
+
+<h2 class="banner" id="s3">3. Cas particuliers : mineurs et démembrement</h2>
+
+<h3 id="s3-1">3.1 Entreprise individuelle démembrée</h3>
+<div class="box precision"><span class="lbl">Précision — les murs</span>Si le défunt était <b>propriétaire</b> : usufruitier utilise/perçoit les revenus ; nu-propriétaire conserve la propriété. Entretien courant à la charge de l'usufruitier, grosses réparations à la charge du nu-propriétaire (art. 605-606 C. civ.). Si le défunt était <b>locataire</b> : le bail se poursuit dans la succession ; congé au décès nécessairement par <b>acte d'huissier</b>, préavis de <b>6 mois minimum</b> — toute autre forme de congé est nulle, même autorisée par le bail.</div>
+<div class="box piege"><span class="lbl">Piège d'examen — le fonds de commerce démembré</span>L'usufruitier a seul le pouvoir de l'exploiter, sous l'obligation de <b>conserver la substance</b> du fonds. La <b>vente du fonds</b> (ou son apport en société) n'est <b>jamais possible par le seul usufruitier</b>. La cession d'un élément essentiel (clientèle, droit au bail, licence indispensable) nécessite l'<b>autorisation du nu-propriétaire</b>.</div>
+<div class="box precision"><span class="lbl">Précision — location-gérance par un mineur héritier</span>Le mineur, incapable, ne peut décider seul : ses représentants légaux doivent solliciter l'<b>autorisation du juge des contentieux de la protection</b> (démontrant l'intérêt du mineur), rédiger le contrat, publier dans un SHAL, et gérer les revenus dans son intérêt (compte bloqué jusqu'à sa majorité, le cas échéant).</div>
+
+<h3 id="s3-2">3.2 Entreprise sociétaire démembrée</h3>
+<table>
+<tbody>
+<tr><td data-label="Point" class="cond">Qualité d'associé</td><td data-label="Détail">Appartient en principe au <b>nu-propriétaire</b></td></tr>
+<tr><td data-label="Point" class="cond">Droit de participer aux AG</td><td data-label="Détail">Usufruitier <b>et</b> nu-propriétaire doivent tous deux être convoqués (art. 1844 C. civ. réformé)</td></tr>
+<tr><td data-label="Point" class="cond">Bénéfices distribués</td><td data-label="Détail">Reviennent à l'<b>usufruitier</b></td></tr>
+<tr><td data-label="Point" class="cond">Réserves incorporées, boni de liquidation</td><td data-label="Détail">Reviennent au <b>nu-propriétaire</b> (substance patrimoniale)</td></tr>
+<tr><td data-label="Point" class="spec">Droit de vote</td><td data-label="Détail">Nu-propriétaire, <b>sauf</b> pour l'affectation des bénéfices, réservée à l'usufruitier — aménageable par les statuts dans les limites de l'art. 1844</td></tr>
+</tbody>
+</table>
+
+<h2 class="banner" id="s4">4. Indivision et sursis au partage</h2>
+<div class="box piege"><span class="lbl">Piège d'examen — précarité de l'indivision</span>Décisions importantes en principe à l'<b>unanimité</b> des indivisaires ; chaque indivisaire peut demander le partage <b>à tout moment</b> — l'indivision est donc structurellement précaire, ce qui menace la continuité d'une entreprise transmise en indivision.</div>
+<div class="tree">
+<span class="root">Sursis au partage (art. 820 C. civ.)</span>
+<span class="mode altern">Alternative</span>
+<div class="branch">
+<div class="cond-item">Le partage immédiat <b>risque de porter atteinte à la valeur</b> des biens indivis</div>
+<div class="cond-item">Un indivisaire <b>ne peut reprendre l'entreprise</b> qu'à l'expiration d'un délai</div>
+</div>
+<div class="result ok">Sursis accordé par le tribunal, sur demande d'un indivisaire, pour <b>2 ans au maximum</b> — mesure exceptionnelle, appréciée souverainement par le juge ; peut porter sur des droits sociaux</div>
+</div>
+
+<h2 class="banner" id="s5">5. Le statut de l'entrepreneur individuel (depuis 2022)</h2>
+<div class="box memo"><span class="lbl">Mémo — séparation de plein droit des patrimoines (depuis le 15 mai 2022)</span>Patrimoine <b>professionnel</b> (biens, droits, obligations et sûretés utiles à l'activité) distinct du patrimoine <b>personnel</b>, sans démarche particulière requise.</div>
+<div class="tree">
+<span class="root">3 voies de transmission de l'activité de l'EI</span>
+<span class="mode altern">Alternative</span>
+<div class="branch">
+<div class="cond-item">Mécanismes successoraux de droit commun</div>
+<div class="cond-item">Transmission du fonds de commerce/artisanal/libéral (isolé)</div>
+<div class="cond-item"><b>Cession universelle du patrimoine professionnel</b> — transmission en bloc de toute l'universalité professionnelle, plus large que la seule cession du fonds</div>
+</div>
+</div>
+
+<h2 class="banner" id="s6">6. Transmission organisée — techniques du droit des libéralités</h2>
+
+<h3 id="s6-1">6.1 La donation simple</h3>
+<div class="box memo"><span class="lbl">Mémo</span>Acte notarié pour les immeubles/biens importants, acte sous seing privé pour les biens mobiliers. Principe d'<b>irrévocabilité</b>, sauf ingratitude du donataire, survenance d'enfant, ou inexécution des charges. Les donations sont <b>rapportables</b> à la succession (calcul de la réserve).</div>
+<div class="box reflexe"><span class="lbl">Réflexe cas pratique — donation successive</span>Transmission progressive par tranches (ex. : 25 %/an sur 4 ans), chaque tranche formalisée par un acte notarié distinct — avantage fiscal (renouvellement des abattements) et transition en douceur. Avec réserve d'usufruit : le donateur conserve le contrôle jusqu'à son décès.</div>
+
+<h3 id="s6-2">6.2 Cas pratique — réduction pour atteinte à la réserve</h3>
+<div class="tree">
+<span class="root">Données</span>
+<div class="branch">
+<div class="cond-item">M. Y : patrimoine total 600 000 €, 2 enfants (A et B)</div>
+<div class="cond-item">Donation de 300 000 € à un tiers Z ; patrimoine restant au décès : 300 000 €</div>
+</div>
+</div>
+<div class="tree">
+<span class="root">Calcul étape par étape</span>
+<div class="branch">
+<div class="cond-item"><b>① Masse successorale fictive</b> = patrimoine restant + donations rapportées = 300 000 + 300 000 = <b>600 000 €</b></div>
+<div class="cond-item"><b>② Réserve héréditaire</b> (2 enfants = 2/3 de la masse) = 2/3 × 600 000 = <b>400 000 €</b> (soit 200 000 € par enfant)</div>
+<div class="cond-item"><b>③ Quotité disponible</b> = 1/3 × 600 000 = <b>200 000 €</b></div>
+<div class="cond-item"><b>④ Comparaison</b> : donation de 300 000 € &gt; quotité disponible de 200 000 € → excédent de <b>100 000 €</b></div>
+</div>
+<div class="result ko">La donation empiète sur la réserve → réduction de 100 000 € : Z restitue cette somme, conserve 200 000 € ; A et B reçoivent chacun 200 000 € (leur réserve intégrale)</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>La réserve héréditaire varie selon le nombre d'enfants : <b>1/2</b> pour 1 enfant, <b>2/3</b> pour 2 enfants, <b>3/4</b> pour 3 enfants ou plus — ne pas appliquer un taux fixe par réflexe.</div>
+
+<h3 id="s6-3">6.3 Donation-partage et Pacte Dutreil</h3>
+<div class="box memo"><span class="lbl">Mémo — donation-partage</span>Double nature : donation <b>et</b> partage. Avantage majeur : la valeur des biens transmis est <b>figée au jour de la donation</b>, ce qui limite les contestations ultérieures entre héritiers et évite l'indivision successorale. Formalisée par acte notarié ; possibilité pour le donateur de conserver la gestion (clauses de réserve de gérance/droits de vote).</div>
+<div class="box precision"><span class="lbl">Précision — Pacte Dutreil</span>Exonération <b>partielle</b> des droits de mutation à titre gratuit, sous conditions de <b>conservation des titres</b> et d'<b>exercice d'une fonction de direction</b> (détail fiscal hors programme UE1, cf. cours de fiscalité).</div>
+
+<h2 class="banner" id="s7">7. Transmission organisée — techniques du droit des sociétés</h2>
+<div class="box precision"><span class="lbl">Précision — objectif commun</span>Toutes ces techniques visent à <b>dissocier le capital et le pouvoir</b> lors de la transmission.</div>
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>Pouvoir aux uns, capital aux autres</h5>Un membre de la famille reçoit la direction (ex. : devient PDG), les autres reçoivent des titres garantissant des revenus sans pouvoir de décision.</div>
+<div class="cmp-card"><h5>Capital transmis, pouvoir retenu</h5>L'associé cède des actions mais en conserve d'autres à droits de vote multiples, ou garde un poste clé — utilisation d'actions de préférence à droits différenciés.</div>
+<div class="cmp-card"><h5>Dissociation immobilier/exploitation</h5>Société commerciale (activité) + SCI (murs), liées par un bail commercial — les parts de la SCI peuvent être conservées par le cédant ou transmises séparément à des héritiers non-exploitants.</div>
+<div class="cmp-card"><h5>Holding de transmission</h5>Le propriétaire apporte ses titres à une holding nouvellement créée en échange d'actions de celle-ci ; les titres de la holding sont ensuite transmis progressivement, souvent combinés au Pacte Dutreil et à des actions à droits de vote multiples pour conserver le contrôle.</div>
+</div>
+
+<h2 class="banner" id="s8">8. Méthode cas DSCG</h2>
+<div class="cas">
+<p><b>Énoncé</b> — Madame Petit décède, laissant un patrimoine de 900 000 €. Elle avait 3 enfants et avait fait, 5 ans avant son décès, une donation de 200 000 € à une association caritative (tiers non héritier). Son fils cadet avait travaillé gratuitement dans son exploitation agricole pendant 7 années consécutives à partir de ses 20 ans, sans jamais être salarié.</p>
+
+<h4 class="q">Question 1 — La donation à l'association est-elle réductible ?</h4>
+<div class="principe"><b>En principe :</b> avec 3 enfants ou plus, la réserve héréditaire est de 3/4 de la masse successorale, la quotité disponible étant de 1/4.</div>
+<div class="espece"><b>En l'espèce :</b> masse successorale fictive = 900 000 + 200 000 = 1 100 000 €. Quotité disponible = 1/4 × 1 100 000 = 275 000 €. La donation de 200 000 € est inférieure à la quotité disponible.</div>
+<div class="conclusion">Conclusion : la donation de 200 000 € n'excède pas la quotité disponible (275 000 €) — elle n'est pas réductible et l'association conserve l'intégralité du don.</div>
+
+<h4 class="q">Question 2 — Le fils cadet peut-il revendiquer un salaire différé ?</h4>
+<div class="principe"><b>En principe :</b> le contrat de travail à salaire différé suppose cumulativement : être descendant, travail effectif et régulier sans salaire, au moins 5 ans consécutifs, à partir de 18 ans, sans contrepartie suffisante ; la durée prise en compte est plafonnée à 10 ans.</div>
+<div class="espece"><b>En l'espèce :</b> le fils cadet est descendant de la défunte, a travaillé 7 années consécutives à partir de 20 ans (au-delà de 18 ans), sans salaire.</div>
+<div class="conclusion">Conclusion : les conditions paraissent réunies — le fils cadet peut revendiquer un salaire différé calculé sur les salaires moyens régionaux pour la période, prélevé en priorité sur l'actif successoral avant tout partage entre les héritiers.</div>
+
+<h4 class="q">Question 3 — Comment se répartit le patrimoine restant entre les 3 enfants ?</h4>
+<div class="principe"><b>En principe :</b> à égalité d'ordre et de degré, le partage se fait par tête entre les enfants, sous réserve du prélèvement prioritaire du salaire différé le cas échéant.</div>
+<div class="espece"><b>En l'espèce :</b> les 3 enfants sont du même ordre (1<sup>er</sup> ordre) et du même degré (1<sup>er</sup> degré).</div>
+<div class="conclusion">Conclusion : après prélèvement du salaire différé du fils cadet sur l'actif successoral, le solde restant est partagé par tête entre les 3 enfants, à parts égales.</div>
+</div>
+
+<div class="box verif" style="border:1px dashed var(--red); border-radius:8px; padding:10px 14px;">
+<b>Points à vérifier auprès du cours / des textes actualisés :</b>
+<ul>
+<li>Barèmes et abattements fiscaux des droits de donation/succession selon le lien de parenté (relèvent du cours de fiscalité, non traités ici).</li>
+<li>Conditions précises et taux d'exonération du Pacte Dutreil (à approfondir avec le cours de Mme Boursier, référencé dans la source).</li>
+</ul>
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){
+  document.body.classList.toggle('mobile-force');
+}
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

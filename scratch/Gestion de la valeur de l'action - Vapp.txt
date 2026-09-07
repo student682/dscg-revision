@@ -1,0 +1,39 @@
+La gestion de la valeur de l’action
+A l’heure actuelle, la gestion du cours de bourse (et donc de la valeur d’une action), revêt un enjeu capital pour les sociétés. C’est un gage de confiance donné aux _______________ et également un élément primordial de l’indépendance d’une entreprise. 
+C’est pourquoi les sociétés cotées sont particulièrement attentives, à l’extrême parfois, aux tribulations de ce cours de bourse qu’elles choient et redoutent en même temps. 
+Nous verrons dans ce chapitre quatre moments particuliers de la vie d’une action, des leviers dont les entreprises disposent et du sens qu’ont chacune de ces opérations.
+Les rachats d’actions
+Autorisé en 1998, le rachat d'action désigne l'action des entreprises qui rachètent leurs propres actions dans le but de ne pas laisser une quantité trop importante d'actions sur le marché. Il s'agit d'une décision prise par les actionnaires de l'entreprise à l'occasion d'une assemblée générale. Cette opération est autorisée par l'Autorité des Marchés Financiers uniquement si moins de ___ % du capital est concerné. Celles-ci investissent sur elle-même et peuvent y parvenir de deux façons :
+racheter leurs actions sur le marché boursier
+racheter les titres appartenant aux actionnaires à un cours ___________ à celui du marché
+ Les modalités juridiques des opérations de rachat d'actions 
+ 
+1.1.1. Des opérations très encadrées 
+• Les sociétés qui souhaitent procéder au rachat de leurs actions doivent y être autorisées par leur assemblée générale dans les conditions définies aux articles L. 225-209 et L. 225-209-2 du Code de commerce. 
+• Le volume de titres pouvant être mis en œuvre un programme de rachat d'actions est soumis à plusieurs contraintes:
+- une société ne peut posséder plus de 10 % du total de ses propres actions (c. com art. L. 225-210) ; 
+- une société peut acheter pendant la durée de son programme un nombre de titres représentant au maximum 10 % de son capital. Ce seuil de 10 % en flux est calculé en additionnant les achats bruts sans tenir compte des ventes réalisées par la société (c. com., art. L. 225-209) ; 
+- les actions ne peuvent être annulées que dans la limite de 10 % du capital de la société par période de 24 mois. 
+Dans le cas où les actions sont sur un marché réglementé ou un système multilatéral de négociation SMN (tel Euronext Growth), les rachats sont soumis aux dispositions visant à interdire les abus de marché (règlement (UE) n° 596/2014 du 16 avril 2014 sur les abus de marché et le règlement délégué (UE) 2016/1052 de la Commission européenne). N'entrent pas dans le champ des abus de marché les rachats d'actions réalisés dans le cadre d'un programme de rachat poursuivant l'un des objectifs suivants: 
+- _________________________  ; 
+- satisfaire aux obligations découlant de titres de créance qui sont ___________ en titres de propriété ;
+- satisfaire aux obligations découlant des programmes ___________ sur actions, ou autres allocations d'actions, aux salariés ou aux membres des organes d'administration, de gestion ou de surveillance de l'émetteur ou d'une entreprise associée. 
+1.1.2. le rachat d'actions en pratique 
+Il existe trois principales manières de procéder à un rachat d'actions. 
+Offre de rachat destinée à tous les actionnaires 
+Si la société est cotée, on parle alors d'offre publique de rachat (OPRA) par la société de ses propres actions. Dans la pratique, le conseil d'administration, utilisant une autorisation qui doit lui avoir été donnée par l'AGE, propose à tous les actionnaires de leur racheter tout ou partie de leurs actions à un certain prix, et ce, pendant une certaine période.
+Rachat au fil de l’eau
+Dans la limite de 10 % du capital et dans le cadre d'un programme de rachat d'actions approuvé par l'assemblée des actionnaires.
+Offre de rachat négociée avec un actionnaire principal ou un groupe d’actionnaires
+Ce rachat s'opère souvent en payant une prime (greenmail*). C'est également l'occasion de contrecarrer une offre publique d'achat (OPA) hostile en rachetant les actions acquises.
+*Le greenmail, c'est une pratique née aux Etats Unis qui consiste pour un investisseur activiste, à acquérir une participation dans une société cotée, à poursuivre et à disqualifier sans relâche la direction, afin soit de la remplacer, soit de l'obliger à racheter sa participation au prix fort.
+Les finalités de la politique de rachat des actions
+La législation détermine cinq finalités pour les programmes de rachat d'actions: 
+- la _________________________ ;
+- ______________________________ ;
+- la remise d'actions dans le cadre _________________________ ;
+- ____________________________ ;
+- leur ____________________. 
+Toutes influent sur la création de valeur, l'évolution du cours des actions, l'émergence d'instruments financiers, le financement des opérations de croissance externe et de restructuration, les structures de financement et les stratégies dissuasives en matière d'OPA hostiles.
+1.2.1.La création de valeur pour les actionnaires
+Cett

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>La Valeur et le Risque</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. — La Valeur et le Risque</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>La Valeur et le Risque</h1>
+  <div class="sub">DSCG UE 2 — Finance</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. La rentabilité et le risque d'un actif financier</a></li>
+<li><a href="#s2">2. La diversification de portefeuille (Modèle de Markowitz)</a></li>
+<li><a href="#s3">3. Le Modèle d'Évaluation des Actifs Financiers (MEDAF)</a></li>
+<li><a href="#s4">4. Structure financière et coût du capital</a></li>
+</ol>
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. La rentabilité et le risque d'un actif financier</h2>
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ</span>
+En finance, il n'y a pas de rentabilité sans risque. La rentabilité attendue d'un actif (action) correspond à l'espérance mathématique de ses rentabilités futures. Le risque est mesuré par la volatilité de cette rentabilité, c'est-à-dire sa <strong>variance</strong> ou son <strong>écart-type</strong>.
+</div>
+
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card">
+<h5>Rentabilité (Espérance)</h5>
+E(R) = Somme des (Probabilité × Rentabilité potentielle). C'est le rendement moyen attendu.
+</div>
+<div class="cmp-card">
+<h5>Risque (Écart-type)</h5>
+σ = Racine de la Variance. Plus la dispersion des rentabilités probables autour de la moyenne est grande, plus l'actif est risqué.
+</div>
+</div>
+
+<h2 class="banner" id="s2">2. La diversification de portefeuille (Modèle de Markowitz)</h2>
+<p>L'objectif de la théorie du portefeuille est de trouver la combinaison d'actifs qui maximise la rentabilité pour un niveau de risque donné, ou qui minimise le risque pour une rentabilité donnée.</p>
+
+<div class="box memo">
+<span class="lbl">★ MÉMO : La Covariance et la Corrélation</span>
+Le risque d'un portefeuille ne se calcule pas comme la moyenne pondérée des risques individuels, car les actifs interagissent entre eux. Cette interaction est mesurée par la covariance ou le coefficient de corrélation (ρ).
+</div>
+
+<div class="tree">
+<span class="root">Effet de diversification selon la corrélation (ρ)</span>
+<div class="branch">
+<div class="cond-item"><b>ρ = +1 :</b> Corrélation positive parfaite. Les titres varient exactement dans le même sens. <b>Aucune réduction de risque</b>.</div>
+<div class="cond-item"><b>ρ = 0 :</b> Actifs indépendants. La diversification réduit significativement le risque global.</div>
+<div class="cond-item"><b>ρ = -1 :</b> Corrélation négative parfaite. Variation en sens strictement opposé. Il est possible d'<b>annuler totalement le risque</b>.</div>
+</div>
+</div>
+
+<div class="box piege">
+<span class="lbl">⚠ PIÈGE D'EXAMEN</span>
+La diversification permet d'éliminer le <strong>risque spécifique</strong> (lié à l'entreprise), mais elle ne permet jamais d'éliminer le <strong>risque systématique</strong> (lié au marché dans son ensemble).
+</div>
+
+<h2 class="banner" id="s3">3. Le Modèle d'Évaluation des Actifs Financiers (MEDAF)</h2>
+<p>Puisque le risque spécifique peut être éliminé par la diversification, le marché ne rémunère que le <strong>risque systématique</strong>, mesuré par le coefficient <strong>Bêta (β)</strong>.</p>
+
+<div class="box precision">
+<span class="lbl">Formule Fondamentale du MEDAF</span>
+<p><strong>E(Ri) = Rf + βi × [E(Rm) - Rf]</strong></p>
+<ul>
+<li>E(Ri) : Rentabilité exigée de l'action i</li>
+<li>Rf : Taux sans risque (ex: OAT)</li>
+<li>E(Rm) : Rentabilité attendue du marché (ex: CAC 40)</li>
+<li>βi : Bêta de l'action (sensibilité de l'action au marché)</li>
+<li>[E(Rm) - Rf] : Prime de risque du marché</li>
+</ul>
+</div>
+
+<table>
+<caption>Interprétation du Bêta (β)</caption>
+<thead><tr><th>Valeur du Bêta</th><th>Interprétation du risque</th></tr></thead>
+<tbody>
+<tr><td>β &gt; 1</td><td>Actif <strong>plus risqué</strong> (plus volatil) que le marché. Amplifie les mouvements du marché.</td></tr>
+<tr><td>β = 1</td><td>Actif présentant exactement le <strong>même risque</strong> que le marché.</td></tr>
+<tr><td>0 &lt; β &lt; 1</td><td>Actif <strong>défensif</strong> (moins risqué que le marché). Amortit les baisses.</td></tr>
+</tbody>
+</table>
+
+<h2 class="banner" id="s4">4. Structure financière et coût du capital (CMPC)</h2>
+<p>Le Coût Moyen Pondéré du Capital (CMPC ou WACC) représente la rémunération globale exigée par les bailleurs de fonds (actionnaires et créanciers).</p>
+<div class="cas">
+<h4 class="q">Calcul du CMPC</h4>
+<div class="principe"><strong>Formule :</strong> CMPC = [E(Rc) × (C/V)] + [Rd × (1 - IS) × (D/V)]<br>Avec : E(Rc) = coût des capitaux propres (via MEDAF), Rd = coût de la dette, C = Capitaux propres, D = Dettes, V = C+D.</div>
+<div class="conclusion">N'oubliez jamais de tenir compte de l'économie d'IS sur le coût de la dette : c'est l'avantage fiscal de l'endettement !</div>
+</div>
+
+</article>
+
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){ document.body.classList.toggle('mobile-force'); }
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

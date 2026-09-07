@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>La Fin de l'Entreprise</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none;}
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+p{margin:8px 0;}
+ul{margin:8px 0; padding-left:24px;}
+li{margin-bottom:4px;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+
+/* Vertical sequence diagram */
+.seq {
+  display:flex; flex-direction:column; gap:10px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px; padding:15px; margin:20px 0;
+}
+.seq-item {
+  display:flex; gap:15px; align-items:flex-start;
+}
+.seq-num {
+  background:var(--dblue); color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0; margin-top:2px;
+}
+.seq-content {
+  background:#fff; border:1px solid #d7dfe8; border-radius:6px; padding:10px 14px; flex-grow:1;
+}
+.seq-content h5 { margin:0 0 5px 0; color:var(--dblue); font-size:14px; }
+.seq-content p { margin:0; font-size:13.5px; }
+
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+@media (max-width:480px){
+  body{font-size:13.5px;} .wrap{padding:0 10px 50px;} .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  table, thead, tbody, th, td, tr{display:block;} thead{display:none;} table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;} td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">DSCG — La Fin de l'Entreprise</div>
+  <div class="btns">
+    <button onclick="window.print()">⬇ Exporter en PDF</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>La Fin de l'Entreprise</h1>
+  <div class="sub">Cessation de l'EI et Dissolution/Liquidation des Sociétés</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. Cessation de l'Activité de l'Entreprise Individuelle (EI)</a></li>
+<li><a href="#s2">2. La Dissolution de la Société</a>
+  <ol><li><a href="#s2-1">2.1 Les causes de dissolution</a></li><li><a href="#s2-2">2.2 Procédure et Effets</a></li></ol>
+</li>
+</ol>
+</div>
+
+<article>
+
+<h2 class="banner" id="s1">1. Cessation de l'Activité de l'EI</h2>
+<h3 id="s1-1">1.1 Les causes de cessation</h3>
+<ul>
+<li><b>Cession</b> : À titre onéreux (vente fonds de commerce) ou gratuit (donation, legs).</li>
+<li><b>Cessation sans cession</b> : Vente isolée des éléments. <i>Liquidation des stocks</i> (autorisation préfectorale). <i>Cession du droit au bail</i> (libre si même activité).</li>
+<li><b>Décès</b> de l'entrepreneur.</li>
+<li><b>Liquidation judiciaire</b> (cessation des paiements insurmontable).</li>
+<li><b>Location-gérance</b> : Concession à un gérant (le loueur perd la qualité de commerçant).</li>
+<li><b>Apport du fonds en société</b> : Évaluation par CAA requise dans SA/SARL.</li>
+</ul>
+
+<h3 id="s1-2">1.2 Formalités au RCS</h3>
+<ul>
+<li><b>Inscriptions modificatives</b> : Cessation temporaire, décès (avec maintien provisoire).</li>
+<li><b>Radiation</b> : Dans le mois de la cessation définitive.</li>
+<li><b>Radiation d'office</b> : Décès (après 1 an), clôture de liquidation.</li>
+</ul>
+
+<h2 class="banner" id="s2">2. La Dissolution de la Société</h2>
+<h3 id="s2-1">2.1 Les causes de dissolution</h3>
+<p><b>Causes communes (Art. 1844-7 C. civ)</b> :</p>
+<ul>
+<li>Expiration de la durée de vie (Max 99 ans).</li>
+<li>Réalisation ou extinction de l'objet social.</li>
+<li>Dissolution anticipée volontaire (AGE).</li>
+<li><b>Dissolution judiciaire pour justes motifs</b> : Inexécution obligations, ou <b>mésentente grave</b> paralysant la société.</li>
+<li>Liquidation judiciaire (insuffisance d'actif).</li>
+</ul>
+
+<div class="box memo"><span class="lbl">Rappel DCG - Majorités pour Dissolution Anticipée</span>
+<b>SARL</b> : 2/3 des voix (AGE) avec quorum 1/4 (SARL après 2005).<br>
+<b>SA</b> : AGE (2/3 des voix exprimées).<br>
+<b>SNC / SC</b> : Unanimité (sauf clause contraire).<br>
+<b>SAS</b> : Selon statuts.
+</div>
+
+<div class="box piege"><span class="lbl">Piège — Réunion des parts en une seule main</span>
+La réunion de toutes les parts n'entraîne pas la dissolution immédiate (délai d'1 an pour régulariser).
+Si l'associé unique est une <b>Personne Morale</b>, cela n'entraîne pas la liquidation mais la <b>TUP</b> (Transmission Universelle du Patrimoine).
+</div>
+
+<h3 id="s2-2">2.2 Procédure et Effets de la Dissolution</h3>
+
+<div class="seq">
+  <div class="seq-item">
+    <div class="seq-num">1</div>
+    <div class="seq-content">
+      <h5>Décision de Dissolution et Publicité</h5>
+      <p>L'AGE vote la dissolution. Opposabilité via enregistrement (Droit fixe 375€), JAL, et inscription au RCS/BODACC.</p>
+    </div>
+  </div>
+  <div class="seq-item">
+    <div class="seq-num">2</div>
+    <div class="seq-content" style="border-color:var(--gold); border-left-width:4px;">
+      <h5>Survie de la Personnalité Morale</h5>
+      <p>La personnalité morale subsiste <b>uniquement pour les besoins de la liquidation</b> jusqu'à la clôture. La société reste débitrice de ses dettes.</p>
+    </div>
+  </div>
+  <div class="seq-item">
+    <div class="seq-num">3</div>
+    <div class="seq-content">
+      <h5>Liquidation (par le Liquidateur)</h5>
+      <p>Le liquidateur représente la société. Sa mission : réaliser l'actif et payer le passif ("prix de la course"). S'il constate la cessation des paiements, il doit déposer le bilan.</p>
+    </div>
+  </div>
+  <div class="seq-item">
+    <div class="seq-num">4</div>
+    <div class="seq-content">
+      <h5>Clôture et Radiation</h5>
+      <p>L'AG approuve les comptes de liquidation. Demande de radiation au RCS dans le mois.</p>
+    </div>
+  </div>
+  <div class="seq-item">
+    <div class="seq-num">5</div>
+    <div class="seq-content" style="border-color:var(--green); border-left-width:4px;">
+      <h5>Le Partage</h5>
+      <p>Perte de la personnalité morale. Chaque associé reprend son apport. L'actif net restant (boni de liquidation) est partagé selon les droits des associés.</p>
+    </div>
+  </div>
+</div>
+
+</article>
+<footer>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé
+</footer>
+</div>
+</body>
+</html>

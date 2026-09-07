@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>La Société Anonyme (SA) — Constitution et Gouvernance</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.tree .mode{
+  display:inline-block; margin-left:10px; font-size:12px; font-weight:700;
+  padding:3px 9px; border-radius:12px; vertical-align:middle;
+}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+.timeline{margin:16px 0; padding:0; list-style:none;}
+.timeline li{
+  position:relative; padding:8px 0 8px 30px; border-left:2px solid var(--blue); margin-left:6px;
+}
+.timeline li:last-child{border-left:2px solid transparent;}
+.timeline li::before{
+  content:""; position:absolute; left:-7px; top:12px; width:12px; height:12px;
+  border-radius:50%; background:var(--blue); border:2px solid #fff;
+}
+.timeline .t-lbl{font-weight:700; color:var(--dblue); font-size:14px;}
+.timeline .t-txt{font-size:13.5px; color:#333;}
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+.cas ul{margin:4px 0; padding-left:20px;}
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+article{margin:0;}
+@media (max-width:480px){
+  body{font-size:13.5px;}
+  .wrap{padding:0 10px 50px;}
+  .toolbar{padding:8px 10px;}
+  .toolbar .chap{font-size:11.5px;}
+  .toolbar button{padding:6px 8px; font-size:11px;}
+  .title-banner h1{font-size:19px;}
+  .title-banner .sub{font-size:12px;}
+  h2.banner{font-size:15px; padding:8px 12px;}
+  h3{font-size:14.5px;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+  td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  .cmp{grid-template-columns:1fr!important;}
+}
+@media (min-width:481px) and (max-width:900px){
+  .cmp{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:901px){
+  .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);}
+}
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force .toolbar{padding:8px 10px;}
+body.mobile-force .toolbar .chap{font-size:11.5px;}
+body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;}
+body.mobile-force .title-banner h1{font-size:19px;}
+body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody,
+body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;}
+body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+body.mobile-force .cmp{grid-template-columns:1fr!important;}
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+  body{font-size:11.5px;}
+  h2.banner{break-before:page; break-after:avoid;}
+  h2.banner:first-of-type{break-before:auto;}
+  table, .box, .tree, .cas, .cmp-card{break-inside:avoid;}
+  .title-banner{break-after:avoid;}
+  a{color:#000; text-decoration:none;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">DCG2 — La Société Anonyme</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>La Société Anonyme (SA) — Constitution et Gouvernance</h1>
+  <div class="sub">DCG UE 2 — Droit des sociétés et des groupements d'affaires · Rappels essentiels pour le DSCG</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. Constitution de la SA</a></li>
+<li><a href="#s2">2. Gouvernance — Structure moniste (CA, PCA, DG)</a></li>
+<li><a href="#s3">3. Gouvernance — Structure dualiste (Directoire, CS)</a></li>
+<li><a href="#s4">4. Comparatif moniste vs dualiste</a></li>
+<li><a href="#s5">5. Les Assemblées d'actionnaires</a></li>
+<li><a href="#s6">6. Conventions avec la société</a></li>
+<li><a href="#s7">7. Évolution du capital et transformation</a></li>
+<li><a href="#s8">8. Cas pratique intégré</a></li>
+</ol>
+</div>
+
+<article>
+
+<h2 class="banner" id="s1">1. Constitution de la SA</h2>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ (EN CLAIR)</span>
+La SA est une société de capitaux par excellence : les actionnaires ne sont pas commerçants, leur responsabilité est limitée aux apports, et les actions sont librement négociables (sauf clause d'agrément). C'est la forme obligatoire pour certaines activités (assurances, sociétés cotées) et la seule à offrir deux modes de gouvernance.
+</div>
+
+<table>
+<caption>Conditions de constitution de la SA</caption>
+<thead><tr><th>Élément</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td data-label="Élément">Nombre d'actionnaires</td><td data-label="Règle"><b>Minimum 2</b> (7 si cotée sur un marché réglementé)</td></tr>
+<tr><td data-label="Élément">Capital social minimum</td><td data-label="Règle" class="imp"><b>37 000 €</b></td></tr>
+<tr><td data-label="Élément">Apports en numéraire</td><td data-label="Règle" class="cond">Entièrement souscrits, libérés d'au moins <b>1/2</b> à la constitution, solde sous 5 ans</td></tr>
+<tr><td data-label="Élément">Apports en nature</td><td data-label="Règle" class="cond">Évaluation obligatoire par un <b>CAA</b> (pas de dispense possible)</td></tr>
+<tr><td data-label="Élément">Apports en industrie</td><td data-label="Règle" class="imp"><b>Interdits</b> dans la SA</td></tr>
+<tr><td data-label="Élément">Activités réservées</td><td data-label="Règle" class="spec">Assurances, SICAV, sociétés cotées sur marché réglementé</td></tr>
+<tr><td data-label="Élément">Dénomination</td><td data-label="Règle">Doit inclure la forme « SA » et le montant du capital social</td></tr>
+</tbody>
+</table>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Apports en industrie interdits</span>
+Contrairement à la SARL, SNC et SAS, les <b>apports en industrie sont interdits</b> dans la SA. C'est la conséquence directe du caractère « capitaliste » de cette forme sociale : seuls les apports créant du capital (numéraire et nature) sont admis.
+</div>
+
+<h2 class="banner" id="s2">2. Gouvernance — Structure moniste (CA, PCA, DG)</h2>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ (EN CLAIR)</span>
+La structure moniste concentre la direction et le contrôle dans un seul organe, le Conseil d'Administration. Le CA désigne en son sein un Président (PCA) et peut dissocier ou non les fonctions de Président et de Directeur Général.
+</div>
+
+<h3>2.1 Le Conseil d'Administration (CA)</h3>
+<table>
+<thead><tr><th>Aspect</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td data-label="Aspect">Composition</td><td data-label="Règle"><b>3 à 18</b> administrateurs (PP obligatoirement, sauf représentant permanent d'une PM)</td></tr>
+<tr><td data-label="Aspect">Mandat</td><td data-label="Règle"><b>6 ans maximum</b> (renouvelable)</td></tr>
+<tr><td data-label="Aspect">Cumul de mandats</td><td data-label="Règle" class="imp">Maximum <b>5 mandats</b> d'administrateur dans des SA ayant leur siège en France</td></tr>
+<tr><td data-label="Aspect">Rôle</td><td data-label="Règle">Détermine les orientations stratégiques, veille à leur mise en œuvre, contrôle la gestion</td></tr>
+<tr><td data-label="Aspect">Quorum</td><td data-label="Règle"><b>Moitié</b> des administrateurs présents</td></tr>
+<tr><td data-label="Aspect">Majorité</td><td data-label="Règle">Majorité des présents (voix prépondérante du PCA en cas de partage)</td></tr>
+</tbody>
+</table>
+
+<h3>2.2 Le Président du CA (PCA) et le Directeur Général (DG)</h3>
+
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>Fonctions cumulées (PCA = DG)</h5>Le Président du CA cumule les fonctions de direction et de présidence du conseil. C'est le régime par défaut. Il est « PDG ».</div>
+<div class="cmp-card"><h5>Fonctions dissociées (PCA ≠ DG)</h5>Le CA peut décider de dissocier les fonctions : le PCA préside le conseil et représente la société, tandis qu'un DG distinct assure la direction opérationnelle.</div>
+</div>
+
+<div class="box memo"><span class="lbl">Mémo — Pouvoirs du DG</span>
+<ul>
+<li>Le DG est investi des <b>pouvoirs les plus étendus</b> pour agir en toutes circonstances au nom de la société</li>
+<li>Les limitations statutaires de ses pouvoirs sont <b>inopposables aux tiers</b></li>
+<li>Il peut être assisté de 1 à 5 <b>DG délégués</b> (DGD)</li>
+</ul>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Révocation du DG et des administrateurs</span>
+<ul>
+<li><b>Administrateurs</b> : révocables <b>ad nutum</b> par l'AGO (à tout moment, sans motif, sans indemnité)</li>
+<li><b>DG</b> (quand il n'est pas PCA) : révocable par le CA. Si la révocation est sans <b>juste motif</b>, le DG a droit à des <b>dommages-intérêts</b> (sauf si PCA = DG → ad nutum)</li>
+<li><b>PCA</b> : révocable ad nutum par le CA de sa qualité de PCA, et par l'AGO de sa qualité d'administrateur</li>
+</ul>
+</div>
+
+<h2 class="banner" id="s3">3. Gouvernance — Structure dualiste (Directoire, CS)</h2>
+
+<h3>3.1 Le Directoire</h3>
+<table>
+<thead><tr><th>Aspect</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td data-label="Aspect">Composition</td><td data-label="Règle"><b>1 à 5</b> membres (7 si cotée). Si capital &lt; 150 000 €, un DG unique peut remplacer le directoire</td></tr>
+<tr><td data-label="Aspect">Qualité</td><td data-label="Règle" class="imp">Uniquement des <b>personnes physiques</b>, pas nécessairement actionnaires</td></tr>
+<tr><td data-label="Aspect">Mandat</td><td data-label="Règle"><b>2 à 6 ans</b> (4 ans par défaut)</td></tr>
+<tr><td data-label="Aspect">Nomination</td><td data-label="Règle">Par le <b>Conseil de surveillance</b></td></tr>
+<tr><td data-label="Aspect">Rôle</td><td data-label="Règle">Direction opérationnelle — pouvoirs les plus étendus pour agir au nom de la société</td></tr>
+<tr><td data-label="Aspect">Révocation</td><td data-label="Règle" class="cond">Par l'<b>AGO</b> (ou par le CS si les statuts le prévoient). Droit à indemnité si sans juste motif</td></tr>
+</tbody>
+</table>
+
+<h3>3.2 Le Conseil de Surveillance (CS)</h3>
+<table>
+<thead><tr><th>Aspect</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td data-label="Aspect">Composition</td><td data-label="Règle"><b>3 à 18</b> membres, nécessairement actionnaires</td></tr>
+<tr><td data-label="Aspect">Mandat</td><td data-label="Règle"><b>6 ans maximum</b></td></tr>
+<tr><td data-label="Aspect">Rôle</td><td data-label="Règle">Contrôle permanent de la gestion du directoire — <b>ne s'immisce jamais dans la gestion</b></td></tr>
+<tr><td data-label="Aspect">Autorisations préalables</td><td data-label="Règle" class="cond">Cautions, avals, garanties au nom de la société (sauf si délégation au directoire)</td></tr>
+<tr><td data-label="Aspect">Révocation</td><td data-label="Règle">Par l'<b>AGO</b> (ad nutum)</td></tr>
+</tbody>
+</table>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Incompatibilité CS / Directoire</span>
+Un membre du CS <b>ne peut pas</b> être simultanément membre du directoire. C'est le fondement même de la séparation direction/contrôle dans la structure dualiste.
+</div>
+
+<h2 class="banner" id="s4">4. Comparatif moniste vs dualiste</h2>
+
+<table>
+<caption>Comparatif — SA moniste vs SA dualiste</caption>
+<thead><tr><th>Critère</th><th>Moniste (CA + DG)</th><th>Dualiste (Directoire + CS)</th></tr></thead>
+<tbody>
+<tr><td data-label="Critère">Organe de direction</td><td data-label="Moniste">DG (+ DGD)</td><td data-label="Dualiste">Directoire (collégial)</td></tr>
+<tr><td data-label="Critère">Organe de contrôle</td><td data-label="Moniste">CA (cumule direction et contrôle)</td><td data-label="Dualiste" class="exo">CS (séparation stricte)</td></tr>
+<tr><td data-label="Critère">Nomination du dirigeant</td><td data-label="Moniste">DG nommé par le CA</td><td data-label="Dualiste">Directoire nommé par le CS</td></tr>
+<tr><td data-label="Critère">Révocation du dirigeant</td><td data-label="Moniste" class="cond">DG par CA (indemnité si sans juste motif)</td><td data-label="Dualiste" class="cond">Directoire par AGO (indemnité si sans juste motif)</td></tr>
+<tr><td data-label="Critère">Mandats</td><td data-label="Moniste">Administrateurs : 6 ans max</td><td data-label="Dualiste">Directoire : 2-6 ans / CS : 6 ans max</td></tr>
+<tr><td data-label="Critère">Qualité d'actionnaire</td><td data-label="Moniste" class="cond">Administrateurs peuvent être non-actionnaires (si statuts)</td><td data-label="Dualiste" class="imp">CS : actionnaires obligatoires / Directoire : non requis</td></tr>
+<tr><td data-label="Critère">Avantage principal</td><td data-label="Moniste">Simplicité, réactivité</td><td data-label="Dualiste" class="exo">Transparence, séparation pouvoir/contrôle</td></tr>
+</tbody>
+</table>
+
+<h2 class="banner" id="s5">5. Les Assemblées d'actionnaires</h2>
+
+<table>
+<caption>Quorum et majorités en SA</caption>
+<thead><tr><th>Type d'AG</th><th>Quorum (1re conv.)</th><th>Quorum (2e conv.)</th><th>Majorité</th></tr></thead>
+<tbody>
+<tr><td data-label="Type" class="spec"><b>AGO</b></td><td data-label="Q1">1/5 des actions ayant droit de vote</td><td data-label="Q2">Aucun quorum</td><td data-label="Majorité">Majorité des voix exprimées</td></tr>
+<tr><td data-label="Type" class="cond"><b>AGE</b></td><td data-label="Q1">1/4 des actions ayant droit de vote</td><td data-label="Q2">1/5 des actions</td><td data-label="Majorité"><b>2/3</b> des voix exprimées</td></tr>
+</tbody>
+</table>
+
+<div class="box memo"><span class="lbl">Mémo — Compétences respectives</span>
+<ul>
+<li><b>AGO</b> : approbation des comptes, affectation du résultat, nomination/révocation des administrateurs/CS, conventions réglementées, CAC</li>
+<li><b>AGE</b> : modification des statuts (objet, siège, capital, transformation), fusions, dissolution anticipée</li>
+</ul>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Augmentation de capital par incorporation de réserves</span>
+Bien que l'augmentation de capital soit en principe de la compétence de l'<b>AGE</b>, l'incorporation de réserves est votée aux conditions de quorum et de majorité de l'<b>AGO</b>. C'est une dérogation classique posée en cas pratique.
+</div>
+
+<div class="box memo"><span class="lbl">Mémo — Cession des actions</span>
+<ul>
+<li>En principe, les actions sont <b>librement négociables</b></li>
+<li>Possibilité de <b>clause d'agrément</b> dans les statuts (pour les cessions à des tiers uniquement, pas entre actionnaires, ni au conjoint/héritier)</li>
+<li>En cas de refus d'agrément, la société doit racheter ou faire racheter les actions dans un délai de <b>3 mois</b></li>
+</ul>
+</div>
+
+<h2 class="banner" id="s6">6. Conventions avec la société</h2>
+
+<div class="cmp" style="--cmp-cols:3;">
+<div class="cmp-card"><h5>Conventions libres</h5>Opérations courantes conclues à des conditions normales. Aucune procédure.</div>
+<div class="cmp-card"><h5>Conventions réglementées</h5>Conventions entre la SA et un dirigeant, administrateur, actionnaire > 10 %, ou société liée. Procédure : <b>autorisation préalable du CA/CS</b> → rapport spécial du CAC → <b>approbation AGO</b>.</div>
+<div class="cmp-card"><h5>Conventions interdites</h5>Emprunts, découverts, cautions consentis par la SA à ses dirigeants <b>personnes physiques</b>, ou à leurs conjoints/ascendants/descendants. <b>Nullité absolue</b>.</div>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Procédure des conventions réglementées en SA</span>
+Contrairement à la SARL (où l'approbation peut être a posteriori), en SA la procédure est <b>toujours en 3 temps</b> :
+<ul>
+<li><b>1. Autorisation préalable</b> par le CA (ou CS en dualiste) — le dirigeant intéressé ne vote pas</li>
+<li><b>2. Rapport spécial</b> du CAC présenté à l'AGO</li>
+<li><b>3. Approbation</b> par l'AGO — le dirigeant intéressé ne vote pas</li>
+</ul>
+À défaut d'autorisation préalable, la convention peut être <b>annulée</b> si elle a causé un préjudice à la société.
+</div>
+
+<h2 class="banner" id="s7">7. Évolution du capital et transformation</h2>
+
+<h3>7.1 Augmentation de capital</h3>
+<div class="box memo"><span class="lbl">Mémo — Modalités d'augmentation</span>
+<ul>
+<li><b>Par apport en numéraire</b> : DPS (droit préférentiel de souscription) pour les actionnaires existants. L'AGE peut supprimer le DPS. Le capital ancien doit être <b>intégralement libéré</b> avant toute nouvelle augmentation en numéraire</li>
+<li><b>Par apport en nature</b> : évaluation par un CAA obligatoire. Pas de DPS</li>
+<li><b>Par incorporation de réserves</b> : quorum et majorité d'AGO. Distribution gratuite d'actions ou augmentation de la valeur nominale</li>
+<li><b>Par compensation de créances</b> : la créance sur la société est convertie en capital</li>
+</ul>
+</div>
+
+<h3>7.2 Réduction de capital</h3>
+<div class="box precision"><span class="lbl">Précision — 2 types de réduction</span>
+<ul>
+<li><b>Non motivée par des pertes</b> : remboursement aux actionnaires. Les créanciers disposent d'un <b>droit d'opposition</b> (délai de 20 jours)</li>
+<li><b>Motivée par des pertes</b> : imputation des pertes sur le capital. Pas de remboursement, pas de droit d'opposition des créanciers</li>
+</ul>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Obligation de reconstitution des capitaux propres</span>
+Si les capitaux propres deviennent <b>inférieurs à la moitié du capital social</b> (art. L. 225-248), le CA doit convoquer une AGE dans les <b>4 mois</b> suivant l'approbation des comptes pour décider de la poursuite ou de la dissolution. Si poursuite, la société a <b>2 ans</b> pour régulariser (réduire le capital ou reconstituer les capitaux propres).
+</div>
+
+<h3>7.3 Transformation</h3>
+<table>
+<thead><tr><th>Cas</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td data-label="Cas" class="imp"><b>Transformation obligatoire</b></td><td data-label="Règle">Si le nombre d'actionnaires descend en dessous du minimum légal pendant plus de <b>1 an</b>, tout intéressé peut demander la dissolution judiciaire (le tribunal peut accorder un délai de régularisation de 6 mois)</td></tr>
+<tr><td data-label="Cas" class="cond"><b>En SAS</b></td><td data-label="Règle">Décision de l'<b>AGE</b> (2/3). Pas de CAC aux comptes requis pour la transformation</td></tr>
+<tr><td data-label="Cas" class="cond"><b>En SARL</b></td><td data-label="Règle"><b>Unanimité</b> des actionnaires (augmentation des engagements → passage de responsabilité limitée à une forme potentiellement plus contraignante)</td></tr>
+<tr><td data-label="Cas" class="imp"><b>En SNC</b></td><td data-label="Règle"><b>Unanimité</b> (les actionnaires deviendraient commerçants, responsables indéfiniment et solidairement)</td></tr>
+</tbody>
+</table>
+
+<h2 class="banner" id="s8">8. Cas pratique intégré</h2>
+
+<div class="cas">
+<p><b>Énoncé</b> — La SA LOGISTIK est une société non cotée à conseil d'administration, composée de 4 actionnaires et dotée d'un capital de 50 000 €. M. Renard, administrateur et DG, a conclu un contrat de prestation de services entre sa société personnelle et LOGISTIK, sans en informer le CA. Par ailleurs, les capitaux propres de LOGISTIK sont tombés à 20 000 € à la clôture du dernier exercice. Enfin, Mme Collet, actionnaire (15 %), souhaite céder ses actions à un investisseur extérieur.</p>
+
+<h4 class="q">Question 1 — Le contrat de prestation conclu par M. Renard est-il régulier ?</h4>
+<div class="principe"><b>En principe :</b> toute convention entre une SA et l'un de ses dirigeants (directement ou indirectement via une société interposée) est une <b>convention réglementée</b> soumise à autorisation préalable du CA, rapport spécial du CAC et approbation de l'AGO (art. L. 225-38 C. com.).</div>
+<div class="espece"><b>En l'espèce :</b> M. Renard est administrateur et DG. Le contrat entre sa société personnelle et LOGISTIK est une convention indirectement conclue avec un dirigeant. Il aurait dû obtenir l'autorisation préalable du CA.</div>
+<div class="conclusion">Conclusion : la convention est irrégulière. Elle peut être annulée si elle a causé un préjudice à LOGISTIK. M. Renard engage sa responsabilité pour les conséquences dommageables de cette convention.</div>
+
+<h4 class="q">Question 2 — Quelles obligations découlent de la baisse des capitaux propres ?</h4>
+<div class="principe"><b>En principe :</b> si les capitaux propres deviennent inférieurs à la moitié du capital social, le CA doit convoquer une AGE dans les 4 mois suivant l'approbation des comptes pour décider de la dissolution ou de la poursuite (art. L. 225-248).</div>
+<div class="espece"><b>En l'espèce :</b> capital social = 50 000 €, capitaux propres = 20 000 € → les CP sont bien inférieurs à la moitié du CS (25 000 €).</div>
+<div class="conclusion">Conclusion : le CA de LOGISTIK doit convoquer une AGE dans les 4 mois. Si la poursuite est décidée, la société a 2 ans pour reconstituer ses capitaux propres au moins au niveau de la moitié du capital.</div>
+
+<h4 class="q">Question 3 — Mme Collet peut-elle librement céder ses actions à un tiers ?</h4>
+<div class="principe"><b>En principe :</b> les actions de SA sont librement négociables. Toutefois, les statuts peuvent prévoir une clause d'agrément pour les cessions à des tiers (art. L. 228-23). En cas de refus, la société dispose de 3 mois pour faire racheter les actions.</div>
+<div class="espece"><b>En l'espèce :</b> il faut vérifier si les statuts de LOGISTIK contiennent une clause d'agrément. Si oui, Mme Collet doit notifier son projet au CA qui statue. Si non, la cession est libre.</div>
+<div class="conclusion">Conclusion : en l'absence de clause d'agrément, la cession est libre. En présence d'une telle clause, elle devra obtenir l'agrément du CA, sous peine de nullité de la cession.</div>
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){ document.body.classList.toggle('mobile-force'); }
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') { allBoxes.forEach(b => b.style.display = ''); return; }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

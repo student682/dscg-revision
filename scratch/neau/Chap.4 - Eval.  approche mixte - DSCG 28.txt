@@ -1,0 +1,124 @@
+Chapitre 4 - L’évaluation par les approches mixtes
+I - Principe de la méthode2
+uNotion de goodwill2
+vCalcul du goodwill2
+wRente annuelle de goodwill2
+xActualisation de la rente du goodwill2
+II- Caractéristiques de la méthode3
+III - Mise en œuvre de la méthode3
+31 - Actif économique : An3
+32 - Bénéfice économique (Bn)5
+33 -  Taux d’intérêt11
+IV - Combinaisons des paramètres11
+uActualisation d’une suite limitée de rentes de goodwill (ou méthode des rentes abrégées)11
+vMéthode des Anglo-saxons12
+wMéthode des praticiens13
+xMéthode de l’union européenne des experts comptables13
+V - Application14
+Annexe 1 : Bilan de la société « WIMILLE de Y » au 31 décembre N -1(en k€)14
+Annexe 2 : Valeur de marché des actifs de la société « WIMILLE de Y» et autres éléments15
+Fiches techniques évaluation GOODWILL     21 à 25                                                                          
+Deux reproches sont généralement faits à la méthode de l’actif net comptable corrigé ou réévalué.
+Elle ne tient pas compte de certains éléments intangibles qui sont source de valeur pour l’entreprise car l’ANCC se fonde avant tout sur les postes du bilan. Ces éléments sont notamment la qualité du personnel de l’entreprise, son savoir-faire, sa réputation, etc.
+Il s’agit d’une vision statique de l’entreprise, à une date donnée, sans prise en compte de ses perspectives futures.
+L’estimation d’un goodwill (GW) va permettre de répondre à ces deux critiques en donnant une valeur à ces actifs intangibles, à partir du business plan de la société. La valeur de marché des capitaux propres de l’entreprise est alors égale à :
+Valeur entreprise = actifs matériels + actifs immatériels
+Valeur entreprise = ANCC (hors fonds de commerce) + goodwill
+On peut donc dire qu’une entreprise a une valeur économique qui se compose de l’addition de 2 valeurs : 
+Une valeur patrimoniale = la somme des éléments qui la composent.
+Une valeur additionnelle qui traduira : soit l’ensemble des valeurs telles que renommée, savoir-faire, qualification du personnel, soit la vocation de l’entreprise à faire des bénéfices.
+Il existe de nombreuses méthodes d’évaluation des entreprises. Elles diffèrent par la façon dont elles appréhendent cette « valeur additionnelle ».
+Le concept anglais de fair value (juste valeur) est une notion subjective. L’opinion que l’on peut avoir de l’équité d’une évaluation dépend largement du jugement individuel. C’est pourquoi les normalisateurs internationaux ont cherché à édicter des critères objectifs de détermination de la juste valeur. Il s’agit de la norme IFRS13. La juste valeur y est définie « comme un prix qui serait reçu si l’on vendait un actif ou si l’on payait pour transférer un passif lors d’une transaction normale entre les acteurs du marché à la date d’évaluation ».
+La juste valeur, tout comme la valeur de marché sur laquelle elle est fondée, présente l’inconvénient de rendre fortement instable l’évaluation des entreprises et de leurs titres.
+Plusieurs autres méthodes du goodwill sont ainsi définies et permettent d’obtenir une base d’évaluation, plus complètes que l’A.N.C.
+I - Principe de la méthode
+uNotion de goodwill
+Désignons : 
+Vl’évaluation de l’entreprise par les flux,
+ANCCl’actif net comptable corrigé,
+GWle goodwill,
+Nous pouvons ainsi écrire : V - ANCC = GW
+ vCalcul du goodwill
+Le calcul du goodwill est fondé sur la prévision du bénéfice et de la rémunération des actifs de l’entreprise au cours des prochaines années.
+wRente annuelle de goodwill
+Pour une année donnée N, désignons par :
+Bnle bénéfice prévu,
+An l’actif nécessaire à l’exploitation,
+rle taux de rentabilité exigé de l’actif.
+La rente du goodwill (Rn) de l’année n est égale à : Rn = Bn –(r x An)
+xActualisation de la rente du goodwill
+Le goodwill (GW) est égal à la valeur actualisée des rentes annuelles de goodwill prévues dans l’avenir.
+Désignons par i, le taux d’actualisation des rentes du goodwill.
+L’actualisation peut porter :
+Soit sur les rentes de goodwill prévisionnelles d’un nombre limité d’années ; en pratique, ce nombre est de l’ordre de cinq ;
+GW = R1(1+i)-1 + R2 (1+i)-2 + R3 (1+i)-3 + R4 (1+i)-4 + R5 (1+i)-5 
+Soit sur une suite infinie de rentes supposées constantes; le goodwill est ainsi obtenu en “capitalisant” la rente annuelle.
+GW = R /i donc  si n tend vers l’infini …………………………………………………………
+II- Caractéristiques de la méthode
+Connaissant l’actif net comptable corrigé (ANCC) et le (GW), une transformation de la relation décrite ci-dessus nous permet d’obtenir la valeur (V) de l’entreprise.
+V = ANCC sans FC+ GW
+Cette méthode est mixte du fait que la valeur de l’entreprise soit donnée par la somme d’une évaluation patrimoniale (l’actif net comptable corrigé) et d’une évaluation par les flux de profits (le goodwill).
+Cette méthode s’appuie des prévisions de bénéfices et d’actifs. Ceci contraste avec les méthodes traditionnelles d’évaluation qui sont fondées sur la constatation des profits déjà réalisés ou du patrimoine existant.
+III - Mise en œuvre de la méthode
+La méthode du goodwill présente des variantes, qui proviennent du calcul lui-même :
+Rn = Bn –(r x An)
+Les différents paramètres de cette formule sont calculés différemment selon les différentes interprétations aussi bien pour l’actif économique An que pour le bénéfice économique Bn.
+31 - Actif économique : An
+L’actif An qui figure dans l’expression de la rente de goodwill correspond, selon les interprétations, soit :
+à l’actif net comptable corrigé (ANCC) tel qu’il a été défini auparavant,
+à la valeur substantielle brute (VSB) ;
+aux capitaux permanents nécessaires à l’exploitation (CPNE).
+L’actif comptable corrigé:
+Bilan schématique 
+Actifs
+Capitaux
+propres
+Dettes
+Cu Valeur substantielle brute (VSB)
+La VSB est égale à la valeur des biens utilisés pour les besoins de l’exploitation.
+La VSB comprend donc la valeur de certains biens qui ne sont pas inscrits à l’actif du bilan :
+Les biens faisant l’objet d’un contrat de crédit-bail, les biens loués et les biens prêtés ;
+Les grosses réparations ;
+Les effets escomptés non échus nécessaires à l’exploitation.
+La VSB ne comprend pas : 
+Les actifs hors exploitation,
+L’actif fictif,
+Le fonds commercial.
+Bilan
+Actif
+Passif
+La définition de la VSB ne fait aucune référence au passif du bilan. La VSB représente ainsi l’outil de travail de l’entreprise indépendamment de son mode de financement.
+La valeur substantielle brute :
+Actif
+immobilisé
+Capitaux
+propres
+       
+    V.S.B.
+Dettes financières
+Stocks et créances d’exploitation
+Dettes d’exploitation
+.
+Cv Les capitaux permanents nécessaires à l’exploitation (CPNE)
+Ce concept correspond à l’actif immobilisé nécessaire, tel qu’il est déterminé pour le calcul de la valeur substantielle brute, augmenté des besoins en fonds de roulement d’exploitation.
+Les CPNE comprennent donc :
+La valeur d’utilité des immobilisations nécessaires à l’exploitation ;
+Le besoin en fonds de roulement d’exploitation.
+Tandis que la VSB est fondée sur l’observation du bilan (point de vue statique), le concept des CPNE est essentiellement dynamique. Les deux composantes des CPNE (immobilisations et BFRE) font l’objet de prévisions annuelles basées sur la prévision du chiffre d’affaires. On détermine ainsi pour chacune des années à venir :
+Le besoin net en investissement, c’est à dire l’investissement moins l’annuité d’amortissement  calculée sur la base de la valeur d’utilité des immobilisations ;
+Le BFRE calculé par la méthode normative.
+Actif
+immobilisé
+Capitaux
+propres
+    C.P.N.E
+Dettes financières
+Stocks et créances d’exploitation
+Dettes d’exploitation
+32 - Bénéfice économique (Bn)
+Rn = ……………….. 
+Le premier terme de l’expression de la rente du goodwill est le bénéfice prévisionnel Bn. Ce bénéfice doit être retraité. Il convient notamment :
+D’éliminer les résultats exceptionnels,
+De calculer la dotation aux amortissements sur la base de la valeur d’utilité,
+D’éliminer les dotations aux amortissements concernant les postes d’actif fictif.
+Il convient en outre de mettre en harmoni

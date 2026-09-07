@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Le Régime Juridique et Social du Groupe</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+
+/* Toolbar */
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+
+/* Title banner */
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+
+/* TOC */
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+
+/* Section banners */
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+
+/* Callout boxes */
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+
+/* Decision tree (HTML/CSS, texte natif) */
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.tree .mode{
+  display:inline-block; margin-left:10px; font-size:12px; font-weight:700;
+  padding:3px 9px; border-radius:12px; vertical-align:middle;
+}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+
+/* Timeline / chronologie */
+.timeline{margin:16px 0; padding:0; list-style:none;}
+.timeline li{
+  position:relative; padding:8px 0 8px 30px; border-left:2px solid var(--blue); margin-left:6px;
+}
+.timeline li:last-child{border-left:2px solid transparent;}
+.timeline li::before{
+  content:""; position:absolute; left:-7px; top:12px; width:12px; height:12px;
+  border-radius:50%; background:var(--blue); border:2px solid #fff;
+}
+.timeline .t-lbl{font-weight:700; color:var(--dblue); font-size:14px;}
+.timeline .t-txt{font-size:13.5px; color:#333;}
+
+/* Comparison grid (organes / formes / acteurs) */
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+
+/* Mini-cas DSCG */
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+.cas ul{margin:4px 0; padding-left:20px;}
+
+/* Footer */
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+article{margin:0;}
+a.anchor-target{scroll-margin-top:60px;}
+.verif{color:var(--red); font-style:italic; font-weight:600;}
+
+/* ===== Responsive mobile ===== */
+@media (max-width:480px){
+  body{font-size:13.5px;}
+  .wrap{padding:0 10px 50px;}
+  .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  .toolbar .chap{font-size:11.5px;}
+  .toolbar button{padding:6px 8px; font-size:11px;}
+  .title-banner h1{font-size:19px;}
+  .title-banner .sub{font-size:12px;}
+  h2.banner{font-size:15px; padding:8px 12px;}
+  h3{font-size:14.5px;}
+  h4{font-size:13.5px;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+  td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  td:empty, td:not([data-label]){padding:4px 10px;}
+  .cmp{grid-template-columns:1fr!important;}
+}
+@media (min-width:481px) and (max-width:900px){
+  .cmp{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:901px){
+  .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);}
+}
+
+/* mobile-force class : forçage du rendu mobile même sur grand écran */
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force .toolbar{padding:8px 10px;}
+body.mobile-force .toolbar .chap{font-size:11.5px;}
+body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;}
+body.mobile-force .title-banner h1{font-size:19px;}
+body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody,
+body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;}
+body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+body.mobile-force .cmp{grid-template-columns:1fr!important;}
+
+/* ===== Print ===== */
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+  body{font-size:11.5px;}
+  h2.banner{break-before:page; break-after:avoid;}
+  h2.banner:first-of-type{break-before:auto;}
+  table, .box, .tree, .cas, .cmp-card{break-inside:avoid;}
+  .title-banner{break-after:avoid;}
+  a{color:#000; text-decoration:none;}
+  .toc a{color:#000;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">Ch. — Régime du Groupe</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>Le Régime Juridique et Social du Groupe</h1>
+  <div class="sub">DSCG UE 1 — Gestion juridique, fiscale et sociale · Droit des sociétés</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+
+<ol>
+<li><a href="#s1">1. Le groupe : une réalité sans personnalité juridique</a></li>
+<li><a href="#s2">2. Intérêt du groupe et direction</a></li>
+<li><a href="#s3">3. Protection des associés au sein du groupe
+  <ol><li><a href="#s3-1">3.1 Information</a></li><li><a href="#s3-2">3.2 Expertise de gestion intragroupe</a></li><li><a href="#s3-3">3.3 Action en responsabilité</a></li><li><a href="#s3-4">3.4 Sanction des abus (Rozenblum)</a></li></ol>
+</li>
+<li><a href="#s4">4. Le CAC dans les groupes</a></li>
+<li><a href="#s5">5. Consolidation des comptes</a></li>
+<li><a href="#s6">6. Titres et options intragroupe</a></li>
+<li><a href="#s7">7. Relations financières entre sociétés du groupe
+  <ol><li><a href="#s7-1">7.1 Opérations de trésorerie</a></li><li><a href="#s7-2">7.2 Sort du passif — principe et exceptions</a></li></ol>
+</li>
+<li><a href="#s8">8. Procédures collectives et groupe</a></li>
+<li><a href="#s9">9. Régime social du groupe
+  <ol><li><a href="#s9-1">9.1 CSE, UES, comité de groupe</a></li><li><a href="#s9-2">9.2 Situation des salariés</a></li></ol>
+</li>
+<li><a href="#s10">10. Méthode cas DSCG</a></li>
+</ol>
+
+</div>
+<article>
+
+<h2 class="banner" id="s1">1. Le groupe : une réalité sans personnalité juridique</h2>
+<div class="box precision"><span class="lbl">Précision fondamentale</span>Le groupe n'a <b>pas de personnalité morale</b> : c'est une multitude de personnalités juridiques distinctes. Chaque société conserve son <b>patrimoine indépendant</b> — principe du cloisonnement patrimonial.</div>
+<div class="box memo"><span class="lbl">Mémo — les 2 seuls mécanismes créant un lien entre patrimoines</span>
+<ul>
+<li><b>La volonté</b> : une société se porte caution ou s'engage solidairement pour une autre</li>
+<li><b>La loi</b> : responsabilité indéfinie (ex. : SNC) ou extension de dette sous contrôle du juge (procédures collectives)</li>
+</ul>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Dans un groupe pyramidal, ce ne sont <b>pas les filiales qui sont associées de la société mère</b>, mais l'inverse : c'est la <b>mère qui est associée des filiales</b>. Aucune personne n'est « associée du groupe » puisque le groupe n'existe pas juridiquement.</div>
+
+<h2 class="banner" id="s2">2. Intérêt du groupe et direction</h2>
+<div class="box precision"><span class="lbl">Précision — l'intérêt du groupe n'est pas la somme des intérêts sociaux</span>C'est une notion avant tout <b>économique</b>, non juridiquement autonome de l'intérêt social. L'intérêt d'une société peut être atteint sans que l'intérêt du groupe le soit — ce dernier pouvant même servir de justification à l'atteinte portée au premier (ex. : une mère qui « étouffe » une filiale).</div>
+<div class="box memo"><span class="lbl">Mémo — arrêt Rozenblum (Cass. crim., 4 février 1985)</span>La jurisprudence pénale admet que l'atteinte à l'intérêt social d'une filiale soit <b>légitimée par l'intérêt du groupe</b>, sous conditions strictes (cf. § 3.4).</div>
+<div class="box precision"><span class="lbl">Précision — direction de fait</span>Le groupe n'ayant pas d'organes propres, sa direction revient <b>en fait</b> à la société holding (ses dirigeants, ses actionnaires majoritaires). Solution recommandée pour un circuit de décision harmonieux : <b>délégations de pouvoir</b> entre dirigeants de la holding et des filiales (plutôt que le cumul systématique de mandats identiques).</div>
+
+<h2 class="banner" id="s3">3. Protection des associés au sein du groupe</h2>
+
+<h3 id="s3-1">3.1 Information</h3>
+<div class="box memo"><span class="lbl">Mémo — obligations d'information (art. L. 233-6, L. 233-26 C. com.)</span>
+<ul>
+<li>Mention dans le rapport de gestion de toute prise de participation franchissant <b>1/20, 1/10, 1/5, 1/3 ou 1/2</b> du capital d'une autre société</li>
+<li>Compte rendu de l'activité et des résultats de l'ensemble, filiales et sociétés contrôlées, par branche d'activité</li>
+<li>Rapport sur la gestion du groupe (situation, évolution prévisible, R&D)</li>
+</ul>
+</div>
+<div class="box precision"><span class="lbl">Précision — conventions réglementées intragroupe</span>Sont concernées les conventions entre la société et un actionnaire détenant plus de <b>10 % des droits de vote</b>, ou la société le contrôlant — ce qui inclut les conventions mère/filiale et mère/sous-filiale.</div>
+
+<h3 id="s3-2">3.2 Expertise de gestion intragroupe</h3>
+<div class="tree">
+<span class="root">2 voies pour une expertise débordant le cadre d'une seule société</span>
+<span class="mode altern">Alternative</span>
+<div class="branch">
+<div class="cond-item"><b>Art. 145 CPC</b> — mesure d'instruction avant tout procès, pour motif légitime ; utilisable de la mère vers la filiale <b>ou</b> de la filiale vers la mère</div>
+<div class="cond-item"><b>Art. L. 225-231 C. com.</b> — expertise de gestion classique, étendue aux sociétés contrôlées, appréciée au regard de l'<b>intérêt du groupe</b></div>
+</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>L'expertise de gestion intragroupe de l'art. L. 225-231 est <b>unilatérale</b> : seuls les minoritaires de la <b>société mère</b> peuvent la déclencher à l'encontre d'une filiale — pas l'inverse. Les minoritaires d'une filiale souhaitant viser la mère doivent utiliser l'art. 145 CPC.</div>
+
+<h3 id="s3-3">3.3 Action en responsabilité</h3>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Les associés d'une société <b>ne peuvent pas</b> agir en responsabilité (action sociale) contre les dirigeants d'une <b>autre</b> société du groupe — l'action sociale de l'art. L. 225-231 n'est ouverte qu'aux associés de la société dont les dirigeants sont mis en cause. Reste possible : une action de <b>droit commun</b> (art. 1240 C. civ.) en tant que tiers, mais à des conditions jurisprudentielles restrictives.</div>
+
+<h3 id="s3-4">3.4 Sanction des abus (Rozenblum)</h3>
+<div class="tree">
+<span class="root">Conditions Rozenblum — écartent l'abus de biens sociaux au sein d'un groupe</span>
+<span class="mode cumul">Cumulatif</span>
+<div class="branch">
+<div class="cond-item">Sociétés liées par des liens capitalistiques <b>et</b> une réelle communauté d'intérêts</div>
+<div class="cond-item">Opération dictée par une <b>politique/stratégie commune</b> du groupe</div>
+<div class="cond-item">La filiale « ponctionnée » reçoit une <b>contrepartie</b> (une surfacturation est admissible ; un prélèvement sans contrepartie ne l'est pas)</div>
+<div class="cond-item">L'opération ne doit pas excéder les <b>capacités financières</b> de la société « victime »</div>
+</div>
+<div class="result ok">Les 4 conditions réunies → pas d'abus de biens sociaux, malgré une atteinte apparente à l'intérêt social de la filiale</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen — abus de majorité au sein d'un groupe</span>La théorie de l'abus de majorité n'est pas enfermée dans les limites de la personne morale : le vote des majoritaires d'une filiale peut être annulé s'il porte atteinte aux intérêts légitimes de la filiale et n'est pas dicté par l'intérêt du groupe.</div>
+
+<h2 class="banner" id="s4">4. Le CAC dans les groupes</h2>
+<div class="box memo"><span class="lbl">Mémo — seuils de désignation obligatoire depuis la loi Pacte (décret du 26/05/2019)</span>
+<table style="margin:8px 0 0;"><tbody>
+<tr><td class="cond" data-label="Niveau">Holding</td><td data-label="Seuils">2 des 3 seuils : CAHT 10 M€ · total bilan 5 M€ · 50 salariés (appréciés sur l'ensemble des sociétés contrôlées)</td></tr>
+<tr><td class="cond" data-label="Niveau">Filiales</td><td data-label="Seuils">Seuils de moitié inférieurs : CAHT 5 M€ · total bilan 2,5 M€ · 25 salariés</td></tr>
+</tbody></table>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Depuis la loi Pacte, le CAC est obligatoire dans le groupe <b>quelle que soit la forme juridique</b> des sociétés qui le composent (donc y compris SARL, SNC etc.), dès lors que les seuils sont dépassés au niveau du groupe.</div>
+
+<h2 class="banner" id="s5">5. Consolidation des comptes</h2>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Ne pas confondre <b>consolidation des comptes</b> (obligation comptable, régie par le Code de commerce) et <b>intégration fiscale</b> (régime d'imposition, distinct).</div>
+<div class="tree">
+<span class="root">Obligation de consolidation (art. L. 233-16)</span>
+<span class="mode altern">Alternative</span>
+<div class="branch">
+<div class="cond-item"><b>Contrôle exclusif</b> — majorité des droits de vote, OU désignation de la majorité des organes de direction 2 exercices de suite (présomption si &gt; 40 % des droits de vote et aucun autre associé n'a une fraction supérieure), OU influence dominante contractuelle/statutaire</div>
+<div class="cond-item"><b>Contrôle conjoint</b> — partage du contrôle entre un nombre limité d'associés, décisions prises en accord</div>
+</div>
+</div>
+<div class="box memo"><span class="lbl">Mémo — 3 exceptions à l'obligation de consolider</span>
+<ul>
+<li>Petits groupes : ne dépassant pas 2 des 3 seuils suivants sur 2 exercices consécutifs — <b>24 M€</b> de total bilan, <b>48 M€</b> de CAHT, <b>250 salariés</b></li>
+<li>« Exception de sous-groupe » — société déjà incluse dans le périmètre de consolidation d'une autre société (inapplicable aux sociétés cotées)</li>
+<li>Filiales d'« intérêt négligeable » pour l'image fidèle de l'ensemble</li>
+</ul>
+</div>
+<div class="box precision"><span class="lbl">Précision — influence notable et intégration proportionnelle</span>Une influence notable est <b>présumée</b> à partir de <b>1/5 des droits de vote</b>. Consolidation <b>totale</b> si contrôle exclusif ; consolidation <b>proportionnelle</b> au contrôle exercé si contrôle conjoint (moitié en cas de contrôle conjoint égalitaire).</div>
+<div class="box precision"><span class="lbl">Précision — communication et vote</span>En sociétés par actions, comptes consolidés et rapport ne sont communiqués <b>que sur demande</b> des actionnaires (vote obligatoire en SA/SCA/SE). Dans les autres sociétés, communication obligatoire, sans vote requis.</div>
+
+<h2 class="banner" id="s6">6. Titres et options intragroupe</h2>
+<div class="cmp" style="--cmp-cols:3;">
+<div class="cmp-card"><h5>Actions de préférence intragroupe</h5>Une mère peut émettre des actions de préférence conférant des droits dans une <b>filiale</b>, et inversement.</div>
+<div class="cmp-card"><h5>VM donnant accès au capital</h5>La société mère peut émettre des titres donnant accès au capital de la <b>filiale</b>, et inversement (art. L. 228-91).</div>
+<div class="cmp-card"><h5>Stock-options / actions gratuites intragroupe</h5>Possibles au profit de salariés/dirigeants d'une société détenue à plus de <b>10 %</b> par l'émettrice, d'une société détenant plus de 10 % de l'émettrice, ou d'une société sœur.</div>
+</div>
+
+<h2 class="banner" id="s7">7. Relations financières entre sociétés du groupe</h2>
+
+<h3 id="s7-1">7.1 Opérations de trésorerie</h3>
+<div class="box precision"><span class="lbl">Précision — dérogation au monopole bancaire</span>Les opérations de trésorerie intragroupe échappent au monopole des établissements de crédit (art. L. 511-7 al. 3° CMF), à condition qu'il existe entre les sociétés des <b>liens de capital conférant un pouvoir de contrôle effectif</b>. Ces opérations restent soumises au régime des <b>conventions réglementées</b>.</div>
+
+<h3 id="s7-2">7.2 Sort du passif — principe et exceptions</h3>
+<div class="box memo"><span class="lbl">Mémo — principe</span>Seule la société <b>débitrice</b> est tenue envers son créancier, quelle que soit la composition de son capital. Une mère détenant 100 % d'une filiale ne peut être poursuivie par les créanciers de cette filiale (elle en subit seulement les conséquences économiques en tant qu'associée).</div>
+<div class="tree">
+<span class="root">3 exceptions au principe d'indépendance patrimoniale</span>
+<div class="branch">
+<div class="cond-item"><b>Forme sociale</b> — filiale SNC : ses associés (dont la mère) répondent indéfiniment et solidairement du passif</div>
+<div class="cond-item"><b>Garanties consenties</b> — cautionnement, garantie autonome, lettre d'intention accordés par une société du groupe au profit d'une autre</div>
+<div class="cond-item"><b>Théorie de l'apparence</b> (art. 1156 C. civ.) — le créancier a pu légitimement croire que mère et filiale ne formaient qu'une seule société</div>
+</div>
+</div>
+<div class="box piege"><span class="lbl">Piège d'examen — théorie de l'apparence</span>La seule <b>identité de dirigeants ou de siège social</b> ne suffit jamais à établir la croyance légitime : il faut prouver que la confusion mère-fille a été <b>entretenue, voire orchestrée</b> par les sociétés du groupe.</div>
+
+<h2 class="banner" id="s8">8. Procédures collectives et groupe</h2>
+<div class="box memo"><span class="lbl">Mémo — principe</span>La procédure ouverte contre une société du groupe n'affecte pas directement les autres.</div>
+<div class="tree">
+<span class="root">2 exceptions — extension de la procédure</span>
+<span class="mode altern">Alternative</span>
+<div class="branch">
+<div class="cond-item"><b>Fictivité</b> de la personne morale ou <b>confusion des patrimoines</b> (art. L. 621-2) — la fictivité suppose une concordance d'éléments (sièges/dirigeants identiques, absence d'activité réelle) ; la confusion des patrimoines se déduit plus facilement de flux financiers anormaux sans contrepartie</div>
+<div class="cond-item"><b>Dirigeant de fait fautif</b> — la mère s'est comportée en dirigeant de fait de la filiale et a commis une faute de gestion → condamnation à prendre en charge une partie du passif (art. L. 651-2, action pour insuffisance d'actif)</div>
+</div>
+</div>
+
+<h2 class="banner" id="s9">9. Régime social du groupe</h2>
+
+<h3 id="s9-1">9.1 CSE, UES, comité de groupe</h3>
+<table>
+<thead><tr><th>Instance</th><th>Seuil / condition</th><th>Rôle</th></tr></thead>
+<tbody>
+<tr><td data-label="Instance">CSE</td><td data-label="Seuil" class="cond">Entreprise/groupe ≥ 11 salariés</td><td data-label="Rôle">Attributions économiques, sociales et culturelles</td></tr>
+<tr><td data-label="Instance">UES</td><td data-label="Seuil" class="cond">Entreprises &lt; 11 salariés chacune, mais unité de direction + complémentarité d'activités + identité de statut social</td><td data-label="Rôle">CSE commun à l'ensemble des entités reconnues comme formant un tout</td></tr>
+<tr><td data-label="Instance">Comité de groupe</td><td data-label="Seuil" class="cond">Entreprise dominante + filiales contrôlées, <b>ou</b> influence dominante avec détention ≥ 10 % et relation permanente/importante</td><td data-label="Rôle">Centralise les informations économiques et financières du groupe — n'exonère pas de l'obligation de CSE par entité</td></tr>
+<tr><td data-label="Instance">Comité d'entreprise européen</td><td data-label="Seuil" class="cond">&gt; 1 000 salariés dans l'UE, 2 établissements ≥ 150 salariés dans au moins 2 États membres</td><td data-label="Rôle">Règles propres</td></tr>
+</tbody>
+</table>
+<div class="box piege"><span class="lbl">Piège d'examen — présomption d'influence dominante (comité de groupe)</span>Présumée si l'entreprise dominante peut, directement ou indirectement : nommer plus de la moitié des organes de direction, OU disposer de la majorité des voix, OU détenir la majorité du capital souscrit. En cas de critères concurrents entre plusieurs entreprises, celle qui peut nommer la <b>majorité des organes de direction</b> prime.</div>
+
+<h3 id="s9-2">9.2 Situation des salariés</h3>
+<div class="box piege"><span class="lbl">Piège d'examen</span>Le principe d'indépendance des personnes morales employeurs s'applique aussi aux <b>conventions collectives</b> : celle de la mère ne s'impose <b>pas</b> de plein droit aux filiales — il faut soit leur signature propre, soit un <b>accord de groupe</b> exprès (art. L. 2232-30).</div>
+<div class="box memo"><span class="lbl">Mémo — atténuations en faveur des salariés</span>Intéressement, participation, PEE, retraite peuvent être organisés au niveau du groupe. Attribution d'actions gratuites/stock-options possible au profit des salariés de filiales, de la mère, ou de sociétés sœurs.</div>
+<div class="box precision"><span class="lbl">Précision — double rattachement possible</span>L'employeur en droit du travail est celui auquel le salarié est <b>en fait subordonné</b> : un salarié contractuellement rattaché à une filiale peut être en réalité subordonné à la mère, qui supportera alors les conséquences d'un licenciement injustifié. La mutation intragroupe est une <b>modification substantielle</b> du contrat de travail nécessitant l'accord du salarié ; l'ancienneté est conservée.</div>
+
+<h2 class="banner" id="s10">10. Méthode cas DSCG</h2>
+<div class="cas">
+<p><b>Énoncé</b> — La société HOLDCO détient 100 % du capital de sa filiale FILCO (SAS). HOLDCO impose à FILCO de vendre sa production exclusivement à une autre filiale du groupe, PRODCO, à un prix inférieur au prix de marché, dans le cadre d'une stratégie de groupe visant à optimiser la trésorerie consolidée. FILCO connaît des difficultés de trésorerie croissantes. Un actionnaire minoritaire de HOLDCO (détenant 6 % du capital) s'interroge sur la responsabilité des dirigeants de FILCO.</p>
+
+<h4 class="q">Question 1 — Le dirigeant de FILCO peut-il être poursuivi pour abus de biens sociaux ?</h4>
+<div class="principe"><b>En principe :</b> selon la jurisprudence Rozenblum, l'abus de biens sociaux n'est pas constitué si 4 conditions cumulatives sont réunies : appartenance à un même groupe avec communauté d'intérêts, opération dictée par une stratégie commune, contrepartie même déséquilibrée au profit de la société ponctionnée, et absence de dépassement de ses capacités financières.</div>
+<div class="espece"><b>En l'espèce :</b> FILCO reçoit une contrepartie (le prix de vente, même sous-évalué), mais l'opération semble excéder ses capacités financières puisqu'elle connaît des difficultés de trésorerie croissantes.</div>
+<div class="conclusion">Conclusion : la 4<sup>e</sup> condition Rozenblum (absence de dépassement des capacités financières de la société victime) paraît compromise — le dirigeant de FILCO (ou de HOLDCO s'il est dirigeant de fait de FILCO) pourrait donc être poursuivi pour abus de biens sociaux, sous réserve de l'appréciation souveraine des juges du fond sur la gravité de l'atteinte.</div>
+
+<h4 class="q">Question 2 — L'actionnaire minoritaire de HOLDCO (6 %) peut-il demander une expertise de gestion portant sur cette opération au sein de FILCO ?</h4>
+<div class="principe"><b>En principe :</b> l'art. L. 225-231 du Code de commerce permet aux actionnaires d'une société représentant au moins 5 % du capital de solliciter une expertise sur des opérations réalisées par les sociétés qu'elle contrôle, appréciée au regard de l'intérêt du groupe.</div>
+<div class="espece"><b>En l'espèce :</b> l'actionnaire détient 6 % de HOLDCO (société mère), au-dessus du seuil de 5 % ; l'opération visée est réalisée par FILCO, filiale contrôlée à 100 % par HOLDCO.</div>
+<div class="conclusion">Conclusion : l'actionnaire peut demander l'expertise de gestion intragroupe, puisque le mécanisme est précisément conçu pour permettre aux minoritaires de la mère d'obtenir un éclairage sur une opération réalisée au sein d'une filiale contrôlée.</div>
+
+<h4 class="q">Question 3 — Cet actionnaire peut-il agir directement en responsabilité contre le dirigeant de FILCO ?</h4>
+<div class="principe"><b>En principe :</b> l'action sociale de l'art. L. 225-231 n'est ouverte qu'aux associés de la société dont les dirigeants sont mis en cause. Un associé d'une autre société du groupe ne peut agir qu'en droit commun (art. 1240 C. civ.), à des conditions restrictives.</div>
+<div class="espece"><b>En l'espèce :</b> l'actionnaire est associé de HOLDCO, pas de FILCO — il n'a donc pas la qualité pour exercer l'action sociale contre le dirigeant de FILCO.</div>
+<div class="conclusion">Conclusion : l'actionnaire ne peut pas exercer l'action sociale de l'art. L. 225-231 contre le dirigeant de FILCO ; il devrait démontrer un préjudice personnel distinct pour agir en responsabilité de droit commun, ce qui reste incertain sur le seul fondement des faits décrits.</div>
+</div>
+
+<div class="box verif" style="border:1px dashed var(--red); border-radius:8px; padding:10px 14px;">
+<b>Points à vérifier auprès du cours / des textes actualisés :</b>
+<ul>
+<li>Seuils de désignation du CAC dans les groupes post-loi Pacte (10 M€/5 M€/50 salariés pour la holding) — vérifier leur maintien.</li>
+<li>Seuils d'exemption de consolidation des comptes (24 M€/48 M€/250 salariés) — sujets à révision périodique par décret.</li>
+</ul>
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){
+  document.body.classList.toggle('mobile-force');
+}
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>

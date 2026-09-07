@@ -1,0 +1,63 @@
+Chapitre 5 - Autres évaluations spécifiques
+Chapitre 5 - Autres évaluations spécifiques1
+Dossier 1 - L'évaluation des actifs immobiliers2
+11 – Les approches comparatives2
+111 -Définitions rapides2
+112 –Pour aller plus loin2
+12 - Les approches fondées sur les revenus3
+121 – Définitions rapides3
+121 –Pour aller plus loin3
+13 – Les méthodes par le coût de remplacement (Cost Approach)3
+14- Les méthodes indiciaires4
+15 –Les méthodes de ratios professionnels (Profit Method Valuation)4
+16 – Les principaux risques de l’immobilier5
+Dossier 2 – L’évaluation des startups6
+21- Notion de startup6
+22- Avis de plusieurs auteurs7
+23 – Evaluation d’une startup8
+231 – Le problème de la valorisation d'une start-up8
+232.- Les facteurs à prendre en compte dans l'évaluation d'une start-up8
+233 - La méthode du venture capital :9
+234 - Extrait de la RF comptable mai 2017. Par Michel Ternisien, membre de la compagnie des conseils et experts financiers (CCEF) :10
+En résumé pour les startups:14
+Dossier 3 - Les évaluations sectorielles16
+31 - La valorisation d'un fonds de commerce16
+32.- Zoom sur des évaluations sectorielles16
+ANNEXE : Evaluation immobilière18
+ANNEXE START-UP : ARTICLE « Les Echos »19
+Pas adaptées aux start-up20
+Dossier 1 - L'évaluation des actifs immobiliers 
+Dans le domaine de l’immobilier, les approches vues précédemment telles que les approches comparatives et les approches fondées sur les revenus restent valables, sous réserve de quelques ajustements.
+11 – Les approches comparatives
+111 -Définitions rapides 
+La méthode par comparaison consiste à partir directement des références des transactions effectuées sur le marché immobilier pour des biens présentant des caractéristiques et une localisation comparable à celle expertisé. La comparaison est utilisée pour déterminer tant la valeur vénale que la valeur locative d’un actif immobilier.
+La valeur vénale correspond au prix auquel un bien ou un droit immobilier pourrait être cédé au moment de l’expertise par un vendeur, dans les conditions normales de l’offre et la demande. Cette estimation suppose l’autonomie de décision des parties, la réalisation de la transaction dans un délai raisonnable et la mise en œuvre de la diligence adaptée pour la présentation sur le marché.
+La valeur locative de marché correspond à la contrepartie financière (annuelle ou mensuelle) des biens expertisés dans des conditions :
+De marché du jour de l’expertise, pour usage du bien dans le cadre d’un nouveau bail ; 
+D’exploitation normales correspondant à l’affectation actuelle du bien.
+Définitions : ouvrages Dunod finance DSCG
+112 –Pour aller plus loin
+L'évaluation d'un actif immobilier par comparaison est l'approche privilégiée par l'Administration fiscale et la plupart des experts car elle se fonde sur les données réelles du marché. Elle consiste à recenser des actifs comparables ayant fait l'objet d'une cession dans un passé relativement proche et à ramener leur prix à ce qui fait leur caractéristique commune. Cette caractéristique est généralement la surface, en mètres carrés pour les immeubles, en hectares pour les terrains. Dans certains cas spécifiques, ce peut être la surface commerciale (pour les immeubles commerciaux), le nombre de chambres pour les hôtels, le nombre de places pour les parkings ...
+Cette approche suppose cependant que les biens constituant l’échantillon soient homogènes. 
+Dans le cas contraire, il faudra appliquer des décotes et surcotes afin d'ajuster les spécificités du bien aux caractéristiques moyennes de l'échantillon. En effet, dans le cas d'une ville comme Nantes, au sein d'un même quartier, parfois à quelques dizaines de mètres de distance, la valeur d'un bien au mètre carré peut être très différente, selon son étage, la date et la qualité de sa construction, l'état de l'appartement, la présence ou non d'un ascenseur ... 
+II faudra également être attentif à la date à laquelle les transactions de référence se sont réalisées. Dans un marché volatil, en un ou deux ans, les prix peuvent fortement fluctuer. 
+La recherche de biens comparables se fait ainsi en trois étapes : 
+Identification des caractéristiques du bien immobilier : terrain, construction, qualité du bâtiment... ; 
+Délimitation du secteur géographique ; 
+Période sur laquelle les transactions comparables sont à retenir. 
+La précision de ces trois étapes dépendra grandement de la liquidité du marché, c'est-à-dire du nombre de transactions que ces trois critères successifs sont susceptibles de faire apparaître. Plus le nombre de transactions sera élevé, plus il sera possible d'en avoir une définition étroite. À l'inverse, lorsque le bien à valoriser est rare, il faudra élargir la zone géographique et/ou la période des transactions, en s'attachant cependant à ce que les biens restent homogènes. 
+12 - Les approches fondées sur les revenus 
+121 – Définitions rapides
+Les méthodes sur le revenu reposent sur deux approches : la capitalisation et l’actualisation.
+Les méthodes par le revenu consistent à prendre pour base un revenu constaté ou existant, un revenu théorique ou potentiel (loyer de marché ou valeur locative de marché) ou les deux, puis à utiliser des taux de rendement, de capitalisation ou des taux d’actualisation (valeur actuelle d’une série de flux sur une période donnée). Ces méthodes s’apparentent à celle de la méthode des flux de trésorerie actualisés.
+Définitions : ouvrages Dunod finance DSCG
+121 –Pour aller plus loin
+Les approches fondées sur les revenus sont une déclinaison des approches actuarielles. Un actif immobilier n'a de valeur que par les revenus (loyers) qu'il procure ou qu'il est susceptible de procurer. Pour la mise en œuvre de cette approche, il est nécessaire d'estimer les revenus à venir mais également leur évolution dans le temps et l'horizon des calculs. Pour ce qui est du revenu, il s'agit d'un revenu net, c'est-à-dire qu'au loyer attendu de la location du bien doit être déduit l'ensemble des charges à décaisser (impôts locaux, charges de copropriété, entretien ... ). Le taux d'actualisation (R) à retenir sera le taux de rentabilité qui est attendu sur le marché pour des biens équivalents. Enfin, pour ce qui est de l'horizon du calcul actuariel, deux méthodes sont possibles : 
+Soit un horizon fini est retenu, ce qui impose de prévoir dans le calcul une valeur vénale terminale pour le bien (VT n) à l'échéance des prévisions (n années). Cette option est cependant délicate à mettre en œuvre, sauf à ce que le bien ait une durée de vie limitée dans le temps (un camping de mobile homes par exemple), auquel cas seul le terrain sur lequel ils sont bâtis doit être valorisé à l’échéance : 
+Soit on pose l'hypothèse que le bien à une durée de vie indéfinie, et que les revenus nets connaissent une évolution constante dans le temps (au taux g), ce qui permet de simplifier les calculs : 
+13 – Les méthodes par le coût de remplacement (Cost Approach)
+Le coût de remplacement constitue à la fois une valeur en soi (valeur de remplacement) et une méthode de calcul.
+En tant que méthode de calcul, le coût de remplacement d’un immeuble intègre l’assiette foncière mais aussi les bâtiments et les équipements qui y sont liés. Il peut se calculer de trois façons :
+Le coût de remplacement à l'identique : il s'agira dans ce cas de la valeur vénale du terrain, augmentée du coût de reconstruction des bâtiments et installations à l'identique, de frais accessoires de l'opération et de la TVA non récupérable. Ce mode de calcul est peu ou pas utilisé pour une approche en valeur vénale ou en poursuite d'usage. Il est plus souvent employé en matière de valeurs d'assurance pour des bâtiments anciens. 
+Le coût de remplacement à l'équivalent, c'est-à-dire la valeur vénale du terrain, augmentée d'un coût de reconstitution des bâtiments à l'équivalent, en partant du principe que si les biens étaient reconstruits aujourd'hui, ils le seraient dans des normes de surfaces, de matériaux et d'équipements différentes des bâtiments existants considérés. 
+La valeu

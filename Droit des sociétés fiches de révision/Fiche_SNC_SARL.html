@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>SNC et SARL — Sociétés de Personnes</title>
+<style>
+:root{
+  --blue:#2E75B6;  --dblue:#1F4E79;
+  --red:#C00000;   --lred:#FCE4D6;
+  --green:#548235; --lgreen:#E2EFDA;
+  --gold:#BF8F00;  --lgold:#FFF2CC;
+  --grey:#595959;  --lgrey:#F2F2F2;
+  --font: "Segoe UI", Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+body{
+  font-family:var(--font); color:#222; margin:0; padding:0; background:#fff;
+  font-size:15.5px; line-height:1.5;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 18px 60px;}
+
+/* Toolbar */
+.toolbar{
+  position:sticky; top:0; z-index:50; background:var(--dblue); color:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 18px; box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.toolbar .chap{font-weight:600; font-size:14px; letter-spacing:.02em;}
+.toolbar .btns{display:flex; gap:8px;}
+.toolbar button{
+  background:#fff; color:var(--dblue); border:none; border-radius:6px;
+  padding:7px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.toolbar button:active{transform:scale(.97);}
+
+/* Title banner */
+.title-banner{
+  background:var(--dblue); color:#fff; padding:26px 18px 22px; text-align:center;
+}
+.title-banner h1{margin:0 0 6px; font-size:26px;}
+.title-banner .sub{font-size:14px; opacity:.85;}
+
+/* TOC */
+.toc{
+  background:var(--lgrey); border:1px solid #ddd; border-radius:8px;
+  padding:16px 20px; margin:22px 0;
+}
+.toc h2{margin-top:0; color:var(--dblue); font-size:16px;}
+.toc ol{margin:0; padding-left:20px;}
+.toc ol ol{padding-left:18px; margin-top:4px;}
+.toc li{margin:4px 0;}
+.toc a{color:var(--blue); text-decoration:none; font-size:14.5px;}
+.toc a:hover{text-decoration:underline;}
+
+/* Section banners */
+h2.banner{
+  background:var(--dblue); color:#fff; padding:10px 16px; margin:38px 0 16px;
+  border-radius:6px; font-size:18px; scroll-margin-top:60px;
+}
+h3{
+  color:var(--dblue); border-bottom:2px solid var(--blue); padding-bottom:4px;
+  margin:26px 0 12px; font-size:16.5px; scroll-margin-top:60px;
+}
+h4{color:var(--blue); font-style:italic; margin:18px 0 8px; font-size:15px;}
+p{margin:8px 0;}
+
+/* Callout boxes */
+.box{border-radius:8px; padding:12px 14px; margin:14px 0; border-left:5px solid;}
+.box .lbl{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; margin-bottom:4px; display:block;}
+.piege{background:var(--lred); border-color:var(--red);}
+.piege .lbl{color:var(--red);}
+.memo{background:var(--lgold); border-color:var(--gold);}
+.memo .lbl{color:var(--gold);}
+.reflexe{background:var(--lgreen); border-color:var(--green);}
+.reflexe .lbl{color:var(--green);}
+.precision{background:#DEEBF7; border-color:var(--blue);}
+.precision .lbl{color:var(--dblue);}
+.simplification{background:#F3E8FF; border-color:#9333EA; color:#3B0764;}
+.simplification .lbl{color:#7E22CE;}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+caption{display:block; width:100%; text-align:left; font-weight:600; color:var(--dblue); margin-bottom:6px; font-size:14.5px;}
+th{background:var(--dblue); color:#fff; padding:8px 10px; text-align:left; font-size:13.5px;}
+td{padding:7px 10px; border-bottom:1px solid #ddd; vertical-align:top;}
+tr:nth-child(even) td{background:#F7F9FB;}
+td.exo{background:var(--lgreen)!important; border-left:4px solid var(--green);}
+td.imp{background:var(--lred)!important; border-left:4px solid var(--red);}
+td.cond{background:var(--lgold)!important; border-left:4px solid var(--gold);}
+td.spec{background:#DEEBF7!important; border-left:4px solid var(--blue);}
+
+/* Decision tree */
+.tree{margin:16px 0; padding:14px; background:#FAFBFC; border:1px solid #e2e2e2; border-radius:8px;}
+.tree .root{
+  background:var(--dblue); color:#fff; padding:9px 14px; border-radius:6px;
+  font-weight:600; display:inline-block; margin-bottom:10px; font-size:14.5px;
+}
+.tree .mode{
+  display:inline-block; margin-left:10px; font-size:12px; font-weight:700;
+  padding:3px 9px; border-radius:12px; vertical-align:middle;
+}
+.tree .cumul{background:var(--lred); color:var(--red);}
+.tree .altern{background:var(--lgreen); color:var(--green);}
+.branch{
+  border-left:3px solid var(--blue); margin:0 0 0 10px; padding:6px 0 6px 16px;
+}
+.cond-item{
+  background:#fff; border:1px solid #d7dfe8; border-left:4px solid var(--gold);
+  border-radius:6px; padding:8px 12px; margin:6px 0; font-size:14px;
+}
+.cond-item b{color:var(--dblue);}
+.result{
+  border-radius:6px; padding:8px 12px; margin:8px 0 0; font-weight:600; font-size:14px;
+  display:block;
+}
+.result.ok{background:var(--lgreen); color:var(--green); border-left:4px solid var(--green);}
+.result.ko{background:var(--lred); color:var(--red); border-left:4px solid var(--red);}
+
+/* Timeline */
+.timeline{margin:16px 0; padding:0; list-style:none;}
+.timeline li{
+  position:relative; padding:8px 0 8px 30px; border-left:2px solid var(--blue); margin-left:6px;
+}
+.timeline li:last-child{border-left:2px solid transparent;}
+.timeline li::before{
+  content:""; position:absolute; left:-7px; top:12px; width:12px; height:12px;
+  border-radius:50%; background:var(--blue); border:2px solid #fff;
+}
+.timeline .t-lbl{font-weight:700; color:var(--dblue); font-size:14px;}
+.timeline .t-txt{font-size:13.5px; color:#333;}
+
+/* Comparison grid */
+.cmp{display:grid; gap:10px; margin:14px 0;}
+.cmp-card{
+  border:1px solid #dbe3ea; border-radius:8px; padding:10px 12px; background:#fff;
+}
+.cmp-card h5{margin:0 0 6px; color:#fff; background:var(--blue); padding:5px 10px; border-radius:5px; font-size:13.5px; display:inline-block;}
+
+/* Mini-cas */
+.cas{background:#fff; border:1.5px solid var(--dblue); border-radius:8px; padding:16px 18px; margin:18px 0;}
+.cas h4.q{color:var(--dblue); font-style:normal; font-weight:700; margin-top:16px;}
+.cas .principe{background:var(--lgold); border-left:4px solid var(--gold); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .espece{background:#EEF3F8; border-left:4px solid var(--blue); padding:8px 12px; border-radius:6px; margin:8px 0;}
+.cas .conclusion{background:var(--lgreen); border-left:4px solid var(--green); padding:8px 12px; border-radius:6px; margin:8px 0; font-weight:600;}
+.cas ul{margin:4px 0; padding-left:20px;}
+
+/* Footer */
+footer{
+  margin-top:40px; padding:16px 18px; border-top:2px solid var(--lgrey);
+  font-size:12px; color:var(--grey); text-align:center;
+}
+footer .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:8px;}
+footer .legend span{display:inline-flex; align-items:center; gap:5px;}
+footer .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+article{margin:0;}
+a.anchor-target{scroll-margin-top:60px;}
+
+/* Responsive */
+@media (max-width:480px){
+  body{font-size:13.5px;}
+  .wrap{padding:0 10px 50px;}
+  .toolbar{padding:8px 10px; flex-direction:row; gap:6px;}
+  .toolbar .chap{font-size:11.5px;}
+  .toolbar button{padding:6px 8px; font-size:11px;}
+  .title-banner h1{font-size:19px;}
+  .title-banner .sub{font-size:12px;}
+  h2.banner{font-size:15px; padding:8px 12px;}
+  h3{font-size:14.5px;}
+  h4{font-size:13.5px;}
+  table, thead, tbody, th, td, tr{display:block;}
+  thead{display:none;}
+  table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+  tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+  td{border:none; padding:4px 10px;}
+  td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+  td:empty, td:not([data-label]){padding:4px 10px;}
+  .cmp{grid-template-columns:1fr!important;}
+}
+@media (min-width:481px) and (max-width:900px){
+  .cmp{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:901px){
+  .cmp{grid-template-columns:repeat(var(--cmp-cols,3),1fr);}
+}
+
+body.mobile-force{font-size:13.5px;}
+body.mobile-force .wrap{max-width:400px; margin:0 auto; padding:0 10px 50px;}
+body.mobile-force .toolbar{padding:8px 10px;}
+body.mobile-force .toolbar .chap{font-size:11.5px;}
+body.mobile-force .toolbar button{padding:6px 8px; font-size:11px;}
+body.mobile-force .title-banner h1{font-size:19px;}
+body.mobile-force h2.banner{font-size:15px; padding:8px 12px;}
+body.mobile-force table, body.mobile-force thead, body.mobile-force tbody,
+body.mobile-force th, body.mobile-force td, body.mobile-force tr{display:block;}
+body.mobile-force thead{display:none;}
+body.mobile-force table{border:1px solid #ddd; border-radius:8px; overflow:hidden;}
+body.mobile-force tr{border-bottom:2px solid var(--lgrey); padding:6px 0;}
+body.mobile-force td{border:none; padding:4px 10px;}
+body.mobile-force td::before{content:attr(data-label); font-weight:700; color:var(--dblue); display:block; margin-bottom:2px;}
+body.mobile-force .cmp{grid-template-columns:1fr!important;}
+
+@media print{
+  .toolbar{display:none!important;}
+  @page{size:A4; margin:14mm 12mm;}
+  body{font-size:11.5px;}
+  h2.banner{break-before:page; break-after:avoid;}
+  h2.banner:first-of-type{break-before:auto;}
+  table, .box, .tree, .cas, .cmp-card{break-inside:avoid;}
+  .title-banner{break-after:avoid;}
+  a{color:#000; text-decoration:none;}
+  .toc a{color:#000;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="chap">DCG2 — SNC et SARL</div>
+  <div class="btns">
+    <button onclick="exportPDF()">⬇ Exporter en PDF</button>
+    <button onclick="toggleMobile()">📱 Format mobile</button>
+  </div>
+</div>
+<div class="title-banner">
+  <h1>SNC et SARL — Sociétés de Personnes</h1>
+  <div class="sub">DCG UE 2 — Droit des sociétés et des groupements d'affaires · Rappels essentiels pour le DSCG</div>
+</div>
+<div class="wrap">
+<div class="toc">
+<h2>Sommaire</h2>
+<ol>
+<li><a href="#s1">1. La SNC — Société en Nom Collectif</a>
+  <ol><li><a href="#s1-1">1.1 Constitution</a></li><li><a href="#s1-2">1.2 Gérance</a></li><li><a href="#s1-3">1.3 Assemblées et prises de décisions</a></li><li><a href="#s1-4">1.4 Cession des parts sociales</a></li><li><a href="#s1-5">1.5 Responsabilité des associés</a></li><li><a href="#s1-6">1.6 Dissolution et événements affectant les associés</a></li></ol>
+</li>
+<li><a href="#s2">2. La SARL — Société à Responsabilité Limitée</a>
+  <ol><li><a href="#s2-1">2.1 Constitution</a></li><li><a href="#s2-2">2.2 Gérance</a></li><li><a href="#s2-3">2.3 Assemblées (AGO et AGE)</a></li><li><a href="#s2-4">2.4 Cession des parts sociales</a></li><li><a href="#s2-5">2.5 Conventions réglementées</a></li><li><a href="#s2-6">2.6 Augmentation et réduction de capital</a></li></ol>
+</li>
+<li><a href="#s3">3. Tableau comparatif SNC vs SARL</a></li>
+<li><a href="#s4">4. Arbre de décision — Cession de parts en SARL</a></li>
+<li><a href="#s5">5. Cas pratique intégré</a></li>
+</ol>
+</div>
+
+<article>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s1">1. La SNC — Société en Nom Collectif</h2>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ (EN CLAIR)</span>
+La SNC est la forme sociétaire la plus « intuitu personae » : les associés sont tous commerçants, responsables indéfiniment et solidairement des dettes sociales. Toute décision majeure (cession, révocation du gérant statutaire) requiert l'unanimité. C'est une société où la confiance entre associés est absolue.
+</div>
+
+<h3 id="s1-1">1.1 Constitution</h3>
+<table>
+<thead><tr><th>Élément</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td data-label="Élément">Nombre d'associés</td><td data-label="Règle"><b>Minimum 2</b> — personnes physiques ou morales</td></tr>
+<tr><td data-label="Élément">Qualité des associés</td><td data-label="Règle" class="imp">Tous les associés ont la <b>qualité de commerçant</b> → capacité commerciale exigée (exclusion des mineurs et personnes frappées d'interdiction)</td></tr>
+<tr><td data-label="Élément">Capital social</td><td data-label="Règle">Pas de minimum légal — librement fixé par les statuts</td></tr>
+<tr><td data-label="Élément">Apports</td><td data-label="Règle" class="exo">Tous types autorisés : <b>numéraire, nature et industrie</b></td></tr>
+<tr><td data-label="Élément">Professions libérales</td><td data-label="Règle" class="imp">Non autorisées en SNC</td></tr>
+</tbody>
+</table>
+
+<div class="box piege"><span class="lbl">Piège d'examen</span>
+Contrairement aux sociétés de capitaux, <b>tous</b> les associés de SNC acquièrent automatiquement la qualité de commerçant, même s'ils n'exercent pas personnellement le commerce. Cela a des conséquences sur leur régime fiscal (BIC) et leur soumission aux procédures collectives.
+</div>
+
+<h3 id="s1-2">1.2 Gérance</h3>
+
+<div class="box memo"><span class="lbl">Mémo — Règles clés de la gérance SNC</span>
+<ul>
+<li><b>Nomination</b> : par les statuts (gérant statutaire) ou par acte séparé (gérant non statutaire)</li>
+<li><b>Qui</b> : associé ou non, personne physique ou morale</li>
+<li><b>Pouvoirs</b> : dans les rapports avec les tiers, le gérant engage la société par tous les actes entrant dans l'objet social</li>
+<li><b>Rapport de gestion</b> : obligatoire sauf si la SARL/SNC ne dépasse pas : 8 M€ CA, 4 M€ total bilan, 50 salariés</li>
+</ul>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Révocation du gérant</span>
+<ul>
+<li><b>Gérant statutaire</b> : révocation à l'<b>unanimité</b> des autres associés. La révocation entraîne en principe la <b>dissolution</b> de la société (sauf clause de continuation)</li>
+<li><b>Gérant non statutaire</b> : révocation à la <b>majorité</b> prévue par les statuts (ou à l'unanimité à défaut)</li>
+<li><b>Révocation judiciaire</b> : toujours possible pour <b>cause légitime</b>, à la demande de tout associé</li>
+</ul>
+</div>
+
+<h3 id="s1-3">1.3 Assemblées et prises de décisions</h3>
+<p>Par défaut, chaque associé dispose d'<b>une voix</b> (principe « 1 homme = 1 voix »).</p>
+
+<div class="box memo"><span class="lbl">Mémo — Principe d'unanimité</span>
+En SNC, les décisions sont prises à l'<b>unanimité</b> en principe, sauf clause contraire dans les statuts. Cependant, certaines décisions restent <b>impérativement à l'unanimité</b> même avec clause contraire :
+<ul>
+<li>Révocation du gérant <b>associé statutaire</b></li>
+<li><b>Cession</b> des parts sociales</li>
+</ul>
+L'AG donne lieu à un <b>procès-verbal</b> signé par tous les associés présents.
+</div>
+
+<h3 id="s1-4">1.4 Cession des parts sociales</h3>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Unanimité d'ordre public</span>
+La cession de parts sociales en SNC nécessite l'accord <b>unanime</b> de tous les associés. Cette règle est d'<b>ordre public</b> : toute clause statutaire contraire est réputée non écrite.
+</div>
+
+<div class="box precision"><span class="lbl">Précision — Effets de la cession</span>
+<ul>
+<li><b>Associé sortant</b> : tenu du passif existant à la date de son départ, mais pas du passif postérieur</li>
+<li><b>Associé entrant</b> : tenu du passif antérieur <b>et</b> postérieur à son entrée. Il peut se protéger par une <b>clause de garantie de passif</b> dans l'acte de cession</li>
+</ul>
+</div>
+
+<h3 id="s1-5">1.5 Responsabilité des associés</h3>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Responsabilité subsidiaire, indéfinie et solidaire</span>
+Les associés de SNC sont responsables des dettes sociales de manière :
+<ul>
+<li><b>Subsidiaire</b> : le créancier doit d'abord mettre en demeure la société par acte extrajudiciaire</li>
+<li><b>Indéfinie</b> : au-delà de leurs apports, sur leur patrimoine personnel</li>
+<li><b>Solidaire</b> : le créancier peut demander le remboursement intégral à un seul associé, qui aura ensuite un recours contre les autres (contribution à proportion du capital détenu)</li>
+</ul>
+</div>
+
+<h3 id="s1-6">1.6 Dissolution et événements affectant les associés</h3>
+
+<div class="tree">
+<span class="root">Décès d'un associé en SNC</span>
+<span class="mode altern">Selon les clauses</span>
+<div class="branch">
+<div class="cond-item"><b>Pas de clause de continuation</b> → Dissolution de la société</div>
+<div class="cond-item"><b>Clause avec associés survivants</b> → Les parts sont rachetées aux héritiers</div>
+<div class="cond-item"><b>Clause avec héritiers</b> → Les héritiers intègrent la SNC comme associés (agrément nécessaire, à défaut indemnisation)</div>
+<div class="cond-item"><b>Clause avec héritiers mineurs</b> → Le mineur n'est tenu qu'à hauteur de l'actif successoral. La société <b>doit être transformée</b> (le mineur n'ayant pas la capacité commerciale)</div>
+</div>
+</div>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s2">2. La SARL — Société à Responsabilité Limitée</h2>
+
+<div class="box simplification">
+<span class="lbl">💡 L'ESSENTIEL REFORMULÉ (EN CLAIR)</span>
+La SARL est un hybride entre société de personnes et société de capitaux : la responsabilité des associés est limitée aux apports, mais l'intuitu personae reste présent (agrément pour les cessions à des tiers). C'est la forme la plus répandue en France pour les PME.
+</div>
+
+<h3 id="s2-1">2.1 Constitution</h3>
+<table>
+<thead><tr><th>Élément</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td data-label="Élément">Nombre d'associés</td><td data-label="Règle"><b>1 à 100</b> (EURL si 1 seul associé)</td></tr>
+<tr><td data-label="Élément">Qualité des associés</td><td data-label="Règle" class="exo">PP ou PM — <b>pas de qualité de commerçant</b> requise</td></tr>
+<tr><td data-label="Élément">Capital social</td><td data-label="Règle">Pas de minimum légal</td></tr>
+<tr><td data-label="Élément">Apports en numéraire</td><td data-label="Règle">Libérés d'au moins <b>1/5</b> à la constitution, solde sous 5 ans</td></tr>
+<tr><td data-label="Élément">Apports en nature</td><td data-label="Règle" class="cond">CAA obligatoire sauf décision unanime de ne pas y recourir (si chaque apport &lt; 30 000 € et total &lt; 50 % du capital)</td></tr>
+<tr><td data-label="Élément">Apports en industrie</td><td data-label="Règle" class="exo">Autorisés</td></tr>
+<tr><td data-label="Élément">Responsabilité</td><td data-label="Règle" class="exo"><b>Limitée aux apports</b></td></tr>
+</tbody>
+</table>
+
+<h3 id="s2-2">2.2 Gérance</h3>
+
+<div class="cmp" style="--cmp-cols:2;">
+<div class="cmp-card"><h5>Gérant minoritaire/égalitaire</h5>Régime social : assimilé salarié. Peut cumuler mandat social et contrat de travail sous conditions.</div>
+<div class="cmp-card"><h5>Gérant majoritaire</h5>Régime social : travailleur non salarié (TNS). <b>Ne peut pas</b> cumuler mandat social et contrat de travail.</div>
+</div>
+
+<div class="box memo"><span class="lbl">Mémo — Conditions du cumul mandat social / contrat de travail</span>
+Le cumul est possible pour le gérant minoritaire/égalitaire si 4 conditions sont réunies :
+<ul>
+<li>Travail <b>effectif</b></li>
+<li>Rémunération <b>non excessive</b></li>
+<li>Fonctions <b>distinctes</b> du mandat social</li>
+<li><b>Lien de subordination</b> avec la société</li>
+</ul>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Révocation du gérant SARL</span>
+<ul>
+<li>Révocation par les associés à la <b>majorité de plus de la moitié des parts sociales</b></li>
+<li>Si la majorité n'est pas atteinte en première convocation, possibilité d'une seconde à la <b>majorité des votes émis</b> (sauf clause contraire)</li>
+<li>La révocation doit reposer sur un <b>juste motif</b>, sinon le gérant révoqué peut obtenir des <b>dommages-intérêts</b></li>
+<li><b>Révocation judiciaire</b> toujours possible pour cause légitime</li>
+</ul>
+</div>
+
+<h3 id="s2-3">2.3 Assemblées (AGO et AGE)</h3>
+<table>
+<caption>Quorum et majorités en SARL (SARL constituées après août 2005)</caption>
+<thead><tr><th>Type</th><th>1re convocation</th><th>2e convocation</th></tr></thead>
+<tbody>
+<tr><td data-label="Type" class="spec"><b>AGO</b></td><td data-label="1re conv.">Pas de quorum — majorité absolue (> 50 % des parts)</td><td data-label="2e conv.">Majorité des votes émis</td></tr>
+<tr><td data-label="Type" class="cond"><b>AGE</b></td><td data-label="1re conv.">Quorum : <b>1/4</b> des parts — Majorité : <b>2/3</b> des présents ou représentés</td><td data-label="2e conv.">Quorum : <b>1/5</b> des parts — Majorité : 2/3</td></tr>
+<tr><td data-label="Type" class="imp"><b>Unanimité obligatoire</b></td><td data-label="Cas" colspan="2">Changement de nationalité, augmentation des engagements des associés, transformation en SNC/SCS/SCA</td></tr>
+</tbody>
+</table>
+
+<div class="box precision"><span class="lbl">Précision — Incorporation de réserves</span>
+Si l'augmentation de capital se fait par <b>incorporation de réserves</b>, une simple <b>majorité</b> (AGO) suffit, et non la majorité renforcée de l'AGE.
+</div>
+
+<h3 id="s2-4">2.4 Cession des parts sociales</h3>
+
+<div class="tree">
+<span class="root">Cession de parts en SARL — Agrément requis ?</span>
+<div class="branch">
+<div class="cond-item"><b>Cession entre associés</b> → <span class="result ok">Libre (sauf clause contraire dans les statuts)</span></div>
+<div class="cond-item"><b>Cession au conjoint, ascendant, descendant</b> → <span class="result ok">Libre en principe (clause d'agrément possible dans les statuts)</span></div>
+<div class="cond-item"><b>Cession en cas de liquidation judiciaire</b> → <span class="result ok">Libre</span></div>
+<div class="cond-item"><b>Cession à un tiers étranger</b> → <span class="result ko">Agrément obligatoire — majorité des associés représentant au moins la moitié des parts sociales</span></div>
+</div>
+</div>
+
+<div class="box memo"><span class="lbl">Mémo — Procédure d'agrément SARL</span>
+<ul class="timeline">
+<li><span class="t-lbl">1. Notification du projet</span><br><span class="t-txt">Par acte authentique ou LRAR à la société et à chaque associé</span></li>
+<li><span class="t-lbl">2. Convocation de l'AGE</span><br><span class="t-txt">Par le gérant pour statuer sur le projet de cession</span></li>
+<li><span class="t-lbl">3. Décision</span><br><span class="t-txt">Majorité des associés représentant ≥ 50 % des parts (sauf clause contraire)</span></li>
+<li><span class="t-lbl">4. En cas de refus d'agrément</span><br><span class="t-txt">Les associés ont 3 mois pour racheter ou faire racheter les parts. À défaut, l'agrément est réputé acquis</span></li>
+</ul>
+</div>
+
+<h3 id="s2-5">2.5 Conventions réglementées</h3>
+
+<div class="cmp" style="--cmp-cols:3;">
+<div class="cmp-card"><h5>Conventions libres</h5>Actes passés dans des conditions <b>normales</b>. Aucune procédure particulière.</div>
+<div class="cmp-card"><h5>Conventions réglementées</h5>Actes entre la SARL et un gérant/associé ou une société liée. Soumis à <b>approbation de l'AG</b> (rapport spécial du CAC ou du gérant).</div>
+<div class="cmp-card"><h5>Conventions interdites</h5>Emprunts, découverts, cautions consentis par la société à ses <b>gérants ou associés personnes physiques</b>.</div>
+</div>
+
+<div class="box piege"><span class="lbl">Piège d'examen — Procédure a priori vs a posteriori</span>
+<ul>
+<li><b>Procédure a priori</b> (autorisation préalable) : obligatoire lorsque la convention est conclue par un <b>gérant non associé</b> ou en l'absence de CAC</li>
+<li><b>Procédure a posteriori</b> (approbation après conclusion) : c'est le régime de droit commun — rapport spécial présenté à l'AG annuelle</li>
+</ul>
+</div>
+
+<h3 id="s2-6">2.6 Augmentation et réduction de capital</h3>
+
+<div class="box memo"><span class="lbl">Mémo — Augmentation de capital en SARL</span>
+<ul>
+<li>Relève de l'<b>AGE</b> (modification des statuts)</li>
+<li><b>Apport en numéraire</b> : libération d'au moins 1/4 à la souscription, solde sous 5 ans</li>
+<li><b>Apport en nature</b> : CAA désigné à l'unanimité (ou par décision de justice). Rapport déposé au greffe 8 jours avant l'AGE. Si pas de CAA, responsabilité solidaire des associés pendant 5 ans</li>
+<li><b>Souscription par un tiers</b> : soumise à la procédure d'agrément (comme une cession)</li>
+</ul>
+</div>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s3">3. Tableau comparatif SNC vs SARL</h2>
+
+<table>
+<caption>Comparatif synthétique — SNC vs SARL</caption>
+<thead><tr><th>Critère</th><th>SNC</th><th>SARL</th></tr></thead>
+<tbody>
+<tr><td data-label="Critère">Nombre d'associés</td><td data-label="SNC">≥ 2</td><td data-label="SARL">1 à 100</td></tr>
+<tr><td data-label="Critère">Qualité</td><td data-label="SNC" class="imp">Commerçants</td><td data-label="SARL" class="exo">PP/PM, pas de qualité commerciale</td></tr>
+<tr><td data-label="Critère">Capital minimum</td><td data-label="SNC">Aucun</td><td data-label="SARL">Aucun</td></tr>
+<tr><td data-label="Critère">Apports en industrie</td><td data-label="SNC" class="exo">Oui</td><td data-label="SARL" class="exo">Oui</td></tr>
+<tr><td data-label="Critère">Responsabilité</td><td data-label="SNC" class="imp">Indéfinie et solidaire</td><td data-label="SARL" class="exo">Limitée aux apports</td></tr>
+<tr><td data-label="Critère">Cession de parts</td><td data-label="SNC" class="imp">Unanimité (ordre public)</td><td data-label="SARL" class="cond">Libre entre associés / Agrément pour tiers</td></tr>
+<tr><td data-label="Critère">Décisions collectives</td><td data-label="SNC">Unanimité (sauf clause contraire)</td><td data-label="SARL">Majorité variable (AGO/AGE)</td></tr>
+<tr><td data-label="Critère">Gérant</td><td data-label="SNC">Associé ou non</td><td data-label="SARL">PP obligatoirement, associé ou non</td></tr>
+<tr><td data-label="Critère">Révocation gérant statutaire</td><td data-label="SNC" class="imp">Unanimité → peut entraîner dissolution</td><td data-label="SARL" class="cond">Majorité > 50 % parts + juste motif</td></tr>
+<tr><td data-label="Critère">Fiscalité</td><td data-label="SNC" class="spec">IR (transparence) par défaut, option IS possible</td><td data-label="SARL" class="spec">IS par défaut, option IR possible (SARL familiale ou < 5 ans)</td></tr>
+<tr><td data-label="Critère">Décès d'un associé</td><td data-label="SNC" class="imp">Dissolution sauf clause de continuation</td><td data-label="SARL" class="exo">Continuation avec héritiers (sauf clause d'agrément)</td></tr>
+</tbody>
+</table>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s4">4. Arbre de décision — Cession de parts en SARL</h2>
+
+<div class="tree">
+<span class="root">Un associé de SARL souhaite céder ses parts</span>
+<div class="branch">
+<div class="cond-item"><b>À qui cède-t-il ?</b></div>
+<div class="branch">
+  <div class="cond-item">À un <b>autre associé</b></div>
+  <span class="result ok">✅ Libre (sauf clause contraire dans les statuts)</span>
+</div>
+<div class="branch">
+  <div class="cond-item">À son <b>conjoint, ascendant ou descendant</b></div>
+  <span class="result ok">✅ Libre en principe (clause d'agrément possible)</span>
+</div>
+<div class="branch">
+  <div class="cond-item">À un <b>tiers extérieur</b></div>
+  <div class="cond-item">→ Notification par LRAR à la société et aux associés</div>
+  <div class="cond-item">→ AGE — majorité ≥ 50 % des parts sociales</div>
+  <div class="branch">
+    <div class="cond-item"><b>Agrément accordé</b></div>
+    <span class="result ok">✅ Cession réalisée</span>
+  </div>
+  <div class="branch">
+    <div class="cond-item"><b>Agrément refusé</b></div>
+    <div class="cond-item">→ Les associés ont <b>3 mois</b> pour racheter ou faire racheter les parts</div>
+    <div class="branch">
+      <div class="cond-item">Rachat effectué</div>
+      <span class="result ok">✅ Parts rachetées — associé sortant indemnisé</span>
+    </div>
+    <div class="branch">
+      <div class="cond-item">Pas de rachat dans les 3 mois</div>
+      <span class="result ko">⚠️ Agrément réputé acquis — la cession au tiers s'impose</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============================================= -->
+<h2 class="banner" id="s5">5. Cas pratique intégré</h2>
+
+<div class="cas">
+<p><b>Énoncé</b> — La SARL TECHNOPLUS compte 3 associés : M. Dupont (gérant majoritaire, 60 % des parts), Mme Martin (30 %) et M. Bernard (10 %). M. Bernard souhaite céder ses parts à son ami M. Leclerc, tiers à la société. Par ailleurs, M. Dupont a conclu un contrat de prêt entre lui-même et la SARL pour financer des travaux personnels.</p>
+
+<h4 class="q">Question 1 — M. Bernard peut-il céder librement ses parts à M. Leclerc ?</h4>
+<div class="principe"><b>En principe :</b> la cession de parts de SARL à un tiers étranger à la société est soumise à l'agrément des associés, qui doivent statuer à la majorité représentant au moins la moitié des parts sociales (art. L. 223-14 C. com.).</div>
+<div class="espece"><b>En l'espèce :</b> M. Leclerc est un tiers extérieur à la SARL. M. Bernard doit notifier son projet de cession par LRAR à la société et aux associés, puis le gérant doit convoquer une assemblée. Pour obtenir l'agrément, il faut réunir plus de 50 % des parts (soit M. Dupont à lui seul, ou Mme Martin + M. Bernard).</div>
+<div class="conclusion">Conclusion : M. Bernard ne peut pas céder librement ses parts. Il doit suivre la procédure d'agrément. Seul M. Dupont (60 %) pourrait, à lui seul, décider de l'agrément ou du refus.</div>
+
+<h4 class="q">Question 2 — Le prêt consenti par la SARL à M. Dupont est-il régulier ?</h4>
+<div class="principe"><b>En principe :</b> les conventions par lesquelles la société consent un prêt, un découvert ou une caution à ses gérants ou associés <b>personnes physiques</b> sont des <b>conventions interdites</b> (art. L. 223-21 C. com.). Elles sont nulles de plein droit.</div>
+<div class="espece"><b>En l'espèce :</b> M. Dupont est gérant et associé personne physique de la SARL. Le contrat de prêt est une convention interdite.</div>
+<div class="conclusion">Conclusion : le prêt est nul de plein droit. La SARL peut en demander le remboursement immédiat, et M. Dupont pourrait engager sa responsabilité civile et pénale (abus de biens sociaux).</div>
+
+<h4 class="q">Question 3 — M. Dupont peut-il cumuler son mandat de gérant avec un contrat de travail au sein de TECHNOPLUS ?</h4>
+<div class="principe"><b>En principe :</b> le cumul d'un mandat social et d'un contrat de travail est possible en SARL, mais il est <b>interdit pour le gérant majoritaire</b>. Le gérant minoritaire ou égalitaire peut cumuler sous 4 conditions : travail effectif, rémunération non excessive, fonctions distinctes et lien de subordination.</div>
+<div class="espece"><b>En l'espèce :</b> M. Dupont détient 60 % des parts et est donc <b>gérant majoritaire</b>.</div>
+<div class="conclusion">Conclusion : M. Dupont ne peut pas cumuler son mandat de gérant avec un contrat de travail au sein de la SARL TECHNOPLUS.</div>
+</div>
+
+<div class="box reflexe"><span class="lbl">Réflexe cas pratique — Méthode</span>
+Pour tout cas pratique en droit des sociétés, suivre systématiquement la structure :<br>
+<b>1. Principe</b> (règle juridique abstraite + article) → <b>2. Espèce</b> (application aux faits) → <b>3. Conclusion</b> (réponse à la question posée).<br>
+Toujours qualifier juridiquement les parties et les actes avant de raisonner.
+</div>
+
+</article>
+<footer>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--red)"></span>Piège / interdit</span>
+    <span><span class="dot" style="background:var(--gold)"></span>Mémo / condition</span>
+    <span><span class="dot" style="background:var(--green)"></span>Réflexe / autorisé</span>
+    <span><span class="dot" style="background:var(--blue)"></span>Précision / exception</span>
+  </div>
+  Codage : rouge = piège/interdit · jaune = mémo/condition · vert = réflexe/autorisé · bleu = précision/exception
+</footer>
+</div>
+<script>
+function exportPDF(){ window.print(); }
+function toggleMobile(){
+  document.body.classList.toggle('mobile-force');
+}
+</script>
+<script>
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.action === 'filter') {
+    const type = e.data.type;
+    const allBoxes = document.querySelectorAll('.box, .cas, table, .tree');
+    if (type === 'all') {
+      allBoxes.forEach(b => b.style.display = '');
+      return;
+    }
+    allBoxes.forEach(b => {
+      if (type === 'piege' && b.classList.contains('piege')) b.style.display = '';
+      else if (type === 'memo' && b.classList.contains('memo')) b.style.display = '';
+      else if (type === 'reformulation' && (b.classList.contains('simplification') || b.classList.contains('reformulation'))) b.style.display = '';
+      else if (type === 'cas' && b.classList.contains('cas')) b.style.display = '';
+      else b.style.display = 'none';
+    });
+  }
+  if (e.data && e.data.action === 'jump') {
+    const targetElem = document.getElementById(e.data.target) || Array.from(document.querySelectorAll('h2.banner, h3')).find(b => b.textContent === e.data.target);
+    if (targetElem) targetElem.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>
